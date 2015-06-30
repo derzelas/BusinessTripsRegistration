@@ -167,9 +167,9 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Models\RegistrationConfirmationModels.cs" />
-    <Compile Include="Models\UserModels.cs" />
-    <Compile Include="Models\UserRegistrationModels.cs" />
+    <Compile Include="Models\RegistrationConfirmationModel.cs" />
+    <Compile Include="Models\UserModel.cs" />
+    <Compile Include="Models\UserRegistrationModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -235,6 +235,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\UserRegistration\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

@@ -5,7 +5,7 @@ using System.Web;
 
 namespace BusinessTrips.Models
 {
-    public class RegistrationConfirmationModels
+    public class RegistrationConfirmationModel
     {
         public Guid RequestToken { get; set; }
     }
