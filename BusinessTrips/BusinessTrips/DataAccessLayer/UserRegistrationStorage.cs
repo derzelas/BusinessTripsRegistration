@@ -8,14 +8,14 @@ namespace BusinessTrips.DataAccessLayer
 {
     public class UserRegistrationStorage
     {
-        private IStorage<UserRegistrationModels> storage;
+        private IStorage<UserRegistrationModel> storage;
 
         public UserRegistrationStorage()
         {
-            storage= new InMemoryStorage<UserRegistrationModels>();
+            storage= new InMemoryStorage<UserRegistrationModel>();
         }
 
-        public void Add(UserRegistrationModels userRegistration)
+        public void Add(UserRegistrationModel userRegistration)
         {
             storage.Add(userRegistration);
         }
