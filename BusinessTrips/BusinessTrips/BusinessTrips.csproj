@@ -163,6 +163,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="DataAccessLayer\InMemoryStorage.cs" />
     <Compile Include="DataAccessLayer\IStorage.cs" />
+    <Compile Include="DataAccessLayer\UserEntity.cs" />
     <Compile Include="DataAccessLayer\UserRegistrationStorage.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
