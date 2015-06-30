@@ -14,18 +14,20 @@ namespace BusinessTrips.Controllers
         // GET: /UserOperations/
 
         [HttpPost]
-        public void RegisterNewUser(UserRegistrationModel userCredantials)
+        public ActionResult RegisterNewUser(UserRegistrationModel userCredantials)
         {
             IStorage<UserRegistrationModel> storage = new InMemoryStorage<UserRegistrationModel>();
 
             UserRegistrationRepository registrationRepository = new UserRegistrationRepository(storage);
             registrationRepository.Add(userCredantials);
 
+            return View("ConfirmationEmailSent");
+
         }
 
         public ActionResult RegisterNewUser()
         {
-            return View("");
+            return View();
         }
 
         public ActionResult ConfirmRegistration()
