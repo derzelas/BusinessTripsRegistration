@@ -164,6 +164,7 @@
     <Compile Include="DataAccessLayer\InMemoryStorage.cs" />
     <Compile Include="DataAccessLayer\IStorage.cs" />
     <Compile Include="DataAccessLayer\UserRegistrationStorage.cs" />
+    <Compile Include="Controllers\UserOperationsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -239,6 +240,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\UserOperations\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
