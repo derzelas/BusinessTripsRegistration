@@ -13,10 +13,8 @@ namespace BusinessTrips.Controllers
         // GET: /UserOperations/
 
         [HttpPost]
-        public ActionResult RegisterNewUser(UserRegistrationModels model)
+        public void RegisterNewUser(UserRegistrationModel model)
         {
-
-            //send email
             
         }
 
