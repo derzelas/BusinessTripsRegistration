@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using BusinessTrips.Models;
 
 namespace BusinessTrips.Controllers
 {
@@ -10,6 +11,12 @@ namespace BusinessTrips.Controllers
     {
         //
         // GET: /UserOperations/
+
+        [HttpPost]
+        public void RegisterNewUser(UserRegistrationModel model)
+        {
+            
+        }
 
         public ActionResult RegisterNewUser()
         {
