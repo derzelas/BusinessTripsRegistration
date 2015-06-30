@@ -17,7 +17,7 @@ namespace BusinessTrips.Controllers
         {
 
             //send email
-            var x = 0;
+            
         }
 
         public ActionResult RegisterNewUser()
