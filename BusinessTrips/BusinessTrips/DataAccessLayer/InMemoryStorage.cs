@@ -1,30 +1,22 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Web;
 
 namespace BusinessTrips.DataAccessLayer
 {
-    public class InMemoryStorage<T> : IStorage<T>
+    public class InMemoryStorage<T>:IStorage<T>
     {
-        private List<T> storage;
+        private List<T> data;
 
         public InMemoryStorage()
         {
-            storage = new List<T>();
-        }
-
-        public InMemoryStorage(List<T> elements)
-        {
-            storage = elements;
+            data=new List<T>();
         }
 
         public void Add(T obj)
         {
-            storage.Add(obj);
-        }
-
-        public T Get(T element)
-        {
-            return storage.First(e=>e.Equals(element));
+            data.Add(obj);
         }
     }
 }

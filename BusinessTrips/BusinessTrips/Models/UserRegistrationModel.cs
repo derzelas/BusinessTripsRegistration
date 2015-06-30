@@ -31,7 +31,5 @@ namespace BusinessTrips.Models
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]        
         [Display(Name = "Confirm password")]
         public string ConfirmedPassword { get; set; }
-
-
     }
 }
