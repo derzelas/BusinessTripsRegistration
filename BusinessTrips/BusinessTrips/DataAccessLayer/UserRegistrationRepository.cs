@@ -4,14 +4,14 @@ namespace BusinessTrips.DataAccessLayer
 {
     public class UserRegistrationRepository
     {
-        private IStorage<UserRegistrationModels> storage;
+        private IStorage<UserRegistrationModel> storage;
 
-        public UserRegistrationRepository(IStorage<UserRegistrationModels> storage)
+        public UserRegistrationRepository(IStorage<UserRegistrationModel> storage)
         {
             this.storage = storage;
         }
 
-        public void Add(UserRegistrationModels userRegistration)
+        public void Add(UserRegistrationModel userRegistration)
         {
             storage.Add(userRegistration);
         }
