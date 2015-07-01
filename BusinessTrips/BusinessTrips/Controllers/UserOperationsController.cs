@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using BusinessTrips.DataAccessLayer;
 using BusinessTrips.Models;
 
@@ -10,14 +6,13 @@ namespace BusinessTrips.Controllers
 {
     public class UserOperationsController : Controller
     {
-      
         [HttpPost]
-        public ActionResult RegisterNewUSer(UserRegistrationModel userCredentials)
+        public ActionResult RegisterNewUSer(UserRegistrationModel userRegistrationModel)
         {
             IStorage<UserRegistrationModel> storage = new InMemoryStorage<UserRegistrationModel>();
 
             UserRegistrationRepository registrationRepository = new UserRegistrationRepository(storage);
-            registrationRepository.Add(userCredentials);
+            registrationRepository.Add(userRegistrationModel);
 
             return View("RegisterMailSent");
         }
