@@ -7,7 +7,7 @@ namespace BusinessTrips.Controllers
     public class UserOperationsController : Controller
     {
         [HttpPost]
-        public ActionResult RegisterNewUSer(UserRegistrationModel userRegistrationModel)
+        public ActionResult Register(UserRegistrationModel userRegistrationModel)
         {
             IStorage<UserRegistrationModel> storage = new InMemoryStorage<UserRegistrationModel>();
 
@@ -17,7 +17,7 @@ namespace BusinessTrips.Controllers
             return View("RegisterMailSent");
         }
 
-        public ActionResult RegisterNewUser()
+        public ActionResult Register()
         {
             return View("Register");
         }
