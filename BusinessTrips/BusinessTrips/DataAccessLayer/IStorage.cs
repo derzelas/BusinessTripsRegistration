@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BusinessTrips.DataAccessLayer
+﻿namespace BusinessTrips.DataAccessLayer
 {
     public interface IStorage<T>
     {
-        void Add(T obj);
+        void Add(T element);
+
+        T Get(T element);
     }
 }
