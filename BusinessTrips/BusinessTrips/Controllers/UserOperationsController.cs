@@ -3,40 +3,30 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-
-using System.Net.Mail;
-using System.Net;
+using BusinessTrips.DataAccessLayer;
+using BusinessTrips.Models;
 
 namespace BusinessTrips.Controllers
 {
     public class UserOperationsController : Controller
     {
-        //
-        // GET: /UserOperations/
-
-        public class Email
+      
+        [HttpPost]
+        public ActionResult RegisterNewUSer(UserRegistrationModel userCredentials)
         {
-            public Email()
-            {
-            SmtpClient  smtp = new SmtpClient("smtp.gmail.com", 587);
-            smtp.EnableSsl=true;
-            smtp.UseDefaultCredentials=false;
+            IStorage<UserRegistrationModel> storage = new InMemoryStorage<UserRegistrationModel>();
 
-            smtp.Credentials = new NetworkCredential("user", "parola");
-            MailMessage mail = new MailMessage("sandica_robert@gmail.com", "petrica.bota2@yahoo.com", "Message", "Hello World");
-            smtp.Send(mail);
+            UserRegistrationRepository registrationRepository = new UserRegistrationRepository(storage);
+            registrationRepository.Add(userCredentials);
 
-            }
-            
+            return View("RegisterMailSent");
         }
+
         public ActionResult RegisterNewUser()
         {
-            //save in depository
-            //send e mail
-            
-            return View();
+            return View("Register");
         }
-        
+
         public ActionResult ConfirmRegistration()
         {
             return View();
@@ -46,15 +36,5 @@ namespace BusinessTrips.Controllers
         {
             return View();
         }
-
-        /*
-         int l=0,O=1;
-         
-         if(l==0)
-            O=1;
-         else
-            O=0;
-         
-         */ 
 	}
 }
