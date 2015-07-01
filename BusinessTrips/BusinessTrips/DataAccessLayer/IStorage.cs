@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BusinessTrips.DataAccessLayer
 {
-    interface IStorage<T>
+    public interface IStorage<T>
     {
         void Add(T obj);
     }
