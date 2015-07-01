@@ -18,5 +18,24 @@ namespace BusinessTrips.Models
 
         [Display(Name = "Remember me?")]
         public bool RememberMe { get; set; }
+
+
+        public override bool Equals(object o)
+        {
+            if (ReferenceEquals(null, o)) return false;
+            if (ReferenceEquals(this, o)) return true;
+            if (o.GetType() != this.GetType()) return false;
+            return Equals((UserModel) o);
+        }
+
+        protected bool Equals(UserModel other)
+        {
+            return string.Equals(Email, other.Email);
+        }
+
+        public override int GetHashCode()
+        {
+            return (Email != null ? Email.GetHashCode() : 0);
+        }
     }
 }
