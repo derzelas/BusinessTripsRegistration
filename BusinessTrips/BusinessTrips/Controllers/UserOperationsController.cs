@@ -1,5 +1,5 @@
-﻿using System.Web.Mvc;
-using BusinessTrips.DataAccessLayer;
+﻿using System.Threading.Tasks;
+using System.Web.Mvc;
 using BusinessTrips.Models;
 
 namespace BusinessTrips.Controllers
@@ -24,9 +24,17 @@ namespace BusinessTrips.Controllers
             return View();
         }
 
-        public ActionResult AuthenticateUser()
+        public ActionResult Login()
         {
-            return View();
+            return View("Login");
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Login(UserModel model)
+        {
+            return View("UnknownUser");
         }
 	}
 }

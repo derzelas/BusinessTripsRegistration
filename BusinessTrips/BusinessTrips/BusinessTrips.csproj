@@ -240,6 +240,8 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\UserOperations\Register.cshtml" />
     <Content Include="Views\UserOperations\RegisterMailSent.cshtml" />
+    <Content Include="Views\UserOperations\Login.cshtml" />
+    <Content Include="Views\UserOperations\UnknownUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
