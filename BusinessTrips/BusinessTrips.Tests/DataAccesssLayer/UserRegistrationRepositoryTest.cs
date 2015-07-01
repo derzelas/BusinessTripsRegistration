@@ -9,14 +9,14 @@ namespace BusinessTrips.Tests.DataAccesssLayer
     public class UserRegistrationRepositoryTest
     {
         private UserRegistrationRepository repository;
-        private List<UserRegistrationModel> elements;
         private IStorage<UserRegistrationModel> storage;
+        private List<UserRegistrationModel> userRegistrationModels;
 
         [TestInitialize]
         public void Initialize()
         {
-            elements = new List<UserRegistrationModel>();
-            storage = new InMemoryStorage<UserRegistrationModel>(elements);
+            userRegistrationModels = new List<UserRegistrationModel>();
+            storage = new InMemoryStorage<UserRegistrationModel>(userRegistrationModels);
             repository = new UserRegistrationRepository(storage);
         }
 
@@ -29,12 +29,12 @@ namespace BusinessTrips.Tests.DataAccesssLayer
         [TestMethod]
         public void AddingElementIsInStorage()
         {
-            UserRegistrationModel userRegistration = new UserRegistrationModel();
+            var userRegistration = new UserRegistrationModel();
             userRegistration.Name = "testName";
             userRegistration.Email = "123";
 
             repository.Add(userRegistration);
-            CollectionAssert.Contains(elements, userRegistration);
+            CollectionAssert.Contains(userRegistrationModels, userRegistration);
         }
     }
 }
