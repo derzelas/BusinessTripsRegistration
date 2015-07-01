@@ -49,14 +49,14 @@ namespace BusinessTrips.Models
         {
             var client = new SmtpClient("smtp.gmail.com", 587);
             var message = new MailMessage();
-            message.From = new MailAddress("thezohan123456789@gmail.com");
+            message.From = new MailAddress("iQuestBusinessTrips@gmail.com");
             message.To.Add(user.Email);
-            message.Body = "Hello World 12465789";
+            message.Body = "Hello World 2.0";
             message.Subject = "hope this works";
             client.UseDefaultCredentials = false;
             client.EnableSsl = true;
 
-            client.Credentials = new NetworkCredential("thezohan123456789@gmail.com", "FieruBateOsu123!@#");
+            client.Credentials = new NetworkCredential("iQuestBusinessTrips@gmail.com", "Ana@re6mere");
             client.Send(message);
             message = null;
         }
