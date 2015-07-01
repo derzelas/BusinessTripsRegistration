@@ -167,6 +167,7 @@
     <Compile Include="DataAccessLayer\UserRegistrationEntity.cs" />
     <Compile Include="DataAccessLayer\UserRegistrationRepository.cs" />
     <Compile Include="Controllers\UserOperationsController.cs" />
+    <Compile Include="db.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
