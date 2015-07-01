@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using BusinessTrips.DataAccessLayer;
 using BusinessTrips.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -9,7 +8,6 @@ namespace BusinessTrips.Tests.DataAccesssLayer
     [TestClass]
     public class UserRegistrationRepositoryTest
     {
-
         private UserRegistrationRepository repository;
         private List<UserRegistrationModel> elements;
         private IStorage<UserRegistrationModel> storage;
@@ -19,8 +17,7 @@ namespace BusinessTrips.Tests.DataAccesssLayer
         {
             elements = new List<UserRegistrationModel>();
             storage = new InMemoryStorage<UserRegistrationModel>(elements);
-
-            repository=new UserRegistrationRepository(storage);
+            repository = new UserRegistrationRepository(storage);
         }
 
         [TestMethod]
@@ -37,7 +34,7 @@ namespace BusinessTrips.Tests.DataAccesssLayer
             userRegistration.Email = "123";
 
             repository.Add(userRegistration);
-            CollectionAssert.Contains(elements,userRegistration);
+            CollectionAssert.Contains(elements, userRegistration);
         }
     }
 }
