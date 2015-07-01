@@ -9,10 +9,7 @@ namespace BusinessTrips.Controllers
         [HttpPost]
         public ActionResult Register(UserRegistrationModel userRegistrationModel)
         {
-            IStorage<UserRegistrationModel> storage = new InMemoryStorage<UserRegistrationModel>();
-
-            UserRegistrationRepository registrationRepository = new UserRegistrationRepository(storage);
-            registrationRepository.Add(userRegistrationModel);
+           userRegistrationModel.Save();
 
             return View("RegisterMailSent");
         }
