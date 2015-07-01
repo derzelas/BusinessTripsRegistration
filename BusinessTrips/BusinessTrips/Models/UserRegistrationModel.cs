@@ -36,12 +36,11 @@ namespace BusinessTrips.Models
         [Display(Name = "Confirm password")]
         public string ConfirmedPassword { get; set; }
 
-        public void Save(UserRegistrationModel userFields)
+        public void Save()
         {
             IStorage<UserRegistrationModel> storage = new InMemoryStorage<UserRegistrationModel>();
-
             var registrationRepository = new UserRegistrationRepository(storage);
-            registrationRepository.Add(userFields);
+            registrationRepository.Add(this);
             Email a = new Email();
             a.Send();
         }
