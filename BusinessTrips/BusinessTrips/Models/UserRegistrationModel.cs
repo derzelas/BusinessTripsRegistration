@@ -1,9 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.Net;
-using System.Net.Mail;
+using System.Net; 
+using System.Net.Mail;//e de la e mail
 using BusinessTrips.DataAccessLayer;
-
-//e de la e mail
 
 namespace BusinessTrips.Models
 {
@@ -41,27 +39,28 @@ namespace BusinessTrips.Models
             IStorage<UserRegistrationModel> storage = new InMemoryStorage<UserRegistrationModel>();
             var registrationRepository = new UserRegistrationRepository(storage);
             registrationRepository.Add(this);
-            Email a = new Email();
-            a.Send();
+            BusinessTrips.Models.Email.Send(this);
         }
     }
 
-    public class Email
-    {
-        public void Send()
+    public static class Email
+    { 
+        public static void Send(UserRegistrationModel user)
         {
             var client = new SmtpClient("smtp.gmail.com", 587);
             var message = new MailMessage();
-            message.From = new MailAddress("thezohan123456789@gmail.com");
-            message.To.Add("petrica.bota2@yahoo.com");
-            message.Body = "Hello World";
+            message.From = new MailAddress("iQuestBusinessTrips@gmail.com");
+            message.To.Add(user.Email);
+            message.Body = "Hello World 2.0";
             message.Subject = "hope this works";
             client.UseDefaultCredentials = false;
             client.EnableSsl = true;
 
-            client.Credentials = new NetworkCredential("thezohan123456789@gmail.com", "FieruBateOsu123!@#");
+            client.Credentials = new NetworkCredential("iQuestBusinessTrips@gmail.com", "Ana@re6mere");
             client.Send(message);
             message = null;
         }
     }
+
+
 }
