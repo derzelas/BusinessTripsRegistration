@@ -26,7 +26,7 @@ namespace BusinessTrips.Tests.DataAccesssLayer
 
         [TestMethod]
         [ExpectedException(typeof (InvalidOperationException))]
-        public void GetInexistendElementIsNotFound()
+        public void GetInexistentElementThrowsException()
         {
             storage.Add(10);
             storage.Add(15);
@@ -34,7 +34,15 @@ namespace BusinessTrips.Tests.DataAccesssLayer
         }
 
         [TestMethod]
-        public void AddingElementReturnsSameElement()
+        public void GetExistentElementIsFound()
+        {
+            storage.Add(30);
+            var t = storage.Get(30);
+            Assert.AreEqual(30, t);
+        }
+
+        [TestMethod]
+        public void AddedElementIsInStorge()
         {
             storage.Add(5);
             CollectionAssert.Contains(elements, 5);

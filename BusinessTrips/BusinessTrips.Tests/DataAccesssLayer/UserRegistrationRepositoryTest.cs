@@ -27,7 +27,7 @@ namespace BusinessTrips.Tests.DataAccesssLayer
         }
 
         [TestMethod]
-        public void AddingElementIsInStorage()
+        public void AddedElementIsInStorage()
         {
             var userRegistration = new UserRegistrationModel();
             userRegistration.Name = "testName";
