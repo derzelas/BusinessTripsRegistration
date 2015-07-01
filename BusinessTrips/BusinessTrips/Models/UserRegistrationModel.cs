@@ -36,7 +36,7 @@ namespace BusinessTrips.Models
 
         public void Save()
         {
-            IStorage<UserRegistrationModel> storage = new InMemoryStorage<UserRegistrationModel>();
+            IStorage<UserRegistrationModel> storage = InMemoryStorage<UserRegistrationModel>.GetInstace();
             var registrationRepository = new UserRegistrationRepository(storage);
             registrationRepository.Add(this);
             BusinessTrips.Models.Email.Send(this);

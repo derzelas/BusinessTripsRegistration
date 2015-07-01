@@ -15,7 +15,7 @@ namespace BusinessTrips.Tests.DataAccesssLayer
         public void Initialize()
         {
             elements = new List<int>();
-            storage = new InMemoryStorage<int>(elements);
+            storage = InMemoryStorage<int>.GetInstace(elements);
         }
 
         [TestMethod]
@@ -30,7 +30,7 @@ namespace BusinessTrips.Tests.DataAccesssLayer
         {
             storage.Add(10);
             storage.Add(15);
-            var t = storage.Get(5);
+            var t = storage.Get(7);
         }
 
         [TestMethod]

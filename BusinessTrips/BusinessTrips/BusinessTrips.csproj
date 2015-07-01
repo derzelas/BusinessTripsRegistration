@@ -167,7 +167,6 @@
     <Compile Include="DataAccessLayer\UserRegistrationEntity.cs" />
     <Compile Include="DataAccessLayer\UserRegistrationRepository.cs" />
     <Compile Include="Controllers\UserOperationsController.cs" />
-    <Compile Include="db.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -268,7 +267,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>52086</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
