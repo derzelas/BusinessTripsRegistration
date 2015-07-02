@@ -38,7 +38,9 @@ namespace BusinessTrips.DataAccessLayer
             userModel.Name = userRegistrationModel.Name;
             userModel.Email = userRegistrationModel.Email;
             userModel.Password = userRegistrationModel.Password;
-            
+
+            storage.Add(userModel);
+
             return userModel;
         }
     }
