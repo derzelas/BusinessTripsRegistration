@@ -34,8 +34,7 @@ namespace BusinessTrips.Models
 
         public void Save()
         {
-            IStorage<UserRegistrationModel> storage = InMemoryStorage<UserRegistrationModel>.GetInstace();
-            var registrationRepository = new UserRegistrationRepository(storage);
+            var registrationRepository = new UserRegistrationRepository();
             registrationRepository.Add(this);
         }
     }
