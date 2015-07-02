@@ -20,6 +20,13 @@ namespace BusinessTrips.Tests.DataAccesssLayer
             repository = new UserRegistrationRepository(storage);
         }
 
+        [TestCleanup]
+        public void CleanUp()
+        {
+            storage = null;
+        }
+
+
         [TestMethod]
         public void InstanceIsCreated()
         {
