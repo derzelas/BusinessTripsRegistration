@@ -1,5 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.Net; 
+﻿using System;//try catch
+using System.ComponentModel.DataAnnotations;
+using System.Net;
 using System.Net.Mail;//e de la e mail
 using BusinessTrips.DataAccessLayer;
 
@@ -39,28 +40,34 @@ namespace BusinessTrips.Models
             IStorage<UserRegistrationModel> storage = new InMemoryStorage<UserRegistrationModel>();
             var registrationRepository = new UserRegistrationRepository(storage);
             registrationRepository.Add(this);
-            BusinessTrips.Models.Email.Send(this);
+
+            Email email = new Email();
+            email.Send(this);
         }
     }
 
-    public static class Email
-    { 
-        public static void Send(UserRegistrationModel user)
+    public class Email
+    {
+        public void Send(UserRegistrationModel user)
         {
-            var client = new SmtpClient("smtp.gmail.com", 587);
-            var message = new MailMessage();
-            message.From = new MailAddress("iQuestBusinessTrips@gmail.com");
-            message.To.Add(user.Email);
-            message.Body = "Hello World 2.0";
-            message.Subject = "hope this works";
-            client.UseDefaultCredentials = false;
-            client.EnableSsl = true;
-
-            client.Credentials = new NetworkCredential("iQuestBusinessTrips@gmail.com", "Ana@re6mere");
-            client.Send(message);
-            message = null;
+            try
+            {
+                var client = new SmtpClient("smtp.gmail.com", 587);
+                var message = new MailMessage();
+                message.From = new MailAddress("iQuestBusinessTrips@gmail.com");
+                message.To.Add(user.Email);
+                message.Body = "Hello World 2.0";
+                message.Subject = "hope this works";
+                client.UseDefaultCredentials = false;
+                client.EnableSsl = true;
+                client.Credentials = new NetworkCredential("iQuestBusinessTrips@gmail.com", "Ana@re6mere");
+                client.Send(message);
+                message = null;
+            }
+            catch (System.Net.Mail.SmtpException e)
+            {
+                throw e;
+            }
         }
     }
-
-
 }
