@@ -16,7 +16,7 @@ namespace BusinessTrips.Tests.DataAccesssLayer
         public void Initialize()
         {
             userRegistrationModels = new List<UserRegistrationModel>();
-            storage = new InMemoryStorage<UserRegistrationModel>(userRegistrationModels);
+            storage = InMemoryStorage<UserRegistrationModel>.GetInstace(userRegistrationModels);
             repository = new UserRegistrationRepository(storage);
         }
 
@@ -27,7 +27,7 @@ namespace BusinessTrips.Tests.DataAccesssLayer
         }
 
         [TestMethod]
-        public void AddingElementIsInStorage()
+        public void AddedElementIsInStorage()
         {
             var userRegistration = new UserRegistrationModel();
             userRegistration.Name = "testName";

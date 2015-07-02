@@ -167,6 +167,7 @@
     <Compile Include="DataAccessLayer\UserRegistrationEntity.cs" />
     <Compile Include="DataAccessLayer\UserRegistrationRepository.cs" />
     <Compile Include="Controllers\UserOperationsController.cs" />
+    <Compile Include="DataAccessLayer\UserRepository.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -240,6 +241,8 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\UserOperations\Register.cshtml" />
     <Content Include="Views\UserOperations\RegisterMailSent.cshtml" />
+    <Content Include="Views\UserOperations\Login.cshtml" />
+    <Content Include="Views\UserOperations\UnknownUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -265,7 +268,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>52086</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
