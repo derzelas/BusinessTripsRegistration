@@ -52,20 +52,17 @@ namespace BusinessTrips.Models
     {
         public void Send(UserRegistrationModel user)
         {
-                var client = new SmtpClient("smtp.gmail.com", 587);
-                var message = new MailMessage();
-                message.From = new MailAddress("iQuestBusinessTrips@gmail.com");
-                message.To.Add(user.Email);
-                message.Body = "Hello World 2.0";
-                message.Subject = "hope this works";
-                client.UseDefaultCredentials = false;
-                client.EnableSsl = true;
-                client.Credentials = new NetworkCredential("iQuestBusinessTrips@gmail.com", "Ana@re6mere");
-                client.Send(message);
-                message = null;
-            
-           // catch (System.Net.Mail.SmtpException e)
-            
+            var client = new SmtpClient("smtp.gmail.com", 587);
+            var message = new MailMessage();
+            message.From = new MailAddress("iQuestBusinessTrips@gmail.com");
+            message.To.Add(user.Email);
+            message.Body = "Hello World 2.0";
+            message.Subject = "hope this works";
+            client.UseDefaultCredentials = false;
+            client.EnableSsl = true;
+            client.Credentials = new NetworkCredential("iQuestBusinessTrips@gmail.com", "Ana@re6mere");
+            client.Send(message);
+            message = null;
         }
     }
 }
