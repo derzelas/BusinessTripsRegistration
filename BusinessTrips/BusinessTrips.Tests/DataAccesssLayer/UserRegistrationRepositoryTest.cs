@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using System;
 using BusinessTrips.DataAccessLayer;
 using BusinessTrips.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -9,39 +9,37 @@ namespace BusinessTrips.Tests.DataAccesssLayer
     public class UserRegistrationRepositoryTest
     {
         private UserRegistrationRepository repository;
-        private IStorage<UserRegistrationModel> storage;
-        private List<UserRegistrationModel> userRegistrationModels;
 
         [TestInitialize]
         public void Initialize()
         {
-            userRegistrationModels = new List<UserRegistrationModel>();
-            storage = InMemoryStorage<UserRegistrationModel>.GetInstace(userRegistrationModels);
-            repository = new UserRegistrationRepository(storage);
-        }
-
-        [TestCleanup]
-        public void CleanUp()
-        {
-            storage = null;
-        }
-
-
-        [TestMethod]
-        public void InstanceIsCreated()
-        {
-            Assert.IsNotNull(repository);
+            repository = new UserRegistrationRepository();
         }
 
         [TestMethod]
-        public void AddedElementIsInStorage()
+        public void AddedUserRegistrationIsFoundStorage()
         {
-            var userRegistration = new UserRegistrationModel();
-            userRegistration.Name = "testName";
-            userRegistration.Email = "123";
+            var userRegistration = new UserRegistrationModel
+            {
+                Name = "testName",
+                Email = "123"
+            };
 
             repository.Add(userRegistration);
-            CollectionAssert.Contains(userRegistrationModels, userRegistration);
+            var user = repository.Get(userRegistration);
+            Assert.AreEqual(userRegistration, user);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof (InvalidOperationException))]
+        public void GetInexistentUserRegistrationThrowsException()
+        {
+            var userRegistration = new UserRegistrationModel
+            {
+                Name = "testName",
+                Email = "123"
+            };
+            repository.Get(userRegistration);
         }
     }
 }
