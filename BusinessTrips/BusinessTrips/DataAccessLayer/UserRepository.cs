@@ -1,4 +1,5 @@
-﻿using BusinessTrips.Models;
+﻿using System;
+using BusinessTrips.Models;
 
 namespace BusinessTrips.DataAccessLayer
 {
@@ -6,9 +7,9 @@ namespace BusinessTrips.DataAccessLayer
     {
         private IStorage<UserModel> storage;
 
-        public UserRepository()
+        public UserRepository(IStorage<UserModel> storage)
         {
-            storage = InMemoryStorage<UserModel>.GetInstace();
+            this.storage = storage;
         }
 
         public bool AreCredentialsValid(string email, string password)
@@ -16,9 +17,17 @@ namespace BusinessTrips.DataAccessLayer
             UserModel userModel = new UserModel();
             userModel.Email = email;
 
-            UserModel retrivedModel = storage.Get(userModel);
+            UserModel retrievedModel;
+            try
+            {
+                retrievedModel = storage.Get(userModel);
+            }
+            catch (InvalidOperationException)
+            {
+                return false;
+            }
 
-            if (retrivedModel.Password == password)
+            if (retrievedModel.Password == password)
                 return true;
             return false;
         }
