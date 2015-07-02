@@ -1,8 +1,6 @@
-﻿using System;//try catch
-using System.ComponentModel.DataAnnotations;
-using System.Net;
-using System.Net.Mail;//e de la e mail
+﻿using System.ComponentModel.DataAnnotations;
 using BusinessTrips.DataAccessLayer;
+using BusinessTrips.Services;
 
 namespace BusinessTrips.Models
 {
@@ -37,32 +35,14 @@ namespace BusinessTrips.Models
 
         public void Save()
         {
-            IStorage<UserRegistrationModel> storage = InMemoryStorage<UserRegistrationModel>.GetInstace();
-            var registrationRepository = new UserRegistrationRepository(storage);
+            var registrationRepository = new UserRegistrationRepository();
             registrationRepository.Add(this);
         }
+
         public void SendEmail()
         {
             Email email = new Email();
             email.Send(this);
-        }
-    }
-
-    public class Email
-    {
-        public void Send(UserRegistrationModel user)
-        {
-            var client = new SmtpClient("smtp.gmail.com", 587);
-            var message = new MailMessage();
-            message.From = new MailAddress("iQuestBusinessTrips@gmail.com");
-            message.To.Add(user.Email);
-            message.Body = "Hello World 2.0";
-            message.Subject = "hope this works";
-            client.UseDefaultCredentials = false;
-            client.EnableSsl = true;
-            client.Credentials = new NetworkCredential("iQuestBusinessTrips@gmail.com", "Ana@re6mere");
-            client.Send(message);
-            message = null;
         }
     }
 }
