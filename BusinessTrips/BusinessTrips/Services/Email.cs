@@ -1,28 +1,56 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Net.Mail;
-using System.Web;
 using BusinessTrips.Models;
 
 namespace BusinessTrips.Services
 {
     public class Email
     {
-        public void Send(UserRegistrationModel user)
+        public bool IsSent { get; private set; }
+        private SmtpClient client;
+        private MailMessage message;
+
+        public Email(UserRegistrationModel user)
         {
-            var client = new SmtpClient("smtp.gmail.com", 587);
-            var message = new MailMessage();
-            message.From = new MailAddress("iQuestBusinessTrips@gmail.com");
-            message.To.Add(user.Email);
-            message.Body = "Hello World 2.0";
-            message.Subject = "E-mail confirmation";
-            client.UseDefaultCredentials = false;
-            client.EnableSsl = true;
-            client.Credentials = new NetworkCredential("iQuestBusinessTrips@gmail.com", "Ana@re6mere");
-            client.Send(message);
-            message = null;
+            string emailSenderAddress = "iQuestBusinessTrips@gmail.com";
+
+            message = new MailMessage
+            {
+                From = new MailAddress(emailSenderAddress),
+                Subject = "E-mail confirmation",
+                Body = BodyConfiguration(),
+                To = { user.Email }
+            };
+
+            client = new SmtpClient("smtp.gmail.com", 587)
+            {
+                UseDefaultCredentials = false,
+                EnableSsl = true,
+                Credentials = new NetworkCredential(emailSenderAddress, "Ana@re6mere")
+            };
+        }
+
+        private string BodyConfiguration()
+        {
+            Uri uri = new Uri("http://msdn.com");
+
+            string bodyMessage = "Welcome message ";
+            bodyMessage += uri.AbsoluteUri;
+
+            return bodyMessage;
+        }
+        public void Send()
+        {
+            try
+            {
+                client.Send(message);
+                IsSent = true;
+            }
+            catch (SmtpException e)
+            {
+                IsSent = false;
+            }
         }
     }
 }

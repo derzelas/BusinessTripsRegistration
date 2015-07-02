@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using System.Web.Mvc;
 using BusinessTrips.Models;
+using BusinessTrips.Services;
 
 namespace BusinessTrips.Controllers
 {
@@ -9,17 +10,19 @@ namespace BusinessTrips.Controllers
         [HttpPost]
         public ActionResult Register(UserRegistrationModel userRegistrationModel)
         {
-           userRegistrationModel.Save();
-           try
-           {
-               userRegistrationModel.SendEmail();
-               return View("RegisterMailSent");
-           }
-           catch(System.Net.Mail.SmtpException e)
-           {
-               return View("RegisterEmailNotSent");
-           }
+            userRegistrationModel.Save();
+
+            Email email = new Email(userRegistrationModel);
+
+            email.Send();
+
+            if (email.IsSent)
+            {
+                return View("RegisterMailSent");
+            }
+            return View("RegisterEmailNotSent");
         }
+
         public ActionResult Register()
         {
             return View("Register");
@@ -42,5 +45,5 @@ namespace BusinessTrips.Controllers
         {
             return View("UnknownUser");
         }
-	}
+    }
 }

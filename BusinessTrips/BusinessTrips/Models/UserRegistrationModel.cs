@@ -1,7 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.Net;
 using BusinessTrips.DataAccessLayer;
-using BusinessTrips.Services;
 
 namespace BusinessTrips.Models
 {
@@ -39,11 +37,6 @@ namespace BusinessTrips.Models
             IStorage<UserRegistrationModel> storage = InMemoryStorage<UserRegistrationModel>.GetInstace();
             var registrationRepository = new UserRegistrationRepository(storage);
             registrationRepository.Add(this);
-        }
-        public void SendEmail()
-        {
-            Email email = new Email();
-            email.Send(this);
         }
     }
 }
