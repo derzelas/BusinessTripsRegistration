@@ -35,7 +35,7 @@ namespace BusinessTrips.Services
         {
             Uri uri = new Uri("http://msdn.com");
 
-            string bodyMessage = "Welcome message ";
+            string bodyMessage = "Click this link to complete your registration ";
             bodyMessage += uri.AbsoluteUri;
 
             return bodyMessage;
