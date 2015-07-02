@@ -8,7 +8,7 @@ namespace BusinessTrips.DataAccessLayer
 
         public UserRepository()
         {
-            storage = InMemoryStorage<UserModel>.GetInstace();
+            storage = new InMemoryStorage<UserModel>();
         }
 
         public bool AreCredentialsValid(string email, string password)
