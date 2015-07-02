@@ -5,7 +5,7 @@ namespace BusinessTrips.DataAccessLayer
 {
     public class InMemoryStorage<T> : IStorage<T>
     {
-        private List<T> storage=new List<T>();
+        private List<T> storage = new List<T>();
 
         public void Add(T obj)
         {
