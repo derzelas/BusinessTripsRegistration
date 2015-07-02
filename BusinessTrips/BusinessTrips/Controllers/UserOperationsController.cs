@@ -10,8 +10,8 @@ namespace BusinessTrips.Controllers
         public ActionResult Register(UserRegistrationModel userRegistrationModel)
         {
            userRegistrationModel.Save();
-
-            return View("RegisterMailSent");
+           userRegistrationModel.SendEmail();
+           return View("RegisterMailSent");
         }
 
         public ActionResult Register()

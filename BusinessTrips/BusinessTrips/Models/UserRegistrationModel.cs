@@ -40,7 +40,9 @@ namespace BusinessTrips.Models
             IStorage<UserRegistrationModel> storage = InMemoryStorage<UserRegistrationModel>.GetInstace();
             var registrationRepository = new UserRegistrationRepository(storage);
             registrationRepository.Add(this);
-
+        }
+        public void SendEmail()
+        {
             Email email = new Email();
             email.Send(this);
         }
@@ -50,8 +52,6 @@ namespace BusinessTrips.Models
     {
         public void Send(UserRegistrationModel user)
         {
-            try
-            {
                 var client = new SmtpClient("smtp.gmail.com", 587);
                 var message = new MailMessage();
                 message.From = new MailAddress("iQuestBusinessTrips@gmail.com");
@@ -63,11 +63,9 @@ namespace BusinessTrips.Models
                 client.Credentials = new NetworkCredential("iQuestBusinessTrips@gmail.com", "Ana@re6mere");
                 client.Send(message);
                 message = null;
-            }
-            catch (System.Net.Mail.SmtpException e)
-            {
-                throw e;
-            }
+            
+           // catch (System.Net.Mail.SmtpException e)
+            
         }
     }
 }
