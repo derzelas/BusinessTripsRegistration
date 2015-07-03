@@ -14,7 +14,7 @@ namespace BusinessTrips.Controllers
         {
             userRegistrationModel.Save();
 
-            string message = GenerateMessage(userRegistrationModel.registerTokenGuid);
+            string message = GenerateMessage(userRegistrationModel.RegisterToken);
 
             Email email = new Email();
             email.SendConfirmatioEmail(userRegistrationModel.Email, message);

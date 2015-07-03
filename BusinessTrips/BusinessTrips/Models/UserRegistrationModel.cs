@@ -10,7 +10,7 @@ namespace BusinessTrips.Models
         private const int MinimumNameLength = 3;
         private const string PasswordValidationMessage = "Minimum password length is 6";
 
-        public Guid registerTokenGuid { get;private set; }
+        public Guid RegisterToken { get;private set; }
 
         [Required]
         [Display(Name = "Name")]
@@ -37,7 +37,7 @@ namespace BusinessTrips.Models
 
         public void Save()
         {
-            registerTokenGuid=Guid.NewGuid();
+            RegisterToken=Guid.NewGuid();
             var registrationRepository = new UserRegistrationRepository();
             registrationRepository.Add(this);
         }

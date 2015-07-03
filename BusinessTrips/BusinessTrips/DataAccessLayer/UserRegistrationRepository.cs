@@ -15,14 +15,12 @@ namespace BusinessTrips.DataAccessLayer
             return storage.Get(userRegistration);
         }
 
-        public override void CommitChanges()
-        {
-            throw new System.NotImplementedException();
-        }
-
         public UserRegistrationModel GetByToken(Guid requestToken)
         {
-            throw new NotImplementedException();
+            Predicate<UserRegistrationModel> predicate =
+                userRegistrationModel => userRegistrationModel.RegisterToken.Equals(requestToken);
+
+            return storage.Get(predicate);
         }
     }
 }
