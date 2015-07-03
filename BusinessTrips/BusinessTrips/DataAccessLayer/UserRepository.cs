@@ -3,10 +3,8 @@ using BusinessTrips.Models;
 
 namespace BusinessTrips.DataAccessLayer
 {
-    public class UserRepository
+    public class UserRepository : BaseRepository<UserModel>
     {
-        private IStorage<UserModel> storage;
-
         public UserRepository()
         {
             storage = new InMemoryStorage<UserModel>();
@@ -42,6 +40,11 @@ namespace BusinessTrips.DataAccessLayer
             storage.Add(userModel);
 
             return userModel;
+        }
+
+        public override void CommitChanges()
+        {
+            throw new NotImplementedException();
         }
     }
 }

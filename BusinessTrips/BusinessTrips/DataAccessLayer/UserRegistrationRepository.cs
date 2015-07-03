@@ -2,10 +2,8 @@
 
 namespace BusinessTrips.DataAccessLayer
 {
-    public class UserRegistrationRepository
+    public class UserRegistrationRepository : BaseRepository<UserRegistrationModel>
     {
-        private IStorage<UserRegistrationModel> storage;
-
         public UserRegistrationRepository()
         {
             storage = new InMemoryStorage<UserRegistrationModel>();
@@ -19,6 +17,11 @@ namespace BusinessTrips.DataAccessLayer
         public UserRegistrationModel Get(UserRegistrationModel userRegistration)
         {
             return storage.Get(userRegistration);
+        }
+
+        public override void CommitChanges()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }
