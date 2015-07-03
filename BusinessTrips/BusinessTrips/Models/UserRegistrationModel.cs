@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using BusinessTrips.DataAccessLayer;
 
 namespace BusinessTrips.Models
@@ -8,6 +9,8 @@ namespace BusinessTrips.Models
         private const int MinimumPasswordLength = 6;
         private const int MinimumNameLength = 3;
         private const string PasswordValidationMessage = "Minimum password length is 6";
+
+        public Guid registerTokenGuid { get;private set; }
 
         [Required]
         [Display(Name = "Name")]
@@ -34,6 +37,7 @@ namespace BusinessTrips.Models
 
         public void Save()
         {
+            registerTokenGuid=new Guid();
             var registrationRepository = new UserRegistrationRepository();
             registrationRepository.Add(this);
         }

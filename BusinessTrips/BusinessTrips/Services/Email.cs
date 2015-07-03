@@ -1,27 +1,17 @@
 ﻿using System;
 using System.Net;
 using System.Net.Mail;
-using BusinessTrips.Models;
 
 namespace BusinessTrips.Services
 {
     public class Email
     {
-        public bool IsSent { get; private set; }
         private SmtpClient client;
-        private MailMessage message;
+        private string emailSenderAddress;
 
-        public Email(UserRegistrationModel user)
+        public Email()
         {
-            string emailSenderAddress = "iQuestBusinessTrips@gmail.com";
-
-            message = new MailMessage
-            {
-                From = new MailAddress(emailSenderAddress),
-                Subject = "E-mail confirmation",
-                Body = BodyConfiguration(),
-                To = { user.Email }
-            };
+            emailSenderAddress = "iQuestBusinessTrips@gmail.com";
 
             client = new SmtpClient("smtp.gmail.com", 587)
             {
@@ -31,26 +21,16 @@ namespace BusinessTrips.Services
             };
         }
 
-        private string BodyConfiguration()
+        public void SendConfirmatioEmail(string emailReceiver, string message)
         {
-            Uri uri = new Uri("http://msdn.com");
-
-            string bodyMessage = "Click this link to complete your registration ";
-            bodyMessage += uri.AbsoluteUri;
-
-            return bodyMessage;
-        }
-        public void Send()
-        {
-            try
-            {
-                client.Send(message);
-                IsSent = true;
-            }
-            catch (SmtpException e)
-            {
-                IsSent = false;
-            }
+            var mailMessage = new MailMessage
+             {
+                 From = new MailAddress(emailSenderAddress),
+                 Subject = "E-mail confirmation",
+                 Body = message,
+                 To = { emailReceiver }
+             };
+            client.Send(mailMessage);
         }
     }
 }

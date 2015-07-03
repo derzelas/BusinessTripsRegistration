@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Net;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 using BusinessTrips.Models;
 using BusinessTrips.Services;
@@ -12,15 +14,19 @@ namespace BusinessTrips.Controllers
         {
             userRegistrationModel.Save();
 
-            Email email = new Email(userRegistrationModel);
+            string message = GenerateMessage(userRegistrationModel.registerTokenGuid);
 
-            email.Send();
+            Email email = new Email();
+            email.SendConfirmatioEmail(userRegistrationModel.Email,string.Empty);
+            return View("RegisterMailSent");
+        }
 
-            if (email.IsSent)
-            {
-                return View("RegisterMailSent");
-            }
-            return View("RegisterEmailNotSent");
+        private string GenerateMessage(Guid registerTokenGuid)
+        {
+            string link = System.Web.HttpContext.Current.Request.Url.Host;
+            link += ":" + System.Web.HttpContext.Current.Request.Url.Port;
+            link += "/UserOperations/ConfirmRegistration/?guid=" + registerTokenGuid;
+            return link;
         }
 
         public ActionResult Register()
@@ -28,9 +34,14 @@ namespace BusinessTrips.Controllers
             return View("Register");
         }
 
-        public ActionResult ConfirmRegistration()
+        public ActionResult ConfirmRegistration(string guid)
         {
-            return View();
+            RegistrationConfirmationModel registrationConfirmationModel=new RegistrationConfirmationModel();
+            registrationConfirmationModel.RequestToken = Guid.Parse(guid);
+
+            registrationConfirmationModel.Confirm();
+
+            return View("UnknownUser");
         }
 
         public ActionResult Login()
