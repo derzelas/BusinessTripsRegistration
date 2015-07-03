@@ -45,7 +45,7 @@ namespace BusinessTrips.Controllers
             }
             catch
             {
-                return View("Register");
+                return View("ConfirmRegistration");
             }
 
 
