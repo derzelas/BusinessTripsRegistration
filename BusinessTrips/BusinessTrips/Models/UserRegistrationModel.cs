@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using BusinessTrips.DataAccessLayer;
-using BusinessTrips.Services;
 
 namespace BusinessTrips.Models
 {
@@ -37,12 +36,6 @@ namespace BusinessTrips.Models
         {
             var registrationRepository = new UserRegistrationRepository();
             registrationRepository.Add(this);
-        }
-
-        public void SendEmail()
-        {
-            Email email = new Email();
-            email.Send(this);
         }
     }
 }
