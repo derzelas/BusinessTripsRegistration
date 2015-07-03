@@ -5,11 +5,6 @@ namespace BusinessTrips.DataAccessLayer
 {
     public class User : RepositoryBase<UserModel>
     {
-        public User()
-        {
-            storage = new InMemoryStorage<UserModel>();
-        }
-
         public bool AreCredentialsValid(string email, string password)
         {
             UserModel userModel = new UserModel();
