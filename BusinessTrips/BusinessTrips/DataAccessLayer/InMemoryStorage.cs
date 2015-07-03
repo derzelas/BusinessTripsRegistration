@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace BusinessTrips.DataAccessLayer
@@ -15,6 +16,11 @@ namespace BusinessTrips.DataAccessLayer
         public T Get(T element)
         {
             return storage.First(e => e.Equals(element));
+        }
+
+        public T Get(Func<T,bool> condition)
+        {
+            return storage.First(condition);
         }
 
         public void Update(T element)

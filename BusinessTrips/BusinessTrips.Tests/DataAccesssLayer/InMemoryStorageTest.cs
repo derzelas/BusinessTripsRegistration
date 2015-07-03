@@ -31,5 +31,31 @@ namespace BusinessTrips.Tests.DataAccesssLayer
             int t = storage.Get(30);
             Assert.AreEqual(30, t);
         }
+
+        [TestMethod]
+        public void GetByPredicate()
+        {
+            storage.Add(3);
+            storage.Add(5);
+
+            Func<int, bool> predicate = (t => t == 5);
+
+            int x = storage.Get(predicate);
+            Assert.AreEqual(5, x);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void GetByPredicateThrowsExceptionWhenElementNotFound()
+        {
+            storage.Add(3);
+            storage.Add(5);
+
+            Func<int,bool> predicate = (t => t == 7);
+
+            int x = storage.Get(predicate);
+
+            Assert.AreEqual(5, x);
+        }
     }
 }

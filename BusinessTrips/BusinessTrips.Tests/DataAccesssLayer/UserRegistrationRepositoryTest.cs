@@ -41,5 +41,44 @@ namespace BusinessTrips.Tests.DataAccesssLayer
             };
             repository.Get(userRegistration);
         }
+
+        [TestMethod]
+        public void GetByTokenExistentUserRegistrationReturnsTheSameUserRegistration()
+        {
+            var userRegistration = new UserRegistrationModel
+            {
+                Name = "testName",
+                Email = "123",
+            };
+
+            userRegistration.Save();
+
+            repository.Add(userRegistration);
+
+            var userReg = repository.GetByToken(userRegistration.RegisterToken);
+            
+            Assert.AreEqual(userRegistration,userReg);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void GetByTokenInexistentUserRegistrationThrowsException()
+        {
+            var userRegistration = new UserRegistrationModel
+            {
+                Name = "testName",
+                Email = "123"
+            };
+
+            userRegistration.Save();
+
+            Guid guid = userRegistration.RegisterToken;
+
+            repository.Add(userRegistration);
+
+            userRegistration.Save();
+
+            repository.GetByToken(guid);
+        }
     }
 }

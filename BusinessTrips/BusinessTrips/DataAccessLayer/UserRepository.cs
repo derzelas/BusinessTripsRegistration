@@ -25,19 +25,16 @@ namespace BusinessTrips.DataAccessLayer
 
         public UserModel CreateByUserRegistration(UserRegistrationModel userRegistrationModel)
         {
-            UserModel userModel = new UserModel();
-            userModel.Name = userRegistrationModel.Name;
-            userModel.Email = userRegistrationModel.Email;
-            userModel.Password = userRegistrationModel.Password;
+            UserModel userModel = new UserModel
+            {
+                Name = userRegistrationModel.Name,
+                Email = userRegistrationModel.Email,
+                Password = userRegistrationModel.Password
+            };
 
             storage.Add(userModel);
 
             return userModel;
-        }
-
-        public override void CommitChanges()
-        {
-            throw new NotImplementedException();
         }
     }
 }
