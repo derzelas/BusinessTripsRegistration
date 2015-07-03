@@ -22,7 +22,7 @@ namespace BusinessTrips.Controllers
         }
 
         private string GenerateMessage(Guid registerTokenGuid)
-        {
+            {
             string link = System.Web.HttpContext.Current.Request.Url.Host;
             link += ":" + System.Web.HttpContext.Current.Request.Url.Port;
             link += "/UserOperations/ConfirmRegistration/?guid=" + registerTokenGuid;

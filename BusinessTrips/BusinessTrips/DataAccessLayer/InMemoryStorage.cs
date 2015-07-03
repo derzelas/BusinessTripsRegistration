@@ -16,5 +16,20 @@ namespace BusinessTrips.DataAccessLayer
         {
             return storage.First(e => e.Equals(element));
         }
+
+        public void Update(T element)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void Remove(T element)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void Commit()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

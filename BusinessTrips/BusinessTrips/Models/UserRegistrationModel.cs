@@ -37,7 +37,7 @@ namespace BusinessTrips.Models
 
         public void Save()
         {
-            registerTokenGuid=new Guid();
+            registerTokenGuid=Guid.NewGuid();
             var registrationRepository = new UserRegistrationRepository();
             registrationRepository.Add(this);
         }

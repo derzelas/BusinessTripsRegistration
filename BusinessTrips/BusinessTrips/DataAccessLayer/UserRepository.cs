@@ -3,15 +3,8 @@ using BusinessTrips.Models;
 
 namespace BusinessTrips.DataAccessLayer
 {
-    public class UserRepository
+    public class User : RepositoryBase<UserModel>
     {
-        private IStorage<UserModel> storage;
-
-        public UserRepository()
-        {
-            storage = new InMemoryStorage<UserModel>();
-        }
-
         public bool AreCredentialsValid(string email, string password)
         {
             UserModel userModel = new UserModel();
@@ -27,9 +20,7 @@ namespace BusinessTrips.DataAccessLayer
                 return false;
             }
 
-            if (retrievedModel.Password == password)
-                return true;
-            return false;
+            return retrievedModel.Password == password;
         }
 
         public UserModel CreateByUserRegistration(UserRegistrationModel userRegistrationModel)
@@ -42,6 +33,11 @@ namespace BusinessTrips.DataAccessLayer
             storage.Add(userModel);
 
             return userModel;
+        }
+
+        public override void CommitChanges()
+        {
+            throw new NotImplementedException();
         }
     }
 }
