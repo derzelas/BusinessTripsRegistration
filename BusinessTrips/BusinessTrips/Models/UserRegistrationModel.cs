@@ -34,7 +34,7 @@ namespace BusinessTrips.Models
 
         public void Save()
         {
-            var registrationRepository = new UserRegistrationRepository();
+            var registrationRepository = new UserRegistration();
             registrationRepository.Add(this);
         }
     }

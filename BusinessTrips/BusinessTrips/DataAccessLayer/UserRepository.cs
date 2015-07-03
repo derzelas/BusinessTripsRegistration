@@ -3,9 +3,9 @@ using BusinessTrips.Models;
 
 namespace BusinessTrips.DataAccessLayer
 {
-    public class UserRepository : BaseRepository<UserModel>
+    public class User : RepositoryBase<UserModel>
     {
-        public UserRepository()
+        public User()
         {
             storage = new InMemoryStorage<UserModel>();
         }

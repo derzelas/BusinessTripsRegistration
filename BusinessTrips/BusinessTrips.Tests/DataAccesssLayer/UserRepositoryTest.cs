@@ -8,20 +8,20 @@ namespace BusinessTrips.Tests.DataAccesssLayer
     public class UserRepositoryTest
     {
         private IStorage<UserModel> storage;
-        private UserRepository userRepository;
+        private User user;
         private UserModel userModel;
 
         [TestInitialize]
         public void Initialize()
         {
-            userRepository = new UserRepository();
+            user = new User();
             userModel = new UserModel();
         }
 
         [TestMethod]
         public void InstanceIsCreated()
         {
-            Assert.IsNotNull(userRepository);
+            Assert.IsNotNull(user);
         }
 
         [TestMethod]
@@ -33,9 +33,9 @@ namespace BusinessTrips.Tests.DataAccesssLayer
                 Password = "12345"
             };
            
-            userRepository.CreateByUserRegistration(userRegistrationModel);
+            user.CreateByUserRegistration(userRegistrationModel);
 
-            Assert.AreEqual(true, userRepository.AreCredentialsValid(userRegistrationModel.Email, userRegistrationModel.Password));
+            Assert.AreEqual(true, user.AreCredentialsValid(userRegistrationModel.Email, userRegistrationModel.Password));
         }
 
         [TestMethod]
@@ -44,7 +44,7 @@ namespace BusinessTrips.Tests.DataAccesssLayer
             userModel.Email = "notexist@work.com";
             userModel.Password = "12345";
             
-            Assert.AreEqual(false, userRepository.AreCredentialsValid(userModel.Email, userModel.Password));            
+            Assert.AreEqual(false, user.AreCredentialsValid(userModel.Email, userModel.Password));            
         }
 
         [TestMethod]
@@ -57,7 +57,7 @@ namespace BusinessTrips.Tests.DataAccesssLayer
                 Password = "12345"
             };
 
-            userModel = userRepository.CreateByUserRegistration(userRegistrationModel);
+            userModel = user.CreateByUserRegistration(userRegistrationModel);
 
             Assert.AreEqual(userModel.Name, userRegistrationModel.Name);
             Assert.AreEqual(userModel.Email, userRegistrationModel.Email);
