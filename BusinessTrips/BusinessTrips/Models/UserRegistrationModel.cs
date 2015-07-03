@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using BusinessTrips.DataAccessLayer;
 
 namespace BusinessTrips.Models
@@ -32,8 +33,11 @@ namespace BusinessTrips.Models
         [Display(Name = "Confirm password")]
         public string ConfirmedPassword { get; set; }
 
+        public Guid RequestToken { get; private set; }
+
         public void Save()
         {
+            RequestToken = Guid.NewGuid();
             var registrationRepository = new UserRegistration();
             registrationRepository.Add(this);
         }

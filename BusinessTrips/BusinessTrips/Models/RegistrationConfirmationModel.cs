@@ -7,6 +7,9 @@ namespace BusinessTrips.Models
 {
     public class RegistrationConfirmationModel
     {
-        public Guid RequestToken { get; set; }
+        public void Confirm(UserRegistrationModel userRegistrationModel,Guid confirmationGuid)
+        {
+            
+        }
     }
 }

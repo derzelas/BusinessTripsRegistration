@@ -11,7 +11,7 @@ namespace BusinessTrips.Controllers
         public ActionResult Register(UserRegistrationModel userRegistrationModel)
         {
             userRegistrationModel.Save();
-
+            var message = "http..." + userRegistrationModel.RequestToken;
             Email email = new Email(userRegistrationModel);
 
             email.Send();

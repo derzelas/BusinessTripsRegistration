@@ -25,9 +25,7 @@ namespace BusinessTrips.DataAccessLayer
                 return false;
             }
 
-            if (retrievedModel.Password == password)
-                return true;
-            return false;
+            return retrievedModel.Password == password;
         }
 
         public UserModel CreateByUserRegistration(UserRegistrationModel userRegistrationModel)
