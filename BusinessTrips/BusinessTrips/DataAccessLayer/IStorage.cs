@@ -8,7 +8,7 @@ namespace BusinessTrips.DataAccessLayer
 
         T Get(T element);
 
-        T Get(Predicate<T> predicate);
+        T Get(Func<T,bool> predicate);
 
         void Update(T element);
 

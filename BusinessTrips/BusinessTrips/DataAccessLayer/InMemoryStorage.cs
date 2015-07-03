@@ -18,9 +18,9 @@ namespace BusinessTrips.DataAccessLayer
             return storage.First(e => e.Equals(element));
         }
 
-        public T Get(Predicate<T> comparer)
+        public T Get(Func<T,bool> condition)
         {
-            return storage.Find(comparer);
+            return storage.First(condition);
         }
 
         public void Update(T element)

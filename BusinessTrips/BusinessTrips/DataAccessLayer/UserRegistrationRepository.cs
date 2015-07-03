@@ -17,10 +17,10 @@ namespace BusinessTrips.DataAccessLayer
 
         public UserRegistrationModel GetByToken(Guid requestToken)
         {
-            Predicate<UserRegistrationModel> predicate =
-                userRegistrationModel => userRegistrationModel.RegisterToken.Equals(requestToken);
+            Func<UserRegistrationModel, bool> function =
+                m => m.RegisterToken == requestToken;
 
-            return storage.Get(predicate);
+            return storage.Get(function);
         }
     }
 }
