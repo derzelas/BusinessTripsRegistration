@@ -1,8 +1,9 @@
-﻿using BusinessTrips.Models;
+﻿using System;
+using BusinessTrips.Models;
 
 namespace BusinessTrips.DataAccessLayer
 {
-    public class UserRegistration : RepositoryBase<UserRegistrationModel>
+    public class UserRegistrationRepository : RepositoryBase<UserRegistrationModel>
     {
         public void Add(UserRegistrationModel userRegistration)
         {
@@ -17,6 +18,11 @@ namespace BusinessTrips.DataAccessLayer
         public override void CommitChanges()
         {
             throw new System.NotImplementedException();
+        }
+
+        public UserRegistrationModel GetByToken(Guid requestToken)
+        {
+            throw new NotImplementedException();
         }
     }
 }

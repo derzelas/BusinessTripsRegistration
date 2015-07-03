@@ -17,13 +17,13 @@ namespace BusinessTrips.Controllers
             string message = GenerateMessage(userRegistrationModel.registerTokenGuid);
 
             Email email = new Email();
-            email.SendConfirmatioEmail(userRegistrationModel.Email,string.Empty);
+            email.SendConfirmatioEmail(userRegistrationModel.Email, message);
             return View("RegisterMailSent");
         }
 
         private string GenerateMessage(Guid registerTokenGuid)
-            {
-            string link = System.Web.HttpContext.Current.Request.Url.Host;
+        {
+            string link = "http://"+System.Web.HttpContext.Current.Request.Url.Host;
             link += ":" + System.Web.HttpContext.Current.Request.Url.Port;
             link += "/UserOperations/ConfirmRegistration/?guid=" + registerTokenGuid;
             return link;
@@ -36,12 +36,20 @@ namespace BusinessTrips.Controllers
 
         public ActionResult ConfirmRegistration(string guid)
         {
-            RegistrationConfirmationModel registrationConfirmationModel=new RegistrationConfirmationModel();
+            RegistrationConfirmationModel registrationConfirmationModel = new RegistrationConfirmationModel();
             registrationConfirmationModel.RequestToken = Guid.Parse(guid);
 
-            registrationConfirmationModel.Confirm();
+            try
+            {
+                registrationConfirmationModel.Confirm();
+            }
+            catch
+            {
+                return View("Register");
+            }
 
-            return View("UnknownUser");
+
+            return View("Login");
         }
 
         public ActionResult Login()

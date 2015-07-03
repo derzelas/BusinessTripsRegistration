@@ -8,12 +8,12 @@ namespace BusinessTrips.Tests.DataAccesssLayer
     [TestClass]
     public class UserRegistrationRepositoryTest
     {
-        private UserRegistration repository;
+        private UserRegistrationRepository repository;
 
         [TestInitialize]
         public void Initialize()
         {
-            repository = new UserRegistration();
+            repository = new UserRegistrationRepository();
         }
 
         [TestMethod]

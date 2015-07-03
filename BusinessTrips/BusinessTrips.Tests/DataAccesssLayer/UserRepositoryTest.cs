@@ -8,13 +8,13 @@ namespace BusinessTrips.Tests.DataAccesssLayer
     public class UserRepositoryTest
     {
         private IStorage<UserModel> storage;
-        private User user;
+        private UserRepository user;
         private UserModel userModel;
 
         [TestInitialize]
         public void Initialize()
         {
-            user = new User();
+            user = new UserRepository();
             userModel = new UserModel();
         }
 

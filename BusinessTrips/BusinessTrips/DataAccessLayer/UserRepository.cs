@@ -3,7 +3,7 @@ using BusinessTrips.Models;
 
 namespace BusinessTrips.DataAccessLayer
 {
-    public class User : RepositoryBase<UserModel>
+    public class UserRepository : RepositoryBase<UserModel>
     {
         public bool AreCredentialsValid(string email, string password)
         {

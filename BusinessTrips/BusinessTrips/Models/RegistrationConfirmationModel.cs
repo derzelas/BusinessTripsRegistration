@@ -1,15 +1,22 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+using BusinessTrips.DataAccessLayer;
 
 namespace BusinessTrips.Models
 {
     public class RegistrationConfirmationModel
     {
-        public void Confirm(UserRegistrationModel userRegistrationModel,Guid confirmationGuid)
+
+        public Guid RequestToken { get; set; }
+
+        public void Confirm()
         {
-            
+            UserRegistrationRepository userRegistrationRepository=new UserRegistrationRepository();
+
+            UserRegistrationModel userRegistrationModel = userRegistrationRepository.GetByToken(RequestToken);
+
+            UserRepository userRepository=new UserRepository();
+
+            userRepository.CreateByUserRegistration(userRegistrationModel);
         }
     }
 }
