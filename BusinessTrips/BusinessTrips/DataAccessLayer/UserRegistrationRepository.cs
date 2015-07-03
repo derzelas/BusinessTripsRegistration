@@ -4,11 +4,6 @@ namespace BusinessTrips.DataAccessLayer
 {
     public class UserRegistration : RepositoryBase<UserRegistrationModel>
     {
-        public UserRegistration()
-        {
-            storage = new InMemoryStorage<UserRegistrationModel>();
-        }
-
         public void Add(UserRegistrationModel userRegistration)
         {
             storage.Add(userRegistration);
