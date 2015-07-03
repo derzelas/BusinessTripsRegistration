@@ -245,6 +245,7 @@
     <Content Include="Views\UserOperations\RegisterMailSent.cshtml" />
     <Content Include="Views\UserOperations\Login.cshtml" />
     <Content Include="Views\UserOperations\UnknownUser.cshtml" />
+    <Content Include="Views\UserOperations\ConfirmRegistration.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

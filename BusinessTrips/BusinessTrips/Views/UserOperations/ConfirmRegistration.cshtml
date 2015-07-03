@@ -1,0 +1,11 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3>Registration was successful!</h3>
+
+@Html.ActionLink("Go to Login", "Login", "UserOperations");
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

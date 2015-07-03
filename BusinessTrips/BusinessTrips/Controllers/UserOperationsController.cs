@@ -49,7 +49,7 @@ namespace BusinessTrips.Controllers
             }
 
 
-            return View("Login");
+            return View("ConfirmRegistration");
         }
 
         public ActionResult Login()
