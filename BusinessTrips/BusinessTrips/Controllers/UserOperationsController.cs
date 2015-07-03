@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Net;
-using System.Threading.Tasks;
 using System.Web.Mvc;
+using BusinessTrips.DataAccessLayer;
 using BusinessTrips.Models;
 using BusinessTrips.Services;
 
@@ -45,7 +44,7 @@ namespace BusinessTrips.Controllers
             }
             catch
             {
-                return View("ConfirmRegistration");
+                return View("Register");
             }
 
 
@@ -60,8 +59,15 @@ namespace BusinessTrips.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Login(UserModel model)
+        public ActionResult Login(UserModel userModel)
         {
+            UserRepository userRepository = new UserRepository();
+
+            if (userRepository.AreCredentialsValid(userModel.Email, userModel.Password))
+            {
+                return View("AuthenticatedUser");
+            }
+
             return View("UnknownUser");
         }
     }

@@ -82,6 +82,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\UserOperationsControllerTest.cs" />
     <Compile Include="DataAccesssLayer\InMemoryStorageTest.cs" />
     <Compile Include="DataAccesssLayer\UserRegistrationRepositoryTest.cs" />
     <Compile Include="DataAccesssLayer\UserRepositoryTest.cs" />
