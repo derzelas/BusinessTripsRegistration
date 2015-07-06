@@ -8,31 +8,22 @@ namespace BusinessTrips.Controllers
 {
     public class UserOperationsController : Controller
     {
-        [HttpPost]
-        public ActionResult Register(UserRegistrationModel userRegistrationModel)
-        {
-            userRegistrationModel.Save();
-
-            string message = GenerateMessage(userRegistrationModel.ID);
-
-            Email email = new Email();
-            email.SendConfirmatioEmail(userRegistrationModel.Email, message);
-            return View("RegisterMailSent");
-        }
-
-        private string GenerateMessage(Guid registerTokenGuid)
-        {
-            string link = "http://"+System.Web.HttpContext.Current.Request.Url.Host;
-            link += ":" + System.Web.HttpContext.Current.Request.Url.Port;
-            link += "/UserOperations/ConfirmRegistration/?guid=" + registerTokenGuid;
-            return link;
-        }
-
         public ActionResult Register()
         {
             return View("Register");
         }
 
+        [HttpPost]
+        public ActionResult Register(UserRegistrationModel userRegistrationModel)
+        {
+            userRegistrationModel.Save();
+
+            Email email = new Email();
+            email.SendConfirmationEmail(userRegistrationModel.Email, userRegistrationModel.ID);
+
+            return View("RegisterMailSent");
+        }
+      
         public ActionResult ConfirmRegistration(string guid)
         {
             RegistrationConfirmationModel registrationConfirmationModel = new RegistrationConfirmationModel();

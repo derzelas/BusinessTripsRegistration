@@ -7,30 +7,43 @@ namespace BusinessTrips.Services
     public class Email
     {
         private SmtpClient client;
-        private string emailSenderAddress;
+        private string senderAddress;
 
         public Email()
         {
-            emailSenderAddress = "iQuestBusinessTrips@gmail.com";
+            senderAddress = "iQuestBusinessTrips@gmail.com";
 
             client = new SmtpClient("smtp.gmail.com", 587)
             {
                 UseDefaultCredentials = false,
                 EnableSsl = true,
-                Credentials = new NetworkCredential(emailSenderAddress, "Ana@re6mere")
+                Credentials = new NetworkCredential(senderAddress, "Ana@re6mere")
             };
         }
 
-        public void SendConfirmatioEmail(string emailReceiver, string message)
+        public void SendConfirmationEmail(string receiverAddress, Guid id)
         {
             var mailMessage = new MailMessage
              {
-                 From = new MailAddress(emailSenderAddress),
+                 From = new MailAddress(senderAddress),
                  Subject = "E-mail confirmation",
-                 Body = message,
-                 To = { emailReceiver }
+                 Body = GenerateConfirmationMessage(id),
+                 To = { receiverAddress }
              };
+
             client.Send(mailMessage);
+        }
+
+        private string GenerateConfirmationMessage(Guid id)
+        {
+            var welcomeMessage = "Welcome to Business trips. Here is your confirmation link: ";
+
+            string link = String.Format("http://{0}:{1}/UserOperations/ConfirmRegistration/?guid={2}",
+                System.Web.HttpContext.Current.Request.Url.Host,
+                System.Web.HttpContext.Current.Request.Url.Port,
+                id);
+
+            return welcomeMessage + link;
         }
     }
 }
