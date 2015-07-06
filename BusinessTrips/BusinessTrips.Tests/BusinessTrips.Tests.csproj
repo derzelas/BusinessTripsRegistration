@@ -86,7 +86,6 @@
     <Compile Include="DataAccesssLayer\UserRepositoryTest.cs" />
     <Compile Include="Model\UserRegistrationModelTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Controllers\HomeControllerTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App.config" />
@@ -99,6 +98,9 @@
       <Project>{E6BF0F13-1737-46CE-8534-7B96C2E9D167}</Project>
       <Name>BusinessTrips</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Controllers\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
