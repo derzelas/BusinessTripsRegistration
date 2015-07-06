@@ -5,7 +5,7 @@ namespace BusinessTrips.Models
 {
     public class UserModel
     {
-        public Guid ID { get; private set; }
+        public Guid ID { get; set; }
 
         public string Name { get; set; }
 
@@ -18,9 +18,6 @@ namespace BusinessTrips.Models
         [Display(Name = "Password")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
-
-        [Display(Name = "Remember me?")]
-        public bool RememberMe { get; set; }
 
         public bool IsConfirmed { get; set; }
     }

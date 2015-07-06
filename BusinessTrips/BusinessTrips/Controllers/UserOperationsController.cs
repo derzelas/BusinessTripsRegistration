@@ -23,7 +23,7 @@ namespace BusinessTrips.Controllers
 
             return View("RegisterMailSent");
         }
-      
+
         public ActionResult ConfirmRegistration(string guid)
         {
             RegistrationConfirmationModel registrationConfirmationModel = new RegistrationConfirmationModel();
@@ -37,7 +37,6 @@ namespace BusinessTrips.Controllers
             {
                 return View("Register");
             }
-
 
             return View("ConfirmRegistration");
         }

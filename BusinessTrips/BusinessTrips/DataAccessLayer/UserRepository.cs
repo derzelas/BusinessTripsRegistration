@@ -12,7 +12,9 @@ namespace BusinessTrips.DataAccessLayer
             {
                 Name = userRegistrationModel.Name,
                 Email = userRegistrationModel.Email,
-                Password = userRegistrationModel.Password
+                Password = userRegistrationModel.Password,
+                ID = userRegistrationModel.ID,
+                IsConfirmed = false
             };
 
             storage.Add(userModel);
