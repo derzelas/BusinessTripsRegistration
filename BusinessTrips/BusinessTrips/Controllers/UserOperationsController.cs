@@ -8,29 +8,30 @@ namespace BusinessTrips.Controllers
 {
     public class UserOperationsController : Controller
     {
+        public ActionResult Register()
+        {
+            return View("Register");
+        }
+
         [HttpPost]
         public ActionResult Register(UserRegistrationModel userRegistrationModel)
         {
             userRegistrationModel.Save();
 
-            string message = GenerateMessage(userRegistrationModel.ID);
+            var confirmationMessage = string.Format("Thank you for your registration! This is your confirmation link : {0}.",
+                GenerateConfirmationLink(userRegistrationModel.ID));
 
             Email email = new Email();
-            email.SendConfirmatioEmail(userRegistrationModel.Email, message);
+            email.SendConfirmatioEmail(userRegistrationModel.Email, confirmationMessage);
             return View("RegisterMailSent");
         }
 
-        private string GenerateMessage(Guid registerTokenGuid)
+        private string GenerateConfirmationLink(Guid registerTokenGuid)
         {
             string link = "http://"+System.Web.HttpContext.Current.Request.Url.Host;
             link += ":" + System.Web.HttpContext.Current.Request.Url.Port;
             link += "/UserOperations/ConfirmRegistration/?guid=" + registerTokenGuid;
             return link;
-        }
-
-        public ActionResult Register()
-        {
-            return View("Register");
         }
 
         public ActionResult ConfirmRegistration(string guid)
@@ -46,7 +47,6 @@ namespace BusinessTrips.Controllers
             {
                 return View("Register");
             }
-
 
             return View("ConfirmRegistration");
         }
