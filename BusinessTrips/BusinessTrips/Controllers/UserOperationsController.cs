@@ -13,7 +13,7 @@ namespace BusinessTrips.Controllers
         {
             userRegistrationModel.Save();
 
-            string message = GenerateMessage(userRegistrationModel.RegisterToken);
+            string message = GenerateMessage(userRegistrationModel.ID);
 
             Email email = new Email();
             email.SendConfirmatioEmail(userRegistrationModel.Email, message);
@@ -36,7 +36,7 @@ namespace BusinessTrips.Controllers
         public ActionResult ConfirmRegistration(string guid)
         {
             RegistrationConfirmationModel registrationConfirmationModel = new RegistrationConfirmationModel();
-            registrationConfirmationModel.RequestToken = Guid.Parse(guid);
+            registrationConfirmationModel.ID = Guid.Parse(guid);
 
             try
             {

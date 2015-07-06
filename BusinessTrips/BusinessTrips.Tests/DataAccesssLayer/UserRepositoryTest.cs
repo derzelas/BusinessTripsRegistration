@@ -7,7 +7,6 @@ namespace BusinessTrips.Tests.DataAccesssLayer
     [TestClass]
     public class UserRepositoryTest
     {
-        private IStorage<UserModel> storage;
         private UserRepository user;
         private UserModel userModel;
 
@@ -16,12 +15,6 @@ namespace BusinessTrips.Tests.DataAccesssLayer
         {
             user = new UserRepository();
             userModel = new UserModel();
-        }
-
-        [TestMethod]
-        public void InstanceIsCreated()
-        {
-            Assert.IsNotNull(user);
         }
 
         [TestMethod]
@@ -34,8 +27,9 @@ namespace BusinessTrips.Tests.DataAccesssLayer
             };
            
             user.CreateByUserRegistration(userRegistrationModel);
+            bool actual = user.AreCredentialsValid(userRegistrationModel.Email, userRegistrationModel.Password);
 
-            Assert.AreEqual(true, user.AreCredentialsValid(userRegistrationModel.Email, userRegistrationModel.Password));
+            Assert.AreEqual(true, actual);
         }
 
         [TestMethod]

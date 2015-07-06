@@ -6,17 +6,17 @@ namespace BusinessTrips.Models
     public class RegistrationConfirmationModel
     {
 
-        public Guid RequestToken { get; set; }
+        public Guid ID { get; set; }
 
         public void Confirm()
         {
-            UserRegistrationRepository userRegistrationRepository=new UserRegistrationRepository();
+            UserRepository userRepository = new UserRepository();
 
-            UserRegistrationModel userRegistrationModel = userRegistrationRepository.GetByToken(RequestToken);
+            UserModel userModel = userRepository.GetByID(ID);
 
-            UserRepository userRepository=new UserRepository();
+            userModel.IsConfirmed = true;
 
-            userRepository.CreateByUserRegistration(userRegistrationModel);
+            userRepository.Update(userModel);
         }
     }
 }

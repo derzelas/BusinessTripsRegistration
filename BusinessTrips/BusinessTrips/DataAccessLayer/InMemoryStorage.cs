@@ -13,14 +13,9 @@ namespace BusinessTrips.DataAccessLayer
             storage.Add(obj);
         }
 
-        public T Get(T element)
+        public IQueryable<T> GetStorageFor()
         {
-            return storage.First(e => e.Equals(element));
-        }
-
-        public T Get(Func<T,bool> condition)
-        {
-            return storage.First(condition);
+            return storage.AsQueryable();
         }
 
         public void Update(T element)

@@ -10,7 +10,7 @@ namespace BusinessTrips.Models
         private const int MinimumNameLength = 3;
         private const string PasswordValidationMessage = "Minimum password length is 6";
 
-        public Guid RegisterToken { get;private set; }
+        public Guid ID { get; private set; }
 
         [Required]
         [Display(Name = "Name")]
@@ -19,6 +19,7 @@ namespace BusinessTrips.Models
 
         [Required]
         [EmailAddress]
+        [UniqueEmail(ErrorMessage = "This e-mail is already registered")]
         [Display(Name = "E-mail")]
         public string Email { get; set; }
 
@@ -37,27 +38,9 @@ namespace BusinessTrips.Models
 
         public void Save()
         {
-            RegisterToken=Guid.NewGuid();
-            var registrationRepository = new UserRegistrationRepository();
-            registrationRepository.Add(this);
-        }
-
-        public override bool Equals(object obj)
-        {
-            if (ReferenceEquals(null, obj)) return false;
-            if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != this.GetType()) return false;
-            return Equals((UserRegistrationModel) obj);
-        }
-
-        protected bool Equals(UserRegistrationModel other)
-        {
-            return string.Equals(Email, other.Email);
-        }
-
-        public override int GetHashCode()
-        {
-            return (Email != null ? Email.GetHashCode() : 0);
+            ID = Guid.NewGuid();
+            var userRepository = new UserRepository();
+            userRepository.CreateByUserRegistration(this);
         }
     }
 }

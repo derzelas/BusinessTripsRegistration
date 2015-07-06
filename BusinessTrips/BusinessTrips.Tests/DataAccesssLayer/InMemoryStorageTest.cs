@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using BusinessTrips.DataAccessLayer;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -16,46 +17,20 @@ namespace BusinessTrips.Tests.DataAccesssLayer
         }
 
         [TestMethod]
-        [ExpectedException(typeof (InvalidOperationException))]
-        public void GetInexistentElementThrowsException()
+        public void GetStorageForReturnsIQueryable()
         {
             storage.Add(10);
             storage.Add(15);
-            storage.Get(7);
+            var t = storage.GetStorageFor();
+            Assert.IsInstanceOfType(t,typeof (IQueryable<int>));
         }
 
         [TestMethod]
         public void AddedElementIsFoundInStorage()
         {
             storage.Add(30);
-            int t = storage.Get(30);
+            int t = storage.GetStorageFor().First(i => i == 30);
             Assert.AreEqual(30, t);
-        }
-
-        [TestMethod]
-        public void GetByPredicate()
-        {
-            storage.Add(3);
-            storage.Add(5);
-
-            Func<int, bool> predicate = (t => t == 5);
-
-            int x = storage.Get(predicate);
-            Assert.AreEqual(5, x);
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof(InvalidOperationException))]
-        public void GetByPredicateThrowsExceptionWhenElementNotFound()
-        {
-            storage.Add(3);
-            storage.Add(5);
-
-            Func<int,bool> predicate = (t => t == 7);
-
-            int x = storage.Get(predicate);
-
-            Assert.AreEqual(5, x);
         }
     }
 }

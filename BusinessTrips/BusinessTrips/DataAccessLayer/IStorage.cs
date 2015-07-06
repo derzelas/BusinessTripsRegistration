@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace BusinessTrips.DataAccessLayer
 {
@@ -6,9 +8,7 @@ namespace BusinessTrips.DataAccessLayer
     {
         void Add(T element);
 
-        T Get(T element);
-
-        T Get(Func<T,bool> predicate);
+        IQueryable<T> GetStorageFor();
 
         void Update(T element);
 
