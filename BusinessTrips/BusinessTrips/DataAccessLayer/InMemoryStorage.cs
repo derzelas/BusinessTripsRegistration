@@ -20,17 +20,17 @@ namespace BusinessTrips.DataAccessLayer
 
         public void Update(T element)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public void Remove(T element)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public void Commit()
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
     }
 }
