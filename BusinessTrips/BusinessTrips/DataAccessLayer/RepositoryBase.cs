@@ -2,16 +2,16 @@
 {
     public abstract class RepositoryBase<T>
     {
-        protected IStorage<T> storage;
+        protected IStorage<T> Storage;
 
         protected RepositoryBase()
         {
-            storage = new InMemoryStorage<T>();
+            Storage = new InMemoryStorage<T>();
         }
 
         public void CommitChanges()
         {
-            storage.Commit();
+            Storage.Commit();
         }
     }
 }

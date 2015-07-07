@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using BusinessTrips.DataAccessLayer;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -28,9 +27,14 @@ namespace BusinessTrips.Tests.DataAccesssLayer
         [TestMethod]
         public void AddedElementIsFoundInStorage()
         {
+            //arrange
             storage.Add(30);
-            int t = storage.GetStorageFor().First(i => i == 30);
-            Assert.AreEqual(30, t);
+
+            //act
+            int expectedValue = storage.GetStorageFor().First(i => i == 30);
+
+            //assert
+            Assert.AreEqual(30, expectedValue);
         }
     }
 }

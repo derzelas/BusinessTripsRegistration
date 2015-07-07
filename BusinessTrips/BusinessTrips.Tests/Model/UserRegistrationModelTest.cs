@@ -18,7 +18,7 @@ namespace BusinessTrips.Tests.Model
         public void SaveCreatesANewGuid()
         {
             userRegistrationModel.Save();
-            Assert.IsNotNull(userRegistrationModel.ID);
+            Assert.IsNotNull(userRegistrationModel.Id);
         }
     }
 }

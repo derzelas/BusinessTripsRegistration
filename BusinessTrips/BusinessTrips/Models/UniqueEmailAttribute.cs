@@ -8,7 +8,7 @@ namespace BusinessTrips.Models
         public override bool IsValid(object value)
         {
             UserRepository userRepository = new UserRepository();
-            return userRepository.NotExists((string)value);
+            return !userRepository.Exists((string)value);
         }
     }
 }

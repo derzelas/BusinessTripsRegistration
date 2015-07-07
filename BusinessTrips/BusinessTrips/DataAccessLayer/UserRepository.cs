@@ -13,33 +13,23 @@ namespace BusinessTrips.DataAccessLayer
                 Name = userRegistrationModel.Name,
                 Email = userRegistrationModel.Email,
                 Password = userRegistrationModel.Password,
-                ID = userRegistrationModel.ID,
+                Id = userRegistrationModel.Id,
                 IsConfirmed = false
             };
 
-            storage.Add(userModel);
+            Storage.Add(userModel);
 
             return userModel;
         }
 
-        public UserModel GetByID(Guid id)
+        public UserModel GetById(Guid id)
         {
-            return storage.GetStorageFor().First(m => m.ID == id);
+            return Storage.GetStorageFor().FirstOrDefault(m => m.Id == id);
         }
 
         public bool AreCredentialsValid(string email, string password)
         {
-            UserModel retrievedModel;
-            try
-            {
-                retrievedModel = storage.GetStorageFor().First(m => m.Email == email);
-            }
-            catch (InvalidOperationException)
-            {
-                return false;
-            }
-
-            return retrievedModel.Password == password;
+            return Storage.GetStorageFor().Any(m => m.Email == email && m.Password == password);
         }
 
         public void Update(UserModel userModel)
@@ -47,17 +37,9 @@ namespace BusinessTrips.DataAccessLayer
             throw new NotImplementedException();
         }
 
-        public bool NotExists(string email)
+        public bool Exists(string email)
         {
-            try
-            {
-                storage.GetStorageFor().Single(m => m.Email == email);
-            }
-            catch (InvalidOperationException)
-            {
-                return true;
-            }
-            return false;
+            return Storage.GetStorageFor().Any(m => m.Email == email);
         }
     }
 }

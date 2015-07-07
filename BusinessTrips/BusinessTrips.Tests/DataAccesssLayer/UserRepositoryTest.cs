@@ -1,6 +1,5 @@
 ﻿using BusinessTrips.DataAccessLayer;
 using BusinessTrips.Models;
-using BusinessTrips.Services;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace BusinessTrips.Tests.DataAccesssLayer
@@ -31,14 +30,14 @@ namespace BusinessTrips.Tests.DataAccesssLayer
         [TestMethod]
         public void ValidationPassesWhenCredentialsAreValid()
         {
-            UserRegistrationModel userRegistrationModel = new UserRegistrationModel()
+            UserRegistrationModel registrationModel = new UserRegistrationModel()
             {
                 Email = "example@work.com",
                 Password = "12345"
             };
-            user.CreateByUserRegistration(userRegistrationModel);
+            user.CreateByUserRegistration(registrationModel);
 
-            bool actual = user.AreCredentialsValid(userRegistrationModel.Email, userRegistrationModel.Password);
+            bool actual = user.AreCredentialsValid(registrationModel.Email, registrationModel.Password);
             Assert.AreEqual(true, actual);
         }
 
@@ -59,16 +58,16 @@ namespace BusinessTrips.Tests.DataAccesssLayer
             Assert.AreEqual(userModel.Name, userRegistrationModel.Name);
             Assert.AreEqual(userModel.Email, userRegistrationModel.Email);
             Assert.AreEqual(userModel.Password, userRegistrationModel.Password);
-            Assert.IsNotNull(userModel.ID);
+            Assert.IsNotNull(userModel.Id);
             Assert.AreEqual(userModel.IsConfirmed, false);
         }
 
         [TestMethod]
-        public void GetByIDFindsCreatedUser()
+        public void GetByIdFindsCreatedUser()
         {
             userModel = user.CreateByUserRegistration(userRegistrationModel);
 
-            UserModel actualUserModel = user.GetByID(userModel.ID);
+            UserModel actualUserModel = user.GetById(userModel.Id);
 
             Assert.AreEqual(userModel, actualUserModel);
         }

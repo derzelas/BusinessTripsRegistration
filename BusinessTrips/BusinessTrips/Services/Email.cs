@@ -7,17 +7,16 @@ namespace BusinessTrips.Services
     public class Email
     {
         private SmtpClient client;
-        private string senderAddress;
+        public const string SenderAddress = "iQuestBusinessTrips@gmail.com";        
 
         public Email()
         {
-            senderAddress = "iQuestBusinessTrips@gmail.com";
-
-            client = new SmtpClient("smtp.gmail.com", 587)
+            int port = 587;
+            client = new SmtpClient("smtp.gmail.com", port)
             {
                 UseDefaultCredentials = false,
                 EnableSsl = true,
-                Credentials = new NetworkCredential(senderAddress, "Ana@re6mere")
+                Credentials = new NetworkCredential(SenderAddress, "Ana@re6mere")
             };
         }
 
@@ -25,7 +24,7 @@ namespace BusinessTrips.Services
         {
             var mailMessage = new MailMessage
              {
-                 From = new MailAddress(senderAddress),
+                 From = new MailAddress(SenderAddress),
                  Subject = "E-mail confirmation",
                  Body = GenerateConfirmationMessage(id),
                  To = { receiverAddress }
@@ -34,7 +33,7 @@ namespace BusinessTrips.Services
             client.Send(mailMessage);
         }
 
-        private string GenerateConfirmationMessage(Guid id)
+        private static string GenerateConfirmationMessage(Guid id)
         {
             var welcomeMessage = "Welcome to Business trips. Here is your confirmation link: ";
 

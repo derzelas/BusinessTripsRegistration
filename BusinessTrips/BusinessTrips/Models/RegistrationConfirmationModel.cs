@@ -5,17 +5,22 @@ namespace BusinessTrips.Models
 {
     public class RegistrationConfirmationModel
     {
-        public Guid ID { get; set; }
+        public Guid Id { get; set; }
 
-        public void Confirm()
+        public bool Confirm()
         {
             UserRepository userRepository = new UserRepository();
 
-            UserModel userModel = userRepository.GetByID(ID);
+            UserModel userModel = userRepository.GetById(Id);
 
-            userModel.IsConfirmed = true;
+            if (userModel.IsConfirmed == false)
+            {
+                userModel.IsConfirmed = true;
+                userRepository.Update(userModel);
 
-            userRepository.Update(userModel);
+                return true;
+            }
+            return false;
         }
     }
 }

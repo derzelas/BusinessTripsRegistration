@@ -19,7 +19,7 @@ namespace BusinessTrips.Controllers
             userRegistrationModel.Save();
 
             Email email = new Email();
-            email.SendConfirmationEmail(userRegistrationModel.Email, userRegistrationModel.ID);
+            email.SendConfirmationEmail(userRegistrationModel.Email, userRegistrationModel.Id);
 
             return View("RegisterMailSent");
         }
@@ -27,18 +27,13 @@ namespace BusinessTrips.Controllers
         public ActionResult ConfirmRegistration(string guid)
         {
             RegistrationConfirmationModel registrationConfirmationModel = new RegistrationConfirmationModel();
-            registrationConfirmationModel.ID = Guid.Parse(guid);
+            registrationConfirmationModel.Id = Guid.Parse(guid);
 
-            try
+            if (registrationConfirmationModel.Confirm())
             {
-                registrationConfirmationModel.Confirm();
+                return View("ConfirmRegistration");
             }
-            catch
-            {
-                return View("Register");
-            }
-
-            return View("ConfirmRegistration");
+            return View("Register");
         }
 
         public ActionResult Login()
@@ -57,7 +52,6 @@ namespace BusinessTrips.Controllers
             {
                 return View("AuthenticatedUser");
             }
-
             return View("UnknownUser");
         }
     }
