@@ -32,7 +32,7 @@ namespace BusinessTrips.DAL
                 Email = userEntity.Email,
                 Password = userEntity.Password,
                 Id = userEntity.Id,
-                IsConfirmed = false
+                IsConfirmed = userEntity.IsConfirmed
             };
         }
 
@@ -45,8 +45,6 @@ namespace BusinessTrips.DAL
         {
             var userEntity = Storage.GetStorageFor<UserEntity>().Single(u => u.Id == userModel.Id);
             userEntity.IsConfirmed = true;
-
-            Storage.Commit();
         }
 
         public bool Exists(string email)

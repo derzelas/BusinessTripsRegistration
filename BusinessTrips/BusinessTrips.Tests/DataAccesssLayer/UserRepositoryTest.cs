@@ -8,10 +8,10 @@ namespace BusinessTrips.Tests.DataAccesssLayer
     [TestClass]
     public class UserRepositoryTest
     {
+        private EFStorage storage;
         private UserRepository repository;
         private UserModel userModel;
         private UserRegistrationModel userRegistrationModel;
-        private EFStorage storage;
 
         [TestInitialize]
         public void Initialize()
@@ -19,7 +19,7 @@ namespace BusinessTrips.Tests.DataAccesssLayer
             storage = new EFStorage();
             repository = new UserRepository();
             userModel = new UserModel();
-
+            
             userRegistrationModel = new UserRegistrationModel()
             {
                 Id = Guid.NewGuid(),
@@ -52,38 +52,53 @@ namespace BusinessTrips.Tests.DataAccesssLayer
         }
 
         [TestMethod]
+        public void GetByIdFindsCreatedUser()
+        {
+            repository.CreateByUserRegistration(userRegistrationModel);
+            repository.CommitChanges();
+
+            UserModel retrievedUser = repository.GetById(userRegistrationModel.Id);
+
+            Assert.AreEqual(userRegistrationModel.Id, retrievedUser.Id);
+            Assert.AreEqual(userRegistrationModel.Name, retrievedUser.Name);
+            Assert.AreEqual(userRegistrationModel.Email, retrievedUser.Email);
+            Assert.AreEqual(userRegistrationModel.Password, retrievedUser.Password);
+            Assert.AreEqual(retrievedUser.IsConfirmed, false);
+        }
+
+        [TestMethod]
         public void ValidationPassesWhenCredentialsAreValid()
         {
-            UserRegistrationModel registrationModel = new UserRegistrationModel()
-            {
-                Email = "example@work.com",
-                Password = "12345"
-            };
-            repository.CreateByUserRegistration(registrationModel);
+            repository.CreateByUserRegistration(userRegistrationModel);
+            repository.CommitChanges();
 
-            bool actual = repository.AreCredentialsValid(registrationModel.Email, registrationModel.Password);
-            Assert.AreEqual(true, actual);
+            bool actual = repository.AreCredentialsValid(userRegistrationModel.Email, userRegistrationModel.Password);
+            Assert.AreEqual(actual, true);
         }
 
         [TestMethod]
         public void ValidationFailsWhenCredentialisAreInvalid()
         {
             userModel.Email = "notexist@work.com";
-            userModel.Password = "12345";
+            userModel.Password = "nopassword";
 
-            Assert.AreEqual(false, repository.AreCredentialsValid(userModel.Email, userModel.Password));
+            Assert.AreEqual(repository.AreCredentialsValid(userModel.Email, userModel.Password), false);
         }
 
-        
-
         [TestMethod]
-        public void GetByIdFindsCreatedUser()
+        public void ConfirmSetIsConfirmedPropertyToTrue()
         {
+            userModel.Id = userRegistrationModel.Id;
+
             repository.CreateByUserRegistration(userRegistrationModel);
+            repository.CommitChanges();
 
-            UserModel actualUserModel = repository.GetById(userModel.Id);
+            repository.Confirm(userModel);
+            repository.CommitChanges();
+            
+            UserModel retrievedModel = repository.GetById(userRegistrationModel.Id);
 
-            Assert.AreEqual(userModel, actualUserModel);
+            Assert.AreEqual(retrievedModel.IsConfirmed, true);
         }
     }
 }
