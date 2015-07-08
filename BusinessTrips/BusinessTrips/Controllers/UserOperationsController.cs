@@ -17,12 +17,15 @@ namespace BusinessTrips.Controllers
         [HttpPost]
         public ActionResult Register(UserRegistrationModel userRegistrationModel)
         {
-            userRegistrationModel.Save();
-         
-            Email email = new Email();
-            email.SendConfirmationEmail(userRegistrationModel.Email, userRegistrationModel.Id);
+            if (ModelState.IsValid)
+            {
+                userRegistrationModel.Save();
 
-            return View("RegisterMailSent");
+                Email email = new Email();
+                email.SendConfirmationEmail(userRegistrationModel.Email, userRegistrationModel.Id);
+                return View("RegisterMailSent");
+            }
+            return View("Register");
         }
 
         public ActionResult ConfirmRegistration(string guid)
