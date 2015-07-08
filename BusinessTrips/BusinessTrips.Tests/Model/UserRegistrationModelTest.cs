@@ -1,4 +1,4 @@
-﻿using BusinessTrips.Models;
+﻿using BusinessTrips.DAL.Model;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace BusinessTrips.Tests.Model

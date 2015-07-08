@@ -94,6 +94,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BusinessTrips.DAL\BusinessTrips.DAL.csproj">
+      <Project>{39AD3E22-DDFF-4F72-8455-BC4AAD65D25D}</Project>
+      <Name>BusinessTrips.DAL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BusinessTrips\BusinessTrips.csproj">
       <Project>{E6BF0F13-1737-46CE-8534-7B96C2E9D167}</Project>
       <Name>BusinessTrips</Name>

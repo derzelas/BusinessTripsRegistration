@@ -1,5 +1,5 @@
-﻿using BusinessTrips.DataAccessLayer;
-using BusinessTrips.Models;
+﻿using BusinessTrips.DAL;
+using BusinessTrips.DAL.Model;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace BusinessTrips.Tests.DataAccesssLayer
@@ -53,7 +53,7 @@ namespace BusinessTrips.Tests.DataAccesssLayer
         [TestMethod]
         public void CreatedUserMatchesRegistrationUser()
         {
-            userModel = user.CreateByUserRegistration(userRegistrationModel);
+            user.CreateByUserRegistration(userRegistrationModel);
 
             Assert.AreEqual(userModel.Name, userRegistrationModel.Name);
             Assert.AreEqual(userModel.Email, userRegistrationModel.Email);
@@ -65,7 +65,7 @@ namespace BusinessTrips.Tests.DataAccesssLayer
         [TestMethod]
         public void GetByIdFindsCreatedUser()
         {
-            userModel = user.CreateByUserRegistration(userRegistrationModel);
+            user.CreateByUserRegistration(userRegistrationModel);
 
             UserModel actualUserModel = user.GetById(userModel.Id);
 

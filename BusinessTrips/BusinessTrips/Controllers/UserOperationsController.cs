@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Web.Mvc;
-using BusinessTrips.DataAccessLayer;
+using BusinessTrips.DAL;
+using BusinessTrips.DAL.Model;
 using BusinessTrips.Models;
 using BusinessTrips.Services;
 
@@ -17,7 +18,7 @@ namespace BusinessTrips.Controllers
         public ActionResult Register(UserRegistrationModel userRegistrationModel)
         {
             userRegistrationModel.Save();
-
+         
             Email email = new Email();
             email.SendConfirmationEmail(userRegistrationModel.Email, userRegistrationModel.Id);
 
@@ -28,12 +29,9 @@ namespace BusinessTrips.Controllers
         {
             RegistrationConfirmationModel registrationConfirmationModel = new RegistrationConfirmationModel();
             registrationConfirmationModel.Id = Guid.Parse(guid);
+            registrationConfirmationModel.Confirm();
 
-            if (registrationConfirmationModel.Confirm())
-            {
-                return View("ConfirmRegistration");
-            }
-            return View("Register");
+            return View("ConfirmRegistration");
         }
 
         public ActionResult Login()
