@@ -2,7 +2,7 @@
 
 namespace BusinessTrips.DAL
 {
-    public class EFStorageDBInitializer : DropCreateDatabaseIfModelChanges<EFStorage>
+    public class EfStorageDbInitializer : DropCreateDatabaseIfModelChanges<EfStorage>
     {
     }
 }

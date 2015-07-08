@@ -2,7 +2,6 @@
 using System.Web.Mvc;
 using BusinessTrips.DAL;
 using BusinessTrips.DAL.Model;
-using BusinessTrips.Models;
 using BusinessTrips.Services;
 
 namespace BusinessTrips.Controllers
@@ -30,8 +29,10 @@ namespace BusinessTrips.Controllers
 
         public ActionResult ConfirmRegistration(string guid)
         {
-            RegistrationConfirmationModel registrationConfirmationModel = new RegistrationConfirmationModel();
-            registrationConfirmationModel.Id = Guid.Parse(guid);
+            RegistrationConfirmationModel registrationConfirmationModel = new RegistrationConfirmationModel
+            {
+                Id = Guid.Parse(guid)
+            };
             registrationConfirmationModel.Confirm();
 
             return View("ConfirmRegistration");

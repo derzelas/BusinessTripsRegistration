@@ -6,7 +6,7 @@
 
         protected RepositoryBase()
         {
-            Storage = new EFStorage();
+            Storage = new EfStorage();
         }
 
         public void CommitChanges()
