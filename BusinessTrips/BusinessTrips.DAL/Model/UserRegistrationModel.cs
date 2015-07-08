@@ -18,8 +18,8 @@ namespace BusinessTrips.DAL.Model
 
         [Required]
         [EmailAddress]
-        [UniqueEmail(ErrorMessage = "This e-mail is already registered")]
         [Display(Name = "E-mail")]
+        [UniqueEmail(ErrorMessage = "This e-mail is already registered")]
         public string Email { get; set; }
 
         [Required]
@@ -30,7 +30,6 @@ namespace BusinessTrips.DAL.Model
 
         [Required]
         [DataType(DataType.Password)]
-        [MinLength(MinimumPasswordLength, ErrorMessage = PasswordValidationMessage)]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         [Display(Name = "Confirm password")]
         public string ConfirmedPassword { get; set; }
