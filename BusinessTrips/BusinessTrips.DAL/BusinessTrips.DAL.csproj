@@ -53,18 +53,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EFStorageDBInitializer.cs" />
-    <Compile Include="EFStorage.cs" />
-    <Compile Include="InMemoryStorage.cs" />
-    <Compile Include="IStorage.cs" />
+    <Compile Include="Storage\EFStorageDBInitializer.cs" />
+    <Compile Include="Storage\EFStorage.cs" />
+    <Compile Include="Storage\InMemoryStorage.cs" />
+    <Compile Include="Storage\IStorage.cs" />
     <Compile Include="Model\RegistrationConfirmationModel.cs" />
     <Compile Include="Model\UniqueEmailAttribute.cs" />
     <Compile Include="Model\UserModel.cs" />
     <Compile Include="Model\UserRegistrationModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RepositoryBase.cs" />
-    <Compile Include="UserEntity.cs" />
-    <Compile Include="UserRepository.cs" />
+    <Compile Include="Repository\RepositoryBase.cs" />
+    <Compile Include="Entity\UserEntity.cs" />
+    <Compile Include="Repository\UserRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

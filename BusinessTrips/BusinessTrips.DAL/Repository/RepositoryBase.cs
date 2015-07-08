@@ -1,6 +1,7 @@
 ﻿using System;
+using BusinessTrips.DAL.Storage;
 
-namespace BusinessTrips.DAL
+namespace BusinessTrips.DAL.Repository
 {
     public abstract class RepositoryBase : IDisposable
     {

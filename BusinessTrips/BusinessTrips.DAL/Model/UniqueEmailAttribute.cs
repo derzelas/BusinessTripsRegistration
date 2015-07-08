@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using BusinessTrips.DAL.Repository;
 
 namespace BusinessTrips.DAL.Model
 {

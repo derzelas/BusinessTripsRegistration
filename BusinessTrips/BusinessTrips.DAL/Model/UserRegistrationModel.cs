@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using BusinessTrips.DAL.Repository;
 
 namespace BusinessTrips.DAL.Model
 {
@@ -37,8 +38,11 @@ namespace BusinessTrips.DAL.Model
         public void Save()
         {
             Id = Guid.NewGuid();
-            var userRepository = new UserRepository();
-            userRepository.CreateByUserRegistration(this);
+            using (var userRepository = new UserRepository())
+            {
+                userRepository.CreateByUserRegistration(this);
+                userRepository.CommitChanges();
+            }
         }
     }
 }

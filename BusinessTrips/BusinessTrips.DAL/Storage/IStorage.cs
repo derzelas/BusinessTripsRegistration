@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-namespace BusinessTrips.DAL
+namespace BusinessTrips.DAL.Storage
 {
     public interface IStorage : IDisposable
     {

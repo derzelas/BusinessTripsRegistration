@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Web.Mvc;
-using BusinessTrips.DAL;
 using BusinessTrips.DAL.Model;
 using BusinessTrips.Services;
 
@@ -48,9 +47,7 @@ namespace BusinessTrips.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Login(UserModel userModel)
         {
-            UserRepository userRepository = new UserRepository();
-
-            if (userRepository.AreCredentialsValid(userModel.Email, userModel.Password))
+            if (userModel.Authenthicate())
             {
                 return View("AuthenticatedUser");
             }

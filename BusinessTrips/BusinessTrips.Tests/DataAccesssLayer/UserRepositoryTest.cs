@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Data.Entity;
 using BusinessTrips.DAL;
 using BusinessTrips.DAL.Model;
+using BusinessTrips.DAL.Repository;
+using BusinessTrips.DAL.Storage;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace BusinessTrips.Tests.DataAccesssLayer
@@ -8,18 +11,19 @@ namespace BusinessTrips.Tests.DataAccesssLayer
     [TestClass]
     public class UserRepositoryTest
     {
-        private EfStorage storage;
+
         private UserRepository repository;
         private UserModel userModel;
         private UserRegistrationModel userRegistrationModel;
+        private EfStorage efStorage;
 
         [TestInitialize]
         public void Initialize()
         {
-            storage = new EfStorage();
+            efStorage = new EfStorage();
             repository = new UserRepository();
             userModel = new UserModel();
-            
+
             userRegistrationModel = new UserRegistrationModel()
             {
                 Id = Guid.NewGuid(),
@@ -30,11 +34,12 @@ namespace BusinessTrips.Tests.DataAccesssLayer
         }
 
         [TestCleanup]
-        public void Cleanup()
+        public void CleanUp()
         {
-            storage.Database.Delete();
-            storage.SaveChanges();
+            efStorage.Users.RemoveRange(efStorage.Users);
+            efStorage.SaveChanges();
         }
+
 
         [TestMethod]
         public void CreatedUserEntitySameAsUserRegistrationModel()
@@ -95,7 +100,7 @@ namespace BusinessTrips.Tests.DataAccesssLayer
 
             repository.Confirm(userModel);
             repository.CommitChanges();
-            
+
             UserModel retrievedModel = repository.GetById(userRegistrationModel.Id);
 
             Assert.AreEqual(retrievedModel.IsConfirmed, true);

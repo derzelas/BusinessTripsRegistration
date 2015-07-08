@@ -1,4 +1,5 @@
 ﻿using System;
+using BusinessTrips.DAL.Repository;
 
 namespace BusinessTrips.DAL.Model
 {

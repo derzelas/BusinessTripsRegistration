@@ -1,21 +1,15 @@
 ﻿using System;
 using System.Linq;
+using BusinessTrips.DAL.Entity;
 using BusinessTrips.DAL.Model;
 
-namespace BusinessTrips.DAL
+namespace BusinessTrips.DAL.Repository
 {
     public class UserRepository : RepositoryBase
     {
         public void CreateByUserRegistration(UserRegistrationModel userRegistrationModel)
         {
-            UserEntity userEntity = new UserEntity
-            {
-                Name = userRegistrationModel.Name,
-                Email = userRegistrationModel.Email,
-                Password = userRegistrationModel.Password,
-                Id = userRegistrationModel.Id,
-                IsConfirmed = false
-            };
+            UserEntity userEntity = UserEntity.FromUserRegistrationModel(userRegistrationModel);
 
             Storage.Add(userEntity);
         }
@@ -24,16 +18,12 @@ namespace BusinessTrips.DAL
         {
             var userEntity = Storage.GetStorageFor<UserEntity>().FirstOrDefault(m => m.Id == id);
 
-            if (userEntity == null) return null;
-
-            return new UserModel
+            if (userEntity == null)
             {
-                Name = userEntity.Name,
-                Email = userEntity.Email,
-                Password = userEntity.Password,
-                Id = userEntity.Id,
-                IsConfirmed = userEntity.IsConfirmed
-            };
+                return null;
+            }
+
+            return UserModel.FromUserEntity(userEntity);
         }
 
         public bool AreCredentialsValid(string email, string password)

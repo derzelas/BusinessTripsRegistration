@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using BusinessTrips.DAL.Entity;
 
-namespace BusinessTrips.DAL
+namespace BusinessTrips.DAL.Storage
 {
     public class InMemoryStorage : IStorage
     {
