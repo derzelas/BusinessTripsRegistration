@@ -11,12 +11,12 @@ namespace BusinessTrips.Tests.DataAccesssLayer
         private UserRepository repository;
         private UserModel userModel;
         private UserRegistrationModel userRegistrationModel;
-        private EFStorage storage;
+        private EfStorage storage;
 
         [TestInitialize]
         public void Initialize()
         {
-            storage = new EFStorage();
+            storage = new EfStorage();
             repository = new UserRepository();
             userModel = new UserModel();
 
