@@ -3,12 +3,12 @@ using System.Linq;
 
 namespace BusinessTrips.DAL
 {
-    public class EFStorage : DbContext, IStorage
+    public class EfStorage : DbContext, IStorage
     {
-        public EFStorage()
+        public EfStorage()
             : base("BusinessTrips")
         {
-            Database.SetInitializer(new EFStorageDBInitializer());
+            Database.SetInitializer(new EfStorageDbInitializer());
         }
 
         public DbSet<UserEntity> Users { get; set; }
@@ -26,7 +26,7 @@ namespace BusinessTrips.DAL
 
         public void Remove<T>(T element) where T : class
         {
-            throw new System.NotImplementedException();
+            Set<T>().Remove(element);
         }
 
         public void Commit()
