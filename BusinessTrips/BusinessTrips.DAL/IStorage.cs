@@ -1,8 +1,9 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 
 namespace BusinessTrips.DAL
 {
-    public interface IStorage
+    public interface IStorage : IDisposable
     {
         void Add<T>(T element) where T : class;
 
