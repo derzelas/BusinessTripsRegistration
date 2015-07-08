@@ -18,7 +18,6 @@ namespace BusinessTrips.DAL
             };
 
             Storage.Add(userEntity);
-            Storage.Commit();
         }
 
         public UserModel GetById(Guid id)

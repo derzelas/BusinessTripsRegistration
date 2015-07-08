@@ -9,7 +9,7 @@ namespace BusinessTrips.DAL.Model
         private const int MinimumNameLength = 3;
         private const string PasswordValidationMessage = "Minimum password length is 6";
 
-        public Guid Id { get; private set; }
+        public Guid Id { get; set; }
 
         [Required]
         [Display(Name = "Name")]
