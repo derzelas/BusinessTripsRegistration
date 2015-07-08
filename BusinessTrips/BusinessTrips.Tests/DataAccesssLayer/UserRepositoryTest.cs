@@ -8,7 +8,7 @@ namespace BusinessTrips.Tests.DataAccesssLayer
     [TestClass]
     public class UserRepositoryTest
     {
-        private EFStorage storage;
+        private EfStorage storage;
         private UserRepository repository;
         private UserModel userModel;
         private UserRegistrationModel userRegistrationModel;
@@ -16,7 +16,7 @@ namespace BusinessTrips.Tests.DataAccesssLayer
         [TestInitialize]
         public void Initialize()
         {
-            storage = new EFStorage();
+            storage = new EfStorage();
             repository = new UserRepository();
             userModel = new UserModel();
             
@@ -99,6 +99,23 @@ namespace BusinessTrips.Tests.DataAccesssLayer
             UserModel retrievedModel = repository.GetById(userRegistrationModel.Id);
 
             Assert.AreEqual(retrievedModel.IsConfirmed, true);
+        }
+
+        [TestMethod]
+        public void ExistsReturnTrueWhenEmailExists()
+        {
+            repository.CreateByUserRegistration(userRegistrationModel);
+            repository.CommitChanges();
+
+            Assert.AreEqual(repository.Exists(userRegistrationModel.Email), true);
+        }
+
+        [TestMethod]
+        public void ExistsReturnFalseWhenEmailNotExists()
+        {
+            string email = "noemail@gmail.com";
+
+            Assert.AreEqual(repository.Exists(email), false);
         }
     }
 }
