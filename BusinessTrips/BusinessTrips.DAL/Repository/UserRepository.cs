@@ -28,7 +28,7 @@ namespace BusinessTrips.DAL.Repository
 
         public bool AreCredentialsValid(string email, string password)
         {
-            return Storage.GetStorageFor<UserEntity>().Any(m => m.Email == email && m.Password == password);
+            return Storage.GetStorageFor<UserEntity>().Any(m => m.Email == email && m.Password == password && m.IsConfirmed);
         }
 
         public void Confirm(UserModel userModel)

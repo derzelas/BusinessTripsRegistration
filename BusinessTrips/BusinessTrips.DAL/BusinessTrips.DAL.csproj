@@ -53,6 +53,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Repository\BusinesTripsRepository.cs" />
     <Compile Include="Storage\EFStorageDBInitializer.cs" />
     <Compile Include="Storage\EFStorage.cs" />
     <Compile Include="Storage\InMemoryStorage.cs" />
