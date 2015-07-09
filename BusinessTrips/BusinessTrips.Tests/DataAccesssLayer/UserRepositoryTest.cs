@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Data.Entity;
-using BusinessTrips.DAL;
 using BusinessTrips.DAL.Model;
 using BusinessTrips.DAL.Repository;
 using BusinessTrips.DAL.Storage;

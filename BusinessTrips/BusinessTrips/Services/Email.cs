@@ -33,7 +33,7 @@ namespace BusinessTrips.Services
             client.Send(mailMessage);
         }
 
-        private static string GenerateConfirmationMessage(Guid id)
+        private string GenerateConfirmationMessage(Guid id)
         {
             var welcomeMessage = "Welcome to Business trips. Here is your confirmation link: ";
 

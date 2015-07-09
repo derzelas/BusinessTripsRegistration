@@ -15,7 +15,7 @@ namespace BusinessTrips.Controllers
         [HttpPost]
         public ActionResult Register(UserRegistrationModel userRegistrationModel)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && userRegistrationModel != null)
             {
                 userRegistrationModel.Save();
 
