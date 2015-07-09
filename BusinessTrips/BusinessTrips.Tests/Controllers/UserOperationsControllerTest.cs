@@ -80,5 +80,39 @@ namespace BusinessTrips.Tests.Controllers
 
             Assert.AreEqual("Error", result.ViewName);
         }
+
+        [TestMethod]
+        public void LoginReturnsUnknownUserViewWhenUserIsNotInDatabase()
+        {
+            var result = controller.Login(new UserModel()) as ViewResult;
+
+            Assert.AreEqual("UnknownUser", result.ViewName);
+        }
+
+        [TestMethod]
+        public void LoginReturnsAuthenticatedUserViewWhenUserIsInDatabase()
+        {
+            var userRegistrationModel = new UserRegistrationModel()
+            {
+                Id = Guid.NewGuid(),
+                Email = "example@gmail.com",
+                Name = "name",
+                Password = "password",
+                ConfirmedPassword = "password"
+            };
+
+            var repository = new UserRepository();
+            repository.CreateByUserRegistration(userRegistrationModel);
+            repository.CommitChanges();
+
+            repository.Confirm(userRegistrationModel.Id);
+            repository.CommitChanges();
+
+            var userModel = repository.GetById(userRegistrationModel.Id);
+
+            var result = controller.Login(userModel) as ViewResult;
+
+            Assert.AreEqual("AuthenticatedUser", result.ViewName);
+        }
     }
 }
