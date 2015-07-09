@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Security.Policy;
 using System.Web.Mvc;
 using BusinessTrips.Controllers;
 using BusinessTrips.DAL.Model;
@@ -21,16 +20,9 @@ namespace BusinessTrips.Tests.Controllers
         [TestMethod]
         public void RegisterReturnRegisterViewIfUserRegistrationModelIsInvalid()
         {
-            var invalidModel = new UserRegistrationModel()
-            {
-                Id = Guid.NewGuid(),
-                Name = string.Empty,
-                Password = "123",
-                ConfirmedPassword = "456",
-                Email = "notvalidmail.com"
-            };
+            controller.ModelState.AddModelError("key", "error");
 
-            var result = controller.Register(invalidModel) as ViewResult;
+            var result = controller.Register(new UserRegistrationModel()) as ViewResult;
 
             Assert.AreEqual("Register", result.ViewName);
         }

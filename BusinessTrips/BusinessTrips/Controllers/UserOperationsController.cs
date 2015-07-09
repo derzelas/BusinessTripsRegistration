@@ -15,12 +15,13 @@ namespace BusinessTrips.Controllers
         [HttpPost]
         public ActionResult Register(UserRegistrationModel userRegistrationModel)
         {
-            if (ModelState.IsValid && userRegistrationModel != null)
+            if (ModelState.IsValid)
             {
                 userRegistrationModel.Save();
 
                 Email email = new Email();
                 email.SendConfirmationEmail(userRegistrationModel.Email, userRegistrationModel.Id);
+                
                 return View("RegisterMailSent");
             }
             return View("Register");

@@ -16,6 +16,7 @@ namespace BusinessTrips.DAL.Model
             if (userModel.IsConfirmed == false)
             {
                 userRepository.Confirm(userModel);
+                userRepository.CommitChanges();
             }
         }
     }
