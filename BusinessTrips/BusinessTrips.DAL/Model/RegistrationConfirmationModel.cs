@@ -13,9 +13,10 @@ namespace BusinessTrips.DAL.Model
 
             UserModel userModel = userRepository.GetById(Id);
 
-            if (userModel.IsConfirmed == false)
+            if (userModel != null && userModel.IsConfirmed == false)
             {
-                userRepository.Confirm(userModel);
+                userRepository.Confirm(userModel.Id);
+                userRepository.CommitChanges();
             }
         }
     }

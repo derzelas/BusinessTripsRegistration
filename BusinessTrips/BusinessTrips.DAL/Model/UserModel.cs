@@ -29,15 +29,15 @@ namespace BusinessTrips.DAL.Model
             return repository.AreCredentialsValid(Email, Password);
         }
 
-        public static UserModel FromUserEntity(UserEntity userEntity)
+        public UserEntity ToUserEntity()
         {
-            return new UserModel
+            return new UserEntity()
             {
-                Name = userEntity.Name,
-                Email = userEntity.Email,
-                IsConfirmed = userEntity.IsConfirmed,
-                Id = userEntity.Id,
-                Password = userEntity.Password,
+                Name = Name,
+                Email = Email,
+                IsConfirmed = IsConfirmed,
+                Id = Id,
+                Password = Password
             };
         }
     }

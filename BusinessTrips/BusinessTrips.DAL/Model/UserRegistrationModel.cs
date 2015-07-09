@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using BusinessTrips.DAL.Entity;
 using BusinessTrips.DAL.Repository;
 
 namespace BusinessTrips.DAL.Model
@@ -43,6 +44,18 @@ namespace BusinessTrips.DAL.Model
                 userRepository.CreateByUserRegistration(this);
                 userRepository.CommitChanges();
             }
+        }
+
+        public UserEntity ToUserEntity()
+        {
+            return new UserEntity()
+            {
+                Name = Name,
+                Email = Email,
+                IsConfirmed = false,
+                Id = Id,
+                Password = Password
+            };
         }
     }
 }

@@ -20,12 +20,13 @@ namespace BusinessTrips.Controllers
         [HttpPost]
         public ActionResult Register(UserRegistrationModel userRegistrationModel)
         {
-            if (ModelState.IsValid && userRegistrationModel != null)
+            if (ModelState.IsValid)
             {
                 userRegistrationModel.Save();
 
                 Email email = new Email();
                 email.SendConfirmationEmail(userRegistrationModel.Email, userRegistrationModel.Id);
+                
                 return View("RegisterMailSent");
             }
             return View("Register");
@@ -33,10 +34,20 @@ namespace BusinessTrips.Controllers
 
         public ActionResult ConfirmRegistration(string guid)
         {
-            RegistrationConfirmationModel registrationConfirmationModel = new RegistrationConfirmationModel
+            var registrationConfirmationModel = new RegistrationConfirmationModel();
+            try
             {
-                Id = Guid.Parse(guid)
-            };
+                registrationConfirmationModel.Id = Guid.Parse(guid);
+            }
+            catch (ArgumentNullException)
+            {
+                return View("Error");
+            }
+            catch (FormatException)
+            {
+                return View("Error");
+            }
+            
             registrationConfirmationModel.Confirm();
 
             return View("ConfirmRegistration");
