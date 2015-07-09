@@ -29,10 +29,20 @@ namespace BusinessTrips.Controllers
 
         public ActionResult ConfirmRegistration(string guid)
         {
-            RegistrationConfirmationModel registrationConfirmationModel = new RegistrationConfirmationModel
+            var registrationConfirmationModel = new RegistrationConfirmationModel();
+            try
             {
-                Id = Guid.Parse(guid)
-            };
+                registrationConfirmationModel.Id = Guid.Parse(guid);
+            }
+            catch (ArgumentNullException)
+            {
+                return View("Error");
+            }
+            catch (FormatException)
+            {
+                return View("Error");
+            }
+            
             registrationConfirmationModel.Confirm();
 
             return View("ConfirmRegistration");
