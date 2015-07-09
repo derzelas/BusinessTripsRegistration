@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.Entity;
 using BusinessTrips.DAL.Model;
 using BusinessTrips.DAL.Repository;
 using BusinessTrips.DAL.Storage;
@@ -18,7 +19,9 @@ namespace BusinessTrips.Tests.DataAccesssLayer
         [TestInitialize]
         public void Initialize()
         {
-            efStorage = new EfStorage();
+            efStorage = new EfStorage(new DropCreateDatabaseAlways<EfStorage>());
+            efStorage.Database.Initialize(true);
+
             repository = new UserRepository();
             userModel = new UserModel();
 
@@ -30,14 +33,6 @@ namespace BusinessTrips.Tests.DataAccesssLayer
                 Password = "12345",
             };
         }
-
-        [TestCleanup]
-        public void CleanUp()
-        {
-            efStorage.Users.RemoveRange(efStorage.Users);
-            efStorage.SaveChanges();
-        }
-
 
         [TestMethod]
         public void CreatedUserEntitySameAsUserRegistrationModel()
