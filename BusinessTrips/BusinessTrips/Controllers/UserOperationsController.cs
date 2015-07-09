@@ -12,6 +12,11 @@ namespace BusinessTrips.Controllers
             return View("Register");
         }
 
+        public ActionResult Logout()
+        {
+            return View("Logout");
+        }
+
         [HttpPost]
         public ActionResult Register(UserRegistrationModel userRegistrationModel)
         {
