@@ -1,0 +1,11 @@
+﻿@{
+    ViewBag.Title = "BusinessTrips";
+}
+
+@model BusinessTrips.DAL.Model.BusinessTripModel
+
+<h2>BusinessTrips</h2>
+
+<form method="post">
+    @Html.EnumDropDownListFor(model => model.Department)
+</form>
