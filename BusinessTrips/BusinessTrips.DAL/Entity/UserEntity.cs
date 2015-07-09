@@ -13,27 +13,15 @@ namespace BusinessTrips.DAL.Entity
         public string Hash { get; set; }
         public bool IsConfirmed { get; set; }
 
-        public static UserEntity FromUserModel(UserModel userModel)
+        public UserModel ToUserModel()
         {
-            return new UserEntity()
+            return new UserModel
             {
-                Name = userModel.Name,
-                Email = userModel.Email,
-                IsConfirmed = userModel.IsConfirmed,
-                Id = userModel.Id,
-                Password = userModel.Password
-            };
-        }
-
-        public static UserEntity FromUserRegistrationModel(UserRegistrationModel userRegistrationModel)
-        {
-            return new UserEntity()
-            {
-                Name = userRegistrationModel.Name,
-                Email = userRegistrationModel.Email,
-                IsConfirmed = false,
-                Id = userRegistrationModel.Id,
-                Password = userRegistrationModel.Password
+                Name = Name,
+                Email = Email,
+                IsConfirmed = IsConfirmed,
+                Id = Id,
+                Password = Password,
             };
         }
     }

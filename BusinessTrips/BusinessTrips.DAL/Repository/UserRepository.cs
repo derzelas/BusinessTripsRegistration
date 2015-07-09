@@ -9,7 +9,7 @@ namespace BusinessTrips.DAL.Repository
     {
         public void CreateByUserRegistration(UserRegistrationModel userRegistrationModel)
         {
-            UserEntity userEntity = UserEntity.FromUserRegistrationModel(userRegistrationModel);
+            UserEntity userEntity = userRegistrationModel.ToUserEntity();
 
             Storage.Add(userEntity);
         }
@@ -23,17 +23,17 @@ namespace BusinessTrips.DAL.Repository
                 return null;
             }
 
-            return UserModel.FromUserEntity(userEntity);
+            return userEntity.ToUserModel();
         }
 
         public bool AreCredentialsValid(string email, string password)
         {
-            return Storage.GetStorageFor<UserEntity>().Any(m => m.Email == email && m.Password == password);
+            return Storage.GetStorageFor<UserEntity>().Any(m => m.Email == email && m.Password == password && m.IsConfirmed);
         }
 
-        public void Confirm(UserModel userModel)
+        public void Confirm(Guid id)
         {
-            var userEntity = Storage.GetStorageFor<UserEntity>().Single(u => u.Id == userModel.Id);
+            var userEntity = Storage.GetStorageFor<UserEntity>().Single(u => u.Id == id);
             userEntity.IsConfirmed = true;
         }
 

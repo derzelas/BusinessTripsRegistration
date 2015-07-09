@@ -74,6 +74,8 @@ namespace BusinessTrips.Tests.DataAccesssLayer
         {
             repository.CreateByUserRegistration(userRegistrationModel);
             repository.CommitChanges();
+            repository.Confirm(userRegistrationModel.Id);
+            repository.CommitChanges();
 
             bool actual = repository.AreCredentialsValid(userRegistrationModel.Email, userRegistrationModel.Password);
             Assert.AreEqual(actual, true);
@@ -96,7 +98,7 @@ namespace BusinessTrips.Tests.DataAccesssLayer
             repository.CreateByUserRegistration(userRegistrationModel);
             repository.CommitChanges();
 
-            repository.Confirm(userModel);
+            repository.Confirm(userModel.Id);
             repository.CommitChanges();
 
             UserModel retrievedModel = repository.GetById(userRegistrationModel.Id);
