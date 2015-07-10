@@ -7,7 +7,7 @@ using BusinessTrips.DAL.Storage;
 
 namespace BusinessTrips.DAL.Repository
 {
-    class BusinesTripsRepository
+    public class BusinesTripsRepository
     {
         private IStorage storage;
 
@@ -16,26 +16,31 @@ namespace BusinessTrips.DAL.Repository
             storage = new StorageFactory().Create();
         }
 
-        public void CommitChanges()
+        public void Add(BusinessTripModel businessTripModel)
         {
-            storage.Commit();
-        }
-
-        public void Add(BusinessTripModel businessTrip)
-        {
-            storage.Add(businessTrip.ToEntity());
+            storage.Add(businessTripModel.ToEntity());
         }
 
         public BusinessTripModel GetById(Guid id)
         {
-            return storage.GetSetFor<BusinessTripEntity>().Single(m => m.Id == id).ToModel();
+            return (storage.GetSetFor<BusinessTripEntity>().First(m => m.Id == id)).ToModel();
         }
 
         public IEnumerable<BusinessTripModel> GetByUser(Guid id)
         {
-            var result= storage.GetSetFor<BusinessTripEntity>().Where(m => m.User.Id == id);
+            var result = storage.GetSetFor<BusinessTripEntity>().Where(m => m.User.Id == id);
 
-            return result.Select(businessTripEntity => businessTripEntity.ToModel()).ToList();
+            List<BusinessTripModel> list = new List<BusinessTripModel>();
+            foreach (var entity in result)
+            {
+                list.Add(entity.ToModel());
+            }
+            return list;
+        }
+
+        public void CommitChanges()
+        {
+            storage.Commit();
         }
     }
 }
