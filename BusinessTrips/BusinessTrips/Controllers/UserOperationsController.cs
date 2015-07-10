@@ -1,14 +1,18 @@
 ﻿using System;
 using System.Security.Cryptography;
 using System.Text;
+using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 using BusinessTrips.DAL.Model;
 using BusinessTrips.Services;
 
 namespace BusinessTrips.Controllers
 {
+    [Authorize]
     public class UserOperationsController : Controller
     {
+        [AllowAnonymous]
         public ActionResult Register()
         {
             return View("Register");
@@ -21,6 +25,7 @@ namespace BusinessTrips.Controllers
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public ActionResult Register(UserRegistrationModel userRegistrationModel)
         {
             if (ModelState.IsValid)
@@ -30,7 +35,7 @@ namespace BusinessTrips.Controllers
 
                 Email email = new Email();
                 email.SendConfirmationEmail(userRegistrationModel.Email, userRegistrationModel.Id);
-
+                
                 return View("RegisterMailSent");
             }
             return View("Register");
@@ -51,13 +56,13 @@ namespace BusinessTrips.Controllers
             {
                 return View("Error");
             }
-
+            
             registrationConfirmationModel.Confirm();
 
             return View("ConfirmRegistration");
         }
 
-        public ActionResult Login()
+        public ActionResult Not()
         {
             return View("Login");
         }

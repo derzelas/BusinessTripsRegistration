@@ -1,9 +1,12 @@
 ﻿<!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title Business Trips</title>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
@@ -20,6 +23,7 @@
                 @Html.ActionLink("Business Trips", "Login", "UserOperations", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
+
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Contact", "Register", "UserOperations")</li>
                 </ul>
@@ -27,8 +31,33 @@
             </div>
         </div>
     </div>
+
+
+
+    <div class="navbar-left">
+        <div class="container-liquid">
+            <div>
+
+                <button type="button" class="btn btn-default btn-lg">
+                    <span class="glyphicon glyphicon-star" aria-hidden="true"></span><br> Star trasldaslfdsadsafasfasfasf
+                </button>
+                <br>
+                <button type="button" class="btn btn-default btn-lg">
+                    <span class="glyphicon glyphicon-star" aria-hidden="true"></span><br> Star trasldaslfdsadsafasfasfasf<br>
+                </button>
+                <br>
+                <button type="button" class="btn btn-default btn-lg">
+                    <span class="glyphicon glyphicon-star" aria-hidden="true"></span><br> Star trasldaslfdsadsafasfasfasf<br>
+                </button>
+
+            </div>
+        </div>
+    </div>
+
+
+
     <div class="container body-content">
-        @RenderBody()     
+        @RenderBody()
     </div>
 
     @Scripts.Render("~/bundles/jquery")

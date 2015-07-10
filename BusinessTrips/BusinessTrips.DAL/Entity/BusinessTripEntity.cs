@@ -15,7 +15,7 @@ namespace BusinessTrips.DAL.Entity
         public string TaskNumber { get; set; }
         public BusinessTripModel.DepartmentType Department { get; set; }
 
-        public string LeavingFrom { get; set; }
+        public BusinessTripModel.LeavingLocation LeavingFrom { get; set; }
         public DateTime StartingDate { get; set; }
         public DateTime EndingDate { get; set; }
 
@@ -23,7 +23,7 @@ namespace BusinessTrips.DAL.Entity
         public string ClientLocation { get; set; }
 
         public bool WithPersonalCar { get; set; }
-        public string MeanOfTransportation { get; set; }
+        public string MeansOfTransportation { get; set; }
 
         public string Accomodation { get; set; }
         public bool PhoneIsNeeded { get; set; }
@@ -32,5 +32,32 @@ namespace BusinessTrips.DAL.Entity
         public string OtherInfo { get; set; }
 
         public string Status { get; set; }
+
+        public BusinessTripModel ToModel()
+        {
+            return new BusinessTripModel
+            {
+                Id = Id,
+                User = User,
+                PmName = PmName,
+                ProjectNumber = ProjectNumber,
+                ProjectName = ProjectName,
+                Accomodation = Accomodation,
+                BankCardIsNeeded = BankCardIsNeeded,
+                ClientLocation = ClientLocation,
+                ClientName = ClientName,
+                Department = Department,
+                EndingDate = EndingDate,
+                LeavingFrom = LeavingFrom,
+                MeansOfTransportation = MeansOfTransportation,
+                OtherInfo = OtherInfo,
+                PhoneIsNeeded = PhoneIsNeeded,
+                StartingDate = StartingDate,
+                Status = Status,
+                TaskName = TaskName,
+                TaskNumber = TaskNumber,
+                WithPersonalCar = WithPersonalCar
+            };
+        }
     }
 }

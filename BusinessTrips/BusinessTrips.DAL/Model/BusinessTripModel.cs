@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using BusinessTrips.DAL.Entity;
 
 namespace BusinessTrips.DAL.Model
 {
@@ -9,10 +10,14 @@ namespace BusinessTrips.DAL.Model
         public UserModel User { get; set; }
 
         [Required]
+        [Display(Name = "Department:")]
+        public DepartmentType Department { get; set; }
+
+        [Required]
         [Display(Name = "PM name:")]
         public string PmName { get; set; }
 
-        [Required]
+        
         [Display(Name = "Project number:")]
         public string ProjectNumber { get; set; }
 
@@ -22,17 +27,13 @@ namespace BusinessTrips.DAL.Model
         [Display(Name = "Task name:")]
         public string TaskName { get; set; }
 
-        [Required]
+        
         [Display(Name = "Task number:")]
         public string TaskNumber { get; set; }
 
         [Required]
-        [Display(Name = "Department:")]
-        public DepartmentType Department { get; set; }
-
-        [Required]
         [Display(Name = "Leaving from:")]
-        public string LeavingFrom { get; set; }
+        public LeavingLocation LeavingFrom { get; set; }
 
         [Required]
         [Display(Name = "Starting date:")]
@@ -50,8 +51,9 @@ namespace BusinessTrips.DAL.Model
         [Display(Name = "Client location:")]
         public string ClientLocation { get; set; }
 
+        [Display(Name = "With personal car")]
         public bool WithPersonalCar { get; set; }
-        public string MeanOfTransportation { get; set; }
+        public string MeansOfTransportation { get; set; }
 
         [Display(Name = "Accomodation:")]
         public string Accomodation { get; set; }
@@ -62,7 +64,7 @@ namespace BusinessTrips.DAL.Model
         [Display(Name = "Bank card is needed:")]
         public bool BankCardIsNeeded { get; set; }
 
-        [Display(Name = "Anything else to consider important:")]
+        [Display(Name = "Anything else you consider important:")]
         public string OtherInfo { get; set; }
 
         public string Status { get; set; }
@@ -72,6 +74,40 @@ namespace BusinessTrips.DAL.Model
             Department1 = 0,
             Department2,
             Department3
+        }
+
+        public BusinessTripEntity ToEntity()
+        {
+            return new BusinessTripEntity()
+            {
+                Id = Id,
+                User = User,
+                PmName = PmName,
+                ProjectNumber = ProjectNumber,
+                ProjectName = ProjectName,
+                Accomodation = Accomodation,
+                BankCardIsNeeded = BankCardIsNeeded,
+                ClientLocation = ClientLocation,
+                ClientName = ClientName,
+                Department = Department,
+                EndingDate = EndingDate,
+                LeavingFrom = LeavingFrom,
+                MeansOfTransportation = MeansOfTransportation,
+                OtherInfo = OtherInfo,
+                PhoneIsNeeded = PhoneIsNeeded,
+                StartingDate = StartingDate,
+                Status = Status,
+                TaskName = TaskName,
+                TaskNumber = TaskNumber,
+                WithPersonalCar = WithPersonalCar
+            };
+        }
+
+        public enum LeavingLocation
+        {
+            Sibiu = 0,
+            Cluj,
+            Iasi
         }
     }
 }
