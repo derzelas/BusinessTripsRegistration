@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 using BusinessTrips.DAL.Model;
 using BusinessTrips.Services;
 
@@ -41,10 +43,26 @@ namespace BusinessTrips.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Login(UserModel userModel)
         {
+            string userName = userModel.Name;
+            string password = userModel.Password;
+
+            bool authenticated = false;
+
             if (userModel.Authenthicate())
             {
+                    authenticated = true;
+                // error checking does happen here.
 
-                return View("AuthenticatedUser");
+                if (authenticated)
+                {
+                    FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(1, userName, DateTime.Now, DateTime.Now.AddMinutes(30), false, String.Empty, FormsAuthentication.FormsCookiePath);
+                    HttpCookie cookie = new HttpCookie(FormsAuthentication.FormsCookieName);
+                    cookie.Expires = DateTime.Now.AddMinutes(30);
+                    Response.Cookies.Add(cookie);
+                    //FormsAuthentication.RedirectFromLoginPage(userName, false);
+
+                    Response.Redirect("~/BusinessTrip/RegisterBusinessTrip");
+                }
             }
             return View("UnknownUser");
         }
