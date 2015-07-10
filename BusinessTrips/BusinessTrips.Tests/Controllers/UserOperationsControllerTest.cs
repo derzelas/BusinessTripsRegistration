@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Data.Entity;
 using System.Web.Mvc;
 using BusinessTrips.Controllers;
 using BusinessTrips.DAL.Model;
 using BusinessTrips.DAL.Repository;
+using BusinessTrips.DAL.Storage;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace BusinessTrips.Tests.Controllers
@@ -16,6 +18,8 @@ namespace BusinessTrips.Tests.Controllers
         public void Initialize()
         {
             controller = new UserOperationsController();
+            EfStorage storage = new EfStorage(new DropCreateDatabaseAlways<EfStorage>());
+            storage.Database.Initialize(true);
         }
 
         [TestMethod]
