@@ -26,7 +26,7 @@ namespace BusinessTrips.Controllers
 
                 Email email = new Email();
                 email.SendConfirmationEmail(userRegistrationModel.Email, userRegistrationModel.Id);
-                
+
                 return View("RegisterMailSent");
             }
             return View("Register");
@@ -37,33 +37,17 @@ namespace BusinessTrips.Controllers
         {
             return View("Login");
         }
-        
+
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public ActionResult Login(UserModel userModel)
         {
-            string userName = userModel.Name;
-            string password = userModel.Password;
-
-            bool authenticated = false;
-
             if (userModel.Authenthicate())
             {
-                    authenticated = true;
-                // error checking does happen here.
-
-                if (authenticated)
-                {
-                    FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(1, userName, DateTime.Now, DateTime.Now.AddMinutes(30), false, String.Empty, FormsAuthentication.FormsCookiePath);
-                    HttpCookie cookie = new HttpCookie(FormsAuthentication.FormsCookieName);
-                    cookie.Expires = DateTime.Now.AddMinutes(30);
-                    Response.Cookies.Add(cookie);
-                    //FormsAuthentication.RedirectFromLoginPage(userName, false);
-
-                    Response.Redirect("~/BusinessTrip/RegisterBusinessTrip");
-                }
+                return View("AuthenticatedUser");
             }
+
             return View("UnknownUser");
         }
 
@@ -82,7 +66,7 @@ namespace BusinessTrips.Controllers
             {
                 return View("Error");
             }
-            
+
             registrationConfirmationModel.Confirm();
 
             return View("ConfirmRegistration");
