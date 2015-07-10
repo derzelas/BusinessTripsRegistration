@@ -3,7 +3,7 @@
 
 <body>
 
-<div class="container-fluid">
+    <div class="container-fluid">
         <h2>Register new business trip.</h2>
         <form class="form-inline">
             <fieldset>
@@ -20,7 +20,6 @@
                 </div>
             </fieldset>
             <br>
-
             <fieldset>
                 <div class="form-group">
                     <div class="col-xs-5">
@@ -34,7 +33,6 @@
                 </div>
             </fieldset>
             <br>
-
             <fieldset>
                 <div class="form-group">
                     <div class="col-xs-5">
@@ -48,11 +46,82 @@
                 </div>
             </fieldset>
             <br>
-            <div class="checkbox">
-                <label><input type="checkbox"> Need of bank card</label>
-            </div>
-            <button type="submit" class="btn btn-default">Submit</button>
+            <fieldset>
+                <div class="form-group">
+                    <div class="col-xs-2">
+                        @Html.LabelFor(m => m.LeavingFrom)
+                        @Html.EnumDropDownListFor(m => m.LeavingFrom, new { @class = "form-control" })
+                    </div>
+                    <div class="col-xs-3">
+                        @Html.LabelFor(m => m.StartingDate)
+                        @Html.TextBoxFor(m => m.StartingDate, new { @class = "form-control", PlaceHolder = "dd/mm/yy" })
+                    </div>
+                    <div class="col-xs-3">
+                        @Html.LabelFor(m => m.EndingDate)
+                        @Html.TextBoxFor(m => m.EndingDate, new { @class = "form-control", PlaceHolder = "dd/mm/yy" })
+                    </div>
+                </div>
+            </fieldset>
+            <br>
+
+            <fieldset>
+                <div class="form-group">
+                    <div class="col-xs-3">
+                        @Html.LabelFor(m => m.ClientName)
+                        @Html.TextBoxFor(m => m.ClientName, new { @class = "form-control", PlaceHolder = "Client Name" })
+                    </div>
+                    <div class="col-xs-3">
+                        @Html.LabelFor(m => m.ClientLocation)
+                        @Html.TextBoxFor(m => m.ClientLocation, new { @class = "form-control", PlaceHolder = "Client Location" })
+                    </div>
+                    <div class="col-xs-3">
+                        @Html.LabelFor(m => m.MeansOfTransportation)
+                        @Html.TextBoxFor(m => m.MeansOfTransportation, new { @class = "form-control" })
+                    </div>
+                    <br>
+                    <div class="checkbox">
+                        @Html.CheckBoxFor(m => m.WithPersonalCar, new { @class = "form-control" })
+                        @Html.LabelFor(m => m.WithPersonalCar)
+                    </div>
+                </div>
+            </fieldset>
+            <br>
+            <fieldset>
+                <div class="form-group">
+                    <div class="col-xs-3">
+                        @Html.LabelFor(m => m.Accomodation)
+                        @Html.TextBoxFor(m => m.Accomodation, new { @class = "form-control", PlaceHolder = "Accomodation" })
+                    </div>
+                    <<br>
+                </div>
+                <div class="form-group">
+                    <div class="checkbox">
+                        @Html.CheckBoxFor(m => m.PhoneIsNeeded, new { @class = "form-control" })
+                        @Html.LabelFor(m => m.PhoneIsNeeded)
+                    </div>
+                    <br>
+                    <br>
+                    <div class="checkbox">
+                        @Html.CheckBoxFor(m => m.BankCardIsNeeded, new { @class = "form-control" })
+                        @Html.LabelFor(m => m.BankCardIsNeeded)
+                    </div>
+
+                </div>
+            </fieldset>
+            <br>
+            <fieldset>
+                <div class="form-group">
+                   
+                        @Html.LabelFor(m => m.OtherInfo)
+                    <div class="col-xs-40">
+                        @Html.TextAreaFor(m => m.OtherInfo, new { @class = "form-control", rows="8",cols="120", PlaceHolder = "anything else you wish to mention" })
+                    </div>
+                </div>
+            </fieldset>
+            @*<div class="checkbox">
+                    <label><input type="checkbox"> Need of bank card</label>
+                </div>
+                <button type="submit" class="btn btn-default">Submit</button>*@
         </form>
     </div>
 </body>
-</html>
