@@ -35,7 +35,7 @@ namespace BusinessTrips.Controllers
         {
             return View("Login");
         }
-
+        
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -43,6 +43,7 @@ namespace BusinessTrips.Controllers
         {
             if (userModel.Authenthicate())
             {
+
                 return View("AuthenticatedUser");
             }
             return View("UnknownUser");
