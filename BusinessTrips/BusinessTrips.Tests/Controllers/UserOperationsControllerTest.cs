@@ -88,7 +88,7 @@ namespace BusinessTrips.Tests.Controllers
         [TestMethod]
         public void LoginReturnsUnknownUserViewWhenUserIsNotInDatabase()
         {
-            var result = controller.Login(new UserModel()) as ViewResult;
+            var result = controller.Login(new UserModel(){Id=Guid.NewGuid(),Password = ""}) as ViewResult;
 
             Assert.AreEqual("UnknownUser", result.ViewName);
         }
@@ -105,6 +105,9 @@ namespace BusinessTrips.Tests.Controllers
                 ConfirmedPassword = "password"
             };
 
+            userRegistrationModel.Password = controller.PasswordEncryption(userRegistrationModel.Id.ToString(),
+                userRegistrationModel.Password);
+
             var repository = new UserRepository();
             repository.CreateByUserRegistration(userRegistrationModel);
             repository.CommitChanges();
@@ -113,6 +116,7 @@ namespace BusinessTrips.Tests.Controllers
             repository.CommitChanges();
 
             var userModel = repository.GetById(userRegistrationModel.Id);
+            userModel.Password = "password";
 
             var result = controller.Login(userModel) as ViewResult;
 
