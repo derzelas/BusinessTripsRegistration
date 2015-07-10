@@ -6,13 +6,20 @@ namespace BusinessTrips.DAL.Storage
 {
     public class EfStorage : DbContext, IStorage
     {
+        public DbSet<UserEntity> Users { get; set; }
+        public DbSet<BusinessTripEntity> BusinessTrips { get; set; }
+
         public EfStorage()
             : base("BusinessTrips")
         {
             Database.SetInitializer(new EfStorageDbInitializer());
         }
 
-        public DbSet<UserEntity> Users { get; set; }
+        public EfStorage(IDatabaseInitializer<EfStorage> initializer)
+            : base("BusinessTrips")
+        {
+            Database.SetInitializer(initializer);
+        }
 
         public void Add<T>(T entity) where T : class
         {
