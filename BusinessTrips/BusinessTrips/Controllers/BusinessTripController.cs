@@ -16,7 +16,7 @@ namespace BusinessTrips.Controllers
         [HttpPost]
         public ActionResult AddBusinessTrip(BusinessTripModel businessTripModel)
         {
-            var businessTripRepository = new BusinesTripsRepository();
+            var businessTripRepository = new BusinessTripsRepository();
             businessTripRepository.Add(businessTripModel);
             businessTripRepository.CommitChanges();
 
