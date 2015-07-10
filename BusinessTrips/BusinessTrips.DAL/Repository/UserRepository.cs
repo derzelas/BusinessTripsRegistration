@@ -9,9 +9,7 @@ namespace BusinessTrips.DAL.Repository
     {
         public void CreateByUserRegistration(UserRegistrationModel userRegistrationModel)
         {
-            UserEntity userEntity = userRegistrationModel.ToUserEntity();
-
-            Storage.Add(userEntity);
+            Storage.Add(userRegistrationModel.ToUserEntity());
         }
 
         public UserModel GetById(Guid id)
@@ -23,7 +21,7 @@ namespace BusinessTrips.DAL.Repository
                 return null;
             }
 
-            return userEntity.ToUserModel();
+            return userEntity.ToModel();
         }
 
         public bool AreCredentialsValid(string email, string password)

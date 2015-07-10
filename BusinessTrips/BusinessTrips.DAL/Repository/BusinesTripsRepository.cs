@@ -10,22 +10,26 @@ namespace BusinessTrips.DAL.Repository
     {
         public void Add(BusinessTripModel businessTrip)
         {
-            Storage.Add(businessTrip);
+            Storage.Add(businessTrip.ToEntity());
         }
 
-        public BusinessTripEntity GetById(Guid id)
+        public BusinessTripModel GetById(Guid id)
         {
-            return Storage.GetStorageFor<BusinessTripEntity>().Single(m => m.Id == id);
+            return Storage.GetStorageFor<BusinessTripEntity>().Single(m => m.Id == id).ToModel();
         }
 
-        public IEnumerable<BusinessTripEntity> GetByUser(Guid id)
+        public IEnumerable<BusinessTripModel> GetByUser(Guid id)
         {
-            return Storage.GetStorageFor<BusinessTripEntity>().Where(m => m.User.Id == id);
+            var result= Storage.GetStorageFor<BusinessTripEntity>().Where(m => m.User.Id == id);
+
+            return result.Select(businessTripEntity => businessTripEntity.ToModel()).ToList();
         }
 
-        public IEnumerable<BusinessTripEntity> GetAllBusinessTripEntities(Func<BusinessTripEntity,bool> predicate)
+        public IEnumerable<BusinessTripModel> GetAllBusinessTripEntities(Func<BusinessTripEntity,bool> predicate)
         {
-            return Storage.GetStorageFor<BusinessTripEntity>().Where(predicate);
+            var result = Storage.GetStorageFor<BusinessTripEntity>().Where(predicate);
+
+            return result.Select(businessTripEntity => businessTripEntity.ToModel()).ToList();
         }
     }
 }
