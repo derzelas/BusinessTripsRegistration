@@ -1,58 +1,58 @@
-﻿@{
-    ViewBag.Title = "BusinessTrips";
-}
-
-@using System.Web.Mvc.Html
+﻿@using System.Web.Mvc.Html
 @model BusinessTrips.DAL.Model.BusinessTripModel
 
-<div class="container">
-    <h2>Register new business trip.</h2>
-    <form class="form-inline">
-        <fieldset>
-            <div class="form-group">
-                <div class="col-xs-4">
-                    @Html.LabelFor(m => m.Department)
-                    @Html.EnumDropDownListFor(m => m.Department, new { @class = "form-control" })
-                </div>
+<body>
 
-                <div class="col-xs-5">
-                    @Html.LabelFor(m => m.PmName)
-                    @Html.TextBoxFor(m => m.PmName, new { @class = "form-control", PlaceHolder = "PM Name" })
-                </div>
-            </div>
-        </fieldset>
-        <br>
+<div class="container-fluid">
+        <h2>Register new business trip.</h2>
+        <form class="form-inline">
+            <fieldset>
+                <div class="form-group">
+                    <div class="col-xs-4">
+                        @Html.LabelFor(m => m.Department)
+                        @Html.EnumDropDownListFor(m => m.Department, new { @class = "form-control" })
+                    </div>
 
-        <fieldset>
-            <div class="form-group">
-                <div class="col-xs-5">
-                    @Html.LabelFor(m => m.ProjectName)
-                    @Html.TextBoxFor(m => m.ProjectName, new {@class = "form-control", PlaceHolder = "Project Name"})
+                    <div class="col-xs-5">
+                        @Html.LabelFor(m => m.PmName)
+                        @Html.TextBoxFor(m => m.PmName, new { @class = "form-control", PlaceHolder = "PM Name" })
+                    </div>
                 </div>
-                <div class="col-xs-3">
-                    @Html.LabelFor(m => m.ProjectNumber)
-                    @Html.TextBoxFor(m => m.ProjectNumber, new {@class = "form-control", PlaceHolder = "Project Number"})
-                </div>
-            </div>
-        </fieldset>
-        <br>
+            </fieldset>
+            <br>
 
-        <fieldset>
-            <div class="form-group">
-                <div class="col-xs-5">
-                    @Html.LabelFor(m => m.TaskName)
-                    @Html.TextBoxFor(m => m.ProjectName, new {@class = "form-control", PlaceHolder = "Task Name"})
+            <fieldset>
+                <div class="form-group">
+                    <div class="col-xs-5">
+                        @Html.LabelFor(m => m.ProjectName)
+                        @Html.TextBoxFor(m => m.ProjectName, new { @class = "form-control", PlaceHolder = "Project Name" })
+                    </div>
+                    <div class="col-xs-3">
+                        @Html.LabelFor(m => m.ProjectNumber)
+                        @Html.TextBoxFor(m => m.ProjectNumber, new { @class = "form-control", PlaceHolder = "Project Number" })
+                    </div>
                 </div>
-                <div class="col-xs-3">
-                    @Html.LabelFor(m => m.TaskNumber)
-                    @Html.TextBoxFor(m => m.ProjectNumber, new {@class = "form-control", PlaceHolder = "Task Number"})
+            </fieldset>
+            <br>
+
+            <fieldset>
+                <div class="form-group">
+                    <div class="col-xs-5">
+                        @Html.LabelFor(m => m.TaskName)
+                        @Html.TextBoxFor(m => m.ProjectName, new { @class = "form-control", PlaceHolder = "Task Name" })
+                    </div>
+                    <div class="col-xs-3">
+                        @Html.LabelFor(m => m.TaskNumber)
+                        @Html.TextBoxFor(m => m.ProjectNumber, new { @class = "form-control", PlaceHolder = "Task Number" })
+                    </div>
                 </div>
+            </fieldset>
+            <br>
+            <div class="checkbox">
+                <label><input type="checkbox"> Need of bank card</label>
             </div>
-        </fieldset>
-        <br>
-        <div class="checkbox">
-            <label><input type="checkbox"> Need of bank card</label>
-        </div>
-        <button type="submit" class="btn btn-default">Submit</button>
-    </form>
-</div>
+            <button type="submit" class="btn btn-default">Submit</button>
+        </form>
+    </div>
+</body>
+</html>
