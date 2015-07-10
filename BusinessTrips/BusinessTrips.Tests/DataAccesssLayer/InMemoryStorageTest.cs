@@ -20,7 +20,7 @@
 //        {
 //            storage.Add(10);
 //            storage.Add(15);
-//            var t = storage.GetStorageFor();
+//            var t = storage.GetSetFor();
 //            Assert.IsInstanceOfType(t,typeof (IQueryable<int>));
 //        }
 //
@@ -31,7 +31,7 @@
 //            storage.Add(30);
 //
 //            //act
-//            int expectedValue = storage.GetStorageFor().First(i => i == 30);
+//            int expectedValue = storage.GetSetFor().First(i => i == 30);
 //
 //            //assert
 //            Assert.AreEqual(30, expectedValue);

@@ -13,7 +13,7 @@ namespace BusinessTrips.DAL.Entity
         public string Hash { get; set; }
         public bool IsConfirmed { get; set; }
 
-        public UserModel ToUserModel()
+        public UserModel ToModel()
         {
             return new UserModel
             {

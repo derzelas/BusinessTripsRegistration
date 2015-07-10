@@ -14,7 +14,7 @@ namespace BusinessTrips.DAL.Storage
             storage.Add(obj as UserEntity);
         }
 
-        public IQueryable<T> GetStorageFor<T>() where T : class
+        public IQueryable<T> GetSetFor<T>() where T : class
         {
             return storage.AsQueryable().Cast<T>();
         }

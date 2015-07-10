@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using BusinessTrips.DAL.Entity;
 
 namespace BusinessTrips.DAL.Model
 {
@@ -72,6 +73,33 @@ namespace BusinessTrips.DAL.Model
             Department1 = 0,
             Department2,
             Department3
+        }
+
+        public BusinessTripEntity ToEntity()
+        {
+            return new BusinessTripEntity()
+            {
+                Id = Id,
+                User = User,
+                PmName = PmName,
+                ProjectNumber = ProjectNumber,
+                ProjectName = ProjectName,
+                Accomodation = Accomodation,
+                BankCardIsNeeded = BankCardIsNeeded,
+                ClientLocation = ClientLocation,
+                ClientName = ClientName,
+                Department = Department,
+                EndingDate = EndingDate,
+                LeavingFrom = LeavingFrom,
+                MeanOfTransportation = MeanOfTransportation,
+                OtherInfo = OtherInfo,
+                PhoneIsNeeded = PhoneIsNeeded,
+                StartingDate = StartingDate,
+                Status = Status,
+                TaskName = TaskName,
+                TaskNumber = TaskNumber,
+                WithPersonalCar = WithPersonalCar
+            };
         }
     }
 }

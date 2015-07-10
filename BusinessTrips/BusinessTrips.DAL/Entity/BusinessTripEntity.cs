@@ -32,5 +32,32 @@ namespace BusinessTrips.DAL.Entity
         public string OtherInfo { get; set; }
 
         public string Status { get; set; }
+
+        public BusinessTripModel ToModel()
+        {
+            return new BusinessTripModel
+            {
+                Id = Id,
+                User = User,
+                PmName = PmName,
+                ProjectNumber = ProjectNumber,
+                ProjectName = ProjectName,
+                Accomodation = Accomodation,
+                BankCardIsNeeded = BankCardIsNeeded,
+                ClientLocation = ClientLocation,
+                ClientName = ClientName,
+                Department = Department,
+                EndingDate = EndingDate,
+                LeavingFrom = LeavingFrom,
+                MeanOfTransportation = MeanOfTransportation,
+                OtherInfo = OtherInfo,
+                PhoneIsNeeded = PhoneIsNeeded,
+                StartingDate = StartingDate,
+                Status = Status,
+                TaskName = TaskName,
+                TaskNumber = TaskNumber,
+                WithPersonalCar = WithPersonalCar
+            };
+        }
     }
 }
