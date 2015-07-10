@@ -10,7 +10,7 @@ namespace BusinessTrips.Tests.DataAccesssLayer
     [TestClass]
     public class BusinessTripRepositoryTest
     {
-        private BusinesTripsRepository repository;
+        private BusinessTripsRepository repository;
         private BusinessTripModel businessTripModel;
         private UserModel userModel;
 
@@ -27,7 +27,7 @@ namespace BusinessTrips.Tests.DataAccesssLayer
                 Password = "password"
             };
 
-            repository = new BusinesTripsRepository();
+            repository = new BusinessTripsRepository();
             businessTripModel = new BusinessTripModel
             {
                 Id = Guid.NewGuid(),

@@ -7,11 +7,11 @@ using BusinessTrips.DAL.Storage;
 
 namespace BusinessTrips.DAL.Repository
 {
-    public class BusinesTripsRepository
+    public class BusinessTripsRepository
     {
         private IStorage storage;
 
-        public BusinesTripsRepository()
+        public BusinessTripsRepository()
         {
             storage = new StorageFactory().Create();
         }

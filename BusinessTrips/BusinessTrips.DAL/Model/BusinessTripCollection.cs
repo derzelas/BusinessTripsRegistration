@@ -26,8 +26,8 @@ namespace BusinessTrips.DAL.Model
 
         public void LoadBusinessTripForUser(Guid userId)
         {
-            BusinesTripsRepository businesTripsRepository=new BusinesTripsRepository();
-            businessTripModels = businesTripsRepository.GetByUser(userId);
+            BusinessTripsRepository businessTripsRepository=new BusinessTripsRepository();
+            businessTripModels = businessTripsRepository.GetByUser(userId);
         }
     }
 }
