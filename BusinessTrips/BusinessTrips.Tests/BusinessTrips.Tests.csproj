@@ -99,6 +99,7 @@
     <Compile Include="Controllers\UserOperationsControllerTest.cs" />
     <Compile Include="DataAccesssLayer\InMemoryStorageTest.cs" />
     <Compile Include="DataAccesssLayer\BusinessTripRepositoryTest.cs" />
+    <Compile Include="DataAccesssLayer\UniqueEmailAttributeTest.cs" />
     <Compile Include="DataAccesssLayer\UserRepositoryTest.cs" />
     <Compile Include="Models\UserRegistrationModelTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
