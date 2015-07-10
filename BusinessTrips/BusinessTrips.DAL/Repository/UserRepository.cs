@@ -2,19 +2,27 @@
 using System.Linq;
 using BusinessTrips.DAL.Entity;
 using BusinessTrips.DAL.Model;
+using BusinessTrips.DAL.Storage;
 
 namespace BusinessTrips.DAL.Repository
 {
-    public class UserRepository : RepositoryBase
+    public class UserRepository
     {
+        private IStorage storage;
+
+        public UserRepository()
+        {
+            storage = new StorageFactory().Create();
+        }
+
         public void CreateByUserRegistration(UserRegistrationModel userRegistrationModel)
         {
-            Storage.Add(userRegistrationModel.ToUserEntity());
+            storage.Add(userRegistrationModel.ToUserEntity());
         }
 
         public UserModel GetById(Guid id)
         {
-            var userEntity = Storage.GetStorageFor<UserEntity>().FirstOrDefault(m => m.Id == id);
+            var userEntity = storage.GetSetFor<UserEntity>().FirstOrDefault(m => m.Id == id);
 
             if (userEntity == null)
             {
@@ -26,18 +34,23 @@ namespace BusinessTrips.DAL.Repository
 
         public bool AreCredentialsValid(string email, string password)
         {
-            return Storage.GetStorageFor<UserEntity>().Any(m => m.Email == email && m.Password == password && m.IsConfirmed);
+            return storage.GetSetFor<UserEntity>().Any(m => m.Email == email && m.Password == password && m.IsConfirmed);
         }
 
         public void Confirm(Guid id)
         {
-            var userEntity = Storage.GetStorageFor<UserEntity>().Single(u => u.Id == id);
+            var userEntity = storage.GetSetFor<UserEntity>().Single(u => u.Id == id);
             userEntity.IsConfirmed = true;
         }
 
         public bool Exists(string email)
         {
-            return Storage.GetStorageFor<UserEntity>().Any(m => m.Email == email);
+            return storage.GetSetFor<UserEntity>().Any(m => m.Email == email);
+        }
+
+        public void CommitChanges()
+        {
+            storage.Commit();
         }
     }
 }
