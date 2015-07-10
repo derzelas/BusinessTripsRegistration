@@ -50,6 +50,7 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.SqlServer.Compact.4.0.8876.1\lib\net40\System.Data.SqlServerCe.dll</HintPath>
     </Reference>
+    <Reference Include="System.Web" />
     <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.2\lib\net45\System.Web.Helpers.dll</HintPath>
@@ -82,8 +83,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entity\BusinessTripEntity.cs" />
+    <Compile Include="Model\BusinessTripCollection.cs" />
     <Compile Include="Model\BusinessTripModel.cs" />
     <Compile Include="Repository\BusinesTripsRepository.cs" />
+    <Compile Include="Repository\StorageFactory.cs" />
     <Compile Include="Storage\EFStorageDBInitializer.cs" />
     <Compile Include="Storage\EFStorage.cs" />
     <Compile Include="Storage\InMemoryStorage.cs" />
@@ -93,7 +96,6 @@
     <Compile Include="Model\UserModel.cs" />
     <Compile Include="Model\UserRegistrationModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repository\RepositoryBase.cs" />
     <Compile Include="Entity\UserEntity.cs" />
     <Compile Include="Repository\UserRepository.cs" />
   </ItemGroup>

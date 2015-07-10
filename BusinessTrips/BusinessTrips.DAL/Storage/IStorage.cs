@@ -3,11 +3,11 @@ using System.Linq;
 
 namespace BusinessTrips.DAL.Storage
 {
-    public interface IStorage : IDisposable
+    public interface IStorage
     {
         void Add<T>(T element) where T : class;
 
-        IQueryable<T> GetStorageFor<T>() where T : class;
+        IQueryable<T> GetSetFor<T>() where T : class;
 
         void Remove<T>(T element) where T : class;
 

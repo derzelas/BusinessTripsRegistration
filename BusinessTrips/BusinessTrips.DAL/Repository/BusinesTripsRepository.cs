@@ -3,29 +3,44 @@ using System.Collections.Generic;
 using System.Linq;
 using BusinessTrips.DAL.Entity;
 using BusinessTrips.DAL.Model;
+using BusinessTrips.DAL.Storage;
 
 namespace BusinessTrips.DAL.Repository
 {
-    public class BusinesTripsRepository : RepositoryBase
+    public class BusinesTripsRepository
     {
-        public void Add(BusinessTripModel businessTrip)
+        private IStorage storage;
+
+        public BusinesTripsRepository()
         {
-            Storage.Add(businessTrip);
+            storage = new StorageFactory().Create();
         }
 
-        public BusinessTripEntity GetById(Guid id)
+        public void Add(BusinessTripModel businessTripModel)
         {
-            return Storage.GetStorageFor<BusinessTripEntity>().Single(m => m.Id == id);
+            storage.Add(businessTripModel.ToEntity());
         }
 
-        public IEnumerable<BusinessTripEntity> GetByUser(Guid id)
+        public BusinessTripModel GetById(Guid id)
         {
-            return Storage.GetStorageFor<BusinessTripEntity>().Where(m => m.User.Id == id);
+            return (storage.GetSetFor<BusinessTripEntity>().First(m => m.Id == id)).ToModel();
         }
 
-        public IEnumerable<BusinessTripEntity> GetAllBusinessTripEntities(Func<BusinessTripEntity,bool> predicate)
+        public IEnumerable<BusinessTripModel> GetByUser(Guid id)
         {
-            return Storage.GetStorageFor<BusinessTripEntity>().Where(predicate);
+            var result = storage.GetSetFor<BusinessTripEntity>().Where(m => m.User.Id == id);
+
+            List<BusinessTripModel> list = new List<BusinessTripModel>();
+            foreach (var entity in result)
+        {
+                list.Add(entity.ToModel());
+            }
+            return list;
+        }
+
+        public void CommitChanges()
+        {
+            storage.Commit();
         }
     }
 }

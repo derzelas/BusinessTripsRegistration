@@ -29,7 +29,7 @@ namespace BusinessTrips.DAL.Model
             return repository.AreCredentialsValid(Email, Password);
         }
 
-        public UserEntity ToUserEntity()
+        public UserEntity ToEntity()
         {
             return new UserEntity()
             {

@@ -39,11 +39,10 @@ namespace BusinessTrips.DAL.Model
         public void Save()
         {
             Id = Guid.NewGuid();
-            using (var userRepository = new UserRepository())
-            {
-                userRepository.CreateByUserRegistration(this);
-                userRepository.CommitChanges();
-            }
+            var userRepository = new UserRepository();
+
+            userRepository.CreateByUserRegistration(this);
+            userRepository.CommitChanges();
         }
 
         public UserEntity ToUserEntity()

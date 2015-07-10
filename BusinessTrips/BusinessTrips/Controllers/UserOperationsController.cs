@@ -5,19 +5,17 @@ using BusinessTrips.Services;
 
 namespace BusinessTrips.Controllers
 {
+    [Authorize]
     public class UserOperationsController : Controller
     {
+        [AllowAnonymous]
         public ActionResult Register()
         {
             return View("Register");
         }
 
-        public ActionResult Logout()
-        {
-            return View("Logout");
-        }
-
         [HttpPost]
+        [AllowAnonymous]
         public ActionResult Register(UserRegistrationModel userRegistrationModel)
         {
             if (ModelState.IsValid)
@@ -30,6 +28,25 @@ namespace BusinessTrips.Controllers
                 return View("RegisterMailSent");
             }
             return View("Register");
+        }
+
+        [AllowAnonymous]
+        public ActionResult Login()
+        {
+            return View("Login");
+        }
+        
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public ActionResult Login(UserModel userModel)
+        {
+            if (userModel.Authenthicate())
+            {
+
+                return View("AuthenticatedUser");
+            }
+            return View("UnknownUser");
         }
 
         public ActionResult ConfirmRegistration(string guid)
@@ -53,21 +70,9 @@ namespace BusinessTrips.Controllers
             return View("ConfirmRegistration");
         }
 
-        public ActionResult Login()
+        public ActionResult Not()
         {
-            return View("Login");
-        }
-
-        [HttpPost]
-        [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public ActionResult Login(UserModel userModel)
-        {
-            if (userModel.Authenthicate())
-            {
-                return View("AuthenticatedUser");
-            }
-            return View("UnknownUser");
+            return View("AuthenticatedUser");
         }
     }
 }
