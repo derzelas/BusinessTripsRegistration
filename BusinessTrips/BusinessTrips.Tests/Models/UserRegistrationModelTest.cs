@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Data.Entity;
 using BusinessTrips.DAL.Entity;
 using BusinessTrips.DAL.Model;
+using BusinessTrips.DAL.Storage;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace BusinessTrips.Tests.Models
@@ -13,6 +15,9 @@ namespace BusinessTrips.Tests.Models
         [TestInitialize]
         public void Initialize()
         {
+            EfStorage efStorage = new EfStorage(new DropCreateDatabaseAlways<EfStorage>());
+            efStorage.Database.Initialize(true);
+
             userRegistrationModel = new UserRegistrationModel()
             {
                 Name = "nume",
