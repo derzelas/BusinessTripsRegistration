@@ -6,7 +6,7 @@ using BusinessTrips.DAL.Model;
 
 namespace BusinessTrips.DAL.Repository
 {
-    class BusinesTripsRepository : RepositoryBase
+    public class BusinesTripsRepository : RepositoryBase
     {
         public void Add(BusinessTripModel businessTrip)
         {

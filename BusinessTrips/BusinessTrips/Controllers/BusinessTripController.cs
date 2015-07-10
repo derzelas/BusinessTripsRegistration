@@ -1,4 +1,6 @@
 ﻿using System.Web.Mvc;
+using BusinessTrips.DAL.Model;
+using BusinessTrips.DAL.Repository;
 
 namespace BusinessTrips.Controllers
 {
@@ -6,8 +8,18 @@ namespace BusinessTrips.Controllers
     {
         //
         // GET: /BusinessTrip/
-        public ActionResult Index()
+        public ActionResult AddBusinessTrip()
         {
+            return View("RegisterBusinessTrip");
+        }
+
+        [HttpPost]
+        public ActionResult AddBusinessTrip(BusinessTripModel businessTripModel)
+        {
+            var businessTripRepository = new BusinesTripsRepository();
+            businessTripRepository.Add(businessTripModel);
+            businessTripRepository.CommitChanges();
+
             return View("RegisterBusinessTrip");
         }
 	}
