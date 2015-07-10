@@ -14,6 +14,7 @@ namespace BusinessTrips.Controllers
 
         public ActionResult Logout()
         {
+            //controler creat pentru logoff
             return View("Logout");
         }
 
