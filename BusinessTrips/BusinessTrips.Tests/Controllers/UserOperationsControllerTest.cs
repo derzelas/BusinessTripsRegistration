@@ -105,9 +105,6 @@ namespace BusinessTrips.Tests.Controllers
                 ConfirmedPassword = "password"
             };
 
-            userRegistrationModel.Password = controller.PasswordEncryption(userRegistrationModel.Id.ToString(),
-                userRegistrationModel.Password);
-
             var repository = new UserRepository();
             repository.CreateByUserRegistration(userRegistrationModel);
             repository.CommitChanges();

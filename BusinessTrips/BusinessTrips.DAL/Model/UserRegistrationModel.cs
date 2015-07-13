@@ -40,7 +40,7 @@ namespace BusinessTrips.DAL.Model
         {
             Id = Guid.NewGuid();
             var userRepository = new UserRepository();
-
+            
             userRepository.CreateByUserRegistration(this);
             userRepository.CommitChanges();
         }

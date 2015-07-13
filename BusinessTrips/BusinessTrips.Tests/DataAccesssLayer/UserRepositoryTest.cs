@@ -44,7 +44,7 @@ namespace BusinessTrips.Tests.DataAccesssLayer
 
             Assert.AreEqual(retrievedModel.Name, userRegistrationModel.Name);
             Assert.AreEqual(retrievedModel.Email, userRegistrationModel.Email);
-            Assert.AreEqual(retrievedModel.Password, userRegistrationModel.Password);
+            Assert.AreNotEqual(retrievedModel.Password, userRegistrationModel.Password);
             Assert.IsNotNull(retrievedModel.Id);
             Assert.AreEqual(retrievedModel.IsConfirmed, false);
         }
@@ -60,7 +60,7 @@ namespace BusinessTrips.Tests.DataAccesssLayer
             Assert.AreEqual(userRegistrationModel.Id, retrievedUser.Id);
             Assert.AreEqual(userRegistrationModel.Name, retrievedUser.Name);
             Assert.AreEqual(userRegistrationModel.Email, retrievedUser.Email);
-            Assert.AreEqual(userRegistrationModel.Password, retrievedUser.Password);
+            Assert.AreNotEqual(userRegistrationModel.Password, retrievedUser.Password);
             Assert.AreEqual(retrievedUser.IsConfirmed, false);
         }
 

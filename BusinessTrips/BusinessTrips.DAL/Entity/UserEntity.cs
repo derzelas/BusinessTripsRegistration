@@ -10,7 +10,6 @@ namespace BusinessTrips.DAL.Entity
         public string Email { get; set; }
         public string Password { get; set; }
         public string Salt { get; set; }
-        public string Hash { get; set; }
         public bool IsConfirmed { get; set; }
 
         public UserModel ToModel()
