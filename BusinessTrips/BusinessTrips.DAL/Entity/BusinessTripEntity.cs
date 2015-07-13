@@ -13,9 +13,9 @@ namespace BusinessTrips.DAL.Entity
         public string ProjectName { get; set; }
         public string TaskName { get; set; }
         public string TaskNumber { get; set; }
-        public BusinessTripModel.DepartmentType Department { get; set; }
+        public string Department { get; set; }
 
-        public BusinessTripModel.LeavingLocation LeavingFrom { get; set; }
+        public string LeavingFrom { get; set; }
         public DateTime StartingDate { get; set; }
         public DateTime EndingDate { get; set; }
 

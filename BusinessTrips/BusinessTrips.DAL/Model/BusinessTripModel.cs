@@ -12,7 +12,7 @@ namespace BusinessTrips.DAL.Model
 
         [Required]
         [Display(Name = "Department:")]
-        public DepartmentType Department { get; set; }
+        public string Department { get; set; }
 
         [Required]
         [Display(Name = "PM name:")]
@@ -34,16 +34,18 @@ namespace BusinessTrips.DAL.Model
 
         [Required]
         [Display(Name = "Leaving from:")]
-        public LeavingLocation LeavingFrom { get; set; }
+        public string LeavingFrom { get; set; }
 
         [Required]
         [Display(Name = "Starting date:")]
         [DataType(DataType.Date)]
+        [DateRangeAttribute]
         public DateTime StartingDate { get; set; }
 
         [Required]
         [Display(Name = "Ending date:")]
         [DataType(DataType.Date)]
+        [DateRangeAttribute]
         public DateTime EndingDate { get; set; }
 
         [Required]
@@ -73,20 +75,6 @@ namespace BusinessTrips.DAL.Model
         public string OtherInfo { get; set; }
 
         public string Status { get; set; }
-
-        public enum DepartmentType
-        {
-            Department1 = 0,
-            Department2,
-            Department3
-        }
-
-        public enum LeavingLocation
-        {
-            Sibiu = 0,
-            Cluj,
-            Iasi
-        }
 
         public void Save()
         {

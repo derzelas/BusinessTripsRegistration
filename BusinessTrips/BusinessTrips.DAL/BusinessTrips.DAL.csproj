@@ -85,6 +85,7 @@
     <Compile Include="Entity\BusinessTripEntity.cs" />
     <Compile Include="Model\BusinessTripCollection.cs" />
     <Compile Include="Model\BusinessTripModel.cs" />
+    <Compile Include="Model\DateRangeAttribute.cs" />
     <Compile Include="Repository\BusinessTripsRepository.cs" />
     <Compile Include="Repository\StorageFactory.cs" />
     <Compile Include="Storage\EFStorageDBInitializer.cs" />

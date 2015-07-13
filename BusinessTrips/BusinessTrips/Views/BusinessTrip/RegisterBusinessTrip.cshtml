@@ -4,6 +4,7 @@
 <body>
     @using (Html.BeginForm("AddBusinessTrip", "BusinessTrip", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
     {
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="container-fluid">
             <h2>Register new business trip.</h2>
             <form class="form-inline">
@@ -11,12 +12,14 @@
                     <div class="form-group">
                         <div class="col-xs-4">
                             @Html.LabelFor(m => m.Department)
-                            @Html.EnumDropDownListFor(m => m.Department, new { @class = "form-control" })
+                            @Html.TextBoxFor(m => m.Department, new {@class = "form-control"})
+                            @Html.ValidationMessageFor(m => m.Department, "", new { @class = "text-danger" })
                         </div>
 
                         <div class="col-xs-5">
                             @Html.LabelFor(m => m.PmName)
-                            @Html.TextBoxFor(m => m.PmName, new { @class = "form-control", PlaceHolder = "PM Name" })
+                            @Html.TextBoxFor(m => m.PmName, new {@class = "form-control", PlaceHolder = "PM Name"})
+                            @Html.ValidationMessageFor(m => m.PmName, "", new { @class = "text-danger" })
                         </div>
                     </div>
                 </fieldset>
@@ -25,11 +28,13 @@
                     <div class="form-group">
                         <div class="col-xs-5">
                             @Html.LabelFor(m => m.ProjectName)
-                            @Html.TextBoxFor(m => m.ProjectName, new { @class = "form-control", PlaceHolder = "Project Name" })
+                            @Html.TextBoxFor(m => m.ProjectName, new {@class = "form-control", PlaceHolder = "Project Name"})
+                            @Html.ValidationMessageFor(m => m.ProjectName, "", new { @class = "text-danger" })
                         </div>
                         <div class="col-xs-3">
                             @Html.LabelFor(m => m.ProjectNumber)
-                            @Html.TextBoxFor(m => m.ProjectNumber, new { @class = "form-control", PlaceHolder = "Project Number" })
+                            @Html.TextBoxFor(m => m.ProjectNumber, new {@class = "form-control", PlaceHolder = "Project Number"})
+                            @Html.ValidationMessageFor(m => m.ProjectNumber, "", new { @class = "text-danger" })
                         </div>
                     </div>
                 </fieldset>
@@ -38,12 +43,14 @@
                     <div class="form-group">
                         <div class="col-xs-5">
                             @Html.LabelFor(m => m.TaskName)
-                            @Html.TextBoxFor(m => m.TaskName, new { @class = "form-control", PlaceHolder = "Task Name" })
+                            @Html.TextBoxFor(m => m.TaskName, new {@class = "form-control", PlaceHolder = "Task Name"})
+                            @Html.ValidationMessageFor(m => m.TaskName, "", new { @class = "text-danger" })
                         </div>
                         <div class="col-xs-3">
                             @Html.LabelFor(m => m.TaskNumber)
-                            @Html.TextBoxFor(m => m.TaskNumber, new { @class = "form-control", PlaceHolder = "Task Number" })
-                        </div>
+                            @Html.TextBoxFor(m => m.TaskNumber, new {@class = "form-control", PlaceHolder = "Task Number"})
+                            @Html.ValidationMessageFor(m => m.TaskNumber, "", new { @class = "text-danger" })
+                          </div>
                     </div>
                 </fieldset>
                 <br>
@@ -51,17 +58,18 @@
                     <div class="form-group">
                         <div class="col-xs-2">
                             @Html.LabelFor(m => m.LeavingFrom)
-                            @Html.EnumDropDownListFor(m => m.LeavingFrom, new { @class = "form-control" })
+                            @Html.TextBoxFor(m => m.LeavingFrom, new {@class = "form-control"})
+                            @Html.ValidationMessageFor(m => m.LeavingFrom, "", new { @class = "text-danger" })
                         </div>
                         <div class="col-xs-4">
                             @Html.LabelFor(m => m.StartingDate)
-                            @*@Html.TextBoxFor(m => m.StartingDate, new { @class = "form-control", PlaceHolder = "dd/mm/yy" })*@
-                            @Html.EditorFor(m=>m.StartingDate, new { @class = "form-control" })
+                            @Html.EditorFor(m => m.StartingDate, new { @class = "form-control"})
+                            @Html.ValidationMessageFor(m => m.StartingDate, "", new { @class = "text-danger"})
                         </div>
                         <div class="col-xs-4">
                             @Html.LabelFor(m => m.EndingDate)
-                            @*@Html.TextBoxFor(m => m.EndingDate, new { @class = "form-control", PlaceHolder = "dd/mm/yy" })*@
-                            @Html.EditorFor(m => m.EndingDate, new { @class = "form-control" })
+                            @Html.EditorFor(m => m.EndingDate, new { @class = "date-picker" })
+                            @Html.ValidationMessageFor(m => m.EndingDate, "", new { @class = "text-danger" })
                         </div>
                     </div>
                 </fieldset>
@@ -71,15 +79,18 @@
                     <div class="form-group">
                         <div class="col-xs-3">
                             @Html.LabelFor(m => m.ClientName)
-                            @Html.TextBoxFor(m => m.ClientName, new { @class = "form-control", PlaceHolder = "Client Name" })
+                            @Html.TextBoxFor(m => m.ClientName, new {@class = "form-control", PlaceHolder = "Client Name"})
+                            @Html.ValidationMessageFor(m => m.ClientName, "", new { @class = "text-danger" })
                         </div>
                         <div class="col-xs-3">
                             @Html.LabelFor(m => m.ClientLocation)
-                            @Html.TextBoxFor(m => m.ClientLocation, new { @class = "form-control", PlaceHolder = "Client Location" })
+                            @Html.TextBoxFor(m => m.ClientLocation, new {@class = "form-control", PlaceHolder = "Client Location"})
+                            @Html.ValidationMessageFor(m => m.ClientLocation, "", new { @class = "text-danger" })
                         </div>
                         <div class="col-xs-3">
                             @Html.LabelFor(m => m.MeansOfTransportation)
-                            @Html.TextBoxFor(m => m.MeansOfTransportation, new { @class = "form-control" })
+                            @Html.TextBoxFor(m => m.MeansOfTransportation, new {@class = "form-control"})
+                            @Html.ValidationMessageFor(m => m.MeansOfTransportation, "", new { @class = "text-danger" })
                         </div>
                         <br>
                         @*<div class="checkbox">
@@ -93,13 +104,13 @@
                     <div class="form-group">
                         <div class="col-xs-3">
                             @Html.LabelFor(m => m.Accomodation)
-                            @Html.TextBoxFor(m => m.Accomodation, new { @class = "form-control", PlaceHolder = "Accomodation" })
+                            @Html.TextBoxFor(m => m.Accomodation, new {@class = "form-control", PlaceHolder = "Accomodation"})
                         </div>
                         <br>
                     </div>
                     <div class="form-group">
                         <div class="checkbox">
-                            @Html.CheckBoxFor(m => m.PhoneIsNeeded, new { @class = "form-control" })
+                            @Html.CheckBoxFor(m => m.PhoneIsNeeded, new {@class = "form-control"})
                             @Html.LabelFor(m => m.PhoneIsNeeded)
                         </div>
                         <br>
@@ -111,7 +122,7 @@
                         <br>
                         <br>
                         <div class="checkbox">
-                            @Html.CheckBoxFor(m => m.WithPersonalCar, new { @class = "form-control" })
+                            @Html.CheckBoxFor(m => m.WithPersonalCar, new {@class = "form-control"})
                             @Html.LabelFor(m => m.WithPersonalCar)
                         </div>
                     </div>
@@ -122,7 +133,7 @@
 
                         @Html.LabelFor(m => m.OtherInfo)
                         <div class="col-xs-80">
-                            @Html.TextAreaFor(m => m.OtherInfo, new { @class = "form-control", rows = "8", cols = "120", PlaceHolder = "anything else you wish to mention" })
+                            @Html.TextAreaFor(m => m.OtherInfo, new {@class = "form-control", rows = "8", cols = "120", PlaceHolder = "anything else you wish to mention"})
                         </div>
                     </div>
                 </fieldset>

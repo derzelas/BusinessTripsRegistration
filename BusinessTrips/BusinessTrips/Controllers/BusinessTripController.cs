@@ -1,8 +1,6 @@
-﻿using System;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using BusinessTrips.DAL.Model;
-using BusinessTrips.DAL.Repository;
-
+ 
 namespace BusinessTrips.Controllers
 {
     public class BusinessTripController : Controller
