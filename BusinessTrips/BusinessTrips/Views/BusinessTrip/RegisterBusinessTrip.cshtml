@@ -38,11 +38,11 @@
                     <div class="form-group">
                         <div class="col-xs-5">
                             @Html.LabelFor(m => m.TaskName)
-                            @Html.TextBoxFor(m => m.ProjectName, new { @class = "form-control", PlaceHolder = "Task Name" })
+                            @Html.TextBoxFor(m => m.TaskName, new { @class = "form-control", PlaceHolder = "Task Name" })
                         </div>
                         <div class="col-xs-3">
                             @Html.LabelFor(m => m.TaskNumber)
-                            @Html.TextBoxFor(m => m.ProjectNumber, new { @class = "form-control", PlaceHolder = "Task Number" })
+                            @Html.TextBoxFor(m => m.TaskNumber, new { @class = "form-control", PlaceHolder = "Task Number" })
                         </div>
                     </div>
                 </fieldset>
@@ -53,13 +53,15 @@
                             @Html.LabelFor(m => m.LeavingFrom)
                             @Html.EnumDropDownListFor(m => m.LeavingFrom, new { @class = "form-control" })
                         </div>
-                        <div class="col-xs-3">
+                        <div class="col-xs-4">
                             @Html.LabelFor(m => m.StartingDate)
-                            @Html.TextBoxFor(m => m.StartingDate, new { @class = "form-control", PlaceHolder = "dd/mm/yy" })
+                            @*@Html.TextBoxFor(m => m.StartingDate, new { @class = "form-control", PlaceHolder = "dd/mm/yy" })*@
+                            @Html.EditorFor(m=>m.StartingDate, new { @class = "form-control" })
                         </div>
-                        <div class="col-xs-3">
+                        <div class="col-xs-4">
                             @Html.LabelFor(m => m.EndingDate)
-                            @Html.TextBoxFor(m => m.EndingDate, new { @class = "form-control", PlaceHolder = "dd/mm/yy" })
+                            @*@Html.TextBoxFor(m => m.EndingDate, new { @class = "form-control", PlaceHolder = "dd/mm/yy" })*@
+                            @Html.EditorFor(m => m.EndingDate, new { @class = "form-control" })
                         </div>
                     </div>
                 </fieldset>
@@ -80,10 +82,10 @@
                             @Html.TextBoxFor(m => m.MeansOfTransportation, new { @class = "form-control" })
                         </div>
                         <br>
-                        <div class="checkbox">
-                            @Html.CheckBoxFor(m => m.WithPersonalCar, new { @class = "form-control" })
-                            @Html.LabelFor(m => m.WithPersonalCar)
-                        </div>
+                        @*<div class="checkbox">
+                                @Html.CheckBoxFor(m => m.WithPersonalCar, new { @class = "form-control" })
+                                @Html.LabelFor(m => m.WithPersonalCar)
+                            </div>*@
                     </div>
                 </fieldset>
                 <br>
@@ -93,7 +95,7 @@
                             @Html.LabelFor(m => m.Accomodation)
                             @Html.TextBoxFor(m => m.Accomodation, new { @class = "form-control", PlaceHolder = "Accomodation" })
                         </div>
-                        <<br>
+                        <br>
                     </div>
                     <div class="form-group">
                         <div class="checkbox">
@@ -103,10 +105,15 @@
                         <br>
                         <br>
                         <div class="checkbox">
-                            @Html.CheckBoxFor(m => m.BankCardIsNeeded, new { @class = "form-control" })
+                            @Html.CheckBoxFor(m => m.BankCardIsNeeded, new {@class = "form-control"})
                             @Html.LabelFor(m => m.BankCardIsNeeded)
                         </div>
-
+                        <br>
+                        <br>
+                        <div class="checkbox">
+                            @Html.CheckBoxFor(m => m.WithPersonalCar, new { @class = "form-control" })
+                            @Html.LabelFor(m => m.WithPersonalCar)
+                        </div>
                     </div>
                 </fieldset>
                 <br>
@@ -114,7 +121,7 @@
                     <div class="form-group">
 
                         @Html.LabelFor(m => m.OtherInfo)
-                        <div class="col-xs-40">
+                        <div class="col-xs-80">
                             @Html.TextAreaFor(m => m.OtherInfo, new { @class = "form-control", rows = "8", cols = "120", PlaceHolder = "anything else you wish to mention" })
                         </div>
                     </div>

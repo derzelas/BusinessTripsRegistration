@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Web.Mvc;
 using BusinessTrips.DAL.Model;
 using BusinessTrips.DAL.Repository;
 
@@ -16,11 +17,15 @@ namespace BusinessTrips.Controllers
         [HttpPost]
         public ActionResult AddBusinessTrip(BusinessTripModel businessTripModel)
         {
-            var businessTripRepository = new BusinessTripsRepository();
-            businessTripRepository.Add(businessTripModel);
-            businessTripRepository.CommitChanges();
+            if (ModelState.IsValid)
+            {
+                businessTripModel.Save();
+                //send e-mail to BTO
+                //return a view => Business trip added
+            }
+            // return a view => business trip couldn't be added
 
             return View("RegisterBusinessTrip");
         }
-	}
+    }
 }
