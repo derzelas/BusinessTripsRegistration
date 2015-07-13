@@ -62,7 +62,8 @@ namespace BusinessTrips.Controllers
             return View("ConfirmRegistration");
         }
 
-        public ActionResult Not()
+        [AllowAnonymous]
+        public ActionResult Login()
         {
             return View("Login");
         }
@@ -92,7 +93,7 @@ namespace BusinessTrips.Controllers
 
             for (int i = 0; i < hashedPassword.Length; i++)
             {
-                encryptedPassword.Append(hashedPassword[i].ToString("x2"));
+                encryptedPassword.Append(hashedPassword[i].ToString(" x2"));
             }
             return encryptedPassword.ToString();
         }
