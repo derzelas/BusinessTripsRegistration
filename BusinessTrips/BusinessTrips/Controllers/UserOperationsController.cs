@@ -36,6 +36,7 @@ namespace BusinessTrips.Controllers
             return View("Register");
         }
 
+        [AllowAnonymous]
         public ActionResult ConfirmRegistration(string guid)
         {
             var registrationConfirmationModel = new RegistrationConfirmationModel();

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using BusinessTrips.DAL.Entity;
+using BusinessTrips.DAL.Repository;
 
 namespace BusinessTrips.DAL.Model
 {
@@ -17,7 +18,7 @@ namespace BusinessTrips.DAL.Model
         [Display(Name = "PM name:")]
         public string PmName { get; set; }
 
-        
+
         [Display(Name = "Project number:")]
         public string ProjectNumber { get; set; }
 
@@ -27,7 +28,7 @@ namespace BusinessTrips.DAL.Model
         [Display(Name = "Task name:")]
         public string TaskName { get; set; }
 
-        
+
         [Display(Name = "Task number:")]
         public string TaskNumber { get; set; }
 
@@ -37,10 +38,12 @@ namespace BusinessTrips.DAL.Model
 
         [Required]
         [Display(Name = "Starting date:")]
+        [DataType(DataType.Date)]
         public DateTime StartingDate { get; set; }
 
         [Required]
         [Display(Name = "Ending date:")]
+        [DataType(DataType.Date)]
         public DateTime EndingDate { get; set; }
 
         [Required]
@@ -53,6 +56,8 @@ namespace BusinessTrips.DAL.Model
 
         [Display(Name = "With personal car")]
         public bool WithPersonalCar { get; set; }
+
+        [Display(Name = "Means of transportation")]
         public string MeansOfTransportation { get; set; }
 
         [Display(Name = "Accomodation:")]
@@ -74,6 +79,22 @@ namespace BusinessTrips.DAL.Model
             Department1 = 0,
             Department2,
             Department3
+        }
+
+        public enum LeavingLocation
+        {
+            Sibiu = 0,
+            Cluj,
+            Iasi
+        }
+
+        public void Save()
+        {
+            Id = Guid.NewGuid();
+            var businessTripRepository = new BusinessTripsRepository();
+
+            businessTripRepository.Add(this);
+            businessTripRepository.CommitChanges();
         }
 
         public BusinessTripEntity ToEntity()
@@ -101,13 +122,6 @@ namespace BusinessTrips.DAL.Model
                 TaskNumber = TaskNumber,
                 WithPersonalCar = WithPersonalCar
             };
-        }
-
-        public enum LeavingLocation
-        {
-            Sibiu = 0,
-            Cluj,
-            Iasi
         }
     }
 }
