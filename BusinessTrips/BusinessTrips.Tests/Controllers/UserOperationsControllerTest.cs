@@ -36,11 +36,11 @@ namespace BusinessTrips.Tests.Controllers
         public void ConfirmRegistrationSetIsConfirmedPropertyToTrueIfUserGuidExistsAndIsValid()
         {
             var userRegistrationModel = new UserRegistrationModel();
-            userRegistrationModel.Id = Guid.NewGuid();
+
+            userRegistrationModel.Save();
 
             var repository = new UserRepository();
-            repository.CreateByUserRegistration(userRegistrationModel);
-            repository.CommitChanges();
+
 
             var registrationConfirmationModel = new RegistrationConfirmationModel();
             registrationConfirmationModel.Id = userRegistrationModel.Id;
@@ -88,7 +88,7 @@ namespace BusinessTrips.Tests.Controllers
         [TestMethod]
         public void LoginReturnsUnknownUserViewWhenUserIsNotInDatabase()
         {
-            var result = controller.Login(new UserModel(){Id=Guid.NewGuid(),Password = ""}) as ViewResult;
+            var result = controller.Login(new UserModel() { Id = Guid.NewGuid(), Password = "" }) as ViewResult;
 
             Assert.AreEqual("UnknownUser", result.ViewName);
         }
@@ -104,10 +104,9 @@ namespace BusinessTrips.Tests.Controllers
                 Password = "password",
                 ConfirmedPassword = "password"
             };
+            userRegistrationModel.Save();
 
             var repository = new UserRepository();
-            repository.CreateByUserRegistration(userRegistrationModel);
-            repository.CommitChanges();
 
             repository.Confirm(userRegistrationModel.Id);
             repository.CommitChanges();

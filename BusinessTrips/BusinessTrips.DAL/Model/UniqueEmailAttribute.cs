@@ -8,7 +8,7 @@ namespace BusinessTrips.DAL.Model
         public override bool IsValid(object value)
         {
             UserRepository userRepository = new UserRepository();
-            return !userRepository.Exists((string)value);
+            return userRepository.GetByEmail((string)value) == null;
         }
     }
 }

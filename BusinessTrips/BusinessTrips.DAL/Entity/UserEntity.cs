@@ -8,7 +8,7 @@ namespace BusinessTrips.DAL.Entity
         public Guid Id { get; set; }
         public string Name { get; set; }
         public string Email { get; set; }
-        public string Password { get; set; }
+        public string HashedPassword { get; set; }
         public string Salt { get; set; }
         public bool IsConfirmed { get; set; }
 
@@ -20,7 +20,7 @@ namespace BusinessTrips.DAL.Entity
                 Email = Email,
                 IsConfirmed = IsConfirmed,
                 Id = Id,
-                Password = Password,
+                Password = HashedPassword,
             };
         }
     }

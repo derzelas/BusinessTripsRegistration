@@ -40,7 +40,7 @@ namespace BusinessTrips.Tests.Models
             UserEntity userEntity = userRegistrationModel.ToUserEntity();
 
             Assert.AreEqual(userEntity.Name, "nume");
-            Assert.AreEqual(userEntity.Password, "password");
+            Assert.AreEqual(userEntity.HashedPassword, "password");
             Assert.AreEqual(userEntity.Email, "email@email.com");
             Assert.AreEqual(userEntity.IsConfirmed, false);
             Assert.AreEqual(userEntity.Id, Guid.Empty);
