@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Security.Cryptography;
-using System.Text;
-using System.Web;
 using System.Web.Mvc;
-using System.Web.Security;
 using BusinessTrips.DAL.Model;
 using BusinessTrips.Services;
 
@@ -30,12 +26,11 @@ namespace BusinessTrips.Controllers
         {
             if (ModelState.IsValid)
             {
-                userRegistrationModel.Password = PasswordEncryption(userRegistrationModel.Id.ToString(),userRegistrationModel.Password);
                 userRegistrationModel.Save();
 
                 Email email = new Email();
                 email.SendConfirmationEmail(userRegistrationModel.Email, userRegistrationModel.Id);
-                
+
                 return View("RegisterMailSent");
             }
             return View("Register");
@@ -57,7 +52,7 @@ namespace BusinessTrips.Controllers
             {
                 return View("Error");
             }
-            
+
             registrationConfirmationModel.Confirm();
 
             return View("ConfirmRegistration");
@@ -74,8 +69,6 @@ namespace BusinessTrips.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Login(UserModel userModel)
         {
-
-            userModel.Password = PasswordEncryption(userModel.Id.ToString(),userModel.Password);
             if (userModel.Authenthicate())
             {
                 return View("AuthenticatedUser");
@@ -83,20 +76,6 @@ namespace BusinessTrips.Controllers
             return View("UnknownUser");
         }
 
-        public string PasswordEncryption(string salt,string password)
-        {
 
-            var hmacMd5 = new HMACMD5(Encoding.UTF8.GetBytes(salt));
-
-            byte[] hashedPassword = hmacMd5.ComputeHash(Encoding.UTF8.GetBytes(password));
-
-            StringBuilder encryptedPassword = new StringBuilder();
-
-            for (int i = 0; i < hashedPassword.Length; i++)
-            {
-                encryptedPassword.Append(hashedPassword[i].ToString(" x2"));
-            }
-            return encryptedPassword.ToString();
-        }
     }
 }

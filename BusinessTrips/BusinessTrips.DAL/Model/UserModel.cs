@@ -26,6 +26,14 @@ namespace BusinessTrips.DAL.Model
         public bool Authenthicate()
         {
             var repository = new UserRepository();
+            UserEntity userEntity = repository.GetByEmail(Email);
+
+            if (userEntity == null)
+            {
+                return false;
+            }
+
+            Password = PasswordHasher.HashPassword(Password + userEntity.Salt);
             return repository.AreCredentialsValid(Email, Password);
         }
 
@@ -37,7 +45,7 @@ namespace BusinessTrips.DAL.Model
                 Email = Email,
                 IsConfirmed = IsConfirmed,
                 Id = Id,
-                Password = Password
+                HashedPassword = Password
             };
         }
     }

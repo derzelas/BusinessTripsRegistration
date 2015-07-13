@@ -39,9 +39,12 @@ namespace BusinessTrips.DAL.Model
         public void Save()
         {
             Id = Guid.NewGuid();
-            var userRepository = new UserRepository();
+            UserEntity userEntity = ToUserEntity();
+            userEntity.Salt = Guid.NewGuid().ToString();
+            userEntity.HashedPassword = PasswordHasher.HashPassword(userEntity.HashedPassword + userEntity.Salt);
 
-            userRepository.CreateByUserRegistration(this);
+            var userRepository = new UserRepository();
+            userRepository.CreateByUserEntity(userEntity);
             userRepository.CommitChanges();
         }
 
@@ -53,7 +56,7 @@ namespace BusinessTrips.DAL.Model
                 Email = Email,
                 IsConfirmed = false,
                 Id = Id,
-                Password = Password
+                HashedPassword = Password
             };
         }
     }

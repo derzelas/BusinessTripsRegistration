@@ -15,9 +15,9 @@ namespace BusinessTrips.DAL.Repository
             storage = new StorageFactory().Create();
         }
 
-        public void CreateByUserRegistration(UserRegistrationModel userRegistrationModel)
+        public void CreateByUserEntity(UserEntity userEntity)
         {
-            storage.Add(userRegistrationModel.ToUserEntity());
+            storage.Add(userEntity);
         }
 
         public UserModel GetById(Guid id)
@@ -34,7 +34,7 @@ namespace BusinessTrips.DAL.Repository
 
         public bool AreCredentialsValid(string email, string password)
         {
-            return storage.GetSetFor<UserEntity>().Any(m => m.Email == email && m.Password == password && m.IsConfirmed);
+            return storage.GetSetFor<UserEntity>().Any(m => m.Email == email && m.HashedPassword == password && m.IsConfirmed);
         }
 
         public void Confirm(Guid id)
@@ -43,9 +43,9 @@ namespace BusinessTrips.DAL.Repository
             userEntity.IsConfirmed = true;
         }
 
-        public bool Exists(string email)
+        public UserEntity GetByEmail(string email)
         {
-            return storage.GetSetFor<UserEntity>().Any(m => m.Email == email);
+            return storage.GetSetFor<UserEntity>().SingleOrDefault(m => m.Email == email);
         }
 
         public void CommitChanges()
