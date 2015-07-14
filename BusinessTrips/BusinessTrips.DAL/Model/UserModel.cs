@@ -28,25 +28,13 @@ namespace BusinessTrips.DAL.Model
             var repository = new UserRepository();
             UserEntity userEntity = repository.GetByEmail(Email);
 
-            if (userEntity == null)
+            if (userEntity == null || userEntity.IsConfirmed == false)
             {
                 return false;
             }
 
-            Password = PasswordHasher.HashPassword(Password + userEntity.Salt);
-            return repository.AreCredentialsValid(Email, Password);
-        }
-
-        public UserEntity ToEntity()
-        {
-            return new UserEntity()
-            {
-                Name = Name,
-                Email = Email,
-                IsConfirmed = IsConfirmed,
-                Id = Id,
-                HashedPassword = Password,
-            };
+            string hashPassword = PasswordHasher.HashPassword(Password + userEntity.Salt);
+            return hashPassword == userEntity.HashedPassword;
         }
     }
 }

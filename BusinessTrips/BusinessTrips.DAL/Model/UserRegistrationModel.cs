@@ -10,6 +10,8 @@ namespace BusinessTrips.DAL.Model
         private const int MinimumPasswordLength = 6;
         private const int MinimumNameLength = 3;
         private const string PasswordValidationMessage = "Minimum password length is 6";
+        private readonly IRandomStringGenerator randomStringGenerator;
+        private IUserRepository repository;
 
         public Guid Id { get; set; }
 
@@ -36,18 +38,28 @@ namespace BusinessTrips.DAL.Model
         [Display(Name = "Confirm password")]
         public string ConfirmedPassword { get; set; }
 
+        public UserRegistrationModel()
+        {
+            repository = new UserRepository();
+            randomStringGenerator = new RandomStringGenerator();
+        }
+
+        public UserRegistrationModel(IRandomStringGenerator randomStringGenerator, IUserRepository userRepository)
+        {
+            this.repository = userRepository;
+            this.randomStringGenerator = randomStringGenerator;
+        }
+
         public void Save()
         {
             Id = Guid.NewGuid();
 
             UserEntity userEntity = ToUserEntity();
-            userEntity.Roles.Add(new Role(){Id = 1, Name = "Admin"});
-            userEntity.Salt = Guid.NewGuid().ToString();
-            userEntity.HashedPassword = PasswordHasher.HashPassword(userEntity.HashedPassword + userEntity.Salt);
+            userEntity.Salt = randomStringGenerator.GetString();
+            userEntity.HashedPassword = PasswordHasher.HashPassword(Password + userEntity.Salt);
 
-            var userRepository = new UserRepository();
-            userRepository.CreateByUserEntity(userEntity);
-            userRepository.CommitChanges();
+            repository.CreateByUserEntity(userEntity);
+            repository.CommitChanges();
         }
 
         public UserEntity ToUserEntity()
@@ -57,8 +69,7 @@ namespace BusinessTrips.DAL.Model
                 Name = Name,
                 Email = Email,
                 IsConfirmed = false,
-                Id = Id,
-                HashedPassword = Password,
+                Id = Id
             };
         }
     }

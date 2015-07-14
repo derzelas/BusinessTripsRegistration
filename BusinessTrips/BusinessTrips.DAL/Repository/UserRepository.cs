@@ -6,13 +6,18 @@ using BusinessTrips.DAL.Storage;
 
 namespace BusinessTrips.DAL.Repository
 {
-    public class UserRepository
+    public class UserRepository : IUserRepository
     {
         private IStorage storage;
 
         public UserRepository()
         {
             storage = new StorageFactory().Create();
+        }
+
+        public UserRepository(IStorage storage)
+        {
+            this.storage = storage;
         }
 
         public void CreateByUserEntity(UserEntity userEntity)
@@ -32,11 +37,6 @@ namespace BusinessTrips.DAL.Repository
             return userEntity.ToModel();
         }
 
-        public bool AreCredentialsValid(string email, string password)
-        {
-            return storage.GetSetFor<UserEntity>().Any(m => m.Email == email && m.HashedPassword == password && m.IsConfirmed);
-        }
-
         public void Confirm(Guid id)
         {
             var userEntity = storage.GetSetFor<UserEntity>().Single(u => u.Id == id);
@@ -52,5 +52,14 @@ namespace BusinessTrips.DAL.Repository
         {
             storage.Commit();
         }
+    }
+
+    public interface IUserRepository
+    {
+        void CreateByUserEntity(UserEntity userEntity);
+        UserModel GetById(Guid id);
+        void Confirm(Guid id);
+        UserEntity GetByEmail(string email);
+        void CommitChanges();
     }
 }
