@@ -1,27 +1,20 @@
 ﻿using System;
+using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 using BusinessTrips.DAL.Model;
 using BusinessTrips.Services;
 
 namespace BusinessTrips.Controllers
 {
-    [Authorize]
     public class UserOperationsController : Controller
     {
-        [AllowAnonymous]
         public ActionResult Register()
         {
             return View("Register");
         }
 
-        public ActionResult Logout()
-        {
-            //controler creat pentru logoff
-            return View("Logout");
-        }
-
         [HttpPost]
-        [AllowAnonymous]
         public ActionResult Register(UserRegistrationModel userRegistrationModel)
         {
             if (ModelState.IsValid)
@@ -36,7 +29,6 @@ namespace BusinessTrips.Controllers
             return View("Register");
         }
 
-        [AllowAnonymous]
         public ActionResult ConfirmRegistration(string guid)
         {
             var registrationConfirmationModel = new RegistrationConfirmationModel();
@@ -58,24 +50,48 @@ namespace BusinessTrips.Controllers
             return View("ConfirmRegistration");
         }
 
-        [AllowAnonymous]
         public ActionResult Login()
         {
             return View("Login");
         }
 
         [HttpPost]
-        [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public ActionResult Login(UserModel userModel)
         {
             if (userModel.Authenthicate())
             {
+                FormsAuthentication.SetAuthCookie(userModel.Email, false);
+                
                 return View("AuthenticatedUser");
             }
             return View("UnknownUser");
         }
 
+        [Authorize(Roles = "Admin, HR")]
+        public ActionResult Logout()
+        {
+            if (Request.Cookies[".ASPXAUTH"] != null)
+            {
+                HttpCookie myCookie = new HttpCookie(".ASPXAUTH");
+                myCookie.Expires = DateTime.Now.AddDays(-1d);
+                Response.Cookies.Add(myCookie);
+            }
+            
+            FormsAuthentication.SignOut();
+            return View("Logout");
+        }
 
+        [Authorize(Roles = "Admin")]
+        public string Private()
+        {
+            return "Private stuff";
+        }
+
+        [Authorize(Roles = "HR")]
+        public string Hr()
+        {
+            return "Only hr stuff";
+        }
     }
 }

@@ -45,7 +45,7 @@ namespace BusinessTrips.DAL.Model
                 Email = Email,
                 IsConfirmed = IsConfirmed,
                 Id = Id,
-                HashedPassword = Password
+                HashedPassword = Password,
             };
         }
     }

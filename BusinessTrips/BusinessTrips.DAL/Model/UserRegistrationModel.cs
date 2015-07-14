@@ -39,7 +39,9 @@ namespace BusinessTrips.DAL.Model
         public void Save()
         {
             Id = Guid.NewGuid();
+
             UserEntity userEntity = ToUserEntity();
+            userEntity.Roles.Add(new Role(){Id = 1, Name = "Admin"});
             userEntity.Salt = Guid.NewGuid().ToString();
             userEntity.HashedPassword = PasswordHasher.HashPassword(userEntity.HashedPassword + userEntity.Salt);
 
@@ -56,7 +58,7 @@ namespace BusinessTrips.DAL.Model
                 Email = Email,
                 IsConfirmed = false,
                 Id = Id,
-                HashedPassword = Password
+                HashedPassword = Password,
             };
         }
     }
