@@ -52,6 +52,11 @@ namespace BusinessTrips.Controllers
 
         public ActionResult Login()
         {
+            if (HttpContext.User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("RegisterBusinessTrip", "BusinessTrip");
+            }
+
             return View("Login");
         }
 
@@ -62,8 +67,8 @@ namespace BusinessTrips.Controllers
             if (userModel.Authenthicate())
             {
                 FormsAuthentication.SetAuthCookie(userModel.Email, false);
-                
-                return View("AuthenticatedUser");
+
+                return RedirectToAction("RegisterBusinessTrip", "BusinessTrip");
             }
             return View("UnknownUser");
         }
