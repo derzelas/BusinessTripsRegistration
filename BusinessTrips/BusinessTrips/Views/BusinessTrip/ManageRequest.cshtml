@@ -1,0 +1,58 @@
+﻿@{
+    ViewBag.Title = "Manage Request";
+}
+
+@model BusinessTrips.DAL.Model.BusinessTripModel
+
+<h2>Manage Request</h2>
+
+@using (Html.BeginForm("ManageRequest", "BusinessTrip", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    <h4> Request placed by: </h4>
+    <pre>
+    @Html.LabelFor(m => m.User.Name) @Html.DisplayFor(m => m.User.Name)
+
+    @Html.LabelFor(m => m.User.Email) @Html.DisplayFor(m => m.User.Email)
+    </pre>
+    
+    <h4>Request details: </h4>
+    <pre>
+    @Html.LabelFor(m => m.Department) @Html.DisplayFor(m => m.Department)
+
+    @Html.LabelFor(m => m.PmName) @Html.DisplayFor(m => m.PmName)
+
+    @Html.LabelFor(m => m.ProjectName) @Html.DisplayFor(m => m.ProjectName)
+
+    @Html.LabelFor(m => m.ProjectNumber) @Html.DisplayFor(m => m.ProjectNumber)
+ 
+    @Html.LabelFor(m => m.TaskName) @Html.DisplayFor(m => m.TaskName)
+
+    @Html.LabelFor(m => m.TaskNumber) @Html.DisplayFor(m => m.TaskNumber)
+
+    @Html.LabelFor(m => m.LeavingFrom) @Html.DisplayFor(m => m.LeavingFrom)
+
+    @Html.LabelFor(m => m.StartingDate) @Html.DisplayFor(m => m.StartingDate)
+
+    @Html.LabelFor(m => m.EndingDate) @Html.DisplayFor(m => m.EndingDate)
+
+    @Html.LabelFor(m => m.ClientName) @Html.DisplayFor(m => m.ClientName)
+
+    @Html.LabelFor(m => m.ClientLocation) @Html.DisplayFor(m => m.ClientLocation)
+
+    @Html.LabelFor(m => m.MeansOfTransportation) @Html.DisplayFor(m => m.MeansOfTransportation)
+
+    @Html.LabelFor(m => m.WithPersonalCar) @Html.DisplayFor(m => m.WithPersonalCar)
+
+    @Html.LabelFor(m => m.Accomodation) @Html.DisplayFor(m => m.Accomodation)
+
+    @Html.LabelFor(m => m.PhoneIsNeeded) @Html.DisplayFor(m => m.PhoneIsNeeded)
+
+    @Html.LabelFor(m => m.BankCardIsNeeded) @Html.DisplayFor(m => m.BankCardIsNeeded)
+    
+    @Html.LabelFor(m => m.OtherInfo) @Html.DisplayFor(m => m.OtherInfo)
+    </pre>
+
+    <h4>Manage request: </h4>
+    @*@Html.ActionLink("Accept Request", "AcceptRequest", new{})*@
+    
+}

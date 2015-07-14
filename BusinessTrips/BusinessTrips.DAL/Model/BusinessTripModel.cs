@@ -79,8 +79,9 @@ namespace BusinessTrips.DAL.Model
         public void Save()
         {
             Id = Guid.NewGuid();
-            var businessTripRepository = new BusinessTripsRepository();
+            Status = "Pending";
 
+            var businessTripRepository = new BusinessTripsRepository();
             businessTripRepository.Add(this);
             businessTripRepository.CommitChanges();
         }
