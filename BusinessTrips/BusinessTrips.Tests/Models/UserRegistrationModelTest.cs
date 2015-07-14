@@ -2,8 +2,10 @@
 using System.Data.Entity;
 using BusinessTrips.DAL.Entity;
 using BusinessTrips.DAL.Model;
+using BusinessTrips.DAL.Repository;
 using BusinessTrips.DAL.Storage;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 
 namespace BusinessTrips.Tests.Models
 {
@@ -40,10 +42,27 @@ namespace BusinessTrips.Tests.Models
             UserEntity userEntity = userRegistrationModel.ToUserEntity();
 
             Assert.AreEqual(userEntity.Name, "nume");
-            Assert.AreEqual(userEntity.HashedPassword, "password");
             Assert.AreEqual(userEntity.Email, "email@email.com");
             Assert.AreEqual(userEntity.IsConfirmed, false);
             Assert.AreEqual(userEntity.Id, Guid.Empty);
+        }
+
+        [TestMethod]
+        public void Save_AdsSaltToPasswordAndCreatesHash_BeforeSendingTheUserToTheRepository()
+        {
+            var repositoryMock = new Mock<IUserRepository>();
+            var randomStringGeneratorMock = new Mock<IRandomStringGenerator>();
+            UserRegistrationModel model = new UserRegistrationModel(randomStringGeneratorMock.Object, repositoryMock.Object)
+            {
+                Password = "abc"
+            };
+            string salt = "123";
+            randomStringGeneratorMock.Setup(m => m.GetString()).Returns(salt);
+            string expected = PasswordHasher.HashPassword("abc123");
+
+            model.Save();
+
+            repositoryMock.Verify(m=>m.CreateByUserEntity(It.Is<UserEntity>(u=>u.HashedPassword == expected)));
         }
     }
 }
