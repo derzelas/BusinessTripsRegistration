@@ -73,7 +73,7 @@ namespace BusinessTrips.Controllers
             return View("UnknownUser");
         }
 
-        [Authorize(Roles = "Admin,HR,Regular")]
+        [Authorize(Roles = "HR,Regular")]
         public ActionResult Logout()
         {
             if (Request.Cookies[".ASPXAUTH"] != null)

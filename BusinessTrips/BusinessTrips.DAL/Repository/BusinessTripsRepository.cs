@@ -32,9 +32,10 @@ namespace BusinessTrips.DAL.Repository
 
             List<BusinessTripModel> list = new List<BusinessTripModel>();
             foreach (var entity in result)
-        {
+            {
                 list.Add(entity.ToModel());
             }
+
             return list;
         }
 
