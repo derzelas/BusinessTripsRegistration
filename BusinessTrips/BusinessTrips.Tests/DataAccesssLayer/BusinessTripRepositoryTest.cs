@@ -58,7 +58,7 @@ namespace BusinessTrips.Tests.DataAccesssLayer
                     Id = Guid.NewGuid(),
                     EndingDate = DateTime.Now,
                     StartingDate = DateTime.Now,
-                    UserId = userModel
+                    UserId = userModel.Id
                 };
                 repository.Add(businessTripModel);
             }
@@ -69,7 +69,7 @@ namespace BusinessTrips.Tests.DataAccesssLayer
 
             foreach (var tripModel in actual)
             {
-                Assert.AreEqual(userModel.Id, tripModel.UserId.Id);
+                Assert.AreEqual(userModel.Id, tripModel.UserId);
             }
         }
     }

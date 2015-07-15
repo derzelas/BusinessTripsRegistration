@@ -103,7 +103,7 @@ namespace BusinessTrips.DAL.Model
             return new BusinessTripEntity()
             {
                 Id = Id,
-                User = UserId,
+                UserId = UserId,
                 PmName = PmName,
                 ProjectNumber = ProjectNumber,
                 ProjectName = ProjectName,
