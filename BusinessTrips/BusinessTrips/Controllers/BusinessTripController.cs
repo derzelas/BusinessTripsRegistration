@@ -10,7 +10,7 @@ namespace BusinessTrips.Controllers
     {
         public ActionResult RegisterBusinessTrip()
         {
-            return View();
+            return View("RegisterBusinessTrip");
         }
 
         [HttpPost]
@@ -25,7 +25,7 @@ namespace BusinessTrips.Controllers
 
                 return View("MyBusinessTrips");
             }
-            return View();
+            return View("RegisterBusinessTrip");
         }
         
         public ActionResult ManageRequest(string guid)

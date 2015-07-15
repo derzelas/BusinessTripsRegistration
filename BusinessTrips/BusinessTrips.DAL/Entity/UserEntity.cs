@@ -8,7 +8,7 @@ namespace BusinessTrips.DAL.Entity
     {
         public UserEntity()
         {
-            Roles = new HashSet<Role>();
+            Roles = new HashSet<RoleEntity>();
         }
 
         public Guid Id { get; set; }
@@ -17,7 +17,7 @@ namespace BusinessTrips.DAL.Entity
         public string HashedPassword { get; set; }
         public string Salt { get; set; }
         public bool IsConfirmed { get; set; }
-        public virtual ICollection<Role> Roles {get; set; }
+        public virtual ICollection<RoleEntity> Roles {get; set; }
 
         public UserModel ToModel()
         {
