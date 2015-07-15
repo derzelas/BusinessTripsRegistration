@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
-using BusinessTrips.DAL.Entity;
 using BusinessTrips.DAL.Model;
 using BusinessTrips.DAL.Repository;
 using BusinessTrips.Services;
@@ -22,6 +20,13 @@ namespace BusinessTrips.Controllers
         {
             if (ModelState.IsValid)
             {
+                var cookieValue = Request.Cookies["Cookie"].Value;
+                string email = FormsAuthentication.Decrypt(cookieValue).Name;
+
+                var repository = new UserRepository();
+                var entity = repository.GetByEmail(email);
+                businessTripModel.UserId = entity.Id;
+                
                 businessTripModel.Save();
 
                 Email userEmail = new Email();

@@ -77,9 +77,9 @@ namespace BusinessTrips.Controllers
         [Authorize(Roles = "HR,Regular")]
         public ActionResult Logout()
         {
-            if (Request.Cookies[".ASPXAUTH"] != null)
+            if (Request.Cookies["Cookie"] != null)
             {
-                HttpCookie myCookie = new HttpCookie(".ASPXAUTH");
+                HttpCookie myCookie = new HttpCookie("Cookie");
                 myCookie.Expires = DateTime.Now.AddDays(-1d);
                 Response.Cookies.Add(myCookie);
 
