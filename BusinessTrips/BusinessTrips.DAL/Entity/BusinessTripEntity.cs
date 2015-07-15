@@ -6,7 +6,7 @@ namespace BusinessTrips.DAL.Entity
     public class BusinessTripEntity
     {
         public Guid Id { get; set; }
-        public UserModel User { get; set; }
+        public Guid UserId { get; set; }
 
         public string PmName { get; set; }
         public string ProjectNumber { get; set; }
@@ -38,7 +38,7 @@ namespace BusinessTrips.DAL.Entity
             return new BusinessTripModel
             {
                 Id = Id,
-                User = User,
+                UserId = UserId,
                 PmName = PmName,
                 ProjectNumber = ProjectNumber,
                 ProjectName = ProjectName,

@@ -28,13 +28,14 @@ namespace BusinessTrips.DAL.Repository
 
         public IEnumerable<BusinessTripModel> GetByUser(Guid id)
         {
-            var result = storage.GetSetFor<BusinessTripEntity>().Where(m => m.User.Id == id);
+            var result = storage.GetSetFor<BusinessTripEntity>().Where(m => m.UserId == id);
 
             List<BusinessTripModel> list = new List<BusinessTripModel>();
             foreach (var entity in result)
-            {
+        {
                 list.Add(entity.ToModel());
             }
+
             return list;
         }
 

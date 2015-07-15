@@ -86,11 +86,13 @@
     <Compile Include="Entity\Role.cs" />
     <Compile Include="Model\BusinessTripCollectionModel.cs" />
     <Compile Include="Model\BusinessTripFilter.cs" />
+    <Compile Include="Entity\RoleEntity.cs" />
     <Compile Include="Model\BusinessTripModel.cs" />
     <Compile Include="Model\DateRangeAttribute.cs" />
     <Compile Include="Model\RandomStringGenerator.cs" />
     <Compile Include="Repository\BusinessTripsRepository.cs" />
     <Compile Include="Model\PasswordHasher.cs" />
+    <Compile Include="Repository\RoleRepository.cs" />
     <Compile Include="Repository\StorageFactory.cs" />
     <Compile Include="Storage\EFStorageDBInitializer.cs" />
     <Compile Include="Storage\EFStorage.cs" />
