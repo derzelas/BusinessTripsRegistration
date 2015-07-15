@@ -1,11 +1,15 @@
 ﻿using System;
+using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
+using BusinessTrips.DAL.Entity;
 using BusinessTrips.DAL.Model;
 using BusinessTrips.DAL.Repository;
 using BusinessTrips.Services;
 
 namespace BusinessTrips.Controllers
 {
+    [Authorize(Roles = "Regular,HR")]
     public class BusinessTripController : Controller
     {
         public ActionResult RegisterBusinessTrip()
@@ -20,8 +24,8 @@ namespace BusinessTrips.Controllers
             {
                 businessTripModel.Save();
 
-                Email email = new Email();
-                email.SendEmailToBusinessTripOperator(businessTripModel.Id);
+                Email userEmail = new Email();
+                userEmail.SendEmailToBusinessTripOperator(businessTripModel.Id);
 
                 return View("MyBusinessTrips");
             }

@@ -50,6 +50,7 @@ namespace BusinessTrips.Controllers
             return View("ConfirmRegistration");
         }
 
+        // Should I test it ?
         public ActionResult Login()
         {
             if (HttpContext.User.Identity.IsAuthenticated)
@@ -67,12 +68,12 @@ namespace BusinessTrips.Controllers
             if (userModel.Authenthicate())
             {
                 FormsAuthentication.SetAuthCookie(userModel.Email, false);
-                // var email = FormsAuthentication.Decrypt(Request.Cookies[".ASPXAUTH"].Value);
                 return RedirectToAction("RegisterBusinessTrip", "BusinessTrip");
             }
             return View("UnknownUser");
         }
 
+        // Should I test it ?
         [Authorize(Roles = "HR,Regular")]
         public ActionResult Logout()
         {
@@ -81,22 +82,11 @@ namespace BusinessTrips.Controllers
                 HttpCookie myCookie = new HttpCookie(".ASPXAUTH");
                 myCookie.Expires = DateTime.Now.AddDays(-1d);
                 Response.Cookies.Add(myCookie);
+
+                FormsAuthentication.SignOut();
             }
             
-            FormsAuthentication.SignOut();
             return RedirectToAction("Login");
-        }
-
-        [Authorize(Roles = "Admin")]
-        public string Private()
-        {
-            return "Private stuff";
-        }
-
-        [Authorize(Roles = "HR")]
-        public string Hr()
-        {
-            return "Only hr stuff";
         }
     }
 }
