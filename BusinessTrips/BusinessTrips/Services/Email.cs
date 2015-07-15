@@ -1,4 +1,5 @@
 ﻿using System;
+using System.EnterpriseServices;
 using System.Net;
 using System.Net.Mail;
 
@@ -7,7 +8,7 @@ namespace BusinessTrips.Services
     public class Email
     {
         private SmtpClient client;
-        public const string SenderAddress = "iQuestBusinessTrips@gmail.com";        
+        public const string SenderAddress = "iQuestBusinessTrips@gmail.com";
 
         public Email()
         {
@@ -43,6 +44,31 @@ namespace BusinessTrips.Services
                 id);
 
             return welcomeMessage + link;
+        }
+
+        public void SendEmailToBusinessTripOperator(Guid id)
+        {
+            var mailMessage = new MailMessage
+            {
+                From = new MailAddress(SenderAddress),
+                Subject = "New request pending",
+                Body = GenerateBusinessTripRegistrationMessage(id),
+                To = { SenderAddress }
+            };
+
+            client.Send(mailMessage);
+        }
+
+        private string GenerateBusinessTripRegistrationMessage(Guid id)
+        {
+            var message = "A new business trip has been registered, to accept/reject the request click here: ";
+
+            string link = String.Format("http://{0}:{1}/BusinessTrip/ManageRequest/?guid={2}",
+                System.Web.HttpContext.Current.Request.Url.Host,
+                System.Web.HttpContext.Current.Request.Url.Port,
+                id);
+
+            return message + link;
         }
     }
 }

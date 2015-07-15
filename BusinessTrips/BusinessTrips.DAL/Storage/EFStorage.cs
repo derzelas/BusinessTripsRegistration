@@ -8,6 +8,7 @@ namespace BusinessTrips.DAL.Storage
     {
         public DbSet<UserEntity> Users { get; set; }
         public DbSet<BusinessTripEntity> BusinessTrips { get; set; }
+        public DbSet<Role> Roles { get; set; } 
 
         public EfStorage()
             : base("BusinessTrips")

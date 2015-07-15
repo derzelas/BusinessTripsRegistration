@@ -83,9 +83,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entity\BusinessTripEntity.cs" />
+    <Compile Include="Entity\Role.cs" />
     <Compile Include="Model\BusinessTripCollection.cs" />
     <Compile Include="Model\BusinessTripModel.cs" />
     <Compile Include="Model\DateRangeAttribute.cs" />
+    <Compile Include="Model\RandomStringGenerator.cs" />
     <Compile Include="Repository\BusinessTripsRepository.cs" />
     <Compile Include="Model\PasswordHasher.cs" />
     <Compile Include="Repository\StorageFactory.cs" />

@@ -14,7 +14,7 @@ namespace BusinessTrips.Tests.DataAccesssLayer
 
         private UserRepository repository;
         private UserModel userModel;
-        private UserEntity userRegistrationModel;
+        private UserEntity userEntity;
         private EfStorage efStorage;
 
         [TestInitialize]
@@ -26,7 +26,7 @@ namespace BusinessTrips.Tests.DataAccesssLayer
             repository = new UserRepository();
             userModel = new UserModel();
 
-            userRegistrationModel = new UserEntity()
+            userEntity = new UserEntity()
             {
                 Id = Guid.NewGuid(),
                 Name = "Foo",
@@ -36,68 +36,32 @@ namespace BusinessTrips.Tests.DataAccesssLayer
         }
 
         [TestMethod]
-        public void CreatedUserEntitySameAsUserRegistrationModel()
-        {
-            repository.CreateByUserEntity(userRegistrationModel);
-            repository.CommitChanges();
-
-            var retrievedModel = repository.GetById(userRegistrationModel.Id);
-
-            Assert.AreEqual(retrievedModel.Name, userRegistrationModel.Name);
-            Assert.AreEqual(retrievedModel.Email, userRegistrationModel.Email);
-            Assert.AreEqual(retrievedModel.Password, userRegistrationModel.HashedPassword);
-            Assert.IsNotNull(retrievedModel.Id);
-            Assert.AreEqual(retrievedModel.IsConfirmed, false);
-        }
-
-        [TestMethod]
         public void GetByIdFindsCreatedUser()
         {
-            repository.CreateByUserEntity(userRegistrationModel);
+            repository.CreateByUserEntity(userEntity);
             repository.CommitChanges();
 
-            UserModel retrievedUser = repository.GetById(userRegistrationModel.Id);
+            UserModel retrievedUser = repository.GetById(userEntity.Id);
 
-            Assert.AreEqual(userRegistrationModel.Id, retrievedUser.Id);
-            Assert.AreEqual(userRegistrationModel.Name, retrievedUser.Name);
-            Assert.AreEqual(userRegistrationModel.Email, retrievedUser.Email);
-            Assert.AreEqual(userRegistrationModel.HashedPassword, retrievedUser.Password);
+            Assert.AreEqual(userEntity.Id, retrievedUser.Id);
+            Assert.AreEqual(userEntity.Name, retrievedUser.Name);
+            Assert.AreEqual(userEntity.Email, retrievedUser.Email);
+            Assert.AreEqual(userEntity.HashedPassword, retrievedUser.Password);
             Assert.AreEqual(retrievedUser.IsConfirmed, false);
-        }
-
-        [TestMethod]
-        public void ValidationPassesWhenCredentialsAreValid()
-        {
-            repository.CreateByUserEntity(userRegistrationModel);
-            repository.CommitChanges();
-            repository.Confirm(userRegistrationModel.Id);
-            repository.CommitChanges();
-
-            bool actual = repository.AreCredentialsValid(userRegistrationModel.Email, userRegistrationModel.HashedPassword);
-            Assert.AreEqual(actual, true);
-        }
-
-        [TestMethod]
-        public void ValidationFailsWhenCredentialisAreInvalid()
-        {
-            userModel.Email = "notexist@work.com";
-            userModel.Password = "nopassword";
-
-            Assert.AreEqual(repository.AreCredentialsValid(userModel.Email, userModel.Password), false);
         }
 
         [TestMethod]
         public void ConfirmSetIsConfirmedPropertyToTrue()
         {
-            userModel.Id = userRegistrationModel.Id;
+            userModel.Id = userEntity.Id;
 
-            repository.CreateByUserEntity(userRegistrationModel);
+            repository.CreateByUserEntity(userEntity);
             repository.CommitChanges();
 
             repository.Confirm(userModel.Id);
             repository.CommitChanges();
 
-            UserModel retrievedModel = repository.GetById(userRegistrationModel.Id);
+            UserModel retrievedModel = repository.GetById(userEntity.Id);
 
             Assert.AreEqual(retrievedModel.IsConfirmed, true);
         }
@@ -105,10 +69,10 @@ namespace BusinessTrips.Tests.DataAccesssLayer
         [TestMethod]
         public void GetByEmailIsNotNullWhenEmailExists()
         {
-            repository.CreateByUserEntity(userRegistrationModel);
+            repository.CreateByUserEntity(userEntity);
             repository.CommitChanges();
 
-            Assert.IsNotNull(repository.GetByEmail(userRegistrationModel.Email));
+            Assert.IsNotNull(repository.GetByEmail(userEntity.Email));
         }
 
         [TestMethod]
