@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Web.Mvc;
 using BusinessTrips.DAL.Model;
+using BusinessTrips.Models;
 using BusinessTrips.Services;
 
 namespace BusinessTrips.Controllers
@@ -8,9 +9,11 @@ namespace BusinessTrips.Controllers
     [Authorize]
     public class UserOperationsController : Controller
     {
+        
         [AllowAnonymous]
         public ActionResult Register()
         {
+            
             return View("Register");
         }
 
@@ -19,6 +22,7 @@ namespace BusinessTrips.Controllers
             //controler creat pentru logoff
             return View("Logout");
         }
+       
 
         [HttpPost]
         [AllowAnonymous]

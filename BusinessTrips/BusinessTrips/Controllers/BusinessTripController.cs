@@ -25,5 +25,7 @@ namespace BusinessTrips.Controllers
 
             return View("RegisterBusinessTrip");
         }
+
+       
     }
 }
