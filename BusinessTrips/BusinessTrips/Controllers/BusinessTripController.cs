@@ -8,8 +8,6 @@ namespace BusinessTrips.Controllers
 {
     public class BusinessTripController : Controller
     {
-        //
-        // GET: /BusinessTrip/
         public ActionResult RegisterBusinessTrip()
         {
             return View();
@@ -46,8 +44,8 @@ namespace BusinessTrips.Controllers
                 return View("RequestNotFound");
             }
 
-            BusinessTripsRepository tripsRepository = new BusinessTripsRepository();
-            BusinessTripModel retreivedModel = tripsRepository.GetById(businessTripModel.Id);
+            var tripsRepository = new BusinessTripsRepository();
+            var retreivedModel = tripsRepository.GetById(businessTripModel.Id);
 
             if (retreivedModel != null && retreivedModel.Status == "Pending")
             {

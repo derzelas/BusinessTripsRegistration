@@ -10,6 +10,7 @@ namespace BusinessTrips.DAL.Model
         private const int MinimumPasswordLength = 6;
         private const int MinimumNameLength = 3;
         private const string PasswordValidationMessage = "Minimum password length is 6";
+        private readonly Role regularRole;
         private readonly IRandomStringGenerator randomStringGenerator;
         private IUserRepository repository;
 
@@ -42,11 +43,16 @@ namespace BusinessTrips.DAL.Model
         {
             repository = new UserRepository();
             randomStringGenerator = new RandomStringGenerator();
+            regularRole = new Role()
+            {
+                Id = 1,
+                Name = "Regular"
+            };
         }
 
         public UserRegistrationModel(IRandomStringGenerator randomStringGenerator, IUserRepository userRepository)
         {
-            this.repository = userRepository;
+            repository = userRepository;
             this.randomStringGenerator = randomStringGenerator;
         }
 
@@ -55,7 +61,7 @@ namespace BusinessTrips.DAL.Model
             Id = Guid.NewGuid();
             
             UserEntity userEntity = ToUserEntity();
-            userEntity.Roles.Add(new Role(){Id = 1, Name = "Admin"});
+            userEntity.Roles.Add(regularRole);
             userEntity.Salt = randomStringGenerator.GetString();
             userEntity.HashedPassword = PasswordHasher.HashPassword(Password + userEntity.Salt);
 
