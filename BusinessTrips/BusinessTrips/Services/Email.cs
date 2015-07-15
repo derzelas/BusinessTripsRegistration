@@ -1,7 +1,7 @@
 ﻿using System;
-using System.EnterpriseServices;
 using System.Net;
 using System.Net.Mail;
+using System.Web;
 
 namespace BusinessTrips.Services
 {
@@ -39,8 +39,8 @@ namespace BusinessTrips.Services
             var welcomeMessage = "Welcome to Business trips. Here is your confirmation link: ";
 
             string link = String.Format("http://{0}:{1}/UserOperations/ConfirmRegistration/?guid={2}",
-                System.Web.HttpContext.Current.Request.Url.Host,
-                System.Web.HttpContext.Current.Request.Url.Port,
+                HttpContext.Current.Request.Url.Host,
+                HttpContext.Current.Request.Url.Port,
                 id);
 
             return welcomeMessage + link;
@@ -64,8 +64,8 @@ namespace BusinessTrips.Services
             var message = "A new business trip has been registered, to accept/reject the request click here: ";
 
             string link = String.Format("http://{0}:{1}/BusinessTrip/ManageRequest/?guid={2}",
-                System.Web.HttpContext.Current.Request.Url.Host,
-                System.Web.HttpContext.Current.Request.Url.Port,
+                HttpContext.Current.Request.Url.Host,
+                HttpContext.Current.Request.Url.Port,
                 id);
 
             return message + link;

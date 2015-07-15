@@ -67,13 +67,13 @@ namespace BusinessTrips.Controllers
             if (userModel.Authenthicate())
             {
                 FormsAuthentication.SetAuthCookie(userModel.Email, false);
-
+                var userName = FormsAuthentication.Decrypt(Request.Cookies[".ASPXAUTH"].Value);
                 return RedirectToAction("RegisterBusinessTrip", "BusinessTrip");
             }
             return View("UnknownUser");
         }
 
-        [Authorize(Roles = "Admin, HR")]
+        [Authorize(Roles = "Admin,HR,Regular")]
         public ActionResult Logout()
         {
             if (Request.Cookies[".ASPXAUTH"] != null)
@@ -84,7 +84,7 @@ namespace BusinessTrips.Controllers
             }
             
             FormsAuthentication.SignOut();
-            return View("Logout");
+            return RedirectToAction("Login");
         }
 
         [Authorize(Roles = "Admin")]
