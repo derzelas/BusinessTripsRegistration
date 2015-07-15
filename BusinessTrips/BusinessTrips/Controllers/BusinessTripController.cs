@@ -47,7 +47,7 @@ namespace BusinessTrips.Controllers
             var tripsRepository = new BusinessTripsRepository();
             var retreivedModel = tripsRepository.GetById(businessTripModel.Id);
 
-            if (retreivedModel != null && retreivedModel.Status == "Pending")
+            if (retreivedModel != null /*&& retreivedModel.Status == "Pending"*/) 
             {
                 return View(retreivedModel);
             }
@@ -55,6 +55,21 @@ namespace BusinessTrips.Controllers
             return View("RequestNotFound");
         }
 
-       
+        public ActionResult ChangeRequestStatus(Guid id, string status)
+        {
+            var businessTripModel = new BusinessTripModel {Id = id};
+
+            businessTripModel.ChangeStatus(status);
+
+            return View("ViewBusinessTrips"); // <-- show all business trips
+        }
+        
+        public ActionResult RequestDetails(Guid id)
+        {
+            var tripsRepository = new BusinessTripsRepository();
+            var retreivedModel = tripsRepository.GetById(id);
+
+            return View(retreivedModel);
+        }
     }
 }

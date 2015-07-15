@@ -56,10 +56,10 @@ namespace BusinessTrips.DAL.Model
         [Display(Name = "Client location:")]
         public string ClientLocation { get; set; }
 
-        [Display(Name = "With personal car")]
+        [Display(Name = "With personal car:")]
         public bool WithPersonalCar { get; set; }
 
-        [Display(Name = "Means of transportation")]
+        [Display(Name = "Means of transportation:")]
         public string MeansOfTransportation { get; set; }
 
         [Display(Name = "Accomodation:")]
@@ -74,6 +74,7 @@ namespace BusinessTrips.DAL.Model
         [Display(Name = "Anything else you consider important:")]
         public string OtherInfo { get; set; }
 
+        [Display(Name = "Status:")]
         public string Status { get; set; }
 
         public void Save()
@@ -85,7 +86,18 @@ namespace BusinessTrips.DAL.Model
             businessTripRepository.Add(this);
             businessTripRepository.CommitChanges();
         }
+        
+        public void ChangeStatus(string status)
+        {
+            BusinessTripsRepository businessTripsRepository = new BusinessTripsRepository();
+            BusinessTripModel businessTripModel = businessTripsRepository.GetById(Id);
 
+            if (businessTripModel != null && businessTripModel.Status == "Pending")
+            {
+                businessTripsRepository.UpdateStatus(businessTripModel.Id, status);
+                businessTripsRepository.CommitChanges();
+            }
+        }
         public BusinessTripEntity ToEntity()
         {
             return new BusinessTripEntity()
