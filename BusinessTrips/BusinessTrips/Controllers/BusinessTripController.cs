@@ -27,7 +27,7 @@ namespace BusinessTrips.Controllers
             }
             return View();
         }
-        
+
         public ActionResult ManageRequest(string guid)
         {
             var businessTripModel = new BusinessTripModel();
@@ -55,6 +55,17 @@ namespace BusinessTrips.Controllers
             return View("RequestNotFound");
         }
 
-       
+        public ActionResult SearchBusinessTrips()
+        {
+            return View("OthersBusinessTrips", new BusinessTripCollectionModel());
+        }
+
+        [HttpPost]
+        public ActionResult SearchBusinessTrips(BusinessTripCollectionModel businessTripCollectionModel)
+        {
+            businessTripCollectionModel.LoadOtherBusinessTrips();
+
+            return View("OthersBusinessTrips", businessTripCollectionModel);
+        }
     }
 }
