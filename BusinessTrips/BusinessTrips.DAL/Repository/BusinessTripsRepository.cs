@@ -76,6 +76,12 @@ namespace BusinessTrips.DAL.Repository
             return queryable.ToList().Select(b => b.ToModel());
         }
 
+        public void UpdateStatus(Guid id, string status)
+        {
+            var businessTripEntity = storage.GetSetFor<BusinessTripEntity>().Single(u => u.Id == id);
+            businessTripEntity.Status = status;
+        }
+
         public void CommitChanges()
         {
             storage.Commit();

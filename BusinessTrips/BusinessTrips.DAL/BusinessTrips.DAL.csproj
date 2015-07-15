@@ -83,7 +83,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entity\BusinessTripEntity.cs" />
-    <Compile Include="Entity\Role.cs" />
     <Compile Include="Model\BusinessTripCollectionModel.cs" />
     <Compile Include="Model\BusinessTripFilter.cs" />
     <Compile Include="Entity\RoleEntity.cs" />
