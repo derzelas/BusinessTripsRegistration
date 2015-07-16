@@ -57,7 +57,7 @@ namespace BusinessTrips.Controllers
             var entity = GetUserEntityByEmail(GetUserEmailFromCookie());
 
             var businessTripCollectionModel = new BusinessTripCollectionModel();
-            businessTripCollectionModel.LoadBusinessTripsForUser(entity.Id);
+            businessTripCollectionModel.LoadBusinessTripForUser(entity.Id);
 
             return View("MyBusinessTrips", businessTripCollectionModel);
         }
