@@ -37,7 +37,7 @@ namespace BusinessTrips.DAL.Repository
             return storage.GetSetFor<BusinessTripEntity>().Where(e => e.User.Id == id).ToList().Select(e => e.ToModel());
         }
 
-        public IEnumerable<BusinessTripModel> GetOtherBusinessTrips(BusinessTripFilter filter)
+        public IEnumerable<SearchBusinessTripModel> GetOtherBusinessTrips(BusinessTripFilter filter)
         {
             var queryable = storage.GetSetFor<BusinessTripEntity>();
 
@@ -76,7 +76,7 @@ namespace BusinessTrips.DAL.Repository
                 queryable = queryable.Where(m => m.EndingDate == filter.EndingDate);
             }
 
-            return queryable.ToList().Select(b => b.ToModel());
+            return queryable.ToList().Select(e => e.ToSearchBusinessTripViewModel());
         }
 
         public void UpdateStatus(Guid id, string status)

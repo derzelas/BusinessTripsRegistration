@@ -26,7 +26,7 @@ namespace BusinessTrips.Controllers
                 var userEntity = GetUserEntityByEmail(GetUserEmailFromCookie());
 
                 businessTripModel.User = userEntity;
-
+                
                 businessTripModel.Save();
 
                 Email userEmail = new Email();
@@ -36,7 +36,7 @@ namespace BusinessTrips.Controllers
             }
             return View("RegisterBusinessTrip");
         }
-
+        
         private UserEntity GetUserEntityByEmail(string email)
         {
             var repository = new UserRepository();
@@ -57,7 +57,7 @@ namespace BusinessTrips.Controllers
             var entity = GetUserEntityByEmail(GetUserEmailFromCookie());
 
             var businessTripCollectionModel = new BusinessTripCollectionModel();
-            businessTripCollectionModel.LoadBusinessTripsForUser(entity.Id);
+            businessTripCollectionModel.LoadBusinessTripForUser(entity.Id);
 
             return View("MyBusinessTrips", businessTripCollectionModel);
         }
@@ -85,15 +85,16 @@ namespace BusinessTrips.Controllers
 
         public ActionResult SearchBusinessTrips()
         {
-            return View("OthersBusinessTrips", new BusinessTripCollectionModel());
+            return View("OthersBusinessTrips", new OtherBusinessTripsCollectionViewModel());
         }
 
         [HttpPost]
-        public ActionResult SearchBusinessTrips(BusinessTripCollectionModel businessTripCollectionModel)
+        public ActionResult SearchBusinessTrips(OtherBusinessTripsCollectionViewModel businessTripsCollectionViewModel)
         {
-            businessTripCollectionModel.LoadOtherBusinessTrips();
 
-            return View("OthersBusinessTrips", businessTripCollectionModel);
+            businessTripsCollectionViewModel.SearchBusinessTripModels = new BusinessTripCollectionModel().LoadOtherBusinessTrips(businessTripsCollectionViewModel.BusinessTripFilter);
+
+            return View("OthersBusinessTrips", businessTripsCollectionViewModel);
         }
     }
 }

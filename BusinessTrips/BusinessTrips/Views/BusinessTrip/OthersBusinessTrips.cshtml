@@ -1,4 +1,4 @@
-﻿@model BusinessTrips.DAL.Model.BusinessTripCollectionModel
+﻿@model BusinessTrips.DAL.Model.OtherBusinessTripsCollectionViewModel
 @{
     ViewBag.Title = "OthersBusinessTrips";
 }
@@ -19,58 +19,58 @@
     <table>
         <tr>
             <td>
-                @Html.LabelFor(m => m.Filter.EmployeeName)
+                @Html.LabelFor(m => m.BusinessTripFilter.EmployeeName)
             </td>
             <td>
-                @Html.TextBoxFor(m => m.Filter.EmployeeName)
-            </td>
-        <tr>
-        <tr>
-            <td>
-                @Html.LabelFor(m => m.Filter.ClientName)
-            </td>
-            <td>
-                @Html.TextBoxFor(m => m.Filter.ClientName)
+                @Html.TextBoxFor(m => m.BusinessTripFilter.EmployeeName)
             </td>
         <tr>
         <tr>
             <td>
-                @Html.LabelFor(m => m.Filter.Accommodation)
+                @Html.LabelFor(m => m.BusinessTripFilter.ClientName)
             </td>
             <td>
-                @Html.TextBoxFor(m => m.Filter.Accommodation)
-            </td>
-        <tr>
-        <tr>
-            <td>
-                @Html.LabelFor(m => m.Filter.StartingDate)
-            </td>
-            <td>
-                @Html.EditorFor(m => m.Filter.StartingDate, new { @class = "form-control" })
+                @Html.TextBoxFor(m => m.BusinessTripFilter.ClientName)
             </td>
         <tr>
         <tr>
             <td>
-                @Html.LabelFor(m => m.Filter.EndingDate)
+                @Html.LabelFor(m => m.BusinessTripFilter.Accommodation)
             </td>
             <td>
-                @Html.EditorFor(m => m.Filter.EndingDate, new { @class = "form-control" })
-            </td>
-        <tr>
-        <tr>
-            <td>
-                @Html.LabelFor(m => m.Filter.Location)
-            </td>
-            <td>
-                @Html.TextBoxFor(m => m.Filter.Location)
+                @Html.TextBoxFor(m => m.BusinessTripFilter.Accommodation)
             </td>
         <tr>
         <tr>
             <td>
-                @Html.LabelFor(m => m.Filter.MeanOfTransportation)
+                @Html.LabelFor(m => m.BusinessTripFilter.StartingDate)
             </td>
             <td>
-                @Html.TextBoxFor(m => m.Filter.MeanOfTransportation)
+                @Html.EditorFor(m => m.BusinessTripFilter.StartingDate, new { @class = "form-control" })
+            </td>
+        <tr>
+        <tr>
+            <td>
+                @Html.LabelFor(m => m.BusinessTripFilter.EndingDate)
+            </td>
+            <td>
+                @Html.EditorFor(m => m.BusinessTripFilter.EndingDate, new { @class = "form-control" })
+            </td>
+        <tr>
+        <tr>
+            <td>
+                @Html.LabelFor(m => m.BusinessTripFilter.Location)
+            </td>
+            <td>
+                @Html.TextBoxFor(m => m.BusinessTripFilter.Location)
+            </td>
+        <tr>
+        <tr>
+            <td>
+                @Html.LabelFor(m => m.BusinessTripFilter.MeanOfTransportation)
+            </td>
+            <td>
+                @Html.TextBoxFor(m => m.BusinessTripFilter.MeanOfTransportation)
             </td>
         <tr>
         <tr>
@@ -89,118 +89,39 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayName("Department")
-        </th>
-        <th>
             @Html.DisplayName("PmName")
-        </th>
-        <th>
-            @Html.DisplayName("ProjectNumber")
-        </th>
-        <th>
-            @Html.DisplayName("ProjectName")
-        </th>
-        <th>
-            @Html.DisplayName("TaskName")
-        </th>
-        <th>
-            @Html.DisplayName("TaskNumber")
-        </th>
-        <th>
-            @Html.DisplayName("LeavingFrom")
-        </th>
-        <th>
-            @Html.DisplayName("StartingDate")
-        </th>
-        <th>
-            @Html.DisplayName("EndingDate")
-        </th>
-        <th>
-            @Html.DisplayName("ClientName")
-        </th>
-        <th>
-            @Html.DisplayName("ClientLocation")
-        </th>
-        <th>
-            @Html.DisplayName("WithPersonalCar")
-        </th>
-        <th>
-            @Html.DisplayName("MeansOfTransportation")
         </th>
         <th>
             @Html.DisplayName("Accomodation")
         </th>
         <th>
-            @Html.DisplayName("PhoneIsNeeded")
+            @Html.DisplayName("Location")
         </th>
         <th>
-            @Html.DisplayName("BankCardIsNeeded")
+            @Html.DisplayName("Means of Transportaion")
         </th>
         <th>
-            @Html.DisplayName("OtherInfo")
+            @Html.DisplayName("StartingDate")
         </th>
-        <th>
-            @Html.DisplayName("Status")
-        </th>
-        <th></th>
     </tr>
 
-    @foreach (var item in Model.BusinessTripModels)
+    @foreach (var item in Model.SearchBusinessTripModels)
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Department)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PmName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProjectNumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProjectName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TaskName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TaskNumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LeavingFrom)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.StartingDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EndingDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ClientName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ClientLocation)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.WithPersonalCar)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MeansOfTransportation)
+                @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Accomodation)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.PhoneIsNeeded)
+                @Html.DisplayFor(modelItem => item.Location)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.BankCardIsNeeded)
+                @Html.DisplayFor(modelItem => item.MeansOfTransportaion)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.OtherInfo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Status)
+                @Html.DisplayFor(modelItem => item.StartingDate)
             </td>
             <td>
                 @*@Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
