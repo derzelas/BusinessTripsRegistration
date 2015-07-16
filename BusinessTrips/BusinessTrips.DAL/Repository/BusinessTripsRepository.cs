@@ -40,16 +40,10 @@ namespace BusinessTrips.DAL.Repository
         public IEnumerable<BusinessTripModel> GetOtherBusinessTrips(BusinessTripFilter filter)
         {
             var queryable = storage.GetSetFor<BusinessTripEntity>();
-            var queryEmployeeName = storage.GetSetFor<UserEntity>();
 
             if (!string.IsNullOrEmpty(filter.EmployeeName))
             {
-                queryEmployeeName = queryEmployeeName.Where(m => m.Name.Contains(filter.EmployeeName));
-                queryEmployeeName.ToList().Select(b => b.ToModel());
-                foreach (var bla in queryEmployeeName)
-                {
-                    queryable = queryable.Where(m => m.UserId == bla.Id);  
-                }                
+                queryable = queryable.Where(m => m.User.Name.Contains(filter.EmployeeName));
             }
 
             if (!string.IsNullOrEmpty(filter.ClientName))
