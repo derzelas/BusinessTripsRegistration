@@ -11,6 +11,8 @@ namespace BusinessTrips.Controllers
     [Authorize(Roles = "Regular")]
     public class BusinessTripController : Controller
     {
+        private const string CookieName = "Cookie";
+
         public ActionResult RegisterBusinessTrip()
         {
             return View("RegisterBusinessTrip");
@@ -21,9 +23,9 @@ namespace BusinessTrips.Controllers
         {
             if (ModelState.IsValid)
             {
-                var entity = GetUserEntityFromSession();
+                var userEntity = GetUserEntityByEmail(GetUserEmailFromCookie());
 
-                businessTripModel.User = entity;
+                businessTripModel.User = userEntity;
 
                 businessTripModel.Save();
 
@@ -32,26 +34,40 @@ namespace BusinessTrips.Controllers
 
                 return View("BusinessTripAdded");
             }
-
             return View("RegisterBusinessTrip");
+        }
+
+        private UserEntity GetUserEntityByEmail(string email)
+        {
+            var repository = new UserRepository();
+
+            return repository.GetByEmail(email);
+        }
+
+        // There will always be a cookie because of Authorize so no check for null is required
+        private string GetUserEmailFromCookie()
+        {
+            var cookieValue = Request.Cookies[CookieName].Value;
+
+            return FormsAuthentication.Decrypt(cookieValue).Name;
+        }
+
+        public ActionResult ViewMyBusinessTrips()
+        {
+            var entity = GetUserEntityByEmail(GetUserEmailFromCookie());
+
+            var businessTripCollectionModel = new BusinessTripCollectionModel();
+            businessTripCollectionModel.LoadBusinessTripsForUser(entity.Id);
+
+            return View("MyBusinessTrips", businessTripCollectionModel);
         }
 
         public ActionResult RequestDetails(Guid id)
         {
-           var tripsRepository = new BusinessTripsRepository();
+            var tripsRepository = new BusinessTripsRepository();
             var retreivedModel = tripsRepository.GetById(id);
-            
-            return View(retreivedModel);
-        }
-        
-        public ActionResult ViewMyBusinessTrips()
-        {
-            var entity = GetUserEntityFromSession();
 
-            var businessTripCollectionModel = new BusinessTripCollectionModel();
-            businessTripCollectionModel.LoadBusinessTripForUser(entity.Id);
-
-            return View("MyBusinessTrips", businessTripCollectionModel);
+            return View("RequestDetails", retreivedModel);
         }
 
         public ActionResult SearchBusinessTrips()
@@ -65,17 +81,6 @@ namespace BusinessTrips.Controllers
             businessTripCollectionModel.LoadOtherBusinessTrips();
 
             return View("OthersBusinessTrips", businessTripCollectionModel);
-        }
-
-        private UserEntity GetUserEntityFromSession()
-        {
-            var cookieValue = Request.Cookies["Cookie"].Value;
-            string email = FormsAuthentication.Decrypt(cookieValue).Name;
-
-            var repository = new UserRepository();
-            var entity = repository.GetByEmail(email);
-
-            return entity;
         }
     }
 }
