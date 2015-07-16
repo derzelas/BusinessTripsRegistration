@@ -53,14 +53,20 @@ namespace BusinessTrips.Controllers
                 return View("RequestNotFound");
             }
 
-            var tripsRepository = new BusinessTripsRepository();
-            var retreivedModel = tripsRepository.GetById(businessTripModel.Id);
-
-            if (retreivedModel != null /*&& retreivedModel.Status == "Pending"*/) 
+            try
             {
-                return View(retreivedModel);
-            }
+                var tripsRepository = new BusinessTripsRepository();
+                var retreivedModel = tripsRepository.GetById(businessTripModel.Id);
 
+                if (retreivedModel != null)
+                {
+                    return View(retreivedModel);
+                }
+            }
+            catch (InvalidOperationException)
+            {
+                return View("RequestNotFound");
+            }
             return View("RequestNotFound");
         }
 
