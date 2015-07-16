@@ -28,15 +28,7 @@ namespace BusinessTrips.DAL.Repository
 
         public IEnumerable<BusinessTripModel> GetByUser(Guid id)
         {
-            var result = storage.GetSetFor<BusinessTripEntity>().Where(m => m.UserId == id);
-
-            List<BusinessTripModel> list = new List<BusinessTripModel>();
-            foreach (var entity in result)
-        {
-                list.Add(entity.ToModel());
-            }
-
-            return list;
+            return storage.GetSetFor<BusinessTripEntity>().Where(e => e.UserId == id).ToList().Select(e => e.ToModel());
         }
 
         public IEnumerable<BusinessTripModel> GetOtherBusinessTrips(BusinessTripFilter filter)
@@ -45,32 +37,32 @@ namespace BusinessTrips.DAL.Repository
 
             if (!string.IsNullOrEmpty(filter.ClientName))
             {
-                queryable.Where(m => m.ClientName == filter.ClientName);
+                queryable = queryable.Where(m => m.ClientName == filter.ClientName);
             }
 
             if (!string.IsNullOrEmpty(filter.Location))
             {
-                queryable.Where(m => m.ClientLocation == filter.Location);
+                queryable = queryable.Where(m => m.ClientLocation == filter.Location);
             }
 
             if (!string.IsNullOrEmpty(filter.Accommodation))
             {
-                queryable.Where(m => m.Accomodation == filter.Accommodation);
+                queryable = queryable.Where(m => m.Accomodation == filter.Accommodation);
             }
 
             if (!string.IsNullOrEmpty(filter.MeanOfTransportation))
             {
-                queryable.Where(m => m.MeansOfTransportation == filter.MeanOfTransportation);
+                queryable = queryable.Where(m => m.MeansOfTransportation == filter.MeanOfTransportation);
             }
 
             if (filter.StartingDate.HasValue)
             {
-                queryable.Where(m => m.StartingDate == filter.StartingDate);
+                queryable = queryable.Where(m => m.StartingDate == filter.StartingDate);
             }
 
             if (filter.EndingDate.HasValue)
             {
-                queryable.Where(m => m.EndingDate == filter.EndingDate);
+                queryable = queryable.Where(m => m.EndingDate == filter.EndingDate);
             }
 
             return queryable.ToList().Select(b => b.ToModel());
