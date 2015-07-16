@@ -9,6 +9,7 @@ namespace BusinessTrips.DAL.Model
 {
     public class BusinessTripFilter
     {
+        public string EmployeeName { get; set; }
         public string ClientName { get; set; }
         public string Location { get; set; }
         public string MeanOfTransportation { get; set; }

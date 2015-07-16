@@ -7,29 +7,83 @@
 
 @using (Html.BeginForm("SearchBusinessTrips", "BusinessTrip", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
-    @Html.LabelFor(m => m.Filter.ClientName)
-    @Html.TextBoxFor(m => m.Filter.ClientName)
+    <style>
+        table, th, td {
+            padding: 5px;
+        }
 
-    @Html.LabelFor(m => m.Filter.Accommodation)
-    @Html.TextBoxFor(m => m.Filter.Accommodation)
+        table {
+            border-spacing: 15px;
+        }
+    </style>
+    <table>
+        <tr>
+            <td>
+                @Html.LabelFor(m => m.Filter.EmployeeName)
+            </td>
+            <td>
+                @Html.TextBoxFor(m => m.Filter.EmployeeName)
+            </td>
+        <tr>
+        <tr>
+            <td>
+                @Html.LabelFor(m => m.Filter.ClientName)
+            </td>
+            <td>
+                @Html.TextBoxFor(m => m.Filter.ClientName)
+            </td>
+        <tr>
+        <tr>
+            <td>
+                @Html.LabelFor(m => m.Filter.Accommodation)
+            </td>
+            <td>
+                @Html.TextBoxFor(m => m.Filter.Accommodation)
+            </td>
+        <tr>
+        <tr>
+            <td>
+                @Html.LabelFor(m => m.Filter.StartingDate)
+            </td>
+            <td>
+                @Html.EditorFor(m => m.Filter.StartingDate, new { @class = "form-control" })
+            </td>
+        <tr>
+        <tr>
+            <td>
+                @Html.LabelFor(m => m.Filter.EndingDate)
+            </td>
+            <td>
+                @Html.EditorFor(m => m.Filter.EndingDate, new { @class = "form-control" })
+            </td>
+        <tr>
+        <tr>
+            <td>
+                @Html.LabelFor(m => m.Filter.Location)
+            </td>
+            <td>
+                @Html.TextBoxFor(m => m.Filter.Location)
+            </td>
+        <tr>
+        <tr>
+            <td>
+                @Html.LabelFor(m => m.Filter.MeanOfTransportation)
+            </td>
+            <td>
+                @Html.TextBoxFor(m => m.Filter.MeanOfTransportation)
+            </td>
+        <tr>
+        <tr>
+            <td colspan="2" align="center">
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Search" class="btn btn-default" />
+                    </div>
+                </div>
+            </td>
+        </tr>
+    </table>
 
-    @Html.LabelFor(m => m.Filter.StartingDate)
-    @Html.EditorFor(m => m.Filter.StartingDate, new { @class = "form-control" })
-
-    @Html.LabelFor(m => m.Filter.EndingDate)
-    @Html.EditorFor(m => m.Filter.EndingDate, new { @class = "form-control" })
-
-    @Html.LabelFor(m => m.Filter.Location)
-    @Html.TextBoxFor(m => m.Filter.Location)
-
-    @Html.LabelFor(m => m.Filter.MeanOfTransportation)
-    @Html.TextBoxFor(m => m.Filter.MeanOfTransportation)
-
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Search" class="btn btn-default" />
-        </div>
-    </div>
 }
 
 <table class="table">
