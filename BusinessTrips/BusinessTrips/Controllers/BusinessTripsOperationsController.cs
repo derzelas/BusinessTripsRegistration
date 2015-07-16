@@ -5,6 +5,7 @@ using BusinessTrips.DAL.Repository;
 
 namespace BusinessTrips.Controllers
 {
+    [Authorize(Roles = "HR")]
     public class BusinessTripsOperationsController : Controller
     {
         public ActionResult GetRequestBy(string guid)
@@ -30,8 +31,7 @@ namespace BusinessTrips.Controllers
 
             businessTripModel.ChangeStatus(status);
 
-            return View("OthersBusinessTrips"); // <-- show all business trips 
-            //              ^ move this view to shared folder ??
+            return View("StatusChangedSuccessfully");
         }
 
         public ActionResult RequestDetails(Guid id)
@@ -39,8 +39,7 @@ namespace BusinessTrips.Controllers
             var tripsRepository = new BusinessTripsRepository();
             var retreivedModel = tripsRepository.GetById(id);
 
-            return View(retreivedModel);
+            return View("RequestDetails", retreivedModel);
         }
-
     }
 }

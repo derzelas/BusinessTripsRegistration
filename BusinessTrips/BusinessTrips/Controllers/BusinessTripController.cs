@@ -8,7 +8,7 @@ using BusinessTrips.Services;
 
 namespace BusinessTrips.Controllers
 {
-    [Authorize(Roles = "Regular,HR")]
+    [Authorize(Roles = "Regular")]
     public class BusinessTripController : Controller
     {
         public ActionResult RegisterBusinessTrip()
