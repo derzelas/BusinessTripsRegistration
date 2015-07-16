@@ -1,23 +1,33 @@
-﻿@using Microsoft.AspNet.Identity
-@if (Request.IsAuthenticated)
+﻿@if (Request.IsAuthenticated)
 {
-    using (Html.BeginForm("Logout", "UserOperations", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    using (Html.BeginForm("Logout", "UserOperations", FormMethod.Post, new { id = "logoutForm", @class = "navbar-static-top" }))
     {
-    @Html.AntiForgeryToken()
+        @Html.AntiForgeryToken()
 
-    <ul class="nav navbar-nav navbar-right">
-        <li>
-            @Html.ActionLink("Hello " + User.Identity.Name + "!", "RegisterBusinessTrip", "BusinessTrip", routeValues: null, htmlAttributes: new { title = "Manage" })
-        </li>
-        <li><a href="javascript:document.getElementById('logoutForm').submit()">Logout</a></li>
-    </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                @Html.ActionLink("Hello " + User.Identity.Name + "!", "RegisterBusinessTrip", "BusinessTrip", routeValues: null, htmlAttributes: new { title = "Manage" })
+            </li>
+            <li><a href="javascript:document.getElementById('logoutForm').submit()">Logout</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-left">
+            <li>
+                @Html.ActionLink("Register business trip", "RegisterBusinessTrip", "BusinessTrip")
+            </li>
+            <li>
+                @Html.ActionLink("My business trips", "ViewMyBusinessTrips", "BusinessTrip")
+            </li>
+            <li>
+                @Html.ActionLink("Search", "SearchBusinessTrips", "BusinessTrip")
+            </li>
+        </ul>
     }
 }
 else
 {
     <ul class="nav navbar-nav navbar-right">
         <li>ot log in</li>
-        <li>@Html.ActionLink("Register", "Register", "UserOperations", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
-        <li>@Html.ActionLink("Login", "Login", "UserOperations", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+        <li>@Html.ActionLink("Register", "Register", "UserOperations")</li>
+        <li>@Html.ActionLink("Login", "Login", "UserOperations")</li>
     </ul>
 }
