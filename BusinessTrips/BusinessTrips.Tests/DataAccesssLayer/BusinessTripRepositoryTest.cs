@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data.Entity;
+using BusinessTrips.DAL.Entity;
 using BusinessTrips.DAL.Model;
 using BusinessTrips.DAL.Repository;
 using BusinessTrips.DAL.Storage;
@@ -12,7 +13,7 @@ namespace BusinessTrips.Tests.DataAccesssLayer
     {
         private BusinessTripsRepository repository;
         private BusinessTripModel businessTripModel;
-        private UserModel userModel;
+        private UserEntity userEntity;
 
         [TestInitialize]
         public void Initialize()
@@ -20,11 +21,11 @@ namespace BusinessTrips.Tests.DataAccesssLayer
             EfStorage storage = new EfStorage(new DropCreateDatabaseAlways<EfStorage>());
             storage.Database.Initialize(true);
 
-            userModel = new UserModel
+            userEntity = new UserEntity()
             {
                 Id = Guid.NewGuid(),
                 Email = "email@email.email",
-                Password = "password"
+                HashedPassword = "password"
             };
 
             repository = new BusinessTripsRepository();
@@ -33,7 +34,7 @@ namespace BusinessTrips.Tests.DataAccesssLayer
                 Id = Guid.NewGuid(),
                 EndingDate = DateTime.Now,
                 StartingDate = DateTime.Now,
-                UserId = userModel.Id
+                User = userEntity
             };
         }
 
@@ -58,18 +59,18 @@ namespace BusinessTrips.Tests.DataAccesssLayer
                     Id = Guid.NewGuid(),
                     EndingDate = DateTime.Now,
                     StartingDate = DateTime.Now,
-                    UserId = userModel.Id
+                    User = userEntity
                 };
                 repository.Add(businessTripModel);
             }
 
             repository.CommitChanges();
 
-            var actual = repository.GetByUser(userModel.Id);
+            var actual = repository.GetByUser(userEntity.Id);
 
             foreach (var tripModel in actual)
             {
-                Assert.AreEqual(userModel.Id, tripModel.UserId);
+                Assert.AreEqual(userEntity.Id, tripModel.User.Id);
             }
         }
     }
