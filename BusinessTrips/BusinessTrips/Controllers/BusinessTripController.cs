@@ -1,5 +1,7 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Web.Mvc;
 using System.Web.Security;
+using BusinessTrips.DAL.Entity;
 using BusinessTrips.DAL.Model;
 using BusinessTrips.DAL.Repository;
 using BusinessTrips.Services;
@@ -19,23 +21,39 @@ namespace BusinessTrips.Controllers
         {
             if (ModelState.IsValid)
             {
-                var cookieValue = Request.Cookies["Cookie"].Value;
-                string email = FormsAuthentication.Decrypt(cookieValue).Name;
+                var entity = GetUserEntityFromSession();
 
-                var repository = new UserRepository();
-                var entity = repository.GetByEmail(email);
                 businessTripModel.User = entity;
-                
+
                 businessTripModel.Save();
 
                 Email userEmail = new Email();
                 userEmail.SendEmailToBusinessTripOperator(businessTripModel.Id);
 
-                return View("MyBusinessTrips");
+                return View("BusinessTripAdded");
             }
+
             return View("RegisterBusinessTrip");
         }
+
+        public ActionResult RequestDetails(Guid id)
+        {
+           var tripsRepository = new BusinessTripsRepository();
+            var retreivedModel = tripsRepository.GetById(id);
+            
+            return View(retreivedModel);
+        }
         
+        public ActionResult ViewMyBusinessTrips()
+        {
+            var entity = GetUserEntityFromSession();
+
+            var businessTripCollectionModel = new BusinessTripCollectionModel();
+            businessTripCollectionModel.LoadBusinessTripForUser(entity.Id);
+
+            return View("MyBusinessTrips", businessTripCollectionModel);
+        }
+
         public ActionResult SearchBusinessTrips()
         {
             return View("OthersBusinessTrips", new BusinessTripCollectionModel());
@@ -47,6 +65,17 @@ namespace BusinessTrips.Controllers
             businessTripCollectionModel.LoadOtherBusinessTrips();
 
             return View("OthersBusinessTrips", businessTripCollectionModel);
+        }
+
+        private UserEntity GetUserEntityFromSession()
+        {
+            var cookieValue = Request.Cookies["Cookie"].Value;
+            string email = FormsAuthentication.Decrypt(cookieValue).Name;
+
+            var repository = new UserRepository();
+            var entity = repository.GetByEmail(email);
+
+            return entity;
         }
     }
 }

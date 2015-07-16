@@ -46,7 +46,8 @@ namespace BusinessTrips.Controllers
 
             businessTripModel.ChangeStatus(status);
 
-            return View("ViewBusinessTrips"); // <-- show all business trips
+            return View("OthersBusinessTrips"); // <-- show all business trips 
+            //              ^ move this view to shared folder ??
         }
 
         public ActionResult RequestDetails(Guid id)
