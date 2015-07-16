@@ -23,7 +23,13 @@ namespace BusinessTrips.DAL.Repository
 
         public BusinessTripModel GetById(Guid id)
         {
-            return (storage.GetSetFor<BusinessTripEntity>().First(m => m.Id == id)).ToModel();
+            var businessTripEntity = storage.GetSetFor<BusinessTripEntity>().FirstOrDefault(m => m.Id == id);
+
+            if (businessTripEntity != null)
+            {
+                return businessTripEntity.ToModel();
+            }
+            return null;
         }
 
         public IEnumerable<BusinessTripModel> GetByUser(Guid id)
