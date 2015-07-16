@@ -5,37 +5,22 @@ using BusinessTrips.DAL.Repository;
 
 namespace BusinessTrips.Controllers
 {
+    [Authorize(Roles = "HR")]
     public class BusinessTripsOperationsController : Controller
     {
-        public ActionResult ManageRequest(string guid)
+        public ActionResult GetRequestBy(string guid)
         {
-            var businessTripModel = new BusinessTripModel();
-            try
-            {
-                businessTripModel.Id = Guid.Parse(guid);
-            }
-            catch (ArgumentNullException)
-            {
-                return View("RequestNotFound");
-            }
-            catch (FormatException)
-            {
-                return View("RequestNotFound");
-            }
+            Guid parsedGuid;
 
-            try
+            if (Guid.TryParse(guid, out parsedGuid))
             {
                 var tripsRepository = new BusinessTripsRepository();
-                var retreivedModel = tripsRepository.GetById(businessTripModel.Id);
+                var retreivedModel = tripsRepository.GetById(parsedGuid);
 
                 if (retreivedModel != null)
                 {
-                    return View(retreivedModel);
+                    return View("ManageRequest", retreivedModel);
                 }
-            }
-            catch (InvalidOperationException)
-            {
-                return View("RequestNotFound");
             }
             return View("RequestNotFound");
         }
@@ -46,16 +31,15 @@ namespace BusinessTrips.Controllers
 
             businessTripModel.ChangeStatus(status);
 
-            return View("ViewBusinessTrips"); // <-- show all business trips
+            return View("StatusChangedSuccessfully");
         }
 
         public ActionResult RequestDetails(Guid id)
         {
             var tripsRepository = new BusinessTripsRepository();
             var retreivedModel = tripsRepository.GetById(id);
-            
-            return View(retreivedModel);
-        }
 
+            return View("RequestDetails", retreivedModel);
+        }
     }
 }

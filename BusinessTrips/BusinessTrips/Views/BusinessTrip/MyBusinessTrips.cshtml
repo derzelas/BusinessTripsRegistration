@@ -1,7 +1,54 @@
-﻿
+﻿@model BusinessTrips.DAL.Model.BusinessTripCollectionModel
 @{
-    ViewBag.Title = "MyBusinessTrips";
+    ViewBag.Title = "My Business Trips";
 }
 
-<h2>MyBusinessTrips</h2>
+<h2>My Business Trips</h2>
+@using (Html.BeginForm("ViewMyBusinessTrips", "BusinessTrip", FormMethod.Get, new { @class = "form-horizontal", role = "form" }))
+{
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayName("Department")
+            </th>
+            <th>
+                @Html.DisplayName("StartingDate")
+            </th>
+            <th>
+                @Html.DisplayName("EndingDate")
+            </th>
+            <th>
+                @Html.DisplayName("Accomodation")
+            </th>
+            <th>
+                @Html.DisplayName("Status")
+            </th>
+            <th></th>
+        </tr>
 
+        @foreach (var item in Model.BusinessTripModels)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Department)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StartingDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EndingDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Accomodation)
+                </td>
+                <td>
+                    <strong>@Html.DisplayFor(modelItem => item.Status)</strong>
+                </td>
+                <td>
+                    @Html.ActionLink("Details", "RequestDetails", new { id = item.Id })
+                    @*@Html.ActionLink("Cancel", "CancelRequest", new { id=item.Id , status = "Canceled"})*@
+                </td>
+            </tr>
+        }
+    </table>
+}
