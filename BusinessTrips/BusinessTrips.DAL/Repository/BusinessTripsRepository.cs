@@ -28,7 +28,7 @@ namespace BusinessTrips.DAL.Repository
 
         public IEnumerable<BusinessTripModel> GetByUser(Guid id)
         {
-            return storage.GetSetFor<BusinessTripEntity>().Where(e => e.UserId == id).ToList().Select(e => e.ToModel());
+            return storage.GetSetFor<BusinessTripEntity>().Where(e => e.User.Id == id).ToList().Select(e => e.ToModel());
         }
 
         public IEnumerable<BusinessTripModel> GetOtherBusinessTrips(BusinessTripFilter filter)

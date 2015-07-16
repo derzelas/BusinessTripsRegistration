@@ -167,6 +167,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\BusinessTripController.cs" />
+    <Compile Include="Controllers\BusinessTripsOperationsController.cs" />
     <Compile Include="Controllers\UserOperationsController.cs" />
     <Compile Include="Error401.aspx.cs">
       <DependentUpon>Error401.aspx</DependentUpon>
@@ -213,9 +214,9 @@
     <Content Include="Views\Shared\401Error.html" />
     <Content Include="Views\UserOperations\Error.cshtml" />
     <Content Include="Views\UserOperations\Logout.cshtml" />
-    <Content Include="Views\BusinessTrip\ManageRequest.cshtml" />
+    <Content Include="Views\BusinessTripsOperations\ManageRequest.cshtml" />
     <Content Include="Views\BusinessTrip\MyBusinessTrips.cshtml" />
-    <Content Include="Views\BusinessTrip\RequestNotFound.cshtml" />
+    <Content Include="Views\BusinessTripsOperations\RequestNotFound.cshtml" />
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
     <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
     <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
@@ -239,7 +240,7 @@
     <Content Include="Views\Shared\UnauthenticatedLayout.cshtml" />
     <Content Include="Views\UserOperations\ConfirmationEmailSent.cshtml" />
     <Content Include="Views\BusinessTrip\OthersBusinessTrips.cshtml" />
-    <Content Include="Views\BusinessTrip\RequestDetails.cshtml" />
+    <Content Include="Views\BusinessTripsOperations\RequestDetails.cshtml" />
     <Content Include="Views\BusinessTrip\ViewBusinessTrips.cshtml" />
     <None Include="_bin_deployableAssemblies\x86\sqlcese40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceqp40.dll" />

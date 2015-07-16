@@ -63,7 +63,7 @@ namespace BusinessTrips.Services
         {
             var message = "A new business trip has been registered, to accept/reject the request click here: ";
 
-            string link = String.Format("http://{0}:{1}/BusinessTrip/ManageRequest/?guid={2}",
+            string link = String.Format("http://{0}:{1}/BusinessTripsOperations/ManageRequest/?guid={2}",
                 HttpContext.Current.Request.Url.Host,
                 HttpContext.Current.Request.Url.Port,
                 id);
