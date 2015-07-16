@@ -168,6 +168,20 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\BusinessTripController.cs" />
     <Compile Include="Controllers\UserOperationsController.cs" />
+    <Compile Include="Error401.aspx.cs">
+      <DependentUpon>Error401.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Error401.aspx.designer.cs">
+      <DependentUpon>Error401.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Error404.aspx.cs">
+      <DependentUpon>Error404.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Error404.aspx.designer.cs">
+      <DependentUpon>Error404.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Services\CustomRoleProvider.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -187,6 +201,8 @@
     <Content Include="Documentation\Business trips.png" />
     <Content Include="Documentation\BusinessTrips wireframes My BT.png" />
     <Content Include="Documentation\BusinessTrips-Usecases.pdf" />
+    <Content Include="Error401.aspx" />
+    <Content Include="Error404.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -194,10 +210,9 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Views\BusinessTrip\RegisterBusinessTrip.cshtml" />
+    <Content Include="Views\Shared\401Error.html" />
     <Content Include="Views\UserOperations\Error.cshtml" />
     <Content Include="Views\UserOperations\Logout.cshtml" />
-    <Content Include="Http404Error.cshtml" />
-    <Content Include="Html401Error.cshtml" />
     <Content Include="Views\BusinessTrip\ManageRequest.cshtml" />
     <Content Include="Views\BusinessTrip\MyBusinessTrips.cshtml" />
     <Content Include="Views\BusinessTrip\RequestNotFound.cshtml" />
