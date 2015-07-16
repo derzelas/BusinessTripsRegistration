@@ -42,7 +42,7 @@
                     @Html.DisplayFor(modelItem => item.Accomodation)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Status)
+                    <strong>@Html.DisplayFor(modelItem => item.Status)</strong>
                 </td>
                 <td>
                     @Html.ActionLink("Details", "RequestDetails", new { id = item.Id })
