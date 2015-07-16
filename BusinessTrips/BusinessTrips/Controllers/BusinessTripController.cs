@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Web.Mvc;
 using System.Web.Security;
 using BusinessTrips.DAL.Entity;
@@ -56,23 +57,26 @@ namespace BusinessTrips.Controllers
         {
             var entity = GetUserEntityByEmail(GetUserEmailFromCookie());
 
-            var businessTripCollectionModel = new BusinessTripCollectionModel();
-            businessTripCollectionModel.LoadBusinessTripForUser(entity.Id);
+            var myBusinessTripsCollection = new MyBusinesTripsCollectionViewModel
+            {
+                MyBusinesTripsViewModels = entity.BusinessTrips.Select(e => e.ToMyViewModel())
+            };
 
-            return View("MyBusinessTrips", businessTripCollectionModel);
+            return View("MyBusinessTrips", myBusinessTripsCollection);
         }
 
         public ActionResult CancelRequest(Guid id, string status)
         {
-            var businessTripModel = new BusinessTripModel { Id = id };
-            businessTripModel.ChangeStatus(status);
-
             var entity = GetUserEntityByEmail(GetUserEmailFromCookie());
 
-            var businessTripCollectionModel = new BusinessTripCollectionModel();
-            businessTripCollectionModel.LoadBusinessTripsForUser(entity.Id);
+            var myBusinessTripsCollection = new MyBusinesTripsCollectionViewModel
+            {
+                MyBusinesTripsViewModels = entity.BusinessTrips.Select(e => e.ToMyViewModel())
+            };
 
-            return View("MyBusinessTrips", businessTripCollectionModel);
+            entity.BusinessTrips.Single(b => b.Id == id).Status = status;
+
+            return View("MyBusinessTrips", myBusinessTripsCollection);
         }
 
         public ActionResult RequestDetails(Guid id)

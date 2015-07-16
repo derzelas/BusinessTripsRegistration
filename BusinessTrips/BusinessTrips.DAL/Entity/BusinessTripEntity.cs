@@ -71,5 +71,18 @@ namespace BusinessTrips.DAL.Entity
                 MeansOfTransportaion = MeansOfTransportation
             };
         }
+
+        public MyBusinesTripsViewModel ToMyViewModel()
+        {
+            return new MyBusinesTripsViewModel()
+            {
+                StartingDate = StartingDate,
+                EndingDate = EndingDate,
+                Id = Id,
+                Department = ClientLocation,
+                Accomodation = Accomodation,
+                Status = Status
+            };
+        }
     }
 }

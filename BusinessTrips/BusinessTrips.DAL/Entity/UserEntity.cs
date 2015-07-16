@@ -9,6 +9,7 @@ namespace BusinessTrips.DAL.Entity
         public UserEntity()
         {
             Roles = new HashSet<RoleEntity>();
+            BusinessTrips = new List<BusinessTripEntity>();
         }
 
         public Guid Id { get; set; }
@@ -18,6 +19,7 @@ namespace BusinessTrips.DAL.Entity
         public string Salt { get; set; }
         public bool IsConfirmed { get; set; }
         public virtual ICollection<RoleEntity> Roles {get; set; }
+        public virtual ICollection<BusinessTripEntity> BusinessTrips { get; set; }
 
         public UserModel ToModel()
         {
