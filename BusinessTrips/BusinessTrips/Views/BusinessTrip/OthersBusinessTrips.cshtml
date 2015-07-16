@@ -1,0 +1,159 @@
+﻿@model BusinessTrips.DAL.Model.BusinessTripCollectionModel
+@{
+    ViewBag.Title = "OthersBusinessTrips";
+}
+
+<h2>OthersBusinessTrips</h2>
+
+@using (Html.BeginForm("SearchBusinessTrips", "BusinessTrip", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.LabelFor(m => m.Filter.ClientName)
+    @Html.TextBoxFor(m => m.Filter.ClientName)
+
+    @Html.LabelFor(m => m.Filter.Accommodation)
+    @Html.TextBoxFor(m => m.Filter.Accommodation)
+
+    @Html.LabelFor(m => m.Filter.StartingDate)
+    @Html.EditorFor(m => m.Filter.StartingDate)
+
+    @Html.LabelFor(m => m.Filter.EndingDate)
+    @Html.EditorFor(m => m.Filter.EndingDate)
+
+    @Html.LabelFor(m => m.Filter.Location)
+    @Html.TextBoxFor(m => m.Filter.Location)
+
+    @Html.LabelFor(m => m.Filter.MeanOfTransportation)
+    @Html.TextBoxFor(m => m.Filter.MeanOfTransportation)
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Search" class="btn btn-default" />
+        </div>
+    </div>
+}
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayName("Department")
+        </th>
+        <th>
+            @Html.DisplayName("PmName")
+        </th>
+        <th>
+            @Html.DisplayName("ProjectNumber")
+        </th>
+        <th>
+            @Html.DisplayName("ProjectName")
+        </th>
+        <th>
+            @Html.DisplayName("TaskName")
+        </th>
+        <th>
+            @Html.DisplayName("TaskNumber")
+        </th>
+        <th>
+            @Html.DisplayName("LeavingFrom")
+        </th>
+        <th>
+            @Html.DisplayName("StartingDate")
+        </th>
+        <th>
+            @Html.DisplayName("EndingDate")
+        </th>
+        <th>
+            @Html.DisplayName("ClientName")
+        </th>
+        <th>
+            @Html.DisplayName("ClientLocation")
+        </th>
+        <th>
+            @Html.DisplayName("WithPersonalCar")
+        </th>
+        <th>
+            @Html.DisplayName("MeansOfTransportation")
+        </th>
+        <th>
+            @Html.DisplayName("Accomodation")
+        </th>
+        <th>
+            @Html.DisplayName("PhoneIsNeeded")
+        </th>
+        <th>
+            @Html.DisplayName("BankCardIsNeeded")
+        </th>
+        <th>
+            @Html.DisplayName("OtherInfo")
+        </th>
+        <th>
+            @Html.DisplayName("Status")
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.BusinessTripModels)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Department)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PmName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProjectNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProjectName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TaskName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TaskNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LeavingFrom)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartingDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EndingDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ClientName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ClientLocation)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.WithPersonalCar)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MeansOfTransportation)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Accomodation)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PhoneIsNeeded)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BankCardIsNeeded)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OtherInfo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @*@Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+                    @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id=item.Id })*@
+            </td>
+        </tr>
+    }
+
+</table>

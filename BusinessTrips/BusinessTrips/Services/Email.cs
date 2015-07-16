@@ -12,7 +12,7 @@ namespace BusinessTrips.Services
 
         public Email()
         {
-            int port = 587;
+            const int port = 587;
             client = new SmtpClient("smtp.gmail.com", port)
             {
                 UseDefaultCredentials = false,

@@ -8,7 +8,7 @@ namespace BusinessTrips.DAL.Model
     public class BusinessTripModel
     {
         public Guid Id { get; set; }
-        public UserModel User { get; set; }
+        public Guid UserId { get; set; }
 
         [Required]
         [Display(Name = "Department:")]
@@ -103,7 +103,7 @@ namespace BusinessTrips.DAL.Model
             return new BusinessTripEntity()
             {
                 Id = Id,
-                User = User,
+                UserId = UserId,
                 PmName = PmName,
                 ProjectNumber = ProjectNumber,
                 ProjectName = ProjectName,

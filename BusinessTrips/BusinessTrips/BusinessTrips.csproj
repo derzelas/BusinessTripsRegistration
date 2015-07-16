@@ -223,6 +223,7 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\UnauthenticatedLayout.cshtml" />
     <Content Include="Views\UserOperations\ConfirmationEmailSent.cshtml" />
+    <Content Include="Views\BusinessTrip\OthersBusinessTrips.cshtml" />
     <Content Include="Views\BusinessTrip\RequestDetails.cshtml" />
     <Content Include="Views\BusinessTrip\ViewBusinessTrips.cshtml" />
     <None Include="_bin_deployableAssemblies\x86\sqlcese40.dll" />
