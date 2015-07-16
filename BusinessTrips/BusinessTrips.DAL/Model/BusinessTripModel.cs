@@ -98,6 +98,7 @@ namespace BusinessTrips.DAL.Model
                 businessTripsRepository.CommitChanges();
             }
         }
+
         public BusinessTripEntity ToEntity()
         {
             return new BusinessTripEntity()

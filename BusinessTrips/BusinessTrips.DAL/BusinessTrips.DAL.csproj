@@ -88,7 +88,9 @@
     <Compile Include="Entity\RoleEntity.cs" />
     <Compile Include="Model\BusinessTripModel.cs" />
     <Compile Include="Model\DateRangeAttribute.cs" />
+    <Compile Include="Model\OtherBusinessTripsCollectionViewModel.cs" />
     <Compile Include="Model\RandomStringGenerator.cs" />
+    <Compile Include="Model\SearchBusinessTripModel.cs" />
     <Compile Include="Repository\BusinessTripsRepository.cs" />
     <Compile Include="Model\PasswordHasher.cs" />
     <Compile Include="Repository\RoleRepository.cs" />

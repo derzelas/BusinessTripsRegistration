@@ -59,5 +59,17 @@ namespace BusinessTrips.DAL.Entity
                 WithPersonalCar = WithPersonalCar
             };
         }
+
+        public SearchBusinessTripModel ToSearchBusinessTripViewModel()
+        {
+            return new SearchBusinessTripModel
+            {
+                Name = User.Name,
+                StartingDate = StartingDate,
+                Location = ClientLocation,
+                Accomodation = Accomodation,
+                MeansOfTransportaion = MeansOfTransportation
+            };
+        }
     }
 }

@@ -25,7 +25,7 @@ namespace BusinessTrips.Controllers
                 var repository = new UserRepository();
                 var entity = repository.GetByEmail(email);
                 businessTripModel.User = entity;
-                
+
                 businessTripModel.Save();
 
                 Email userEmail = new Email();
@@ -35,18 +35,19 @@ namespace BusinessTrips.Controllers
             }
             return View("RegisterBusinessTrip");
         }
-        
+
         public ActionResult SearchBusinessTrips()
         {
-            return View("OthersBusinessTrips", new BusinessTripCollectionModel());
+            return View("OthersBusinessTrips", new OtherBusinessTripsCollectionViewModel());
         }
 
         [HttpPost]
-        public ActionResult SearchBusinessTrips(BusinessTripCollectionModel businessTripCollectionModel)
+        public ActionResult SearchBusinessTrips(OtherBusinessTripsCollectionViewModel businessTripsCollectionViewModel)
         {
-            businessTripCollectionModel.LoadOtherBusinessTrips();
 
-            return View("OthersBusinessTrips", businessTripCollectionModel);
+            businessTripsCollectionViewModel.SearchBusinessTripModels = new BusinessTripCollectionModel().LoadOtherBusinessTrips(businessTripsCollectionViewModel.BusinessTripFilter);
+
+            return View("OthersBusinessTrips", businessTripsCollectionViewModel);
         }
     }
 }
