@@ -62,6 +62,19 @@ namespace BusinessTrips.Controllers
             return View("MyBusinessTrips", businessTripCollectionModel);
         }
 
+        public ActionResult CancelRequest(Guid id, string status)
+        {
+            var businessTripModel = new BusinessTripModel { Id = id };
+            businessTripModel.ChangeStatus(status);
+
+            var entity = GetUserEntityByEmail(GetUserEmailFromCookie());
+
+            var businessTripCollectionModel = new BusinessTripCollectionModel();
+            businessTripCollectionModel.LoadBusinessTripsForUser(entity.Id);
+
+            return View("MyBusinessTrips", businessTripCollectionModel);
+        }
+
         public ActionResult RequestDetails(Guid id)
         {
             var tripsRepository = new BusinessTripsRepository();
