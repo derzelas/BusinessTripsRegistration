@@ -14,10 +14,10 @@
     @Html.TextBoxFor(m => m.Filter.Accommodation)
 
     @Html.LabelFor(m => m.Filter.StartingDate)
-    @Html.EditorFor(m => m.Filter.StartingDate)
+    @Html.EditorFor(m => m.Filter.StartingDate, new { @class = "form-control" })
 
     @Html.LabelFor(m => m.Filter.EndingDate)
-    @Html.EditorFor(m => m.Filter.EndingDate)
+    @Html.EditorFor(m => m.Filter.EndingDate, new { @class = "form-control" })
 
     @Html.LabelFor(m => m.Filter.Location)
     @Html.TextBoxFor(m => m.Filter.Location)
