@@ -1,5 +1,5 @@
 ﻿using System;
-using BusinessTrips.Models;
+//using BusinessTrips.Models;
 using Microsoft.AspNet.Identity;
 using Owin;
 
@@ -10,7 +10,7 @@ namespace BusinessTrips
         public void ConfigureAuth(IAppBuilder app)
         {
             // Configure the db context, user manager and signin manager to use a single instance per request
-            app.CreatePerOwinContext(ApplicationDbContext.Create);      
+            //app.CreatePerOwinContext(ApplicationDbContext.Create);      
             app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);
 
             // Enables the application to temporarily store user information when they are verifying the second factor in the two-factor authentication process.
