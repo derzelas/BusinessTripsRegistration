@@ -23,6 +23,19 @@ namespace BusinessTrips.DAL.Model
 
         public bool IsConfirmed { get; set; }
 
+        public UserModel()
+        {
+        }
+
+        public UserModel(UserEntity userEntity)
+        {
+            Id = userEntity.Id;
+            Name = userEntity.Name;
+            Email = userEntity.Email;
+            Password = userEntity.HashedPassword;
+            IsConfirmed = userEntity.IsConfirmed;
+        }
+
         public bool Authenthicate()
         {
             var repository = new UserRepository();
