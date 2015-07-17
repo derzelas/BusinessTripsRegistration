@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using BusinessTrips.DAL.Model;
 
 namespace BusinessTrips.DAL.Entity
 {
@@ -20,17 +19,5 @@ namespace BusinessTrips.DAL.Entity
         public bool IsConfirmed { get; set; }
         public virtual ICollection<RoleEntity> Roles { get; set; }
         public virtual ICollection<BusinessTripEntity> BusinessTrips { get; set; }
-
-        public UserModel ToModel()
-        {
-            return new UserModel
-            {
-                Name = Name,
-                Email = Email,
-                IsConfirmed = IsConfirmed,
-                Id = Id,
-                Password = HashedPassword
-            };
-        }
     }
 }
