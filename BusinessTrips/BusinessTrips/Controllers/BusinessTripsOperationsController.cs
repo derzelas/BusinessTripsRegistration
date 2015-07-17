@@ -33,13 +33,5 @@ namespace BusinessTrips.Controllers
 
             return View("StatusChangedSuccessfully");
         }
-
-        public ActionResult RequestDetails(Guid id)
-        {
-            var tripsRepository = new BusinessTripsRepository();
-            var retreivedModel = tripsRepository.GetById(id);
-
-            return View("RequestDetails", retreivedModel);
-        }
     }
 }
