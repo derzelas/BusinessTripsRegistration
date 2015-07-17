@@ -27,7 +27,7 @@ namespace BusinessTrips.Controllers
                 var userEntity = GetUserEntityByEmail(GetUserEmailFromCookie());
 
                 businessTripModel.User = userEntity;
-
+                
                 businessTripModel.Save();
 
                 Email userEmail = new Email();
@@ -37,7 +37,7 @@ namespace BusinessTrips.Controllers
             }
             return View("RegisterBusinessTrip");
         }
-
+        
         private UserEntity GetUserEntityByEmail(string email)
         {
             var repository = new UserRepository();
@@ -74,11 +74,19 @@ namespace BusinessTrips.Controllers
                 MyBusinesTripsViewModels = entity.BusinessTrips.Select(e => e.ToMyViewModel())
             };
 
+            if (entity.BusinessTrips.Single(b => b.Id == id).Status == "Pending")
+                entity.BusinessTrips.Single(b => b.Id == id).Status = status;
+
+            if (entity.BusinessTrips.Single(b => b.Id == id).Status == "Accepted")
+            {
             entity.BusinessTrips.Single(b => b.Id == id).Status = status;
+                Email userEmail = new Email();
+                userEmail.SendEmailToBusinessTripOperator(entity.BusinessTrips.Single(b => b.Id == id).Id);
+            }
 
             return View("MyBusinessTrips", myBusinessTripsCollection);
         }
-
+        
         public ActionResult RequestDetails(Guid id)
         {
             var tripsRepository = new BusinessTripsRepository();
