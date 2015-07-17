@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Web.Mvc;
+using BusinessTrips.DAL;
 using BusinessTrips.DAL.Model;
 using BusinessTrips.DAL.Repository;
 
@@ -25,24 +26,16 @@ namespace BusinessTrips.Controllers
             return View("RequestNotFound");
         }
 
-        // You create an object just to call one method to change other object status
-        public ActionResult ChangeRequestStatus(Guid id, string status)
+        public ActionResult AcceptRequest(BusinessTripModel businessTripModel)
         {
-            var businessTripModel = new BusinessTripModel { Id = id };
-
-            businessTripModel.ChangeStatus(status);
+            businessTripModel.ChangeStatus(RequestStatus.Accepted);
 
             return View("StatusChangedSuccessfully");
         }
 
-        public ActionResult AcceptRequest(Guid id)
+        public ActionResult RejectRequest(BusinessTripModel businessTripModel)
         {
-
-            return View("StatusChangedSuccessfully");
-        }
-
-        public ActionResult RejectRequest(Guid id)
-        {
+            businessTripModel.ChangeStatus(RequestStatus.Rejected);
 
             return View("StatusChangedSuccessfully");
         }

@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Web.Mvc;
 using System.Web.Security;
+using BusinessTrips.DAL;
 using BusinessTrips.DAL.Entity;
 using BusinessTrips.DAL.Model;
 using BusinessTrips.DAL.Repository;
@@ -65,7 +66,7 @@ namespace BusinessTrips.Controllers
             return View("MyBusinessTrips", myBusinessTripsCollection);
         }
 
-        public ActionResult CancelRequest(Guid id, string status)
+        public ActionResult CancelRequest(Guid id)
         {
             var entity = GetUserEntityByEmail(GetUserEmailFromCookie());
 
@@ -74,15 +75,13 @@ namespace BusinessTrips.Controllers
                 MyBusinesTripsViewModels = entity.BusinessTrips.Select(e => e.ToMyViewModel())
             };
 
-            if (entity.BusinessTrips.Single(b => b.Id == id).Status == "Pending")
-                entity.BusinessTrips.Single(b => b.Id == id).Status = status;
-
-            if (entity.BusinessTrips.Single(b => b.Id == id).Status == "Accepted")
+            if (entity.BusinessTrips.Single(b => b.Id == id).Status == RequestStatus.Accepted)
             {
-            entity.BusinessTrips.Single(b => b.Id == id).Status = status;
                 Email userEmail = new Email();
                 userEmail.SendEmailToBusinessTripOperator(entity.BusinessTrips.Single(b => b.Id == id).Id);
             }
+
+            entity.BusinessTrips.Single(b => b.Id == id).Status = RequestStatus.Canceled;
 
             return View("MyBusinessTrips", myBusinessTripsCollection);
         }

@@ -85,14 +85,14 @@ namespace BusinessTrips.DAL.Model
             businessTripRepository.CommitChanges();
         }
 
-        public void ChangeStatus(string status)
+        public void ChangeStatus(RequestStatus status)
         {
-            var businessTripsRepository = new BusinessTripsRepository();
-            var businessTripModel = businessTripsRepository.GetById(Id);
-
-            if (businessTripModel != null && businessTripModel.Status == RequestStatus.Pending)
+            if (Status == RequestStatus.Pending)
             {
-                businessTripsRepository.UpdateStatus(businessTripModel.Id, status);
+                Status = status;
+
+                var businessTripsRepository = new BusinessTripsRepository();
+                businessTripsRepository.UpdateStatus(Id, status);
                 businessTripsRepository.CommitChanges();
             }
         }

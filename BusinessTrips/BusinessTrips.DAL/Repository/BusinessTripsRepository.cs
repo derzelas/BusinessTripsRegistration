@@ -79,7 +79,7 @@ namespace BusinessTrips.DAL.Repository
             return queryable.ToList().Select(e => e.ToSearchBusinessTripViewModel());
         }
 
-        public void UpdateStatus(Guid id, string status)
+        public void UpdateStatus(Guid id, RequestStatus status)
         {
             var businessTripEntity = storage.GetSetFor<BusinessTripEntity>().Single(u => u.Id == id);
             businessTripEntity.Status = status;
