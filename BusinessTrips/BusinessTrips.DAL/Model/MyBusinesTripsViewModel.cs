@@ -9,6 +9,6 @@ namespace BusinessTrips.DAL.Model
         public DateTime StartingDate { get; set; }
         public DateTime EndingDate { get; set; }
         public string Accomodation { get; set; }
-        public string Status { get; set; }
+        public RequestStatus Status { get; set; }
     }
 }
