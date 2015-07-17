@@ -74,6 +74,7 @@ namespace BusinessTrips.Controllers
                 MyBusinesTripsViewModels = entity.BusinessTrips.Select(e => new MyBusinesTripsViewModel(new BusinessTripModel(e)))
             };
 
+
             if (entity.BusinessTrips.Single(b => b.Id == id).Status == "Pending")
                 entity.BusinessTrips.Single(b => b.Id == id).Status = status;
 
