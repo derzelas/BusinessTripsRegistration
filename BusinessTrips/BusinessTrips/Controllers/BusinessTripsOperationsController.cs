@@ -25,6 +25,7 @@ namespace BusinessTrips.Controllers
             return View("RequestNotFound");
         }
 
+        // You create an object just to call one method to change other object status
         public ActionResult ChangeRequestStatus(Guid id, string status)
         {
             var businessTripModel = new BusinessTripModel { Id = id };

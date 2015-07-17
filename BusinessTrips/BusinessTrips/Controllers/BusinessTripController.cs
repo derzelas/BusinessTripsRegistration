@@ -45,7 +45,7 @@ namespace BusinessTrips.Controllers
             return repository.GetByEmail(email);
         }
 
-        // There will always be a cookie because of Authorize so no check for null is required
+        // There will always be a cookie because of Authorize, so no check for null is required
         private string GetUserEmailFromCookie()
         {
             var cookieValue = Request.Cookies[CookieName].Value;
