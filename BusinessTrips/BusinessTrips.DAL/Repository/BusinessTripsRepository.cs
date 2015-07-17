@@ -82,7 +82,7 @@ namespace BusinessTrips.DAL.Repository
         public void UpdateStatus(Guid id, string status)
         {
             var businessTripEntity = storage.GetSetFor<BusinessTripEntity>().Single(u => u.Id == id);
-            businessTripEntity.Status = status;
+            //businessTripEntity.Status = status;
         }
 
         public void CommitChanges()

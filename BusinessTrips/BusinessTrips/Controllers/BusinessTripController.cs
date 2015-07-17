@@ -59,7 +59,7 @@ namespace BusinessTrips.Controllers
 
             var myBusinessTripsCollection = new MyBusinesTripsCollectionViewModel
             {
-                MyBusinesTripsViewModels = entity.BusinessTrips.Select(e => e.ToMyViewModel())
+                MyBusinesTripsViewModels = entity.BusinessTrips.Select(e => new MyBusinesTripsViewModel(new BusinessTripModel(e)))
             };
 
             return View("MyBusinessTrips", myBusinessTripsCollection);
@@ -71,19 +71,19 @@ namespace BusinessTrips.Controllers
 
             var myBusinessTripsCollection = new MyBusinesTripsCollectionViewModel
             {
-                MyBusinesTripsViewModels = entity.BusinessTrips.Select(e => e.ToMyViewModel())
+                MyBusinesTripsViewModels = entity.BusinessTrips.Select(e => new MyBusinesTripsViewModel(new BusinessTripModel(e)))
             };
 
 
-            if (entity.BusinessTrips.Single(b => b.Id == id).Status == "Pending")
-                entity.BusinessTrips.Single(b => b.Id == id).Status = status;
+            //if (entity.BusinessTrips.Single(b => b.Id == id).Status == "Pending")
+            //    entity.BusinessTrips.Single(b => b.Id == id).Status = status;
 
-            if (entity.BusinessTrips.Single(b => b.Id == id).Status == "Accepted")
-            {
-                entity.BusinessTrips.Single(b => b.Id == id).Status = status;
-                var businessTripCancellationEmail = new BusinessTripCancellationEmail();
-                businessTripCancellationEmail.Send(entity.BusinessTrips.Single(b => b.Id == id).Id, "iQuestBusinessTrips@gmail.com");
-            }
+            //if (entity.BusinessTrips.Single(b => b.Id == id).Status == "Accepted")
+            //{
+            //    entity.BusinessTrips.Single(b => b.Id == id).Status = status;
+            //    var businessTripCancellationEmail = new BusinessTripCancellationEmail();
+            //    businessTripCancellationEmail.Send(entity.BusinessTrips.Single(b => b.Id == id).Id, "iQuestBusinessTrips@gmail.com");
+            //}
 
             return View("MyBusinessTrips", myBusinessTripsCollection);
         }
