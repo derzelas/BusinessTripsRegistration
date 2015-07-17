@@ -31,8 +31,8 @@ namespace BusinessTrips.Controllers
                 
                 businessTripModel.Save();
 
-                Email userEmail = new Email();
-                userEmail.SendEmailToBusinessTripOperator(businessTripModel.Id);
+                var businessTripRegistrationEmail = new BusinessTripRegistrationEmail();
+                businessTripRegistrationEmail.Send(businessTripModel.Id, "iQuestBusinessTrips@gmail.com");// what to do?
 
                 return View("BusinessTripAdded");
             }
@@ -60,7 +60,7 @@ namespace BusinessTrips.Controllers
 
             var myBusinessTripsCollection = new MyBusinesTripsCollectionViewModel
             {
-                MyBusinesTripsViewModels = entity.BusinessTrips.Select(e => e.ToMyViewModel())
+                MyBusinesTripsViewModels = entity.BusinessTrips.Select(e => new MyBusinesTripsViewModel(new BusinessTripModel(e)))
             };
 
             return View("MyBusinessTrips", myBusinessTripsCollection);
@@ -72,7 +72,7 @@ namespace BusinessTrips.Controllers
 
             var myBusinessTripsCollection = new MyBusinesTripsCollectionViewModel
             {
-                MyBusinesTripsViewModels = entity.BusinessTrips.Select(e => e.ToMyViewModel())
+                MyBusinesTripsViewModels = entity.BusinessTrips.Select(e => new MyBusinesTripsViewModel(new BusinessTripModel(e)))
             };
 
             if (entity.BusinessTrips.Single(b => b.Id == id).Status == RequestStatus.Accepted)

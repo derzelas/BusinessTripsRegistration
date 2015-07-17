@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using BusinessTrips.DAL.Repository;
 
 namespace BusinessTrips.DAL.Model
@@ -17,7 +18,7 @@ namespace BusinessTrips.DAL.Model
         public IEnumerable<SearchBusinessTripModel> LoadOtherBusinessTrips(BusinessTripFilter filter)
         {
             var businessTripsRepository = new BusinessTripsRepository();
-            return businessTripsRepository.GetOtherBusinessTrips(filter);
+            return businessTripsRepository.GetOtherBusinessTrips(filter).Select(m => new SearchBusinessTripModel(m));
         }
     }
 }

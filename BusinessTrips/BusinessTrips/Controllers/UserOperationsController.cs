@@ -21,8 +21,8 @@ namespace BusinessTrips.Controllers
             {
                 userRegistrationModel.Save();
 
-                Email email = new Email();
-                email.SendConfirmationEmail(userRegistrationModel.Email, userRegistrationModel.Id);
+                var userRegistrationEmail = new UserRegistrationEmail();
+                userRegistrationEmail.Send(userRegistrationModel.Id,userRegistrationModel.Email);
 
                 return View("RegisterMailSent");
             }
