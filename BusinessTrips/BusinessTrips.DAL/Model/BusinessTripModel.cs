@@ -75,6 +75,32 @@ namespace BusinessTrips.DAL.Model
         [Display(Name = "Status:")]
         public string Status { get; set; }
 
+        public BusinessTripModel() { }
+
+        public BusinessTripModel(BusinessTripEntity businessTripEntity)
+        {
+            Id = businessTripEntity.Id;
+            User = businessTripEntity.User;
+            PmName = businessTripEntity.PmName;
+            ProjectNumber = businessTripEntity.ProjectNumber;
+            ProjectName = businessTripEntity.ProjectName;
+            Accomodation = businessTripEntity.Accomodation;
+            BankCardIsNeeded = businessTripEntity.BankCardIsNeeded;
+            ClientLocation = businessTripEntity.ClientLocation;
+            ClientName = businessTripEntity.ClientName;
+            Department = businessTripEntity.Department;
+            EndingDate = businessTripEntity.EndingDate;
+            LeavingFrom = businessTripEntity.LeavingFrom;
+            MeansOfTransportation = businessTripEntity.MeansOfTransportation;
+            OtherInfo = businessTripEntity.OtherInfo;
+            PhoneIsNeeded = businessTripEntity.PhoneIsNeeded;
+            StartingDate = businessTripEntity.StartingDate;
+            Status = businessTripEntity.Status;
+            TaskName = businessTripEntity.TaskName;
+            TaskNumber = businessTripEntity.TaskNumber;
+            WithPersonalCar = businessTripEntity.WithPersonalCar;
+        }
+
         public void Save()
         {
             Id = Guid.NewGuid();

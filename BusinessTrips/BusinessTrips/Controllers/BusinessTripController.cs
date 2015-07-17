@@ -27,7 +27,7 @@ namespace BusinessTrips.Controllers
                 var userEntity = GetUserEntityByEmail(GetUserEmailFromCookie());
 
                 businessTripModel.User = userEntity;
-                
+
                 businessTripModel.Save();
 
                 Email userEmail = new Email();
@@ -37,7 +37,7 @@ namespace BusinessTrips.Controllers
             }
             return View("RegisterBusinessTrip");
         }
-        
+
         private UserEntity GetUserEntityByEmail(string email)
         {
             var repository = new UserRepository();
@@ -59,7 +59,7 @@ namespace BusinessTrips.Controllers
 
             var myBusinessTripsCollection = new MyBusinesTripsCollectionViewModel
             {
-                MyBusinesTripsViewModels = entity.BusinessTrips.Select(e => e.ToMyViewModel())
+                MyBusinesTripsViewModels = entity.BusinessTrips.Select(e => new MyBusinesTripsViewModel(new BusinessTripModel(e)))
             };
 
             return View("MyBusinessTrips", myBusinessTripsCollection);
@@ -71,7 +71,7 @@ namespace BusinessTrips.Controllers
 
             var myBusinessTripsCollection = new MyBusinesTripsCollectionViewModel
             {
-                MyBusinesTripsViewModels = entity.BusinessTrips.Select(e => e.ToMyViewModel())
+                MyBusinesTripsViewModels = entity.BusinessTrips.Select(e => new MyBusinesTripsViewModel(new BusinessTripModel(e)))
             };
 
             if (entity.BusinessTrips.Single(b => b.Id == id).Status == "Pending")
@@ -79,14 +79,14 @@ namespace BusinessTrips.Controllers
 
             if (entity.BusinessTrips.Single(b => b.Id == id).Status == "Accepted")
             {
-            entity.BusinessTrips.Single(b => b.Id == id).Status = status;
+                entity.BusinessTrips.Single(b => b.Id == id).Status = status;
                 Email userEmail = new Email();
                 userEmail.SendEmailToBusinessTripOperator(entity.BusinessTrips.Single(b => b.Id == id).Id);
             }
 
             return View("MyBusinessTrips", myBusinessTripsCollection);
         }
-        
+
         public ActionResult RequestDetails(Guid id)
         {
             var tripsRepository = new BusinessTripsRepository();
