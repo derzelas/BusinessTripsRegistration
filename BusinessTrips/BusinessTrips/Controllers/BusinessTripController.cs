@@ -77,8 +77,8 @@ namespace BusinessTrips.Controllers
 
             if (entity.BusinessTrips.Single(b => b.Id == id).Status == RequestStatus.Accepted)
             {
-                Email userEmail = new Email();
-                userEmail.SendEmailToBusinessTripOperator(entity.BusinessTrips.Single(b => b.Id == id).Id);
+                //Email userEmail = new Email();
+                //userEmail.SendEmailToBusinessTripOperator(entity.BusinessTrips.Single(b => b.Id == id).Id);
             }
 
             entity.BusinessTrips.Single(b => b.Id == id).Status = RequestStatus.Canceled;

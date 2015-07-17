@@ -16,7 +16,7 @@ namespace BusinessTrips.Controllers
             if (Guid.TryParse(guid, out parsedGuid))
             {
                 var tripsRepository = new BusinessTripsRepository();
-                var retreivedModel = tripsRepository.GetById(parsedGuid);
+                BusinessTripModel retreivedModel = tripsRepository.GetById(parsedGuid);
 
                 if (retreivedModel != null)
                 {
