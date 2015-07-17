@@ -89,8 +89,8 @@ namespace BusinessTrips.DAL.Model
         
         public void ChangeStatus(string status)
         {
-            BusinessTripsRepository businessTripsRepository = new BusinessTripsRepository();
-            BusinessTripModel businessTripModel = businessTripsRepository.GetById(Id);
+            var businessTripsRepository = new BusinessTripsRepository();
+            var businessTripModel = businessTripsRepository.GetById(Id);
 
             if (businessTripModel != null && businessTripModel.Status == "Pending")
             {

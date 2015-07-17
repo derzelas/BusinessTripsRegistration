@@ -25,6 +25,7 @@ namespace BusinessTrips.Controllers
             return View("RequestNotFound");
         }
 
+        // You create an object just to call one method to change other object status
         public ActionResult ChangeRequestStatus(Guid id, string status)
         {
             var businessTripModel = new BusinessTripModel { Id = id };
@@ -32,14 +33,6 @@ namespace BusinessTrips.Controllers
             businessTripModel.ChangeStatus(status);
 
             return View("StatusChangedSuccessfully");
-        }
-
-        public ActionResult RequestDetails(Guid id)
-        {
-            var tripsRepository = new BusinessTripsRepository();
-            var retreivedModel = tripsRepository.GetById(id);
-
-            return View("RequestDetails", retreivedModel);
         }
     }
 }

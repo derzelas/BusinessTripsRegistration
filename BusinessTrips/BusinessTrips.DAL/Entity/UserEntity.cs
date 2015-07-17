@@ -9,7 +9,7 @@ namespace BusinessTrips.DAL.Entity
         public UserEntity()
         {
             Roles = new HashSet<RoleEntity>();
-            BusinessTrips = new List<BusinessTripEntity>();
+            BusinessTrips = new HashSet<BusinessTripEntity>();
         }
 
         public Guid Id { get; set; }
