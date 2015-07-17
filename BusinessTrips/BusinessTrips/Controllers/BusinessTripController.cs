@@ -30,14 +30,14 @@ namespace BusinessTrips.Controllers
                 
                 businessTripModel.Save();
 
-                Email userEmail = new Email();
-                userEmail.SendEmailToBusinessTripOperator(businessTripModel.Id);
+                var businessTripRegistrationEmail = new BusinessTripRegistrationEmail();
+                businessTripRegistrationEmail.Send(businessTripModel.Id, "iQuestBusinessTrips@gmail.com");// what to do?
 
                 return View("BusinessTripAdded");
             }
             return View("RegisterBusinessTrip");
         }
-        
+
         private UserEntity GetUserEntityByEmail(string email)
         {
             var repository = new UserRepository();
@@ -79,14 +79,14 @@ namespace BusinessTrips.Controllers
 
             if (entity.BusinessTrips.Single(b => b.Id == id).Status == "Accepted")
             {
-            entity.BusinessTrips.Single(b => b.Id == id).Status = status;
-                Email userEmail = new Email();
-                userEmail.SendEmailToBusinessTripOperator(entity.BusinessTrips.Single(b => b.Id == id).Id);
+                entity.BusinessTrips.Single(b => b.Id == id).Status = status;
+                var businessTripCancellationEmail = new BusinessTripCancellationEmail();
+                businessTripCancellationEmail.Send(entity.BusinessTrips.Single(b => b.Id == id).Id, "iQuestBusinessTrips@gmail.com");
             }
 
             return View("MyBusinessTrips", myBusinessTripsCollection);
         }
-        
+
         public ActionResult RequestDetails(Guid id)
         {
             var tripsRepository = new BusinessTripsRepository();

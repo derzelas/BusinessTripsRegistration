@@ -5,15 +5,17 @@ using System.Web;
 
 namespace BusinessTrips.Services
 {
-    public class Email
+    public abstract class EmailBase
     {
-        private SmtpClient client;
-        public const string SenderAddress = "iQuestBusinessTrips@gmail.com";
+        protected SmtpClient Client;
+        protected const string SenderAddress = "iQuestBusinessTrips@gmail.com";
+        protected const string BusinessTripOperatorAddress = "iQuestBusinessTrips@gmail.com";
 
-        public Email()
+
+        protected EmailBase()
         {
             const int port = 587;
-            client = new SmtpClient("smtp.gmail.com", port)
+            Client = new SmtpClient("smtp.gmail.com", port)
             {
                 UseDefaultCredentials = false,
                 EnableSsl = true,
@@ -21,49 +23,85 @@ namespace BusinessTrips.Services
             };
         }
 
-        public void SendConfirmationEmail(string receiverAddress, Guid id)
-        {
-            var mailMessage = new MailMessage
-             {
-                 From = new MailAddress(SenderAddress),
-                 Subject = "E-mail confirmation",
-                 Body = GenerateConfirmationMessage(id),
-                 To = { receiverAddress }
-             };
+        public abstract void Send(Guid id, string receiverAddress = "iQuestBusinessTrips@gmail.com");
+    }
 
-            client.Send(mailMessage);
+    public class UserRegistrationEmail : EmailBase
+    {
+        public override void Send(Guid id, string receiverAddress)
+        {
+            var message = new MailMessage
+            {
+                From = new MailAddress(SenderAddress),
+                Subject = "E-mail confirmation",
+                Body = GenerateBodyMessage(id),
+                To = { receiverAddress }
+            };
+
+            Client.Send(message);
         }
 
-        private string GenerateConfirmationMessage(Guid id)
+        private static string GenerateBodyMessage(Guid id)
         {
-            var welcomeMessage = "Welcome to Business trips. Here is your confirmation link: ";
+            const string welcomeMessage = "Welcome to Business trips. Here is your confirmation link: ";
 
-            string link = String.Format("http://{0}:{1}/UserOperations/ConfirmRegistration/?guid={2}",
+            var link = string.Format("http://{0}:{1}/UserOperations/ConfirmRegistration/?guid={2}",
                 HttpContext.Current.Request.Url.Host,
                 HttpContext.Current.Request.Url.Port,
                 id);
 
             return welcomeMessage + link;
         }
+    }
 
-        public void SendEmailToBusinessTripOperator(Guid id)
+    public class BusinessTripRegistrationEmail : EmailBase
+    {
+        public override void Send(Guid id,)
         {
-            var mailMessage = new MailMessage
-            {
-                From = new MailAddress(SenderAddress),
-                Subject = "New request pending",
-                Body = GenerateBusinessTripRegistrationMessage(id),
-                To = { SenderAddress }
-            };
+            var message = new MailMessage
+           {
+               From = new MailAddress(SenderAddress),
+               Subject = "New request pending",
+               Body = GenerateBodyMessage(id),
+               To = { BusinessTripOperatorAddress }
+           };
 
-            client.Send(mailMessage);
+            Client.Send(message);
         }
 
-        private string GenerateBusinessTripRegistrationMessage(Guid id)
+        private static string GenerateBodyMessage(Guid id)
         {
-            var message = "A new business trip has been registered, to accept/reject the request click here: ";
+            const string message = "A new business trip has been registered, to accept/reject the request click here: ";
 
-            string link = String.Format("http://{0}:{1}/BusinessTripsOperations/GetRequestBy/?guid={2}",
+            var link = string.Format("http://{0}:{1}/BusinessTripsOperations/GetRequestBy/?guid={2}",
+                HttpContext.Current.Request.Url.Host,
+                HttpContext.Current.Request.Url.Port,
+                id);
+
+            return message + link;
+        }
+    }
+
+    public class BusinessTripCancellationEmail : EmailBase
+    {
+        public override void Send(Guid id, string receiverAddress)
+        {
+            var message = new MailMessage
+            {
+                From = new MailAddress(SenderAddress),
+                Subject = "Request canceled",
+                Body = GenerateBodyMessage(id),
+                To = { BusinessTripOperatorAddress }
+            };
+
+            Client.Send(message);
+        }
+
+        private static string GenerateBodyMessage(Guid id)
+        {
+            const string message = "The following business trip has been canceled: ";
+
+            var link = string.Format("http://{0}:{1}/BusinessTripsOperations/GetRequestBy/?guid={2}",
                 HttpContext.Current.Request.Url.Host,
                 HttpContext.Current.Request.Url.Port,
                 id);
