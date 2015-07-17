@@ -56,7 +56,7 @@ namespace BusinessTrips.Services
 
     public class BusinessTripRegistrationEmail : EmailBase
     {
-        public override void Send(Guid id,)
+        public override void Send(Guid id, string receiverAddress)
         {
             var message = new MailMessage
            {
