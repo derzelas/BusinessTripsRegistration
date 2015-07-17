@@ -27,11 +27,11 @@ namespace BusinessTrips.Controllers
                 var userEntity = GetUserEntityByEmail(GetUserEmailFromCookie());
 
                 businessTripModel.User = userEntity;
-
+                
                 businessTripModel.Save();
 
-                Email userEmail = new Email();
-                userEmail.SendEmailToBusinessTripOperator(businessTripModel.Id);
+                var businessTripRegistrationEmail = new BusinessTripRegistrationEmail();
+                businessTripRegistrationEmail.Send(businessTripModel.Id, "iQuestBusinessTrips@gmail.com");// what to do?
 
                 return View("BusinessTripAdded");
             }
@@ -59,7 +59,7 @@ namespace BusinessTrips.Controllers
 
             var myBusinessTripsCollection = new MyBusinesTripsCollectionViewModel
             {
-                MyBusinesTripsViewModels = entity.BusinessTrips.Select(e => new MyBusinesTripsViewModel(new BusinessTripModel(e)))
+                MyBusinesTripsViewModels = entity.BusinessTrips.Select(e => e.ToMyViewModel())
             };
 
             return View("MyBusinessTrips", myBusinessTripsCollection);
@@ -71,7 +71,7 @@ namespace BusinessTrips.Controllers
 
             var myBusinessTripsCollection = new MyBusinesTripsCollectionViewModel
             {
-                MyBusinesTripsViewModels = entity.BusinessTrips.Select(e => new MyBusinesTripsViewModel(new BusinessTripModel(e)))
+                MyBusinesTripsViewModels = entity.BusinessTrips.Select(e => e.ToMyViewModel())
             };
 
 
@@ -81,8 +81,8 @@ namespace BusinessTrips.Controllers
             if (entity.BusinessTrips.Single(b => b.Id == id).Status == "Accepted")
             {
                 entity.BusinessTrips.Single(b => b.Id == id).Status = status;
-                Email userEmail = new Email();
-                userEmail.SendEmailToBusinessTripOperator(entity.BusinessTrips.Single(b => b.Id == id).Id);
+                var businessTripCancellationEmail = new BusinessTripCancellationEmail();
+                businessTripCancellationEmail.Send(entity.BusinessTrips.Single(b => b.Id == id).Id, "iQuestBusinessTrips@gmail.com");
             }
 
             return View("MyBusinessTrips", myBusinessTripsCollection);
