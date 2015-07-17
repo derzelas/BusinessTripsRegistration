@@ -1,5 +1,4 @@
 ﻿using System;
-using BusinessTrips.DAL.Model;
 
 namespace BusinessTrips.DAL.Entity
 {
@@ -31,58 +30,6 @@ namespace BusinessTrips.DAL.Entity
 
         public string OtherInfo { get; set; }
 
-        public string Status { get; set; }
-
-        public BusinessTripModel ToModel()
-        {
-            return new BusinessTripModel
-            {
-                Id = Id,
-                User = User,
-                PmName = PmName,
-                ProjectNumber = ProjectNumber,
-                ProjectName = ProjectName,
-                Accomodation = Accomodation,
-                BankCardIsNeeded = BankCardIsNeeded,
-                ClientLocation = ClientLocation,
-                ClientName = ClientName,
-                Department = Department,
-                EndingDate = EndingDate,
-                LeavingFrom = LeavingFrom,
-                MeansOfTransportation = MeansOfTransportation,
-                OtherInfo = OtherInfo,
-                PhoneIsNeeded = PhoneIsNeeded,
-                StartingDate = StartingDate,
-                Status = Status,
-                TaskName = TaskName,
-                TaskNumber = TaskNumber,
-                WithPersonalCar = WithPersonalCar
-            };
-        }
-
-        public SearchBusinessTripModel ToSearchBusinessTripViewModel()
-        {
-            return new SearchBusinessTripModel
-            {
-                Name = User.Name,
-                StartingDate = StartingDate,
-                Location = ClientLocation,
-                Accomodation = Accomodation,
-                MeansOfTransportaion = MeansOfTransportation
-            };
-        }
-
-        public MyBusinesTripsViewModel ToMyViewModel()
-        {
-            return new MyBusinesTripsViewModel()
-            {
-                StartingDate = StartingDate,
-                EndingDate = EndingDate,
-                Id = Id,
-                Department = ClientLocation,
-                Accomodation = Accomodation,
-                Status = Status
-            };
-        }
+        public RequestStatus Status { get; set; }
     }
 }

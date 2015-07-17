@@ -27,17 +27,17 @@ namespace BusinessTrips.DAL.Repository
 
             if (businessTripEntity != null)
             {
-                return businessTripEntity.ToModel();
+                return new BusinessTripModel(businessTripEntity);
             }
             return null;
         }
 
         public IEnumerable<BusinessTripModel> GetByUser(Guid id)
         {
-            return storage.GetSetFor<BusinessTripEntity>().Where(e => e.User.Id == id).ToList().Select(e => e.ToModel());
+            return storage.GetSetFor<BusinessTripEntity>().Where(e => e.User.Id == id).ToList().Select(e => new BusinessTripModel(e));
         }
 
-        public IEnumerable<SearchBusinessTripModel> GetOtherBusinessTrips(BusinessTripFilter filter)
+        public IEnumerable<BusinessTripModel> GetOtherBusinessTrips(BusinessTripFilter filter)
         {
             var queryable = storage.GetSetFor<BusinessTripEntity>();
 
@@ -76,7 +76,7 @@ namespace BusinessTrips.DAL.Repository
                 queryable = queryable.Where(m => m.EndingDate == filter.EndingDate);
             }
 
-            return queryable.ToList().Select(e => e.ToSearchBusinessTripViewModel());
+            return queryable.ToList().Select(e => new BusinessTripModel(e));
         }
 
         public void UpdateStatus(Guid id, string status)

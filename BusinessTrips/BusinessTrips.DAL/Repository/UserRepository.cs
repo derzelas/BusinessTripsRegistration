@@ -34,7 +34,7 @@ namespace BusinessTrips.DAL.Repository
                 return null;
             }
 
-            return userEntity.ToModel();
+            return new UserModel(userEntity);
         }
 
         public void Confirm(Guid id)

@@ -34,5 +34,17 @@ namespace BusinessTrips.Controllers
 
             return View("StatusChangedSuccessfully");
         }
+
+        public ActionResult AcceptRequest(Guid id)
+        {
+
+            return View("StatusChangedSuccessfully");
+        }
+
+        public ActionResult RejectRequest(Guid id)
+        {
+
+            return View("StatusChangedSuccessfully");
+        }
     }
 }

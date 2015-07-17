@@ -32,23 +32,19 @@ namespace BusinessTrips.Controllers
         public ActionResult ConfirmRegistration(string guid)
         {
             var registrationConfirmationModel = new RegistrationConfirmationModel();
-            try
+
+            Guid parsedGuid;
+            if (Guid.TryParse(guid, out parsedGuid))
             {
-                registrationConfirmationModel.Id = Guid.Parse(guid);
-            }
-            catch (ArgumentNullException)
-            {
-                return View("Error");
-            }
-            catch (FormatException)
-            {
-                return View("Error");
+                registrationConfirmationModel.Id = parsedGuid;
+                registrationConfirmationModel.Confirm();
+
+                return View("ConfirmRegistration");
             }
 
-            registrationConfirmationModel.Confirm();
-
-            return View("ConfirmRegistration");
+            return View("Error");
         }
+
 
         // Should I test it ?
         public ActionResult Login()
@@ -70,6 +66,7 @@ namespace BusinessTrips.Controllers
                 FormsAuthentication.SetAuthCookie(userModel.Email, false);
                 return RedirectToAction("RegisterBusinessTrip", "BusinessTrip");
             }
+
             return View("UnknownUser");
         }
 
@@ -79,9 +76,9 @@ namespace BusinessTrips.Controllers
         {
             if (Request.Cookies["Cookie"] != null)
             {
-                HttpCookie myCookie = new HttpCookie("Cookie");
-                myCookie.Expires = DateTime.Now.AddDays(-1d);
-                Response.Cookies.Add(myCookie);
+                HttpCookie cookie = new HttpCookie("Cookie");
+                cookie.Expires = DateTime.Now.AddDays(-1d);
+                Response.Cookies.Add(cookie);
 
                 FormsAuthentication.SignOut();
             }

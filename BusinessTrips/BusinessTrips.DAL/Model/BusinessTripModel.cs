@@ -73,12 +73,38 @@ namespace BusinessTrips.DAL.Model
         public string OtherInfo { get; set; }
 
         [Display(Name = "Status:")]
-        public string Status { get; set; }
+        public RequestStatus Status { get; set; }
+
+        public BusinessTripModel() { }
+
+        public BusinessTripModel(BusinessTripEntity businessTripEntity)
+        {
+            Id = businessTripEntity.Id;
+            User = businessTripEntity.User;
+            PmName = businessTripEntity.PmName;
+            ProjectNumber = businessTripEntity.ProjectNumber;
+            ProjectName = businessTripEntity.ProjectName;
+            Accomodation = businessTripEntity.Accomodation;
+            BankCardIsNeeded = businessTripEntity.BankCardIsNeeded;
+            ClientLocation = businessTripEntity.ClientLocation;
+            ClientName = businessTripEntity.ClientName;
+            Department = businessTripEntity.Department;
+            EndingDate = businessTripEntity.EndingDate;
+            LeavingFrom = businessTripEntity.LeavingFrom;
+            MeansOfTransportation = businessTripEntity.MeansOfTransportation;
+            OtherInfo = businessTripEntity.OtherInfo;
+            PhoneIsNeeded = businessTripEntity.PhoneIsNeeded;
+            StartingDate = businessTripEntity.StartingDate;
+            Status = businessTripEntity.Status;
+            TaskName = businessTripEntity.TaskName;
+            TaskNumber = businessTripEntity.TaskNumber;
+            WithPersonalCar = businessTripEntity.WithPersonalCar;
+        }
 
         public void Save()
         {
             Id = Guid.NewGuid();
-            Status = "Pending";
+            Status = RequestStatus.Pending;
 
             var businessTripRepository = new BusinessTripsRepository();
             businessTripRepository.Add(this);
@@ -90,7 +116,7 @@ namespace BusinessTrips.DAL.Model
             var businessTripsRepository = new BusinessTripsRepository();
             var businessTripModel = businessTripsRepository.GetById(Id);
 
-            if (businessTripModel != null && businessTripModel.Status == "Pending")
+            if (businessTripModel != null && businessTripModel.Status == RequestStatus.Pending)
             {
                 businessTripsRepository.UpdateStatus(businessTripModel.Id, status);
                 businessTripsRepository.CommitChanges();
