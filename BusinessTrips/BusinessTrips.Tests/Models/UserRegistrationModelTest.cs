@@ -62,7 +62,7 @@ namespace BusinessTrips.Tests.Models
 
             model.Save();
 
-            repositoryMock.Verify(m=>m.CreateByUserEntity(It.Is<UserEntity>(u=>u.HashedPassword == expected)));
+            repositoryMock.Verify(m => m.CreateByUserEntity(It.Is<UserEntity>(u => u.HashedPassword == expected)));
         }
     }
 }

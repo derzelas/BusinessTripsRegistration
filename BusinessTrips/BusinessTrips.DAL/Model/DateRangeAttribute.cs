@@ -7,6 +7,6 @@ namespace BusinessTrips.DAL.Model
     {
         public DateRangeAttribute()
             : base(typeof(DateTime), DateTime.Now.AddYears(-1).ToString(), DateTime.Now.AddYears(20).ToString())
-        { }                                         
+        { }
     }
 }

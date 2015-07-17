@@ -10,7 +10,6 @@ namespace BusinessTrips.DAL.Model
         }
     }
 
-
     public interface IRandomStringGenerator
     {
         string GetString();

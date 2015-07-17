@@ -27,7 +27,7 @@ namespace BusinessTrips.Controllers
                 var userEntity = GetUserEntityByEmail(GetUserEmailFromCookie());
 
                 businessTripModel.User = userEntity;
-                
+
                 businessTripModel.Save();
 
                 Email userEmail = new Email();
@@ -37,7 +37,7 @@ namespace BusinessTrips.Controllers
             }
             return View("RegisterBusinessTrip");
         }
-        
+
         private UserEntity GetUserEntityByEmail(string email)
         {
             var repository = new UserRepository();
@@ -78,7 +78,7 @@ namespace BusinessTrips.Controllers
 
             return View("MyBusinessTrips", myBusinessTripsCollection);
         }
-        
+
         public ActionResult RequestDetails(Guid id)
         {
             var tripsRepository = new BusinessTripsRepository();

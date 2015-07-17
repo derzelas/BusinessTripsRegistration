@@ -8,7 +8,6 @@ namespace BusinessTrips.Tests.DataAccesssLayer
     [TestClass]
     public class UniqueEmailAttributeTest
     {
-
         private UniqueEmailAttribute uniqueEmailAttribute;
         private EfStorage efStorage;
 

@@ -18,7 +18,7 @@ namespace BusinessTrips.DAL.Entity
         public string HashedPassword { get; set; }
         public string Salt { get; set; }
         public bool IsConfirmed { get; set; }
-        public virtual ICollection<RoleEntity> Roles {get; set; }
+        public virtual ICollection<RoleEntity> Roles { get; set; }
         public virtual ICollection<BusinessTripEntity> BusinessTrips { get; set; }
 
         public UserModel ToModel()

@@ -11,7 +11,6 @@ namespace BusinessTrips.Tests.DataAccesssLayer
     [TestClass]
     public class UserRepositoryTest
     {
-
         private UserRepository repository;
         private UserModel userModel;
         private UserEntity userEntity;

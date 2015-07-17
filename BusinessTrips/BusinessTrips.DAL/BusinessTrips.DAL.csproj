@@ -99,7 +99,6 @@
     <Compile Include="Repository\StorageFactory.cs" />
     <Compile Include="Storage\EFStorageDBInitializer.cs" />
     <Compile Include="Storage\EFStorage.cs" />
-    <Compile Include="Storage\InMemoryStorage.cs" />
     <Compile Include="Storage\IStorage.cs" />
     <Compile Include="Model\RegistrationConfirmationModel.cs" />
     <Compile Include="Model\UniqueEmailAttribute.cs" />

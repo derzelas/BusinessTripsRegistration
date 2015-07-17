@@ -18,7 +18,6 @@ namespace BusinessTrips.DAL.Model
         [Display(Name = "PM name:")]
         public string PmName { get; set; }
 
-
         [Display(Name = "Project number:")]
         public string ProjectNumber { get; set; }
 
@@ -27,7 +26,6 @@ namespace BusinessTrips.DAL.Model
 
         [Display(Name = "Task name:")]
         public string TaskName { get; set; }
-
 
         [Display(Name = "Task number:")]
         public string TaskNumber { get; set; }
@@ -86,7 +84,7 @@ namespace BusinessTrips.DAL.Model
             businessTripRepository.Add(this);
             businessTripRepository.CommitChanges();
         }
-        
+
         public void ChangeStatus(string status)
         {
             var businessTripsRepository = new BusinessTripsRepository();
