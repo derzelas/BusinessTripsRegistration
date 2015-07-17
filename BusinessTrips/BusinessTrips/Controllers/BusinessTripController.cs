@@ -9,7 +9,7 @@ using BusinessTrips.Services;
 
 namespace BusinessTrips.Controllers
 {
-    [Authorize(Roles = "Regular")]
+    [Authorize(Roles = "Regular,HR")]
     public class BusinessTripController : Controller
     {
         private const string CookieName = "Cookie";
@@ -78,7 +78,7 @@ namespace BusinessTrips.Controllers
 
             return View("MyBusinessTrips", myBusinessTripsCollection);
         }
-
+        
         public ActionResult RequestDetails(Guid id)
         {
             var tripsRepository = new BusinessTripsRepository();

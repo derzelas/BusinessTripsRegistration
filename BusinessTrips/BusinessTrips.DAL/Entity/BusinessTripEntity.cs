@@ -6,7 +6,7 @@ namespace BusinessTrips.DAL.Entity
     public class BusinessTripEntity
     {
         public Guid Id { get; set; }
-        public UserEntity User { get; set; }
+        public virtual UserEntity User { get; set; }
 
         public string PmName { get; set; }
         public string ProjectNumber { get; set; }
