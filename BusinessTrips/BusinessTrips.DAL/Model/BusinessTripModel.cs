@@ -73,7 +73,7 @@ namespace BusinessTrips.DAL.Model
         public string OtherInfo { get; set; }
 
         [Display(Name = "Status:")]
-        public string Status { get; set; }
+        public RequestStatus Status { get; set; }
 
         public BusinessTripModel() { }
 
@@ -104,7 +104,7 @@ namespace BusinessTrips.DAL.Model
         public void Save()
         {
             Id = Guid.NewGuid();
-            Status = "Pending";
+            Status = RequestStatus.Pending;
 
             var businessTripRepository = new BusinessTripsRepository();
             businessTripRepository.Add(this);
@@ -116,7 +116,7 @@ namespace BusinessTrips.DAL.Model
             var businessTripsRepository = new BusinessTripsRepository();
             var businessTripModel = businessTripsRepository.GetById(Id);
 
-            if (businessTripModel != null && businessTripModel.Status == "Pending")
+            if (businessTripModel != null && businessTripModel.Status == RequestStatus.Pending)
             {
                 businessTripsRepository.UpdateStatus(businessTripModel.Id, status);
                 businessTripsRepository.CommitChanges();

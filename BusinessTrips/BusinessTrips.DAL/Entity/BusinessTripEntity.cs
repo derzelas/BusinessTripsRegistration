@@ -30,6 +30,6 @@ namespace BusinessTrips.DAL.Entity
 
         public string OtherInfo { get; set; }
 
-        public string Status { get; set; }
+        public RequestStatus Status { get; set; }
     }
 }
