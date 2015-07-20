@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using BusinessTrips.DAL.Entity;
-using BusinessTrips.DAL.Model;
 using BusinessTrips.DAL.Storage;
 
 namespace BusinessTrips.DAL.Repository
@@ -25,16 +24,11 @@ namespace BusinessTrips.DAL.Repository
             storage.Add(userEntity);
         }
 
-        public UserModel GetById(Guid id)
+        public UserEntity GetById(Guid id)
         {
             var userEntity = storage.GetSetFor<UserEntity>().FirstOrDefault(m => m.Id == id);
 
-            if (userEntity == null)
-            {
-                return null;
-            }
-
-            return new UserModel(userEntity);
+            return userEntity;
         }
 
         public void Confirm(Guid id)
@@ -57,7 +51,7 @@ namespace BusinessTrips.DAL.Repository
     public interface IUserRepository
     {
         void CreateByUserEntity(UserEntity userEntity);
-        UserModel GetById(Guid id);
+        UserEntity GetById(Guid id);
         void Confirm(Guid id);
         UserEntity GetByEmail(string email);
         void CommitChanges();

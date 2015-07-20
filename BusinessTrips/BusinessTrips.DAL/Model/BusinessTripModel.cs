@@ -8,7 +8,7 @@ namespace BusinessTrips.DAL.Model
     public class BusinessTripModel
     {
         public Guid Id { get; set; }
-        public UserEntity User { get; set; }
+        public UserModel User { get; set; }
 
         [Required]
         [Display(Name = "Department:")]
@@ -79,8 +79,21 @@ namespace BusinessTrips.DAL.Model
 
         public BusinessTripModel(BusinessTripEntity businessTripEntity)
         {
+            Load(businessTripEntity);
+        }
+
+        public void LoadById(Guid id)
+        {
+            var businessTripRepository = new BusinessTripsRepository();
+            BusinessTripEntity businessTripEntity = businessTripRepository.GetById(id);
+
+            Load(businessTripEntity);
+        }
+
+        private void Load(BusinessTripEntity businessTripEntity)
+        {
             Id = businessTripEntity.Id;
-            User = businessTripEntity.User;
+            User = new UserModel(businessTripEntity.User);
             PmName = businessTripEntity.PmName;
             ProjectNumber = businessTripEntity.ProjectNumber;
             ProjectName = businessTripEntity.ProjectName;
@@ -128,7 +141,7 @@ namespace BusinessTrips.DAL.Model
             return new BusinessTripEntity()
             {
                 Id = Id,
-                User = User,
+                User = User.ToEntity(),
                 PmName = PmName,
                 ProjectNumber = ProjectNumber,
                 ProjectName = ProjectName,
