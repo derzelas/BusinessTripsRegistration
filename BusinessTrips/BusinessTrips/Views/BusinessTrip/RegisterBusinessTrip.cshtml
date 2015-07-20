@@ -1,141 +1,171 @@
 ﻿@using System.Web.Mvc.Html
+
 @model BusinessTrips.DAL.Model.BusinessTripModel
 
-<body>
-    @using (Html.BeginForm("RegisterBusinessTrip", "BusinessTrip", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-    {
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="container-fluid">
-            <h2>Register new business trip.</h2>
-            <form class="form-inline">
-                <fieldset>
-                    <div class="form-group">
-                        <div class="col-md-6">
-                            @Html.LabelFor(m => m.Department)
-                            @Html.TextBoxFor(m => m.Department, new { @class = "form-control" })
-                            @Html.ValidationMessageFor(m => m.Department, "", new { @class = "text-danger" })
-                        </div>
+<h2>Register new business trip</h2>
 
-                        <div class="col-md-6">
-                            @Html.LabelFor(m => m.PmName)
-                            @Html.TextBoxFor(m => m.PmName, new { @class = "form-control", PlaceHolder = "PM Name" })
-                            @Html.ValidationMessageFor(m => m.PmName, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                </fieldset>
-                <br>
-                <fieldset>
-                    <div class="form-group">
-                        <div class="col-md-6">
-                            @Html.LabelFor(m => m.ProjectName)
-                            @Html.TextBoxFor(m => m.ProjectName, new { @class = "form-control", PlaceHolder = "Project Name" })
-                            @Html.ValidationMessageFor(m => m.ProjectName, "", new { @class = "text-danger" })
-                        </div>
-                        <div class="col-md-6">
-                            @Html.LabelFor(m => m.ProjectNumber)
-                            @Html.TextBoxFor(m => m.ProjectNumber, new { @class = "form-control", PlaceHolder = "Project Number" })
-                            @Html.ValidationMessageFor(m => m.ProjectNumber, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                </fieldset>
-                <br>
-                <fieldset>
-                    <div class="form-group">
-                        <div class="col-md-6">
-                            @Html.LabelFor(m => m.TaskName)
-                            @Html.TextBoxFor(m => m.TaskName, new { @class = "form-control", PlaceHolder = "Task Name" })
-                            @Html.ValidationMessageFor(m => m.TaskName, "", new { @class = "text-danger" })
-                        </div>
-                        <div class="col-md-6">
-                            @Html.LabelFor(m => m.TaskNumber)
-                            @Html.TextBoxFor(m => m.TaskNumber, new { @class = "form-control", PlaceHolder = "Task Number" })
-                            @Html.ValidationMessageFor(m => m.TaskNumber, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                </fieldset>
-                <br>
-                <fieldset>
-                    <div class="form-group">
-                        <div class="col-md-6">
-                            @Html.LabelFor(m => m.LeavingFrom)
-                            @Html.TextBoxFor(m => m.LeavingFrom, new { @class = "form-control" })
-                            @Html.ValidationMessageFor(m => m.LeavingFrom, "", new { @class = "text-danger" })
-                        </div>
-                        <div class="col-md-6">
-                            @Html.LabelFor(m => m.StartingDate)
-                            @Html.EditorFor(m => m.StartingDate, new { @class = "form-control" })
-                            @Html.ValidationMessageFor(m => m.StartingDate, "", new { @class = "text-danger" })
-                        </div>
-                        <div class="col-md-6">
-                            @Html.LabelFor(m => m.EndingDate)
-                            @Html.EditorFor(m => m.EndingDate, new { @class = "form-control" })
-                            @Html.ValidationMessageFor(m => m.EndingDate, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                </fieldset>
-                <br>
+@using (Html.BeginForm("RegisterBusinessTrip", "BusinessTrip", FormMethod.Post))
+{
+    <style>
+        table {
+            margin-top: 50px;
+        }
 
-                <fieldset>
-                    <div class="form-group">
-                        <div class="col-md-6">
-                            @Html.LabelFor(m => m.ClientName)
-                            @Html.TextBoxFor(m => m.ClientName, new { @class = "form-control", PlaceHolder = "Client Name" })
-                            @Html.ValidationMessageFor(m => m.ClientName, "", new { @class = "text-danger" })
-                        </div>
-                        <div class="col-md-6">
-                            @Html.LabelFor(m => m.ClientLocation)
-                            @Html.TextBoxFor(m => m.ClientLocation, new { @class = "form-control", PlaceHolder = "Client Location" })
-                            @Html.ValidationMessageFor(m => m.ClientLocation, "", new { @class = "text-danger" })
-                        </div>
-                        <div class="col-md-6">
-                            @Html.LabelFor(m => m.MeansOfTransportation)
-                            @Html.TextBoxFor(m => m.MeansOfTransportation, new { @class = "form-control" })
-                            @Html.ValidationMessageFor(m => m.MeansOfTransportation, "", new { @class = "text-danger" })
-                        </div>
-                        <br>
-                    </div>
-                </fieldset>
-                <br>
-                <fieldset>
-                    <div class="form-group">
-                        <div class="col-md-6">
-                            @Html.LabelFor(m => m.Accomodation)
-                            @Html.TextBoxFor(m => m.Accomodation, new { @class = "form-control", PlaceHolder = "Accomodation" })
-                        </div>
-                        <br>
-                    </div>
-                </fieldset>
-                <fieldset>
-                    <div class="form-group">
-                        <div class="checkbox">
-                            @Html.LabelFor(m => m.PhoneIsNeeded)
-                            @Html.CheckBoxFor(m => m.PhoneIsNeeded, new { @class = "form-control" })
-                        </div>
-                        <br>
-                        <br>
-                        <div class="checkbox">
-                            @Html.LabelFor(m => m.BankCardIsNeeded)
-                            @Html.CheckBoxFor(m => m.BankCardIsNeeded, new { @class = "form-control" })
-                        </div>
-                        <br>
-                        <br>
-                        <div class="checkbox">
-                            @Html.LabelFor(m => m.WithPersonalCar)
-                            @Html.CheckBoxFor(m => m.WithPersonalCar, new { @class = "form-control" })
-                        </div>
-                    </div>
-                </fieldset>
-                <br>
-                <fieldset>
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.OtherInfo)
-                        <div class="col-xs-80">
-                            @Html.TextAreaFor(m => m.OtherInfo, new { @class = "form-control", rows = "8", cols = "120", PlaceHolder = "anything else you wish to mention" })
-                        </div>
-                    </div>
-                </fieldset>
-                <button type="submit" class="btn btn-default">Place request</button>
-            </form>
-        </div>
-    }
-</body>
+        th {
+            text-align: left;
+            padding-left: 25px;
+        }
+
+        tr, td {
+            text-align: left;
+            padding-bottom: 25px;
+            padding-left: 25px;
+        }
+
+        textarea {
+            -moz-resize: none;
+            -ms-resize: none;
+            -o-resize: none;
+            resize: none;
+        }
+    </style>
+
+    <table>
+        <tr>
+            <th>
+                @Html.LabelFor(m => m.Department)
+            </th>
+            <th>
+                @Html.LabelFor(m => m.PmName)
+            </th>
+            <th>
+                @Html.LabelFor(m => m.ProjectName)
+            </th>
+            <th>
+                @Html.LabelFor(m => m.ProjectNumber)
+            </th>
+            <th>
+                @Html.LabelFor(m => m.TaskName)
+            </th>
+            <th>
+                @Html.LabelFor(m => m.TaskNumber)
+            </th>
+        </tr>
+        <tr>
+            <td>
+                @Html.TextBoxFor(m => m.Department, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Department, "", new { @class = "text-danger" })
+            </td>
+            <td>
+                @Html.TextBoxFor(m => m.PmName, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.PmName, "", new { @class = "text-danger" })
+            </td>
+            <td>
+                @Html.TextBoxFor(m => m.ProjectName, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.ProjectName, "", new { @class = "text-danger" })
+            </td>
+            <td>
+                @Html.TextBoxFor(m => m.ProjectNumber, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.ProjectNumber, "", new { @class = "text-danger" })
+            </td>
+            <td>
+                @Html.TextBoxFor(m => m.TaskName, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.TaskName, "", new { @class = "text-danger" })
+            </td>
+            <td>
+                @Html.TextBoxFor(m => m.TaskNumber, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.TaskNumber, "", new { @class = "text-danger" })
+            </td>
+        </tr>
+        <tr>
+            <th colspan="2">
+                @Html.LabelFor(m => m.LeavingFrom)
+            </th>
+            <th colspan="2">
+                @Html.LabelFor(m => m.StartingDate)
+            </th>
+            <th colspan="2">
+                @Html.LabelFor(m => m.EndingDate)
+            </th>
+        </tr>
+        <tr>
+            <td colspan="2">
+                @Html.TextBoxFor(m => m.LeavingFrom, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.LeavingFrom, "", new { @class = "text-danger" })
+            </td>
+            <td colspan="2">
+                @Html.EditorFor(m => m.StartingDate, new { @class = "date" })
+                @Html.ValidationMessageFor(m => m.StartingDate, "", new { @class = "text-danger" })
+            </td>
+            <td colspan="2">
+                @Html.EditorFor(m => m.EndingDate, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.EndingDate, "", new { @class = "text-danger" })
+            </td>
+        </tr>
+        <tr>
+            <th colspan="2">
+                @Html.LabelFor(m => m.ClientName)
+            </th>
+            <th colspan="4">
+                @Html.LabelFor(m => m.ClientLocation)
+            </th>
+        </tr>
+        <tr>
+            <td colspan="2">
+                @Html.TextBoxFor(m => m.ClientName, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.ClientName, "", new { @class = "text-danger" })
+            </td>
+            <td colspan="4">
+                @Html.TextBoxFor(m => m.ClientLocation, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.ClientLocation, "", new { @class = "text-danger" })
+            </td>
+        </tr>
+        <tr>
+            <th colspan="6">
+                @Html.LabelFor(m => m.MeansOfTransportation)
+            </th>
+        </tr>
+        <tr>
+            <td colspan="6">
+                @Html.TextBoxFor(m => m.MeansOfTransportation, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.MeansOfTransportation, "", new { @class = "text-danger" })
+            </td>
+        </tr>
+        <tr>
+            <th colspan="6">
+                @Html.LabelFor(m => m.Accomodation)
+            </th>
+        </tr>
+        <tr>
+            <td colspan="2">
+                @Html.TextBoxFor(m => m.Accomodation, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Accomodation, "", new { @class = "text-danger" })
+            </td>
+            <td colspan="2">
+                @Html.CheckBoxFor(m => m.PhoneIsNeeded)
+                @Html.LabelFor(m => m.PhoneIsNeeded)
+                @Html.ValidationMessageFor(m => m.PhoneIsNeeded, "", new {@class = "text-danger"})
+            </td>
+            <td colspan="2">
+                @Html.CheckBoxFor(m => m.BankCardIsNeeded)
+                @Html.LabelFor(m => m.BankCardIsNeeded)
+                @Html.ValidationMessageFor(m => m.BankCardIsNeeded, "", new {@class = "text-danger"})
+            </td>
+        </tr>
+        <tr>
+            <th colspan="2">
+                @Html.LabelFor(m => m.OtherInfo)
+            </th>
+        </tr>
+        <tr>
+            <td colspan="2">
+                @Html.TextAreaFor(m => m.OtherInfo, new { @class = "form-control", @rows = "5", PlaceHolder = "anything else you wish to mention" })
+            </td>
+            <td>
+                <div align="left">
+                    <button type="submit" class="btn btn-default">Place request</button>
+                </div>
+            </td>
+        </tr>
+    </table>
+}
