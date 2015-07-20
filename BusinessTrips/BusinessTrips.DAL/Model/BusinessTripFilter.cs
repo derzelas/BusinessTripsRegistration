@@ -7,7 +7,7 @@ namespace BusinessTrips.DAL.Model
     public class BusinessTripFilter
     {
         [DisplayName("Name")]
-        public string EmployeeName { get; set; }
+        public string Person { get; set; }
 
         [DisplayName("Client Name")]
         public string ClientName { get; set; }

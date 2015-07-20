@@ -35,9 +35,9 @@ namespace BusinessTrips.DAL.Repository
         {
             var queryable = storage.GetSetFor<BusinessTripEntity>();
 
-            if (!string.IsNullOrEmpty(filter.EmployeeName))
+            if (!string.IsNullOrEmpty(filter.Person))
             {
-                queryable = queryable.Where(m => m.User.Name.Contains(filter.EmployeeName));
+                queryable = queryable.Where(m => m.User.Name.Contains(filter.Person));
             }
 
             if (!string.IsNullOrEmpty(filter.ClientName))

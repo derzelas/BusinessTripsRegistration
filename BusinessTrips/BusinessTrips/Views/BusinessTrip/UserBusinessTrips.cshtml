@@ -5,7 +5,7 @@
 
 <h2>My Business Trips</h2>
 
-@using (Html.BeginForm("ViewMyBusinessTrips", "BusinessTrip", FormMethod.Get, new { @class = "form-horizontal" }))
+@using (Html.BeginForm("ViewUserBusinessTrips", "BusinessTrip", FormMethod.Get, new { @class = "form-horizontal" }))
 {
     <table class="table">
         <tr>
@@ -48,8 +48,8 @@
                     </strong>
                 </td>
                 <td>
-                    @Html.ActionLink("Details", "RequestDetails", new { id = item.Id })
-                    @Html.ActionLink("Cancel", "CancelRequest", new { id = item.Id })
+                    @Html.ActionLink("Details", "Details", new { id = item.Id })
+                    @Html.ActionLink("Cancel", "Cancel", new { id = item.Id })
                 </td>
             </tr>
         }

@@ -13,13 +13,13 @@ namespace BusinessTrips.Controllers
     {
         private const string CookieName = "Cookie";
 
-        public ActionResult RegisterBusinessTrip()
+        public ActionResult Register()
         {
-            return View("RegisterBusinessTrip");
+            return View("Register");
         }
 
         [HttpPost]
-        public ActionResult RegisterBusinessTrip(BusinessTripModel businessTripModel)
+        public ActionResult Register(BusinessTripModel businessTripModel)
         {
             if (ModelState.IsValid)
             {
@@ -32,9 +32,39 @@ namespace BusinessTrips.Controllers
                 var email = new Email();
                 email.SendBusinessTripRegistrationEmail(businessTripModel.Id);
 
-                return View("BusinessTripAdded");
+                return View("RegisteredSuccessfully");
             }
-            return View("RegisterBusinessTrip");
+
+            return View("Register");
+        }
+
+        public ActionResult Details(Guid id)
+        {
+            BusinessTripModel retreivedModel = new BusinessTripModel();
+            retreivedModel.LoadById(id);
+
+            return View("BusinessTripDetails", retreivedModel);
+        }
+
+        public ActionResult Cancel(Guid id)
+        {
+            BusinessTripModel businessTripModel = new BusinessTripModel();
+            businessTripModel.LoadById(id);
+
+            if (businessTripModel.Status == BusinessTripStatus.Accepted)
+            {
+                Email userEmail = new Email();
+                userEmail.SendCancelBusinessTripEmail(businessTripModel.Id);
+            }
+
+            businessTripModel.ChangeStatus(BusinessTripStatus.Canceled);
+
+            return ViewUserBusinessTrips();
+        }
+        
+        public ActionResult SearchBusinessTrips()
+        {
+            return View("AllBusinessTrips", new OtherBusinessTripsCollectionViewModel());
         }
 
         private UserModel GetUserModelByEmail(string email)
@@ -52,7 +82,7 @@ namespace BusinessTrips.Controllers
             return FormsAuthentication.Decrypt(cookieValue).Name;
         }
 
-        public ActionResult ViewMyBusinessTrips()
+        public ActionResult ViewUserBusinessTrips()
         {
             var userModel = GetUserModelByEmail(GetUserEmailFromCookie());
 
@@ -61,36 +91,7 @@ namespace BusinessTrips.Controllers
                 MyBusinesTripsViewModels = userModel.BusinessTrips.Select(e => new PersonalBusinesTripsViewModel(e))
             };
 
-            return View("MyBusinessTrips", myBusinessTripsCollection);
-        }
-
-        public ActionResult CancelRequest(Guid id)
-        {
-            BusinessTripModel businessTripModel = new BusinessTripModel();
-            businessTripModel.LoadById(id);
-
-            if (businessTripModel.Status == BusinessTripStatus.Accepted)
-            {
-                Email userEmail = new Email();
-                userEmail.SendCancelBusinessTripEmail(businessTripModel.Id);
-            }
-
-            businessTripModel.ChangeStatus(BusinessTripStatus.Canceled);
-
-            return ViewMyBusinessTrips();
-        }
-
-        public ActionResult RequestDetails(Guid id)
-        {
-            BusinessTripModel retreivedModel = new BusinessTripModel();
-            retreivedModel.LoadById(id);
-
-            return View("RequestDetails", retreivedModel);
-        }
-
-        public ActionResult SearchBusinessTrips()
-        {
-            return View("OthersBusinessTrips", new OtherBusinessTripsCollectionViewModel());
+            return View("UserBusinessTrips", myBusinessTripsCollection);
         }
 
         [HttpPost]
@@ -98,7 +99,7 @@ namespace BusinessTrips.Controllers
         {
             businessTripsCollectionViewModel.SearchBusinessTripModels = new BusinessTripCollectionModel().LoadOtherBusinessTrips(businessTripsCollectionViewModel.BusinessTripFilter);
 
-            return View("OthersBusinessTrips", businessTripsCollectionViewModel);
+            return View("AllBusinessTrips", businessTripsCollectionViewModel);
         }
     }
 }
