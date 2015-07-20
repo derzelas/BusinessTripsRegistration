@@ -29,12 +29,11 @@ namespace BusinessTrips.Controllers
 
                 businessTripModel.Save();
 
-                var businessTripRegistrationEmail = new BusinessTripRegistrationEmail();
-                businessTripRegistrationEmail.Send(businessTripModel.Id, "iQuestBusinessTrips@gmail.com");
+                var email = new Email();
+                email.SendBusinessTripRegistrationEmail(businessTripModel.Id);
 
                 return View("BusinessTripAdded");
             }
-
             return View("RegisterBusinessTrip");
         }
 
@@ -71,13 +70,13 @@ namespace BusinessTrips.Controllers
             BusinessTripModel businessTripModel = new BusinessTripModel();
             businessTripModel.LoadById(id);
 
-            if (businessTripModel.Status == RequestStatus.Accepted)
+            if (businessTripModel.Status == BusinessTripStatus.Accepted)
             {
-                //Email userEmail = new Email();
-                //userEmail.SendEmailToBusinessTripOperator(entity.BusinessTrips.Single(b => b.Id == id).Id);
+                Email userEmail = new Email();
+                userEmail.SendCancelBusinessTripEmail(businessTripModel.Id);
             }
 
-            businessTripModel.ChangeStatus(RequestStatus.Canceled);
+            businessTripModel.ChangeStatus(BusinessTripStatus.Canceled);
 
             return ViewMyBusinessTrips();
         }

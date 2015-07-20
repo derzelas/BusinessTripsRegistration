@@ -1,6 +1,6 @@
 ﻿namespace BusinessTrips.DAL
 {
-    public enum RequestStatus
+    public enum BusinessTripStatus
     {
         Accepted,
         Rejected,

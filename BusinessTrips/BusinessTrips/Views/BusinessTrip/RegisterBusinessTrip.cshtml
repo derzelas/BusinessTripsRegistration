@@ -142,14 +142,14 @@
                 @Html.ValidationMessageFor(m => m.Accomodation, "", new { @class = "text-danger" })
             </td>
             <td colspan="2">
-                @Html.LabelFor(m => m.PhoneIsNeeded)
                 @Html.CheckBoxFor(m => m.PhoneIsNeeded)
-                @Html.ValidationMessageFor(m => m.PhoneIsNeeded, "", new { @class = "text-danger" })
+                @Html.LabelFor(m => m.PhoneIsNeeded)
+                @Html.ValidationMessageFor(m => m.PhoneIsNeeded, "", new {@class = "text-danger"})
             </td>
             <td colspan="2">
-                @Html.LabelFor(m => m.BankCardIsNeeded)
                 @Html.CheckBoxFor(m => m.BankCardIsNeeded)
-                @Html.ValidationMessageFor(m => m.BankCardIsNeeded, "", new { @class = "text-danger" })
+                @Html.LabelFor(m => m.BankCardIsNeeded)
+                @Html.ValidationMessageFor(m => m.BankCardIsNeeded, "", new {@class = "text-danger"})
             </td>
         </tr>
         <tr>

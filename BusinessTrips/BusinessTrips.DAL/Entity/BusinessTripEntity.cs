@@ -20,8 +20,7 @@ namespace BusinessTrips.DAL.Entity
 
         public string ClientName { get; set; }
         public string ClientLocation { get; set; }
-
-        public bool WithPersonalCar { get; set; }
+        
         public string MeansOfTransportation { get; set; }
 
         public string Accomodation { get; set; }
@@ -30,6 +29,6 @@ namespace BusinessTrips.DAL.Entity
 
         public string OtherInfo { get; set; }
 
-        public RequestStatus Status { get; set; }
+        public BusinessTripStatus Status { get; set; }
     }
 }
