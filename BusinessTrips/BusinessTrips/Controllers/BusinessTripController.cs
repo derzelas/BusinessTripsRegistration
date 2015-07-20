@@ -65,7 +65,7 @@ namespace BusinessTrips.Controllers
 
         public ActionResult Cancel(Guid businessTripId)
         {
-            BusinessTripModel businessTripModel = new BusinessTripModel(id);
+            BusinessTripModel businessTripModel = new BusinessTripModel(businessTripId);
 
             if (businessTripModel.Status == BusinessTripStatus.Accepted)
             {
@@ -80,7 +80,7 @@ namespace BusinessTrips.Controllers
 
         public ActionResult GetDetails(Guid businessTripId)
         {
-            BusinessTripModel retreivedModel = new BusinessTripModel(id);
+            BusinessTripModel businessTripModel = new BusinessTripModel(businessTripId);
 
             if (businessTripModel.User.Id.ToString() == HttpContext.User.Identity.Name)
             {
