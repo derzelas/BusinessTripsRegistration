@@ -37,6 +37,12 @@ namespace BusinessTrips.DAL.Model
             Load(userEntity);
         }
 
+        public UserModel(Guid id)
+        {
+            var repository = new UserRepository();
+            Load(repository.GetById(id));       
+        }
+
         private void Load(UserEntity userEntity)
         {
             Id = userEntity.Id;
@@ -61,16 +67,6 @@ namespace BusinessTrips.DAL.Model
             Load(userEntity);
 
             return hashPassword == userEntity.HashedPassword;
-        }
-
-        public void LoadById(string id)
-        {
-            Guid parsedGuid;
-            if (Guid.TryParse(id, out parsedGuid))
-            {
-                var repository = new UserRepository();
-                Load(repository.GetById(parsedGuid));       
-            }
         }
 
         public UserEntity ToEntity()

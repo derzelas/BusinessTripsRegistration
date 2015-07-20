@@ -14,8 +14,7 @@ namespace BusinessTrips.Controllers
 
             if (Guid.TryParse(guid, out parsedGuid))
             {
-                BusinessTripModel retreivedModel = new BusinessTripModel();
-                retreivedModel.LoadById(Guid.Parse(guid));
+                BusinessTripModel retreivedModel = new BusinessTripModel(Guid.Parse(guid));
 
                 return View("ManageRequest", retreivedModel);
             }

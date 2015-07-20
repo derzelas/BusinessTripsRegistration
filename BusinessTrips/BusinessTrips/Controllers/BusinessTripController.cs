@@ -39,8 +39,7 @@ namespace BusinessTrips.Controllers
 
         private UserModel GetUserModelById(string userId)
         {
-            UserModel userModel = new UserModel();
-            userModel.LoadById(userId);
+            UserModel userModel = new UserModel(Guid.Parse(userId));
 
             return userModel;
         }
@@ -66,8 +65,7 @@ namespace BusinessTrips.Controllers
 
         public ActionResult Cancel(Guid businessTripId)
         {
-            BusinessTripModel businessTripModel = new BusinessTripModel();
-            businessTripModel.LoadById(businessTripId);
+            BusinessTripModel businessTripModel = new BusinessTripModel(id);
 
             if (businessTripModel.Status == BusinessTripStatus.Accepted)
             {
@@ -82,8 +80,7 @@ namespace BusinessTrips.Controllers
 
         public ActionResult GetDetails(Guid businessTripId)
         {
-            BusinessTripModel businessTripModel = new BusinessTripModel();
-            businessTripModel.LoadById(businessTripId);
+            BusinessTripModel retreivedModel = new BusinessTripModel(id);
 
             if (businessTripModel.User.Id.ToString() == HttpContext.User.Identity.Name)
             {

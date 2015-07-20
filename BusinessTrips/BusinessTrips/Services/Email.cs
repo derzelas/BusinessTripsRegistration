@@ -24,7 +24,7 @@ namespace BusinessTrips.Services
             };
         }
 
-        public void Send(string subject, string body, string receiver)
+        private void Send(string subject, string body, string receiver)
         {
             var message = new MailMessage
             {
