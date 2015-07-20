@@ -23,7 +23,7 @@ namespace BusinessTrips.Controllers
         {
             if (ModelState.IsValid)
             {
-                UserModel userModel = GetUserModelByEmail(GetUserEmailFromCookie());
+                UserModel userModel = GetUserModelById(GetUserIdFromCookie());
 
                 businessTripModel.User = userModel;
 
@@ -34,18 +34,20 @@ namespace BusinessTrips.Controllers
 
                 return View("BusinessTripAdded");
             }
+
             return View("RegisterBusinessTrip");
         }
 
-        private UserModel GetUserModelByEmail(string email)
+        private UserModel GetUserModelById(string email)
         {
             UserModel userModel = new UserModel();
-            userModel.LoadByEmail(email);
+            userModel.LoadById(email);
+
             return userModel;
         }
 
         // There will always be a cookie because of Authorize, so no check for null is required
-        private string GetUserEmailFromCookie()
+        private string GetUserIdFromCookie()
         {
             var cookieValue = Request.Cookies[CookieName].Value;
 
@@ -54,19 +56,19 @@ namespace BusinessTrips.Controllers
 
         public ActionResult ViewMyBusinessTrips()
         {
-            var userModel = GetUserModelByEmail(GetUserEmailFromCookie());
+            var userModel = GetUserModelById(GetUserIdFromCookie());
 
-            var myBusinessTripsCollection = new PersonalBusinesTripsCollectionViewModel
+            var personalBusinessTripsCollection = new PersonalBusinesTripsCollectionViewModel
             {
-                MyBusinesTripsViewModels = userModel.BusinessTrips.Select(e => new PersonalBusinesTripsViewModel(e))
+                PersonalBusinessTripsViewModels = userModel.BusinessTrips.Select(e => new PersonalBusinesTripsViewModel(e))
             };
 
-            return View("MyBusinessTrips", myBusinessTripsCollection);
+            return View("PersonalBusinessTrips", personalBusinessTripsCollection);
         }
 
         public ActionResult CancelRequest(Guid id)
         {
-            BusinessTripModel businessTripModel=new BusinessTripModel();
+            BusinessTripModel businessTripModel = new BusinessTripModel();
             businessTripModel.LoadById(id);
 
             if (businessTripModel.Status == RequestStatus.Accepted)

@@ -45,17 +45,22 @@ namespace BusinessTrips.Services
             throw new NotImplementedException();
         }
 
-        public override string[] GetRolesForUser(string email)
+        public override string[] GetRolesForUser(string id)
         {
-            if (string.IsNullOrEmpty(email))
+            if (string.IsNullOrEmpty(id))
             {
                 throw new ProviderException("Email cannot be empty or null.");
             }
 
-            var userRepository = new UserRepository();
-            var userEntity = userRepository.GetByEmail(email);
+            Guid parsedGuid;
+            if (Guid.TryParse(id, out parsedGuid))
+            {
+                var userRepository = new UserRepository();
+                var userEntity = userRepository.GetById(parsedGuid);
 
-            return userEntity.Roles.Select(x => x.Name).ToArray();
+                return userEntity.Roles.Select(x => x.Name).ToArray();
+            }
+            return null;
         }
 
         public override string[] GetUsersInRole(string roleName)

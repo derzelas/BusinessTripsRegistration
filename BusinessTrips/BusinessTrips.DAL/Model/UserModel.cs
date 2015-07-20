@@ -58,18 +58,25 @@ namespace BusinessTrips.DAL.Model
             }
 
             string hashPassword = PasswordHasher.HashPassword(Password + userEntity.Salt);
+            Load(userEntity);
+
             return hashPassword == userEntity.HashedPassword;
         }
 
-        public void LoadByEmail(string email)
+        public void LoadById(string id)
         {
-            var repository = new UserRepository();
-            Load(repository.GetByEmail(email));
+            Guid parsedGuid;
+            if (Guid.TryParse(id, out parsedGuid))
+            {
+                var repository = new UserRepository();
+                Load(repository.GetById(parsedGuid));       
+            }
         }
 
         public UserEntity ToEntity()
         {
             var repository = new UserRepository();
+
             return repository.GetById(Id);
         }
     }

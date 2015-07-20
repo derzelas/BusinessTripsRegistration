@@ -211,7 +211,7 @@
     <Content Include="Views\UserOperations\Error.cshtml" />
     <Content Include="Views\UserOperations\Logout.cshtml" />
     <Content Include="Views\BusinessTripsOperations\ManageRequest.cshtml" />
-    <Content Include="Views\BusinessTrip\MyBusinessTrips.cshtml" />
+    <Content Include="Views\BusinessTrip\PersonalBusinessTrips.cshtml" />
     <Content Include="Views\BusinessTripsOperations\RequestNotFound.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\UnauthenticatedLayout.cshtml" />
