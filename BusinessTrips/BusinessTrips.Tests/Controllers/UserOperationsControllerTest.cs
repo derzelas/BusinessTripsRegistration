@@ -36,36 +36,19 @@ namespace BusinessTrips.Tests.Controllers
         public void ConfirmRegistrationSetIsConfirmedPropertyToTrueIfUserGuidExistsAndIsValid()
         {
             var userRegistrationModel = new UserRegistrationModel();
-
             userRegistrationModel.Save();
 
+            var result = controller.ConfirmRegistration(userRegistrationModel.Id.ToString()) as ViewResult;
             var repository = new UserRepository();
-
-
-            var registrationConfirmationModel = new RegistrationConfirmationModel();
-            registrationConfirmationModel.Id = userRegistrationModel.Id;
-            registrationConfirmationModel.Confirm();
-
-            UserModel userModel = repository.GetById(registrationConfirmationModel.Id);
+            var userModel = new UserModel(repository.GetById(userRegistrationModel.Id));
 
             Assert.AreEqual(userModel.IsConfirmed, true);
-        }
-
-        [TestMethod]
-        public void ConfirmRegistrationReturnsConfirmViewWhenGuidIsValid()
-        {
-            var result = controller.ConfirmRegistration(Guid.NewGuid().ToString()) as ViewResult;
-
             Assert.AreEqual("ConfirmRegistration", result.ViewName);
         }
 
         [TestMethod]
         public void ConfirmRegistrationReturnsErrorViewWhenGuidIsEmpty()
         {
-            var registrationConfirmationModel = new RegistrationConfirmationModel();
-
-            registrationConfirmationModel.Confirm();
-
             var result = controller.ConfirmRegistration(string.Empty) as ViewResult;
 
             Assert.IsNotNull(result);
@@ -75,10 +58,6 @@ namespace BusinessTrips.Tests.Controllers
         [TestMethod]
         public void ConfirmRegistrationReturnsErrorViewWhenGuidHasBadFormat()
         {
-            var registrationConfirmationModel = new RegistrationConfirmationModel();
-
-            registrationConfirmationModel.Confirm();
-
             string badFormatGuid = "5746876876876";
 
             var result = controller.ConfirmRegistration(badFormatGuid) as ViewResult;

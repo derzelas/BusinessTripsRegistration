@@ -40,7 +40,7 @@ namespace BusinessTrips.Tests.DataAccesssLayer
             repository.CreateByUserEntity(userEntity);
             repository.CommitChanges();
 
-            UserModel retrievedUser = repository.GetById(userEntity.Id);
+            UserModel retrievedUser = new UserModel(repository.GetById(userEntity.Id));
 
             Assert.AreEqual(userEntity.Id, retrievedUser.Id);
             Assert.AreEqual(userEntity.Name, retrievedUser.Name);
@@ -60,7 +60,7 @@ namespace BusinessTrips.Tests.DataAccesssLayer
             repository.Confirm(userModel.Id);
             repository.CommitChanges();
 
-            UserModel retrievedModel = repository.GetById(userEntity.Id);
+            UserModel retrievedModel = new UserModel(repository.GetById(userEntity.Id));
 
             Assert.AreEqual(retrievedModel.IsConfirmed, true);
         }

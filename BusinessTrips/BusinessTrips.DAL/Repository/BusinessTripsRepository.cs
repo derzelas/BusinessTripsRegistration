@@ -21,15 +21,9 @@ namespace BusinessTrips.DAL.Repository
             storage.Add(businessTripModel.ToEntity());
         }
 
-        public BusinessTripModel GetById(Guid id)
+        public BusinessTripEntity GetById(Guid id)
         {
-            var businessTripEntity = storage.GetSetFor<BusinessTripEntity>().FirstOrDefault(m => m.Id == id);
-
-            if (businessTripEntity != null)
-            {
-                return new BusinessTripModel(businessTripEntity);
-            }
-            return null;
+            return storage.GetSetFor<BusinessTripEntity>().FirstOrDefault(m => m.Id == id);
         }
 
         public IEnumerable<BusinessTripModel> GetByUser(Guid id)
@@ -82,7 +76,7 @@ namespace BusinessTrips.DAL.Repository
         public void UpdateStatus(Guid id, RequestStatus status)
         {
             var businessTripEntity = storage.GetSetFor<BusinessTripEntity>().Single(u => u.Id == id);
-            //businessTripEntity.Status = status;
+            businessTripEntity.Status = status;
         }
 
         public void CommitChanges()

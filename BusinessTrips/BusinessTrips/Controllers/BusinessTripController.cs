@@ -3,9 +3,7 @@ using System.Linq;
 using System.Web.Mvc;
 using System.Web.Security;
 using BusinessTrips.DAL;
-using BusinessTrips.DAL.Entity;
 using BusinessTrips.DAL.Model;
-using BusinessTrips.DAL.Repository;
 using BusinessTrips.Services;
 
 namespace BusinessTrips.Controllers
@@ -25,25 +23,25 @@ namespace BusinessTrips.Controllers
         {
             if (ModelState.IsValid)
             {
-                var userEntity = GetUserEntityByEmail(GetUserEmailFromCookie());
+                UserModel userModel = GetUserModelByEmail(GetUserEmailFromCookie());
 
-                businessTripModel.User = userEntity;
-                
+                businessTripModel.User = userModel;
+
                 businessTripModel.Save();
 
                 var businessTripRegistrationEmail = new BusinessTripRegistrationEmail();
-                businessTripRegistrationEmail.Send(businessTripModel.Id, "iQuestBusinessTrips@gmail.com");// what to do?
+                businessTripRegistrationEmail.Send(businessTripModel.Id, "iQuestBusinessTrips@gmail.com");
 
                 return View("BusinessTripAdded");
             }
             return View("RegisterBusinessTrip");
         }
-        
-        private UserEntity GetUserEntityByEmail(string email)
-        {
-            var repository = new UserRepository();
 
-            return repository.GetByEmail(email);
+        private UserModel GetUserModelByEmail(string email)
+        {
+            UserModel userModel = new UserModel();
+            userModel.LoadByEmail(email);
+            return userModel;
         }
 
         // There will always be a cookie because of Authorize, so no check for null is required
@@ -56,11 +54,11 @@ namespace BusinessTrips.Controllers
 
         public ActionResult ViewMyBusinessTrips()
         {
-            var entity = GetUserEntityByEmail(GetUserEmailFromCookie());
+            var userModel = GetUserModelByEmail(GetUserEmailFromCookie());
 
-            var myBusinessTripsCollection = new MyBusinesTripsCollectionViewModel
+            var myBusinessTripsCollection = new PersonalBusinesTripsCollectionViewModel
             {
-                MyBusinesTripsViewModels = entity.BusinessTrips.Select(e => new MyBusinesTripsViewModel(new BusinessTripModel(e)))
+                MyBusinesTripsViewModels = userModel.BusinessTrips.Select(e => new PersonalBusinesTripsViewModel(e))
             };
 
             return View("MyBusinessTrips", myBusinessTripsCollection);
@@ -68,28 +66,24 @@ namespace BusinessTrips.Controllers
 
         public ActionResult CancelRequest(Guid id)
         {
-            var entity = GetUserEntityByEmail(GetUserEmailFromCookie());
+            BusinessTripModel businessTripModel=new BusinessTripModel();
+            businessTripModel.LoadById(id);
 
-            var myBusinessTripsCollection = new MyBusinesTripsCollectionViewModel
-            {
-                MyBusinesTripsViewModels = entity.BusinessTrips.Select(e => new MyBusinesTripsViewModel(new BusinessTripModel(e)))
-            };
-
-            if (entity.BusinessTrips.Single(b => b.Id == id).Status == RequestStatus.Accepted)
+            if (businessTripModel.Status == RequestStatus.Accepted)
             {
                 //Email userEmail = new Email();
                 //userEmail.SendEmailToBusinessTripOperator(entity.BusinessTrips.Single(b => b.Id == id).Id);
             }
 
-            entity.BusinessTrips.Single(b => b.Id == id).Status = RequestStatus.Canceled;
+            businessTripModel.ChangeStatus(RequestStatus.Canceled);
 
-            return View("MyBusinessTrips", myBusinessTripsCollection);
+            return ViewMyBusinessTrips();
         }
-        
+
         public ActionResult RequestDetails(Guid id)
         {
-            var tripsRepository = new BusinessTripsRepository();
-            var retreivedModel = tripsRepository.GetById(id);
+            BusinessTripModel retreivedModel = new BusinessTripModel();
+            retreivedModel.LoadById(id);
 
             return View("RequestDetails", retreivedModel);
         }
@@ -102,7 +96,6 @@ namespace BusinessTrips.Controllers
         [HttpPost]
         public ActionResult SearchBusinessTrips(OtherBusinessTripsCollectionViewModel businessTripsCollectionViewModel)
         {
-
             businessTripsCollectionViewModel.SearchBusinessTripModels = new BusinessTripCollectionModel().LoadOtherBusinessTrips(businessTripsCollectionViewModel.BusinessTripFilter);
 
             return View("OthersBusinessTrips", businessTripsCollectionViewModel);

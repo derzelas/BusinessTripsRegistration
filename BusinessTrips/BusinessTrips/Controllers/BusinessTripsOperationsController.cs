@@ -2,7 +2,6 @@
 using System.Web.Mvc;
 using BusinessTrips.DAL;
 using BusinessTrips.DAL.Model;
-using BusinessTrips.DAL.Repository;
 
 namespace BusinessTrips.Controllers
 {
@@ -15,13 +14,10 @@ namespace BusinessTrips.Controllers
 
             if (Guid.TryParse(guid, out parsedGuid))
             {
-                var tripsRepository = new BusinessTripsRepository();
-                BusinessTripModel retreivedModel = tripsRepository.GetById(parsedGuid);
+                BusinessTripModel retreivedModel = new BusinessTripModel();
+                retreivedModel.LoadById(Guid.Parse(guid));
 
-                if (retreivedModel != null)
-                {
-                    return View("ManageRequest", retreivedModel);
-                }
+                return View("ManageRequest", retreivedModel);
             }
             return View("RequestNotFound");
         }

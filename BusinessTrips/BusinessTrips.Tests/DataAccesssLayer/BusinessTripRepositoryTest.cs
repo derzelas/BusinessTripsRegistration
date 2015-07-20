@@ -13,7 +13,8 @@ namespace BusinessTrips.Tests.DataAccesssLayer
     {
         private BusinessTripsRepository repository;
         private BusinessTripModel businessTripModel;
-        private UserEntity userEntity;
+        private UserRegistrationModel userRegistrationModel;
+        private UserModel userModel;
 
         [TestInitialize]
         public void Initialize()
@@ -21,12 +22,16 @@ namespace BusinessTrips.Tests.DataAccesssLayer
             EfStorage storage = new EfStorage(new DropCreateDatabaseAlways<EfStorage>());
             storage.Database.Initialize(true);
 
-            userEntity = new UserEntity()
+            userRegistrationModel = new UserRegistrationModel()
             {
-                Id = Guid.NewGuid(),
                 Email = "email@email.email",
-                HashedPassword = "password"
+                Password = "password"
             };
+
+            userRegistrationModel.Save();
+
+            userModel=new UserModel();
+            userModel.LoadByEmail(userRegistrationModel.Email);
 
             repository = new BusinessTripsRepository();
             businessTripModel = new BusinessTripModel
@@ -34,8 +39,10 @@ namespace BusinessTrips.Tests.DataAccesssLayer
                 Id = Guid.NewGuid(),
                 EndingDate = DateTime.Now,
                 StartingDate = DateTime.Now,
-                User = userEntity
+                User = userModel
             };
+
+            repository.CommitChanges();
         }
 
         [TestMethod]
@@ -44,7 +51,7 @@ namespace BusinessTrips.Tests.DataAccesssLayer
             repository.Add(businessTripModel);
             repository.CommitChanges();
 
-            var actual = repository.GetById(businessTripModel.Id);
+            var actual = new BusinessTripModel(repository.GetById(businessTripModel.Id));
 
             Assert.AreEqual(businessTripModel.Id, actual.Id);
         }
@@ -59,18 +66,19 @@ namespace BusinessTrips.Tests.DataAccesssLayer
                     Id = Guid.NewGuid(),
                     EndingDate = DateTime.Now,
                     StartingDate = DateTime.Now,
-                    User = userEntity
+                    User = userModel
                 };
+
                 repository.Add(businessTripModel);
             }
 
             repository.CommitChanges();
 
-            var actual = repository.GetByUser(userEntity.Id);
+            var actual = repository.GetByUser(userRegistrationModel.Id);
 
             foreach (var tripModel in actual)
             {
-                Assert.AreEqual(userEntity.Id, tripModel.User.Id);
+                Assert.AreEqual(userRegistrationModel.Id, tripModel.User.Id);
             }
         }
     }

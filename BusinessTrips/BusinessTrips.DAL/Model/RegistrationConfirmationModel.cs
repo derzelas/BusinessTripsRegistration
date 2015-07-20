@@ -1,4 +1,5 @@
 ﻿using System;
+using BusinessTrips.DAL.Entity;
 using BusinessTrips.DAL.Repository;
 
 namespace BusinessTrips.DAL.Model
@@ -9,11 +10,17 @@ namespace BusinessTrips.DAL.Model
 
         public void Confirm()
         {
-            UserRepository userRepository = new UserRepository();
+            var userRepository = new UserRepository();
+            UserEntity userEntity = userRepository.GetById(Id);
 
-            UserModel userModel = userRepository.GetById(Id);
+            if (userEntity == null)
+            {
+                return;
+            }
 
-            if (userModel != null && userModel.IsConfirmed == false)
+            UserModel userModel = new UserModel(userEntity);
+
+            if (userModel.IsConfirmed == false)
             {
                 userRepository.Confirm(userModel.Id);
                 userRepository.CommitChanges();
