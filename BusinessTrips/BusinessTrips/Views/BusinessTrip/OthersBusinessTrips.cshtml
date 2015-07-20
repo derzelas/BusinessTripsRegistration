@@ -1,11 +1,11 @@
 ﻿@model BusinessTrips.DAL.Model.OtherBusinessTripsCollectionViewModel
 @{
-    ViewBag.Title = "OthersBusinessTrips";
+    ViewBag.Title = "All business trips";
 }
 
-<h2>OthersBusinessTrips</h2>
+<h2>All business trips</h2>
 
-@using (Html.BeginForm("SearchBusinessTrips", "BusinessTrip", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+@using (Html.BeginForm("SearchBusinessTrips", "BusinessTrip", FormMethod.Post, new { @class = "form-horizontal"}))
 {
     <style>
         table, th, td {
@@ -16,13 +16,14 @@
             border-spacing: 15px;
         }
     </style>
+    
     <table>
         <tr>
             <td>
                 @Html.LabelFor(m => m.BusinessTripFilter.EmployeeName)
             </td>
             <td>
-                @Html.TextBoxFor(m => m.BusinessTripFilter.EmployeeName)
+                @Html.TextBoxFor(m => m.BusinessTripFilter.EmployeeName, new { @class = "form-control" })
             </td>
         <tr>
         <tr>
@@ -30,7 +31,7 @@
                 @Html.LabelFor(m => m.BusinessTripFilter.ClientName)
             </td>
             <td>
-                @Html.TextBoxFor(m => m.BusinessTripFilter.ClientName)
+                @Html.TextBoxFor(m => m.BusinessTripFilter.ClientName, new { @class = "form-control" })
             </td>
         <tr>
         <tr>
@@ -38,7 +39,7 @@
                 @Html.LabelFor(m => m.BusinessTripFilter.Accommodation)
             </td>
             <td>
-                @Html.TextBoxFor(m => m.BusinessTripFilter.Accommodation)
+                @Html.TextBoxFor(m => m.BusinessTripFilter.Accommodation, new { @class = "form-control" })
             </td>
         <tr>
         <tr>
@@ -46,7 +47,7 @@
                 @Html.LabelFor(m => m.BusinessTripFilter.StartingDate)
             </td>
             <td>
-                @Html.EditorFor(m => m.BusinessTripFilter.StartingDate, new { @class = "form-control" })
+                @Html.EditorFor(m => m.BusinessTripFilter.StartingDate)
             </td>
         <tr>
         <tr>
@@ -54,7 +55,7 @@
                 @Html.LabelFor(m => m.BusinessTripFilter.EndingDate)
             </td>
             <td>
-                @Html.EditorFor(m => m.BusinessTripFilter.EndingDate, new { @class = "form-control" })
+                @Html.EditorFor(m => m.BusinessTripFilter.EndingDate)
             </td>
         <tr>
         <tr>
@@ -62,7 +63,7 @@
                 @Html.LabelFor(m => m.BusinessTripFilter.Location)
             </td>
             <td>
-                @Html.TextBoxFor(m => m.BusinessTripFilter.Location)
+                @Html.TextBoxFor(m => m.BusinessTripFilter.Location, new { @class = "form-control" })
             </td>
         <tr>
         <tr>
@@ -70,12 +71,12 @@
                 @Html.LabelFor(m => m.BusinessTripFilter.MeanOfTransportation)
             </td>
             <td>
-                @Html.TextBoxFor(m => m.BusinessTripFilter.MeanOfTransportation)
+                @Html.TextBoxFor(m => m.BusinessTripFilter.MeanOfTransportation, new { @class = "form-control" })
             </td>
         <tr>
         <tr>
-            <td colspan="2" align="center">
-                <div class="form-group">
+            <td colspan="2">
+                <div class="form-group" align="center">
                     <div class="col-md-offset-2 col-md-10">
                         <input type="submit" value="Search" class="btn btn-default" />
                     </div>
@@ -98,10 +99,10 @@
             @Html.DisplayName("Location")
         </th>
         <th>
-            @Html.DisplayName("Means of Transportaion")
+            @Html.DisplayName("Means of transportaion")
         </th>
         <th>
-            @Html.DisplayName("Starting Date")
+            @Html.DisplayName("Starting date")
         </th>
     </tr>
 
@@ -123,12 +124,6 @@
             <td>
                 @Html.DisplayFor(modelItem => item.StartingDate)
             </td>
-            <td>
-                @*@Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-                    @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-                    @Html.ActionLink("Delete", "Delete", new { id=item.Id })*@
-            </td>
         </tr>
     }
-
 </table>

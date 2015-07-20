@@ -1,10 +1,12 @@
 ﻿@model BusinessTrips.DAL.Model.MyBusinesTripsCollectionViewModel
+
 @{
     ViewBag.Title = "My Business Trips";
 }
 
 <h2>My Business Trips</h2>
-@using (Html.BeginForm("ViewMyBusinessTrips", "BusinessTrip", FormMethod.Get, new { @class = "form-horizontal", role = "form" }))
+
+@using (Html.BeginForm("ViewMyBusinessTrips", "BusinessTrip", FormMethod.Get, new { @class = "form-horizontal" }))
 {
     <table class="table">
         <tr>
@@ -12,10 +14,10 @@
                 @Html.DisplayName("Department")
             </th>
             <th>
-                @Html.DisplayName("StartingDate")
+                @Html.DisplayName("Starting date")
             </th>
             <th>
-                @Html.DisplayName("EndingDate")
+                @Html.DisplayName("Ending date")
             </th>
             <th>
                 @Html.DisplayName("Accomodation")
@@ -42,7 +44,9 @@
                     @Html.DisplayFor(modelItem => item.Accomodation)
                 </td>
                 <td>
-                    <strong>@Html.DisplayFor(modelItem => item.Status)</strong>
+                    <strong>
+                        @Html.DisplayFor(modelItem => item.Status)
+                    </strong>
                 </td>
                 <td>
                     @Html.ActionLink("Details", "RequestDetails", new { id = item.Id })
