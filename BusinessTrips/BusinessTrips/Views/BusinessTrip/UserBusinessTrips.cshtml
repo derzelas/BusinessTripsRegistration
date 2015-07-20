@@ -1,11 +1,11 @@
-﻿@model BusinessTrips.DAL.Model.UserBusinesTripsCollectionViewModel
+﻿@model BusinessTrips.DAL.Model.UserBusinessTripsCollectionViewModel
 @{
     ViewBag.Title = "My Business Trips";
 }
 
 <h2>My Business Trips</h2>
 
-@using (Html.BeginForm("ViewUserBusinessTrips", "BusinessTrip", FormMethod.Get, new { @class = "form-horizontal" }))
+@using (Html.BeginForm("GetUserBusinessTrips", "BusinessTrip", FormMethod.Get, new { @class = "form-horizontal" }))
 {
     <table class="table">
         <tr>
@@ -27,7 +27,7 @@
             <th></th>
         </tr>
 
-        @foreach (var item in Model.UserBusinessTripsViewModels)
+        @foreach (var item in Model.UserBusinesTripsViewModel)
         {
             <tr>
                 <td>
@@ -48,7 +48,7 @@
                     </strong>
                 </td>
                 <td>
-                    @Html.ActionLink("Details", "RequestDetails", new { id = item.Id })
+                    @Html.ActionLink("Details", "GetDetails", new { id = item.Id })
                     @Html.ActionLink("Cancel", "Cancel", new { id = item.Id })
                 </td>
             </tr>

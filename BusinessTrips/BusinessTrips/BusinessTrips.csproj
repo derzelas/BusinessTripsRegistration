@@ -209,7 +209,6 @@
     <Content Include="Views\BusinessTrip\Register.cshtml" />
     <Content Include="Views\Shared\401Error.html" />
     <Content Include="Views\UserOperations\Error.cshtml" />
-    <Content Include="Views\UserOperations\Logout.cshtml" />
     <Content Include="Views\BusinessTripsOperations\ManageRequest.cshtml" />
     <Content Include="Views\BusinessTrip\UserBusinessTrips.cshtml" />
     <Content Include="Views\BusinessTripsOperations\RequestNotFound.cshtml" />

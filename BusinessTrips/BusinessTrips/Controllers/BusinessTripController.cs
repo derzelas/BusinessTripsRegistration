@@ -53,22 +53,21 @@ namespace BusinessTrips.Controllers
             return FormsAuthentication.Decrypt(cookieValue).Name;
         }
 
-        public ActionResult ViewUserBusinessTrips()
+        public ActionResult GetUserBusinessTrips()
         {
-            var userModel = GetUserModelById(GetUserIdFromCookie());
+            UserModel userModel = GetUserModelById(GetUserIdFromCookie());
 
-            var userBusinessTripsCollection = new UserBusinesTripsCollectionViewModel
-            {
-                UserBusinessTripsViewModels = userModel.BusinessTrips.Select(e => new UserBusinesTripsViewModel(e))
-            };
+            var userBusinessTripsCollection =
+                new UserBusinessTripsCollectionViewModel(
+                    userModel.BusinessTrips.Select(e => new UserBusinesTripsViewModel(e)));
 
             return View("UserBusinessTrips", userBusinessTripsCollection);
         }
 
-        public ActionResult Cancel(Guid id)
+        public ActionResult Cancel(Guid businessTripId)
         {
             BusinessTripModel businessTripModel = new BusinessTripModel();
-            businessTripModel.LoadById(id);
+            businessTripModel.LoadById(businessTripId);
 
             if (businessTripModel.Status == BusinessTripStatus.Accepted)
             {
@@ -78,24 +77,28 @@ namespace BusinessTrips.Controllers
 
             businessTripModel.ChangeStatus(BusinessTripStatus.Canceled);
 
-            return ViewUserBusinessTrips();
+            return GetUserBusinessTrips();
         }
 
-        public ActionResult RequestDetails(Guid id)
+        public ActionResult GetDetails(Guid businessTripId)
         {
-            BusinessTripModel retreivedModel = new BusinessTripModel();
-            retreivedModel.LoadById(id);
+            BusinessTripModel businessTripModel = new BusinessTripModel();
+            businessTripModel.LoadById(businessTripId);
 
-            return View("BusinessTripDetails", retreivedModel);
+            if (businessTripModel.User.Id.ToString() == HttpContext.User.Identity.Name)
+            {
+                return View("BusinessTripDetails", businessTripModel);
+            }
+            return RedirectToAction("GetUserBusinessTrips");
         }
 
-        public ActionResult Search()
+        public ActionResult GetAllBusinessTrips()
         {
             return View("AllBusinessTrips", new AllBusinessTripsCollectionViewModel());
         }
 
         [HttpPost]
-        public ActionResult Search(AllBusinessTripsCollectionViewModel businessTripsCollectionViewModel)
+        public ActionResult GetAllBusinessTrips(AllBusinessTripsCollectionViewModel businessTripsCollectionViewModel)
         {
             businessTripsCollectionViewModel.SearchBusinessTripModels = new BusinessTripCollectionModel().LoadOtherBusinessTrips(businessTripsCollectionViewModel.BusinessTripFilter);
 

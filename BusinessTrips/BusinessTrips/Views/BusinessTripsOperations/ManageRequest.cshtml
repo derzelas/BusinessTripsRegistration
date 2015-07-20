@@ -48,7 +48,7 @@
                 @Html.ActionLink("Reject", "RejectRequest", "BusinessTripsOperations", Model, null)
             }
 
-            @Html.ActionLink("Details", "Details", "BusinessTrip", new { id = Model.Id }, null)
+            @Html.ActionLink("Details", "GetDetails", "BusinessTrip", new { id = Model.Id }, null)
         </td>
     </tr>
 </table>
