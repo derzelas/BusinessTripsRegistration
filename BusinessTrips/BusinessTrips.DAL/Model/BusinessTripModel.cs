@@ -53,20 +53,17 @@ namespace BusinessTrips.DAL.Model
         [Required]
         [Display(Name = "Client location:")]
         public string ClientLocation { get; set; }
-
-        [Display(Name = "With personal car:")]
-        public bool WithPersonalCar { get; set; }
-
+        
         [Display(Name = "Means of transportation:")]
         public string MeansOfTransportation { get; set; }
 
         [Display(Name = "Accomodation:")]
         public string Accomodation { get; set; }
 
-        [Display(Name = "A phone is needed:")]
+        [Display(Name = "Phone is needed")]
         public bool PhoneIsNeeded { get; set; }
 
-        [Display(Name = "Bank card is needed:")]
+        [Display(Name = "Bank card is needed")]
         public bool BankCardIsNeeded { get; set; }
 
         [Display(Name = "Anything else you consider important:")]
@@ -111,7 +108,6 @@ namespace BusinessTrips.DAL.Model
             Status = businessTripEntity.Status;
             TaskName = businessTripEntity.TaskName;
             TaskNumber = businessTripEntity.TaskNumber;
-            WithPersonalCar = businessTripEntity.WithPersonalCar;
         }
 
         public void Save()
@@ -159,7 +155,6 @@ namespace BusinessTrips.DAL.Model
                 Status = Status,
                 TaskName = TaskName,
                 TaskNumber = TaskNumber,
-                WithPersonalCar = WithPersonalCar
             };
         }
     }
