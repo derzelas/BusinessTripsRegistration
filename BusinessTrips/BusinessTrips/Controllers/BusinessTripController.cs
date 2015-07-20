@@ -37,10 +37,10 @@ namespace BusinessTrips.Controllers
             return View("RegisterBusinessTrip");
         }
 
-        private UserModel GetUserModelById(string email)
+        private UserModel GetUserModelById(string userId)
         {
             UserModel userModel = new UserModel();
-            userModel.LoadById(email);
+            userModel.LoadById(userId);
 
             return userModel;
         }
