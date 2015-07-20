@@ -45,6 +45,11 @@ namespace BusinessTrips.DAL.Model
 
         private void Load(UserEntity userEntity)
         {
+            if (userEntity == null)
+            {
+                return;
+            }
+
             Id = userEntity.Id;
             Name = userEntity.Name;
             Email = userEntity.Email;

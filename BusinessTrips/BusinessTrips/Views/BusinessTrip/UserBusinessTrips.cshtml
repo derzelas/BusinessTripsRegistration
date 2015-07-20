@@ -48,8 +48,8 @@
                     </strong>
                 </td>
                 <td>
-                    @Html.ActionLink("Details", "GetDetails", new { id = item.Id })
-                    @Html.ActionLink("Cancel", "Cancel", new { id = item.Id })
+                    @Html.ActionLink("Details", "GetDetails", new { businessTripId = item.Id })
+                    @Html.ActionLink("Cancel", "Cancel", new { businessTripId = item.Id })
                 </td>
             </tr>
         }

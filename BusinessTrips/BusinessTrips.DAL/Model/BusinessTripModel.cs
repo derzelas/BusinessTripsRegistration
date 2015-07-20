@@ -72,7 +72,13 @@ namespace BusinessTrips.DAL.Model
         [Display(Name = "Status:")]
         public BusinessTripStatus Status { get; set; }
 
-        public BusinessTripModel() { }
+        private readonly BusinessTripsRepository businessTripRepository = new BusinessTripsRepository();
+
+        public BusinessTripModel()
+        {
+            Id = Guid.NewGuid();
+            Status = BusinessTripStatus.Pending;
+        }
 
         public BusinessTripModel(BusinessTripEntity businessTripEntity)
         {
@@ -81,7 +87,6 @@ namespace BusinessTrips.DAL.Model
 
         public BusinessTripModel(Guid id)
         {
-            var businessTripRepository = new BusinessTripsRepository();
             BusinessTripEntity businessTripEntity = businessTripRepository.GetById(id);
 
             Load(businessTripEntity);
@@ -89,6 +94,11 @@ namespace BusinessTrips.DAL.Model
 
         private void Load(BusinessTripEntity businessTripEntity)
         {
+            if (businessTripEntity == null)
+            {
+                return;    
+            }
+
             Id = businessTripEntity.Id;
             User = new UserModel(businessTripEntity.User);
             PmName = businessTripEntity.PmName;
@@ -112,10 +122,6 @@ namespace BusinessTrips.DAL.Model
 
         public void Save()
         {
-            Id = Guid.NewGuid();
-            Status = BusinessTripStatus.Pending;
-
-            var businessTripRepository = new BusinessTripsRepository();
             businessTripRepository.Add(this);
             businessTripRepository.CommitChanges();
         }
@@ -125,10 +131,9 @@ namespace BusinessTrips.DAL.Model
             if (Status == BusinessTripStatus.Pending)
             {
                 Status = status;
-
-                var businessTripsRepository = new BusinessTripsRepository();
-                businessTripsRepository.UpdateStatus(Id, status);
-                businessTripsRepository.CommitChanges();
+                
+                businessTripRepository.UpdateStatus(Id, status);
+                businessTripRepository.CommitChanges();
             }
         }
 

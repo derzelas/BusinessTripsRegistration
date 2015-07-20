@@ -12,13 +12,14 @@ namespace BusinessTrips.DAL.Model
         public void LoadBusinessTripForUser(Guid userId)
         {
             var businessTripsRepository = new BusinessTripsRepository();
-            BusinessTripModels = businessTripsRepository.GetByUser(userId);
+            BusinessTripModels = businessTripsRepository.GetByUser(userId).Select(e=>new BusinessTripModel(e));
         }
 
         public IEnumerable<SearchBusinessTripModel> LoadOtherBusinessTrips(BusinessTripFilter filter)
         {
             var businessTripsRepository = new BusinessTripsRepository();
-            return businessTripsRepository.GetOtherBusinessTrips(filter).Select(m => new SearchBusinessTripModel(m));
+
+            return businessTripsRepository.GetBusinessTrips(filter).Select(m => new SearchBusinessTripModel(m));
         }
     }
 }

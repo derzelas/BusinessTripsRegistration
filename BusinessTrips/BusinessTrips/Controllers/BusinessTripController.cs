@@ -82,10 +82,11 @@ namespace BusinessTrips.Controllers
         {
             BusinessTripModel businessTripModel = new BusinessTripModel(businessTripId);
 
-            if (businessTripModel.User.Id.ToString() == HttpContext.User.Identity.Name)
+            if (businessTripModel.Id != Guid.Empty && businessTripModel.User.Id.ToString() == HttpContext.User.Identity.Name)
             {
                 return View("BusinessTripDetails", businessTripModel);
             }
+
             return RedirectToAction("GetUserBusinessTrips");
         }
 

@@ -21,56 +21,56 @@ namespace BusinessTrips.DAL.Repository
             storage.Add(businessTripModel.ToEntity());
         }
 
-        public BusinessTripEntity GetById(Guid id)
+        public BusinessTripEntity GetById(Guid businessTripId)
         {
-            return storage.GetSetFor<BusinessTripEntity>().FirstOrDefault(m => m.Id == id);
+            return storage.GetSetFor<BusinessTripEntity>().FirstOrDefault(m => m.Id == businessTripId);
         }
 
-        public IEnumerable<BusinessTripModel> GetByUser(Guid id)
+        public IEnumerable<BusinessTripEntity> GetByUser(Guid userId)
         {
-            return storage.GetSetFor<BusinessTripEntity>().Where(e => e.User.Id == id).ToList().Select(e => new BusinessTripModel(e));
+            return storage.GetSetFor<BusinessTripEntity>().Where(e => e.User.Id == userId);
         }
 
-        public IEnumerable<BusinessTripModel> GetOtherBusinessTrips(BusinessTripFilter filter)
+        public IEnumerable<BusinessTripEntity> GetBusinessTrips(BusinessTripFilter filter)
         {
-            var queryable = storage.GetSetFor<BusinessTripEntity>();
+            IQueryable<BusinessTripEntity> businessTrips = storage.GetSetFor<BusinessTripEntity>();
 
             if (!string.IsNullOrEmpty(filter.Person))
             {
-                queryable = queryable.Where(m => m.User.Name.Contains(filter.Person));
+                businessTrips = businessTrips.Where(m => m.User.Name.Contains(filter.Person));
             }
 
             if (!string.IsNullOrEmpty(filter.ClientName))
             {
-                queryable = queryable.Where(m => m.ClientName.Contains(filter.ClientName));
+                businessTrips = businessTrips.Where(m => m.ClientName.Contains(filter.ClientName));
             }
 
             if (!string.IsNullOrEmpty(filter.Location))
             {
-                queryable = queryable.Where(m => m.ClientLocation.Contains(filter.Location));
+                businessTrips = businessTrips.Where(m => m.ClientLocation.Contains(filter.Location));
             }
 
             if (!string.IsNullOrEmpty(filter.Accommodation))
             {
-                queryable = queryable.Where(m => m.Accomodation.Contains(filter.Accommodation));
+                businessTrips = businessTrips.Where(m => m.Accomodation.Contains(filter.Accommodation));
             }
 
             if (!string.IsNullOrEmpty(filter.MeanOfTransportation))
             {
-                queryable = queryable.Where(m => m.MeansOfTransportation.Contains(filter.MeanOfTransportation));
+                businessTrips = businessTrips.Where(m => m.MeansOfTransportation.Contains(filter.MeanOfTransportation));
             }
 
             if (filter.StartingDate.HasValue)
             {
-                queryable = queryable.Where(m => m.StartingDate == filter.StartingDate);
+                businessTrips = businessTrips.Where(m => m.StartingDate == filter.StartingDate);
             }
 
             if (filter.EndingDate.HasValue)
             {
-                queryable = queryable.Where(m => m.EndingDate == filter.EndingDate);
+                businessTrips = businessTrips.Where(m => m.EndingDate == filter.EndingDate);
             }
 
-            return queryable.ToList().Select(e => new BusinessTripModel(e));
+            return businessTrips;
         }
 
         public void UpdateStatus(Guid id, BusinessTripStatus status)

@@ -1,4 +1,5 @@
 ﻿using System;
+using BusinessTrips.DAL.Entity;
 
 namespace BusinessTrips.DAL.Model
 {
@@ -12,13 +13,13 @@ namespace BusinessTrips.DAL.Model
 
         public SearchBusinessTripModel() { }
 
-        public SearchBusinessTripModel(BusinessTripModel businessTripModel)
+        public SearchBusinessTripModel(BusinessTripEntity businessTripEntity)
         {
-            Name = businessTripModel.User.Name;
-            StartingDate = businessTripModel.StartingDate;
-            Location = businessTripModel.ClientLocation;
-            Accomodation = businessTripModel.Accomodation;
-            MeansOfTransportaion = businessTripModel.MeansOfTransportation;
+            Name = businessTripEntity.User.Name;
+            StartingDate = businessTripEntity.StartingDate;
+            Location = businessTripEntity.ClientLocation;
+            Accomodation = businessTripEntity.Accomodation;
+            MeansOfTransportaion = businessTripEntity.MeansOfTransportation;
         }
     }
 }

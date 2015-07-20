@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data.Entity;
+using System.Linq;
 using BusinessTrips.DAL.Entity;
 using BusinessTrips.DAL.Model;
 using BusinessTrips.DAL.Repository;
@@ -73,7 +74,7 @@ namespace BusinessTrips.Tests.DataAccesssLayer
 
             repository.CommitChanges();
 
-            var actual = repository.GetByUser(userRegistrationModel.Id);
+            var actual = repository.GetByUser(userRegistrationModel.Id).Select(e => new BusinessTripModel(e));
 
             foreach (var tripModel in actual)
             {
