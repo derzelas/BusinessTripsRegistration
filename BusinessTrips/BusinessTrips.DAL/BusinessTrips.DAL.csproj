@@ -97,7 +97,7 @@
     <Compile Include="Model\PasswordHasher.cs" />
     <Compile Include="Repository\RoleRepository.cs" />
     <Compile Include="Repository\StorageFactory.cs" />
-    <Compile Include="RequestStatus.cs" />
+    <Compile Include="BusinessTripStatus.cs" />
     <Compile Include="Storage\EFStorageDBInitializer.cs" />
     <Compile Include="Storage\EFStorage.cs" />
     <Compile Include="Storage\IStorage.cs" />

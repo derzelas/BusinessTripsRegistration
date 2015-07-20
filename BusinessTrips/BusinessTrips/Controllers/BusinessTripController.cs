@@ -69,13 +69,13 @@ namespace BusinessTrips.Controllers
             BusinessTripModel businessTripModel = new BusinessTripModel();
             businessTripModel.LoadById(id);
 
-            if (businessTripModel.Status == RequestStatus.Accepted)
+            if (businessTripModel.Status == BusinessTripStatus.Accepted)
             {
                 Email userEmail = new Email();
                 userEmail.SendCancelBusinessTripEmail(businessTripModel.Id);
             }
 
-            businessTripModel.ChangeStatus(RequestStatus.Canceled);
+            businessTripModel.ChangeStatus(BusinessTripStatus.Canceled);
 
             return ViewMyBusinessTrips();
         }

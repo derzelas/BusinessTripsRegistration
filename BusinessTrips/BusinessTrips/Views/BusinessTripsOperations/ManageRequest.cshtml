@@ -42,7 +42,7 @@
             @Html.DisplayFor(model => model.Status)
         </td>
         <td>
-            @if (Model.Status == RequestStatus.Pending)
+            @if (Model.Status == BusinessTripStatus.Pending)
             {
                 @Html.ActionLink("Accept", "AcceptRequest", "BusinessTripsOperations", Model, null)  
                 @Html.ActionLink("Reject", "RejectRequest", "BusinessTripsOperations", Model, null)

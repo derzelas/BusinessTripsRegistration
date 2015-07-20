@@ -24,14 +24,14 @@ namespace BusinessTrips.Controllers
 
         public ActionResult AcceptRequest(BusinessTripModel businessTripModel)
         {
-            businessTripModel.ChangeStatus(RequestStatus.Accepted);
+            businessTripModel.ChangeStatus(BusinessTripStatus.Accepted);
 
             return View("StatusChangedSuccessfully");
         }
 
         public ActionResult RejectRequest(BusinessTripModel businessTripModel)
         {
-            businessTripModel.ChangeStatus(RequestStatus.Rejected);
+            businessTripModel.ChangeStatus(BusinessTripStatus.Rejected);
 
             return View("StatusChangedSuccessfully");
         }
