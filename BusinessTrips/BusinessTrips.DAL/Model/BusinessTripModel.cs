@@ -79,7 +79,7 @@ namespace BusinessTrips.DAL.Model
             Load(businessTripEntity);
         }
 
-        public void LoadById(Guid id)
+        public BusinessTripModel(Guid id)
         {
             var businessTripRepository = new BusinessTripsRepository();
             BusinessTripEntity businessTripEntity = businessTripRepository.GetById(id);
