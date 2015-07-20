@@ -88,9 +88,9 @@
     <Compile Include="Entity\RoleEntity.cs" />
     <Compile Include="Model\BusinessTripModel.cs" />
     <Compile Include="Model\DateRangeAttribute.cs" />
-    <Compile Include="Model\PersonalBusinesTripsCollectionViewModel.cs" />
-    <Compile Include="Model\PersonalBusinesTripsViewModel.cs" />
-    <Compile Include="Model\OtherBusinessTripsCollectionViewModel.cs" />
+    <Compile Include="Model\UserBusinesTripsCollectionViewModel.cs" />
+    <Compile Include="Model\UserBusinesTripsViewModel.cs" />
+    <Compile Include="Model\AllBusinessTripsCollectionViewModel.cs" />
     <Compile Include="Model\RandomStringGenerator.cs" />
     <Compile Include="Model\SearchBusinessTripModel.cs" />
     <Compile Include="Repository\BusinessTripsRepository.cs" />

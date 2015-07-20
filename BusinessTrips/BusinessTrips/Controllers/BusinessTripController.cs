@@ -34,6 +34,8 @@ namespace BusinessTrips.Controllers
 
                 return View("RegisteredSuccessfully");
             }
+            return View("Register");
+        }
 
         private UserModel GetUserModelById(string userId)
         {
@@ -46,26 +48,24 @@ namespace BusinessTrips.Controllers
         // There will always be a cookie because of Authorize, so no check for null is required
         private string GetUserIdFromCookie()
         {
-            BusinessTripModel retreivedModel = new BusinessTripModel();
-            retreivedModel.LoadById(id);
+            var cookieValue = Request.Cookies[CookieName].Value;
 
-            return View("BusinessTripDetails", retreivedModel);
+            return FormsAuthentication.Decrypt(cookieValue).Name;
         }
 
-        public ActionResult ViewMyBusinessTrips()
+        public ActionResult ViewUserBusinessTrips()
         {
             var userModel = GetUserModelById(GetUserIdFromCookie());
 
-            var personalBusinessTripsCollection = new PersonalBusinesTripsCollectionViewModel
-        public ActionResult Cancel(Guid id)
+            var userBusinessTripsCollection = new UserBusinesTripsCollectionViewModel
             {
-                MyBusinesTripsViewModels = userModel.BusinessTrips.Select(e => new PersonalBusinesTripsViewModel(e))
+                UserBusinessTripsViewModels = userModel.BusinessTrips.Select(e => new UserBusinesTripsViewModel(e))
             };
 
-            return View("MyBusinessTrips", myBusinessTripsCollection);
+            return View("UserBusinessTrips", userBusinessTripsCollection);
         }
 
-        public ActionResult CancelRequest(Guid id)
+        public ActionResult Cancel(Guid id)
         {
             BusinessTripModel businessTripModel = new BusinessTripModel();
             businessTripModel.LoadById(id);
@@ -81,40 +81,21 @@ namespace BusinessTrips.Controllers
             return ViewUserBusinessTrips();
         }
 
-        public ActionResult SearchBusinessTrips()
+        public ActionResult RequestDetails(Guid id)
         {
-            return View("AllBusinessTrips", new OtherBusinessTripsCollectionViewModel());
+            BusinessTripModel retreivedModel = new BusinessTripModel();
+            retreivedModel.LoadById(id);
+
+            return View("BusinessTripDetails", retreivedModel);
         }
 
-        private UserModel GetUserModelByEmail(string email)
+        public ActionResult Search()
         {
-            UserModel userModel = new UserModel();
-            userModel.LoadByEmail(email);
-            return userModel;
-        }
-
-        // There will always be a cookie because of Authorize, so no check for null is required
-        private string GetUserEmailFromCookie()
-        {
-            var cookieValue = Request.Cookies[CookieName].Value;
-
-            return FormsAuthentication.Decrypt(cookieValue).Name;
-        }
-
-        public ActionResult ViewUserBusinessTrips()
-        {
-            var userModel = GetUserModelByEmail(GetUserEmailFromCookie());
-
-            var myBusinessTripsCollection = new PersonalBusinesTripsCollectionViewModel
-        {
-                MyBusinesTripsViewModels = userModel.BusinessTrips.Select(e => new PersonalBusinesTripsViewModel(e))
-            };
-
-            return View("UserBusinessTrips", myBusinessTripsCollection);
+            return View("AllBusinessTrips", new AllBusinessTripsCollectionViewModel());
         }
 
         [HttpPost]
-        public ActionResult SearchBusinessTrips(OtherBusinessTripsCollectionViewModel businessTripsCollectionViewModel)
+        public ActionResult Search(AllBusinessTripsCollectionViewModel businessTripsCollectionViewModel)
         {
             businessTripsCollectionViewModel.SearchBusinessTripModels = new BusinessTripCollectionModel().LoadOtherBusinessTrips(businessTripsCollectionViewModel.BusinessTripFilter);
 

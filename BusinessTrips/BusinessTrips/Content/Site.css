@@ -22,3 +22,11 @@ select,
 textarea {
     max-width: 280px;
 }
+
+.form-horizontal table, th, td {
+    padding: 5px;
+}
+
+table {
+    border-spacing: 15px;
+}

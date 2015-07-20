@@ -1,4 +1,4 @@
-﻿@model BusinessTrips.DAL.Model.PersonalBusinesTripsCollectionViewModel
+﻿@model BusinessTrips.DAL.Model.UserBusinesTripsCollectionViewModel
 @{
     ViewBag.Title = "My Business Trips";
 }
@@ -27,7 +27,7 @@
             <th></th>
         </tr>
 
-        @foreach (var item in Model.PersonalBusinessTripsViewModels)
+        @foreach (var item in Model.UserBusinessTripsViewModels)
         {
             <tr>
                 <td>
@@ -48,7 +48,7 @@
                     </strong>
                 </td>
                 <td>
-                    @Html.ActionLink("Details", "Details", new { id = item.Id })
+                    @Html.ActionLink("Details", "RequestDetails", new { id = item.Id })
                     @Html.ActionLink("Cancel", "Cancel", new { id = item.Id })
                 </td>
             </tr>

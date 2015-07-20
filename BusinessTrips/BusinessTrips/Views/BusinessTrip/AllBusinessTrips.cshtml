@@ -1,22 +1,12 @@
-﻿@model BusinessTrips.DAL.Model.OtherBusinessTripsCollectionViewModel
+﻿@model BusinessTrips.DAL.Model.AllBusinessTripsCollectionViewModel
 @{
     ViewBag.Title = "All business trips";
 }
 
 <h2>All business trips</h2>
 
-@using (Html.BeginForm("SearchBusinessTrips", "BusinessTrip", FormMethod.Post, new { @class = "form-horizontal"}))
+@using (Html.BeginForm("Search", "BusinessTrip", FormMethod.Post, new { @class = "form-horizontal"}))
 {
-    <style>
-        table, th, td {
-            padding: 5px;
-        }
-
-        table {
-            border-spacing: 15px;
-        }
-    </style>
-    
     <table>
         <tr>
             <td>
