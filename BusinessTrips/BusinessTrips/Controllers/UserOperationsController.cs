@@ -44,8 +44,6 @@ namespace BusinessTrips.Controllers
             return View("Error");
         }
 
-
-        // Should I test it ?
         public ActionResult Login()
         {
             if (HttpContext.User.Identity.IsAuthenticated)
@@ -61,13 +59,12 @@ namespace BusinessTrips.Controllers
         {
             if (userModel.Authenthicate())
             {
-                FormsAuthentication.SetAuthCookie(userModel.Email, false);
+                FormsAuthentication.SetAuthCookie(userModel.Id.ToString(), false);
                 return RedirectToAction("RegisterBusinessTrip", "BusinessTrip");
             }
             return View("UnknownUser");
         }
 
-        // Should I test it ?
         [Authorize(Roles = "HR,Regular")]
         public ActionResult Logout()
         {
@@ -76,8 +73,6 @@ namespace BusinessTrips.Controllers
                 HttpCookie cookie = new HttpCookie("Cookie");
                 cookie.Expires = DateTime.Now.AddDays(-1d);
                 Response.Cookies.Add(cookie);
-
-                FormsAuthentication.SignOut();
             }
             return RedirectToAction("Login");
         }

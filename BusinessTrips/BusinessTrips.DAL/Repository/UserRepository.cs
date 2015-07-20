@@ -31,15 +31,15 @@ namespace BusinessTrips.DAL.Repository
             return userEntity;
         }
 
+        public UserEntity GetByEmail(string email)
+        {
+            return storage.GetSetFor<UserEntity>().SingleOrDefault(m => m.Email == email);
+        }
+
         public void Confirm(Guid id)
         {
             var userEntity = storage.GetSetFor<UserEntity>().Single(u => u.Id == id);
             userEntity.IsConfirmed = true;
-        }
-
-        public UserEntity GetByEmail(string email)
-        {
-            return storage.GetSetFor<UserEntity>().SingleOrDefault(m => m.Email == email);
         }
 
         public void CommitChanges()

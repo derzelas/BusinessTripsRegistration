@@ -4,11 +4,11 @@ namespace BusinessTrips.DAL.Model
 {
     public class PersonalBusinesTripsCollectionViewModel
     {
-        public IEnumerable<PersonalBusinesTripsViewModel> MyBusinesTripsViewModels { get; set; }
+        public IEnumerable<PersonalBusinesTripsViewModel> PersonalBusinessTripsViewModels { get; set; }
 
         public PersonalBusinesTripsCollectionViewModel()
         {
-            MyBusinesTripsViewModels = new List<PersonalBusinesTripsViewModel>();
+            PersonalBusinessTripsViewModels = new List<PersonalBusinesTripsViewModel>();
         }
     }
 }

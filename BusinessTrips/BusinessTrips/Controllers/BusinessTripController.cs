@@ -23,7 +23,7 @@ namespace BusinessTrips.Controllers
         {
             if (ModelState.IsValid)
             {
-                UserModel userModel = GetUserModelByEmail(GetUserEmailFromCookie());
+                UserModel userModel = GetUserModelById(GetUserIdFromCookie());
 
                 businessTripModel.User = userModel;
 
@@ -35,10 +35,16 @@ namespace BusinessTrips.Controllers
                 return View("RegisteredSuccessfully");
             }
 
-            return View("Register");
+        private UserModel GetUserModelById(string userId)
+        {
+            UserModel userModel = new UserModel();
+            userModel.LoadById(userId);
+
+            return userModel;
         }
 
-        public ActionResult Details(Guid id)
+        // There will always be a cookie because of Authorize, so no check for null is required
+        private string GetUserIdFromCookie()
         {
             BusinessTripModel retreivedModel = new BusinessTripModel();
             retreivedModel.LoadById(id);
@@ -46,7 +52,20 @@ namespace BusinessTrips.Controllers
             return View("BusinessTripDetails", retreivedModel);
         }
 
+        public ActionResult ViewMyBusinessTrips()
+        {
+            var userModel = GetUserModelById(GetUserIdFromCookie());
+
+            var personalBusinessTripsCollection = new PersonalBusinesTripsCollectionViewModel
         public ActionResult Cancel(Guid id)
+            {
+                MyBusinesTripsViewModels = userModel.BusinessTrips.Select(e => new PersonalBusinesTripsViewModel(e))
+            };
+
+            return View("MyBusinessTrips", myBusinessTripsCollection);
+        }
+
+        public ActionResult CancelRequest(Guid id)
         {
             BusinessTripModel businessTripModel = new BusinessTripModel();
             businessTripModel.LoadById(id);
@@ -61,7 +80,7 @@ namespace BusinessTrips.Controllers
 
             return ViewUserBusinessTrips();
         }
-        
+
         public ActionResult SearchBusinessTrips()
         {
             return View("AllBusinessTrips", new OtherBusinessTripsCollectionViewModel());
@@ -87,7 +106,7 @@ namespace BusinessTrips.Controllers
             var userModel = GetUserModelByEmail(GetUserEmailFromCookie());
 
             var myBusinessTripsCollection = new PersonalBusinesTripsCollectionViewModel
-            {
+        {
                 MyBusinesTripsViewModels = userModel.BusinessTrips.Select(e => new PersonalBusinesTripsViewModel(e))
             };
 

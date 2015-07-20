@@ -31,7 +31,7 @@ namespace BusinessTrips.Tests.DataAccesssLayer
             userRegistrationModel.Save();
 
             userModel=new UserModel();
-            userModel.LoadByEmail(userRegistrationModel.Email);
+            userModel.LoadById(userRegistrationModel.Email);
 
             repository = new BusinessTripsRepository();
             businessTripModel = new BusinessTripModel
