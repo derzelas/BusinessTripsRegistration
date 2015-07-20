@@ -41,7 +41,6 @@ namespace BusinessTrips.Controllers
 
                 return View("ConfirmRegistration");
             }
-
             return View("Error");
         }
 
@@ -53,7 +52,6 @@ namespace BusinessTrips.Controllers
             {
                 return RedirectToAction("RegisterBusinessTrip", "BusinessTrip");
             }
-
             return View("Login");
         }
 
@@ -66,7 +64,6 @@ namespace BusinessTrips.Controllers
                 FormsAuthentication.SetAuthCookie(userModel.Email, false);
                 return RedirectToAction("RegisterBusinessTrip", "BusinessTrip");
             }
-
             return View("UnknownUser");
         }
 
@@ -82,7 +79,6 @@ namespace BusinessTrips.Controllers
 
                 FormsAuthentication.SignOut();
             }
-
             return RedirectToAction("Login");
         }
     }
