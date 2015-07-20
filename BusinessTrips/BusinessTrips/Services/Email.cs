@@ -7,15 +7,16 @@ namespace BusinessTrips.Services
 {
     public class Email
     {
-        protected SmtpClient Client;
-        protected const string SenderAddress = "iQuestBusinessTrips@gmail.com";
-        protected const string BusinessTripOperatorAddress = "iQuestBusinessTrips@gmail.com";
-        protected const string Password = "Ana@re6mere";
+        private SmtpClient Client;
+        private const string SenderAddress = "iQuestBusinessTrips@gmail.com";
+        private const string BusinessTripOperatorAddress = "iQuestBusinessTrips@gmail.com";
+        private const string Password = "Ana@re6mere";
+        private const string SmtpClient = "smtp.gmail.com";
 
         public Email()
         {
             const int port = 587;
-            Client = new SmtpClient("smtp.gmail.com", port)
+            Client = new SmtpClient(SmtpClient, port)
             {
                 UseDefaultCredentials = false,
                 EnableSsl = true,
