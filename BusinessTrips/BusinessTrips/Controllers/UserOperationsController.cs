@@ -1,4 +1,4 @@
-﻿ using System;
+﻿using System;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
@@ -21,8 +21,8 @@ namespace BusinessTrips.Controllers
             {
                 userRegistrationModel.Save();
 
-                var userRegistrationEmail = new UserRegistrationEmail();
-                userRegistrationEmail.Send(userRegistrationModel.Id,userRegistrationModel.Email);
+                var email = new Email();
+                email.SendUserRegistrationEmail(userRegistrationModel.Id, userRegistrationModel.Email);
 
                 return View("RegisterMailSent");
             }
