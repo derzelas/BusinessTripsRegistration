@@ -89,6 +89,7 @@
     <Compile Include="Entity\RoleEntity.cs" />
     <Compile Include="Model\BusinessTripModel.cs" />
     <Compile Include="Model\DateRangeAttribute.cs" />
+    <Compile Include="Model\ForgotPasswordModel.cs" />
     <Compile Include="Model\UserBusinessTripsCollectionViewModel.cs" />
     <Compile Include="Model\UserBusinesTripsViewModel.cs" />
     <Compile Include="Model\AllBusinessTripsCollectionViewModel.cs" />
