@@ -30,21 +30,21 @@ namespace BusinessTrips.Controllers
                 return View("Register");
             }
 
-                UserModel userModel = GetUserModelById(GetUserIdFromCookie());
+            UserModel userModel = GetUserModelBy(GetUserIdFromCookie());
 
-                businessTripModel.User = userModel;
-                businessTripModel.Save();
+            businessTripModel.User = userModel;
+            businessTripModel.Save();
 
-                var email = new Email();
-                email.SendBusinessTripRegistrationEmail(businessTripModel.Id);
+            var email = new Email();
+            email.SendBusinessTripRegistrationEmail(businessTripModel.Id);
 
-                return View("RegisteredSuccessfully");
-            }
+            return View("RegisteredSuccessfully");
+        }
 
         [Authorize(Roles = "Regular,HR")]
         public ActionResult GetUserBusinessTrips()
         {
-            UserModel userModel = GetUserModelById(GetUserIdFromCookie());
+            UserModel userModel = GetUserModelBy(GetUserIdFromCookie());
 
             var userBusinessTripsCollection =
                 new UserBusinessTripsCollectionViewModel(
@@ -127,7 +127,7 @@ namespace BusinessTrips.Controllers
             return View("StatusChangedSuccessfully");
         }
 
-        private static UserModel GetUserModelById(string userId)
+        private static UserModel GetUserModelBy(string userId)
         {
             return new UserModel(Guid.Parse(userId));
         }
