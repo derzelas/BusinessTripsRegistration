@@ -44,7 +44,7 @@ namespace BusinessTrips.Controllers
             var email = new Email();
             email.SendUserRegistrationEmail(userRegistrationModel.Id, userRegistrationModel.Email);
 
-            return View("RegisterMailSent");
+            return View("RegistrationSuccessful");
         }
 
         public ActionResult ConfirmRegistration(string guid)
@@ -60,7 +60,7 @@ namespace BusinessTrips.Controllers
             registrationConfirmationModel.Id = parsedGuid;
             registrationConfirmationModel.Confirm();
 
-            return View("ConfirmRegistration");
+            return View("RegistrationConfirmationSuccessful");
         }
 
         public ActionResult Login()
@@ -78,7 +78,7 @@ namespace BusinessTrips.Controllers
         {
             if (!userModel.Authenthicate())
             {
-                return View("UnknownUser");
+                return View("InvalidUser");
             }
 
             FormsAuthentication.SetAuthCookie(userModel.Id.ToString(), false);

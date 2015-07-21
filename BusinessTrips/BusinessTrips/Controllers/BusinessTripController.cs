@@ -3,7 +3,6 @@ using System.Configuration;
 using System.Linq;
 using System.Web.Mvc;
 using System.Web.Security;
-using BusinessTrips.DAL;
 using BusinessTrips.DAL.Model;
 using BusinessTrips.DAL.Model.BusinessTrip;
 using BusinessTrips.DAL.Model.User;

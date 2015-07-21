@@ -258,10 +258,10 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\UserOperations\Register.cshtml" />
-    <Content Include="Views\UserOperations\RegisterMailSent.cshtml" />
+    <Content Include="Views\UserOperations\RegistrationSuccessful.cshtml" />
     <Content Include="Views\UserOperations\Login.cshtml" />
-    <Content Include="Views\UserOperations\UnknownUser.cshtml" />
-    <Content Include="Views\UserOperations\ConfirmRegistration.cshtml" />
+    <Content Include="Views\UserOperations\InvalidUser.cshtml" />
+    <Content Include="Views\UserOperations\RegistrationConfirmationSuccessful.cshtml" />
     <None Include="_bin_deployableAssemblies\amd64\Microsoft.VC90.CRT\Microsoft.VC90.CRT.manifest" />
     <None Include="_bin_deployableAssemblies\x86\Microsoft.VC90.CRT\Microsoft.VC90.CRT.manifest" />
   </ItemGroup>
