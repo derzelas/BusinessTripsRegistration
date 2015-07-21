@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BusinessTrips
+namespace BusinessTrips.Views.Shared
 {
 
 

@@ -2,7 +2,9 @@
     Layout = "~/Views/Shared/UnauthenticatedLayout.cshtml";
 }
 
-<h3>Sorry, but your e-mail or password is incorect or you are not registered yet!</h3>
+<h3 class="col-md-12">
+    Sorry, but your e-mail or password is incorect or you are not registered yet!
+</h3>
 
 <p>@Html.ActionLink("Login", "Login", "UserOperations")</p>
 <p>@Html.ActionLink("Register now", "Register","UserOperations")</p>

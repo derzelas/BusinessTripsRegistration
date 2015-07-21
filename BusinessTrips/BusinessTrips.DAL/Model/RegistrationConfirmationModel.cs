@@ -22,7 +22,7 @@ namespace BusinessTrips.DAL.Model
 
             if (userModel.IsConfirmed == false)
             {
-                userRepository.Confirm(userModel.Id);
+                userRepository.ConfirmRegistration(userModel.Id);
                 userRepository.CommitChanges();
             }
         }

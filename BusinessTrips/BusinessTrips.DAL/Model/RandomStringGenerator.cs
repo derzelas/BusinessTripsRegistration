@@ -1,17 +1,12 @@
-using System;
+﻿using System;
 
 namespace BusinessTrips.DAL.Model
 {
     public class RandomStringGenerator : IRandomStringGenerator
     {
-        public string GetString()
+        public string GetSalt()
         {
             return Guid.NewGuid().ToString();
         }
-    }
-
-    public interface IRandomStringGenerator
-    {
-        string GetString();
     }
 }

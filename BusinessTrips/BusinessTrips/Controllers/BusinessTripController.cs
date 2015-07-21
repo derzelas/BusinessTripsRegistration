@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.Linq;
 using System.Web.Mvc;
 using System.Web.Security;
@@ -11,7 +12,7 @@ namespace BusinessTrips.Controllers
     [Authorize(Roles = "Regular,HR")]
     public class BusinessTripController : Controller
     {
-        private const string CookieName = "Cookie";
+        private readonly string cookieName = ConfigurationManager.AppSettings["Cookie"];
 
         public ActionResult Register()
         {
@@ -47,7 +48,7 @@ namespace BusinessTrips.Controllers
         // There will always be a cookie because of Authorize, so no check for null is required
         private string GetUserIdFromCookie()
         {
-            var cookieValue = Request.Cookies[CookieName].Value;
+            var cookieValue = Request.Cookies[cookieName].Value;
 
             return FormsAuthentication.Decrypt(cookieValue).Name;
         }
@@ -58,7 +59,7 @@ namespace BusinessTrips.Controllers
 
             var userBusinessTripsCollection =
                 new UserBusinessTripsCollectionViewModel(
-                    userModel.BusinessTrips.Select(e => new UserBusinesTripsViewModel(e)));
+                    userModel.BusinessTrips.Select(e => new UserBusinessTripViewModel(e)));
 
             return View("UserBusinessTrips", userBusinessTripsCollection);
         }
@@ -84,7 +85,7 @@ namespace BusinessTrips.Controllers
 
             if (businessTripModel.Id != Guid.Empty && businessTripModel.User.Id.ToString() == HttpContext.User.Identity.Name)
             {
-                return View("BusinessTripDetails", businessTripModel);
+                return View("Details", businessTripModel);
             }
 
             return RedirectToAction("GetUserBusinessTrips");
@@ -98,7 +99,7 @@ namespace BusinessTrips.Controllers
         [HttpPost]
         public ActionResult GetAllBusinessTrips(AllBusinessTripsCollectionViewModel businessTripsCollectionViewModel)
         {
-            businessTripsCollectionViewModel.SearchBusinessTripModels = new BusinessTripCollectionModel().LoadOtherBusinessTrips(businessTripsCollectionViewModel.BusinessTripFilter);
+            businessTripsCollectionViewModel.BusinessTrips = new BusinessTripCollectionModel().GetBusinessTripsBy(businessTripsCollectionViewModel.BusinessTripFilter);
 
             return View("AllBusinessTrips", businessTripsCollectionViewModel);
         }

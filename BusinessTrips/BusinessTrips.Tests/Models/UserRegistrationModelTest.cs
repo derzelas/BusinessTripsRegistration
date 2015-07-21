@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data.Entity;
+using BusinessTrips.DAL;
 using BusinessTrips.DAL.Entity;
 using BusinessTrips.DAL.Model;
 using BusinessTrips.DAL.Repository;
@@ -57,8 +58,8 @@ namespace BusinessTrips.Tests.Models
                 Password = "abc"
             };
             string salt = "123";
-            randomStringGeneratorMock.Setup(m => m.GetString()).Returns(salt);
-            string expected = PasswordHasher.HashPassword("abc123");
+            randomStringGeneratorMock.Setup(m => m.GetSalt()).Returns(salt);
+            string expected = PasswordHasher.GetHashed("abc123");
 
             model.Save();
 

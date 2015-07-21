@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
@@ -9,6 +10,8 @@ namespace BusinessTrips.Controllers
 {
     public class UserOperationsController : Controller
     {
+        private readonly string cookieName = ConfigurationManager.AppSettings["Cookie"];
+
         public ActionResult Register()
         {
             return View("Register");
@@ -31,24 +34,26 @@ namespace BusinessTrips.Controllers
 
         public ActionResult ConfirmRegistration(string guid)
         {
-            var registrationConfirmationModel = new RegistrationConfirmationModel();
-
             Guid parsedGuid;
             if (Guid.TryParse(guid, out parsedGuid))
             {
-                registrationConfirmationModel.Id = parsedGuid;
+                var registrationConfirmationModel = new RegistrationConfirmationModel
+                {
+                    Id = parsedGuid
+                };
+
                 registrationConfirmationModel.Confirm();
 
                 return View("ConfirmRegistration");
             }
-            return View("Error");
+            return View("ErrorEncountered");
         }
 
         public ActionResult Login()
         {
             if (HttpContext.User.Identity.IsAuthenticated)
             {
-                return RedirectToAction("Register", "BusinessTrip");
+                return RedirectToAction("GetUserBusinessTrips", "BusinessTrip");
             }
             return View("Login");
         }
@@ -60,7 +65,7 @@ namespace BusinessTrips.Controllers
             if (userModel.Authenthicate())
             {
                 FormsAuthentication.SetAuthCookie(userModel.Id.ToString(), false);
-                return RedirectToAction("Register", "BusinessTrip");
+                return RedirectToAction("GetAllBusinessTrips", "BusinessTrip");
             }
             return View("UnknownUser");
         }
@@ -68,9 +73,9 @@ namespace BusinessTrips.Controllers
         [Authorize(Roles = "HR,Regular")]
         public ActionResult Logout()
         {
-            if (Request.Cookies["Cookie"] != null)
+            if (Request.Cookies[cookieName] != null)
             {
-                HttpCookie cookie = new HttpCookie("Cookie");
+                var cookie = new HttpCookie(cookieName);
                 cookie.Expires = DateTime.Now.AddDays(-1d);
                 Response.Cookies.Add(cookie);
             }

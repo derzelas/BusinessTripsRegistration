@@ -57,7 +57,7 @@ namespace BusinessTrips.Tests.DataAccesssLayer
             repository.CreateByUserEntity(userEntity);
             repository.CommitChanges();
 
-            repository.Confirm(userModel.Id);
+            repository.ConfirmRegistration(userModel.Id);
             repository.CommitChanges();
 
             UserModel retrievedModel = new UserModel(repository.GetById(userEntity.Id));

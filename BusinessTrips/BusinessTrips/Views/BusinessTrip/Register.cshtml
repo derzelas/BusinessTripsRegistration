@@ -4,7 +4,7 @@
 
 <h2>Register new business trip</h2>
 
-@using (Html.BeginForm("Register", "BusinessTrip", FormMethod.Post, new {@class = "form-horizontal"}))
+@using (Html.BeginForm("Register", "BusinessTrip", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
     <table>
         <tr>
@@ -120,12 +120,12 @@
             <td colspan="2">
                 @Html.CheckBoxFor(m => m.PhoneIsNeeded)
                 @Html.LabelFor(m => m.PhoneIsNeeded)
-                @Html.ValidationMessageFor(m => m.PhoneIsNeeded, "", new {@class = "text-danger"})
+                @Html.ValidationMessageFor(m => m.PhoneIsNeeded, "", new { @class = "text-danger" })
             </td>
             <td colspan="2">
                 @Html.CheckBoxFor(m => m.BankCardIsNeeded)
                 @Html.LabelFor(m => m.BankCardIsNeeded)
-                @Html.ValidationMessageFor(m => m.BankCardIsNeeded, "", new {@class = "text-danger"})
+                @Html.ValidationMessageFor(m => m.BankCardIsNeeded, "", new { @class = "text-danger" })
             </td>
         </tr>
         <tr>
@@ -139,7 +139,8 @@
             </td>
             <td>
                 <div align="left">
-                    <button type="submit" class="btn btn-default">Place request</button>
+                    <button type="submit" class="btn btn-default">Place                    
+                    </button>
                 </div>
             </td>
         </tr>

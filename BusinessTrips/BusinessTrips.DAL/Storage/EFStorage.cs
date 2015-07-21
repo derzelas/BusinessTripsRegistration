@@ -28,7 +28,7 @@ namespace BusinessTrips.DAL.Storage
             set.Add(entity);
         }
 
-        public IQueryable<T> GetSetFor<T>() where T : class
+        public IQueryable<T> GetStorageFor<T>() where T : class
         {
             return Set<T>();
         }

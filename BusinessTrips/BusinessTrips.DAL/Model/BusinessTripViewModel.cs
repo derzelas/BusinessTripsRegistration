@@ -3,7 +3,7 @@ using BusinessTrips.DAL.Entity;
 
 namespace BusinessTrips.DAL.Model
 {
-    public class SearchBusinessTripModel
+    public class BusinessTripViewModel
     {
         public DateTime StartingDate { get; set; }
         public string Location { get; set; }
@@ -11,9 +11,7 @@ namespace BusinessTrips.DAL.Model
         public string MeansOfTransportaion { get; set; }
         public string Accomodation { get; set; }
 
-        public SearchBusinessTripModel() { }
-
-        public SearchBusinessTripModel(BusinessTripEntity businessTripEntity)
+        public BusinessTripViewModel(BusinessTripEntity businessTripEntity)
         {
             Name = businessTripEntity.User.Name;
             StartingDate = businessTripEntity.StartingDate;

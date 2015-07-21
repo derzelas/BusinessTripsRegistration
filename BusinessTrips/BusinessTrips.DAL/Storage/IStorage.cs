@@ -6,7 +6,7 @@ namespace BusinessTrips.DAL.Storage
     {
         void Add<T>(T element) where T : class;
 
-        IQueryable<T> GetSetFor<T>() where T : class;
+        IQueryable<T> GetStorageFor<T>() where T : class;
 
         void Remove<T>(T element) where T : class;
 

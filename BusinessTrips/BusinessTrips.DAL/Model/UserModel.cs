@@ -68,7 +68,7 @@ namespace BusinessTrips.DAL.Model
                 return false;
             }
 
-            string hashPassword = PasswordHasher.HashPassword(Password + userEntity.Salt);
+            string hashPassword = PasswordHasher.GetHashed(Password + userEntity.Salt);
             Load(userEntity);
 
             return hashPassword == userEntity.HashedPassword;
