@@ -72,7 +72,7 @@ namespace BusinessTrips.Services
 
         private static string GetLinkToBusinessTripBy(Guid businessTripId)
         {
-            var link = string.Format("http://{0}:{1}/BusinessTripsOperations/GetRequestBy/?guid={2}",
+            var link = string.Format("http://{0}:{1}/BusinessTrip/GetBy/?guid={2}",
                 HttpContext.Current.Request.Url.Host,
                 HttpContext.Current.Request.Url.Port,
                 businessTripId);
