@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Web.Mvc;
-using BusinessTrips.DAL;
-using BusinessTrips.DAL.Model;
+using BusinessTrips.DAL.Model.BusinessTrip;
 
 namespace BusinessTrips.Controllers
 {

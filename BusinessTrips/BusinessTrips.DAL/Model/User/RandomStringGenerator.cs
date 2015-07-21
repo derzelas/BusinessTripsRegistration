@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BusinessTrips.DAL.Model
+namespace BusinessTrips.DAL.Model.User
 {
     public class RandomStringGenerator : IRandomStringGenerator
     {

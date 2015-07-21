@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
-namespace BusinessTrips.DAL.Model
+namespace BusinessTrips.DAL.Model.User
 {
     public class BusinessTripFilter
     {

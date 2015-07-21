@@ -2,6 +2,8 @@
 using System.Data.Entity;
 using System.Linq;
 using BusinessTrips.DAL.Model;
+using BusinessTrips.DAL.Model.BusinessTrip;
+using BusinessTrips.DAL.Model.User;
 using BusinessTrips.DAL.Repository;
 using BusinessTrips.DAL.Storage;
 using Microsoft.VisualStudio.TestTools.UnitTesting;

@@ -4,7 +4,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 using BusinessTrips.DAL.Exception;
-using BusinessTrips.DAL.Model;
+using BusinessTrips.DAL.Model.User;
 using BusinessTrips.Services;
 
 namespace BusinessTrips.Controllers
@@ -18,8 +18,6 @@ namespace BusinessTrips.Controllers
         {
             if (ModelState.IsValid)
             {
-
-
                 var email = new Email();
                 email.SendUserRegistrationEmail(userForgotPasswordModelModel.Id, userForgotPasswordModelModel.Email);
 
@@ -84,6 +82,7 @@ namespace BusinessTrips.Controllers
             }
 
             FormsAuthentication.SetAuthCookie(userModel.Id.ToString(), false);
+
             return RedirectToAction("GetAllBusinessTrips", "BusinessTrip");
         }
 

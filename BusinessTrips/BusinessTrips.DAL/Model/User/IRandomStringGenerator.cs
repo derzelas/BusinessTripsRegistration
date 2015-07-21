@@ -1,4 +1,4 @@
-namespace BusinessTrips.DAL
+namespace BusinessTrips.DAL.Model.User
 {
     public interface IRandomStringGenerator
     {

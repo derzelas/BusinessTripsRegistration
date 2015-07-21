@@ -1,4 +1,4 @@
-﻿namespace BusinessTrips.DAL
+﻿namespace BusinessTrips.DAL.Model.BusinessTrip
 {
     public enum BusinessTripStatus
     {

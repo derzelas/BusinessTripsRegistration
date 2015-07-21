@@ -6,6 +6,7 @@ using System.Web.Security;
 using BusinessTrips.DAL;
 using BusinessTrips.DAL.Model;
 using BusinessTrips.DAL.Model.BusinessTrip;
+using BusinessTrips.DAL.Model.User;
 using BusinessTrips.DAL.ViewModel;
 using BusinessTrips.Services;
 
