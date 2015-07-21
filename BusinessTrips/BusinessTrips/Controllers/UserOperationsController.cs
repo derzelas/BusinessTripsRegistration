@@ -105,7 +105,7 @@ namespace BusinessTrips.Controllers
 
         protected override void OnException(ExceptionContext filterContext)
         {
-            if (filterContext.Exception is UserNotFoundInDataBaseException)
+            if (filterContext.Exception is UserNotFoundException)
             {
                 filterContext.ExceptionHandled = true;
 

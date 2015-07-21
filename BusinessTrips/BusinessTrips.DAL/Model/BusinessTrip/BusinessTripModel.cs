@@ -141,7 +141,7 @@ namespace BusinessTrips.DAL.Model.BusinessTrip
 
         public BusinessTripEntity ToEntity()
         {
-            return new BusinessTripEntity()
+            return new BusinessTripEntity
             {
                 Id = Id,
                 User = User.ToEntity(),

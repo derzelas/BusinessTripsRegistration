@@ -20,7 +20,7 @@ namespace BusinessTrips.DAL.Model.User
             }
             catch (InvalidOperationException)
             {
-                throw new UserNotFoundInDataBaseException();
+                throw new UserNotFoundException();
             }
 
             if (userEntity.IsConfirmed)
@@ -28,7 +28,7 @@ namespace BusinessTrips.DAL.Model.User
                 return;
             }
 
-            userRepository.ConfirmRegistration(userEntity.Id);
+            userEntity.IsConfirmed = true;
             userRepository.CommitChanges();
         }
     }

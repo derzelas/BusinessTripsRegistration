@@ -7,7 +7,6 @@ namespace BusinessTrips.DAL.Repository
     {
         void CreateByUserEntity(UserEntity userEntity);
         UserEntity GetById(Guid userId);
-        void ConfirmRegistration(Guid userId);
         UserEntity GetByEmail(string userEmail);
         void CommitChanges();
     }

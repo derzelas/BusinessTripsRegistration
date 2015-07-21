@@ -6,7 +6,7 @@ using BusinessTrips.DAL.Repository;
 
 namespace BusinessTrips.DAL.Model.User
 {
-    public class UserRegistrationModel
+    public class UserRegistrationModel : IUserRegistrationModel
     {
         private const int MinimumPasswordLength = 6;
         private const int MinimumNameLength = 3;
@@ -74,5 +74,9 @@ namespace BusinessTrips.DAL.Model.User
                 Id = Id
             };
         }
+    }
+
+    public interface IUserRegistrationModel
+    {
     }
 }

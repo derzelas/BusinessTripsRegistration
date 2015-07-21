@@ -30,30 +30,15 @@ namespace BusinessTrips.Controllers
                 return View("Register");
             }
 
-                UserModel userModel = GetUserModelById(GetUserIdFromCookie());
+            UserModel userModel = GetUserModelById(GetUserIdFromCookie());
 
-                businessTripModel.User = userModel;
-                businessTripModel.Save();
+            businessTripModel.User = userModel;
+            businessTripModel.Save();
 
-                var email = new Email();
-                email.SendBusinessTripRegistrationEmail(businessTripModel.Id);
+            var email = new Email();
+            email.SendBusinessTripRegistrationEmail(businessTripModel.Id);
 
-                return View("RegisteredSuccessfully");
-            }
-
-        private UserModel GetUserModelById(string userId)
-        {
-            UserModel userModel = new UserModel(Guid.Parse(userId));
-
-            return userModel;
-        }
-
-        // There will always be a cookie because of Authorize, so no check for null is required
-        private string GetUserIdFromCookie()
-        {
-            var cookieValue = Request.Cookies[cookieName].Value;
-
-            return FormsAuthentication.Decrypt(cookieValue).Name;
+            return View("RegisteredSuccessfully");
         }
 
         [Authorize(Roles = "Regular,HR")]
@@ -142,5 +127,19 @@ namespace BusinessTrips.Controllers
 
             return View("StatusChangedSuccessfully");
         }
+
+        private static UserModel GetUserModelById(string userId)
+        {
+            return new UserModel(Guid.Parse(userId));
+        }
+
+        // There will always be a cookie because of Authorize, so no check for null is required
+        private string GetUserIdFromCookie()
+        {
+            var cookieValue = Request.Cookies[cookieName].Value;
+
+            return FormsAuthentication.Decrypt(cookieValue).Name;
+        }
+
     }
 }

@@ -9,16 +9,8 @@ namespace BusinessTrips.DAL.Attribute
         public override bool IsValid(object value)
         {
             UserRepository userRepository = new UserRepository();
-            try
-            {
-                userRepository.GetByEmail((string)value);
 
-                return false;
-            }
-            catch (InvalidOperationException)
-            {
-                return true;
-            }
+            return userRepository.GetByEmail((string)value) == null;
         }
     }
 }

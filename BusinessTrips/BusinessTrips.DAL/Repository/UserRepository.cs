@@ -26,12 +26,7 @@ namespace BusinessTrips.DAL.Repository
 
         public UserEntity GetByEmail(string userEmail)
         {
-            return storage.GetStorageFor<UserEntity>().Single(m => m.Email == userEmail);
-        }
-
-        public void ConfirmRegistration(Guid userId)
-        {
-            storage.GetStorageFor<UserEntity>().Single(u => u.Id == userId).IsConfirmed = true;
+            return storage.GetStorageFor<UserEntity>().SingleOrDefault(m => m.Email == userEmail);
         }
 
         public void CommitChanges()

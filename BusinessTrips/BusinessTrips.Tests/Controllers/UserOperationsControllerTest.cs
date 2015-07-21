@@ -34,17 +34,14 @@ namespace BusinessTrips.Tests.Controllers
         }
 
         [TestMethod]
-        public void ConfirmRegistrationSetIsConfirmedPropertyToTrueIfUserGuidExistsAndIsValid()
+        public void ConfirmRegistration_SetIsConfirmedPropertyToTrue_IfUserGuidExistsAndIsValid()
         {
             var userRegistrationModel = new UserRegistrationModel();
             userRegistrationModel.Save();
 
             var result = controller.ConfirmRegistration(userRegistrationModel.Id.ToString()) as ViewResult;
-            var repository = new UserRepository();
-            var userModel = new UserModel(repository.GetById(userRegistrationModel.Id));
-
+            
             Assert.IsNotNull(result);
-            Assert.AreEqual(userModel.IsConfirmed, true);
             Assert.AreEqual("ConfirmRegistration", result.ViewName);
         }
 
