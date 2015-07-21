@@ -7,7 +7,7 @@ using BusinessTrips.DAL.Storage;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 
-namespace BusinessTrips.Tests.Models
+namespace BusinessTrips.Tests.DataAccesssLayer.Models
 {
     [TestClass]
     public class UserRegistrationModelTest

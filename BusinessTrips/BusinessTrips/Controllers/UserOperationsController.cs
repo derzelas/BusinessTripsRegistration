@@ -2,6 +2,7 @@
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using BusinessTrips.DAL.Exception;
 using BusinessTrips.DAL.Model;
 using BusinessTrips.Services;
 
@@ -17,16 +18,17 @@ namespace BusinessTrips.Controllers
         [HttpPost]
         public ActionResult Register(UserRegistrationModel userRegistrationModel)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                userRegistrationModel.Save();
-
-                var email = new Email();
-                email.SendUserRegistrationEmail(userRegistrationModel.Id, userRegistrationModel.Email);
-
-                return View("RegisterMailSent");
+                return View("Register");
             }
-            return View("Register");
+
+            userRegistrationModel.Save();
+
+            var email = new Email();
+            email.SendUserRegistrationEmail(userRegistrationModel.Id, userRegistrationModel.Email);
+
+            return View("RegisterMailSent");
         }
 
         public ActionResult ConfirmRegistration(string guid)
@@ -34,14 +36,16 @@ namespace BusinessTrips.Controllers
             var registrationConfirmationModel = new RegistrationConfirmationModel();
 
             Guid parsedGuid;
-            if (Guid.TryParse(guid, out parsedGuid))
+            if (!Guid.TryParse(guid, out parsedGuid))
             {
-                registrationConfirmationModel.Id = parsedGuid;
-                registrationConfirmationModel.Confirm();
-
-                return View("ConfirmRegistration");
+                ViewBag.ExceptionMessage = "The link is invalid";
+                return View("Error");
             }
-            return View("Error");
+
+            registrationConfirmationModel.Id = parsedGuid;
+            registrationConfirmationModel.Confirm();
+
+            return View("ConfirmRegistration");
         }
 
         public ActionResult Login()
@@ -57,24 +61,43 @@ namespace BusinessTrips.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Login(UserModel userModel)
         {
-            if (userModel.Authenthicate())
+            if (!userModel.Authenthicate())
             {
-                FormsAuthentication.SetAuthCookie(userModel.Id.ToString(), false);
-                return RedirectToAction("Register", "BusinessTrip");
+                return View("UnknownUser");
             }
-            return View("UnknownUser");
+
+            FormsAuthentication.SetAuthCookie(userModel.Id.ToString(), false);
+            return RedirectToAction("Register", "BusinessTrip");
         }
 
         [Authorize(Roles = "HR,Regular")]
         public ActionResult Logout()
         {
-            if (Request.Cookies["Cookie"] != null)
+            if (Request.Cookies["Cookie"] == null)
             {
-                HttpCookie cookie = new HttpCookie("Cookie");
-                cookie.Expires = DateTime.Now.AddDays(-1d);
-                Response.Cookies.Add(cookie);
+                return RedirectToAction("Login");
             }
+
+            var cookie = new HttpCookie("Cookie")
+            {
+                Expires = DateTime.Now.AddDays(-1d)
+            };
+
+            Response.Cookies.Add(cookie);
             return RedirectToAction("Login");
+        }
+
+        protected override void OnException(ExceptionContext filterContext)
+        {
+            if (filterContext.Exception is UserNotFoundInDataBaseException)
+            {
+                filterContext.ExceptionHandled = true;
+
+                ViewBag.ExceptionMessage = filterContext.Exception.Message;
+                filterContext.Result = View("Error");
+            }
+
+            base.OnException(filterContext);
         }
     }
 }

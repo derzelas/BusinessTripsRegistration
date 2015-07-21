@@ -21,20 +21,20 @@ namespace BusinessTrips.Controllers
         [HttpPost]
         public ActionResult Register(BusinessTripModel businessTripModel)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                UserModel userModel = GetUserModelById(GetUserIdFromCookie());
-
-                businessTripModel.User = userModel;
-
-                businessTripModel.Save();
-
-                var email = new Email();
-                email.SendBusinessTripRegistrationEmail(businessTripModel.Id);
-
-                return View("RegisteredSuccessfully");
+                return View("Register");
             }
-            return View("Register");
+
+            UserModel userModel = GetUserModelById(GetUserIdFromCookie());
+
+            businessTripModel.User = userModel;
+            businessTripModel.Save();
+
+            var email = new Email();
+            email.SendBusinessTripRegistrationEmail(businessTripModel.Id);
+
+            return View("RegisteredSuccessfully");
         }
 
         private UserModel GetUserModelById(string userId)

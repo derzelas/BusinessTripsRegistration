@@ -6,7 +6,7 @@ using BusinessTrips.DAL.Repository;
 using BusinessTrips.DAL.Storage;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace BusinessTrips.Tests.DataAccesssLayer
+namespace BusinessTrips.Tests.DataAccesssLayer.Repository
 {
     [TestClass]
     public class UserRepositoryTest

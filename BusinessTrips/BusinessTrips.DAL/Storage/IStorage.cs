@@ -8,8 +8,6 @@ namespace BusinessTrips.DAL.Storage
 
         IQueryable<T> GetSetFor<T>() where T : class;
 
-        void Remove<T>(T element) where T : class;
-
         void Commit();
     }
 }

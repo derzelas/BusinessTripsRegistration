@@ -1,5 +1,6 @@
 ﻿using System;
 using BusinessTrips.DAL.Entity;
+using BusinessTrips.DAL.Exception;
 using BusinessTrips.DAL.Repository;
 
 namespace BusinessTrips.DAL.Model
@@ -11,20 +12,24 @@ namespace BusinessTrips.DAL.Model
         public void Confirm()
         {
             var userRepository = new UserRepository();
-            UserEntity userEntity = userRepository.GetById(Id);
+            UserEntity userEntity;
 
-            if (userEntity == null)
+            try
+            {
+                userEntity = userRepository.GetById(Id);
+            }
+            catch (InvalidOperationException)
+            {
+                throw new UserNotFoundInDataBaseException();
+            }
+
+            if (userEntity.IsConfirmed)
             {
                 return;
             }
 
-            UserModel userModel = new UserModel(userEntity);
-
-            if (userModel.IsConfirmed == false)
-            {
-                userRepository.Confirm(userModel.Id);
-                userRepository.CommitChanges();
-            }
+            userRepository.Confirm(userEntity.Id);
+            userRepository.CommitChanges();
         }
     }
 }
