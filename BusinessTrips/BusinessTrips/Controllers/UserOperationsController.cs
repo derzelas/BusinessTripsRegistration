@@ -82,8 +82,7 @@ namespace BusinessTrips.Controllers
             }
 
             FormsAuthentication.SetAuthCookie(userModel.Id.ToString(), false);
-
-            return RedirectToAction("GetAllBusinessTrips", "BusinessTrip");
+            return RedirectToAction("GetUserBusinessTrips", "BusinessTrip");
         }
 
         [Authorize(Roles = "HR,Regular")]
