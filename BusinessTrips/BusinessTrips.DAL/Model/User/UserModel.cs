@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using BusinessTrips.DAL.Entity;
+using BusinessTrips.DAL.Model.BusinessTrip;
 using BusinessTrips.DAL.Repository;
 
-namespace BusinessTrips.DAL.Model
+namespace BusinessTrips.DAL.Model.User
 {
     public class UserModel
     {
+        private readonly UserRepository repository = new UserRepository();
         public Guid Id { get; set; }
 
         public string Name { get; set; }
@@ -23,8 +25,6 @@ namespace BusinessTrips.DAL.Model
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
-        public bool IsConfirmed { get; set; }
-
         public IEnumerable<BusinessTripModel> BusinessTrips { get; set; }
 
         public UserModel()
@@ -34,16 +34,15 @@ namespace BusinessTrips.DAL.Model
 
         public UserModel(UserEntity userEntity)
         {
-            Load(userEntity);
+            FromEntity(userEntity);
         }
 
         public UserModel(Guid id)
         {
-            var repository = new UserRepository();
-            Load(repository.GetById(id));
+            FromEntity(repository.GetById(id));
         }
 
-        private void Load(UserEntity userEntity)
+        private void FromEntity(UserEntity userEntity)
         {
             if (userEntity == null)
             {
@@ -53,40 +52,24 @@ namespace BusinessTrips.DAL.Model
             Id = userEntity.Id;
             Name = userEntity.Name;
             Email = userEntity.Email;
-            Password = userEntity.HashedPassword;
-            IsConfirmed = userEntity.IsConfirmed;
             BusinessTrips = userEntity.BusinessTrips.ToList().Select(e => new BusinessTripModel(e));
         }
 
         public bool Authenthicate()
         {
-            var repository = new UserRepository();
-            UserEntity userEntity;
-
-            try
-            {
-                userEntity = repository.GetByEmail(Email);
-            }
-            catch(InvalidOperationException)
+            var userEntity = repository.GetByEmail(Email);
+            if (userEntity == null || !userEntity.IsConfirmed)
             {
                 return false;
             }
 
-            if (userEntity.IsConfirmed == false)
-            {
-                return false;
-            }
+            FromEntity(userEntity);
 
-            string hashPassword = PasswordHasher.GetHashed(Password + userEntity.Salt);
-            Load(userEntity);
-
-            return hashPassword == userEntity.HashedPassword;
+            return PasswordHasher.GetHashed(Password + userEntity.Salt) == userEntity.HashedPassword;
         }
 
         public UserEntity ToEntity()
         {
-            var repository = new UserRepository();
-
             return repository.GetById(Id);
         }
     }

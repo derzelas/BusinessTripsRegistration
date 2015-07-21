@@ -2,22 +2,15 @@
 using System.ComponentModel.DataAnnotations;
 using BusinessTrips.DAL.Repository;
 
-namespace BusinessTrips.DAL.Model
+namespace BusinessTrips.DAL.Attribute
 {
     public class UniqueEmailAttribute : ValidationAttribute
     {
         public override bool IsValid(object value)
         {
             UserRepository userRepository = new UserRepository();
-            try
-            {
-                userRepository.GetByEmail((string) value);
-                return false;
-            }
-            catch (InvalidOperationException)
-            {
-                return true;
-            }
+
+            return userRepository.GetByEmail((string)value) == null;
         }
     }
 }

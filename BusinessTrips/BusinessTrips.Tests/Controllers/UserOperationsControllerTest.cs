@@ -2,6 +2,7 @@
 using System.Web.Mvc;
 using BusinessTrips.Controllers;
 using BusinessTrips.DAL.Model;
+using BusinessTrips.DAL.Model.User;
 using BusinessTrips.DAL.Repository;
 using BusinessTrips.DAL.Storage;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -33,18 +34,15 @@ namespace BusinessTrips.Tests.Controllers
         }
 
         [TestMethod]
-        public void ConfirmRegistrationSetIsConfirmedPropertyToTrueIfUserGuidExistsAndIsValid()
+        public void ConfirmRegistration_SetIsConfirmedPropertyToTrue_IfUserGuidExistsAndIsValid()
         {
             var userRegistrationModel = new UserRegistrationModel();
             userRegistrationModel.Save();
 
             var result = controller.ConfirmRegistration(userRegistrationModel.Id.ToString()) as ViewResult;
-            var repository = new UserRepository();
-            var userModel = new UserModel(repository.GetById(userRegistrationModel.Id));
-
+            
             Assert.IsNotNull(result);
-            Assert.AreEqual(userModel.IsConfirmed, true);
-            Assert.AreEqual("ConfirmRegistration", result.ViewName);
+            Assert.AreEqual("RegistrationConfirmationSuccessful", result.ViewName);
         }
 
         [TestMethod]
@@ -73,7 +71,7 @@ namespace BusinessTrips.Tests.Controllers
             var result = controller.Login(new UserModel() { Id = Guid.NewGuid(), Password = "" }) as ViewResult;
 
             Assert.IsNotNull(result);
-            Assert.AreEqual("UnknownUser", result.ViewName);
+            Assert.AreEqual("InvalidUser", result.ViewName);
         }
     }
 }

@@ -4,7 +4,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 using BusinessTrips.DAL.Exception;
-using BusinessTrips.DAL.Model;
+using BusinessTrips.DAL.Model.User;
 using BusinessTrips.Services;
 
 namespace BusinessTrips.Controllers
@@ -18,8 +18,6 @@ namespace BusinessTrips.Controllers
         {
             if (ModelState.IsValid)
             {
-
-
                 var email = new Email();
                 email.SendUserRegistrationEmail(userForgotPasswordModelModel.Id, userForgotPasswordModelModel.Email);
 
@@ -46,7 +44,7 @@ namespace BusinessTrips.Controllers
             var email = new Email();
             email.SendUserRegistrationEmail(userRegistrationModel.Id, userRegistrationModel.Email);
 
-            return View("RegisterMailSent");
+            return View("RegistrationSuccessful");
         }
 
         public ActionResult ConfirmRegistration(string guid)
@@ -62,7 +60,7 @@ namespace BusinessTrips.Controllers
             registrationConfirmationModel.Id = parsedGuid;
             registrationConfirmationModel.Confirm();
 
-            return View("ConfirmRegistration");
+            return View("RegistrationConfirmationSuccessful");
         }
 
         public ActionResult Login()
@@ -80,11 +78,11 @@ namespace BusinessTrips.Controllers
         {
             if (!userModel.Authenthicate())
             {
-                return View("UnknownUser");
+                return View("InvalidUser");
             }
 
             FormsAuthentication.SetAuthCookie(userModel.Id.ToString(), false);
-            return RedirectToAction("GetAllBusinessTrips", "BusinessTrip");
+            return RedirectToAction("GetUserBusinessTrips", "BusinessTrip");
         }
 
         [Authorize(Roles = "HR,Regular")]
@@ -107,7 +105,7 @@ namespace BusinessTrips.Controllers
 
         protected override void OnException(ExceptionContext filterContext)
         {
-            if (filterContext.Exception is UserNotFoundInDataBaseException)
+            if (filterContext.Exception is UserNotFoundException)
             {
                 filterContext.ExceptionHandled = true;
 

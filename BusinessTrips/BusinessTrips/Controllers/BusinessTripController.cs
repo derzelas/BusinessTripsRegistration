@@ -3,9 +3,9 @@ using System.Configuration;
 using System.Linq;
 using System.Web.Mvc;
 using System.Web.Security;
-using BusinessTrips.DAL;
 using BusinessTrips.DAL.Model;
 using BusinessTrips.DAL.Model.BusinessTrip;
+using BusinessTrips.DAL.Model.User;
 using BusinessTrips.DAL.ViewModel;
 using BusinessTrips.Services;
 
@@ -41,21 +41,6 @@ namespace BusinessTrips.Controllers
                 return View("RegisteredSuccessfully");
             }
 
-        private UserModel GetUserModelById(string userId)
-        {
-            UserModel userModel = new UserModel(Guid.Parse(userId));
-
-            return userModel;
-        }
-
-        // There will always be a cookie because of Authorize, so no check for null is required
-        private string GetUserIdFromCookie()
-        {
-            var cookieValue = Request.Cookies[cookieName].Value;
-
-            return FormsAuthentication.Decrypt(cookieValue).Name;
-        }
-
         [Authorize(Roles = "Regular,HR")]
         public ActionResult GetUserBusinessTrips()
         {
@@ -89,8 +74,7 @@ namespace BusinessTrips.Controllers
         {
             BusinessTripModel businessTripModel = new BusinessTripModel(businessTripId);
 
-            if (businessTripModel.Id != Guid.Empty &&
-                businessTripModel.User.Id.ToString() == HttpContext.User.Identity.Name)
+            if (businessTripModel.Id != Guid.Empty && (businessTripModel.User.Id.ToString() == HttpContext.User.Identity.Name || User.IsInRole("HR")))
             {
                 return View("Details", businessTripModel);
             }
@@ -142,6 +126,20 @@ namespace BusinessTrips.Controllers
 
             return View("StatusChangedSuccessfully");
         }
+
+        private static UserModel GetUserModelById(string userId)
+        {
+            return new UserModel(Guid.Parse(userId));
+        }
+
+        // There will always be a cookie because of Authorize, so no check for null is required
+        private string GetUserIdFromCookie()
+        {
+            var cookieValue = Request.Cookies[cookieName].Value;
+
+            return FormsAuthentication.Decrypt(cookieValue).Name;
+        }
+
 
         protected override void OnException(ExceptionContext filterContext)
         {

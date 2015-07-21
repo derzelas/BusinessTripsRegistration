@@ -3,7 +3,7 @@ using BusinessTrips.DAL.Entity;
 using BusinessTrips.DAL.Exception;
 using BusinessTrips.DAL.Repository;
 
-namespace BusinessTrips.DAL.Model
+namespace BusinessTrips.DAL.Model.User
 {
     public class RegistrationConfirmationModel
     {
@@ -14,22 +14,15 @@ namespace BusinessTrips.DAL.Model
             var userRepository = new UserRepository();
             UserEntity userEntity;
 
-            try
-            {
-                userEntity = userRepository.GetById(Id);
-            }
-            catch (InvalidOperationException)
-            {
-                throw new UserNotFoundInDataBaseException();
-            }
+            userEntity = userRepository.GetById(Id);
 
             if (userEntity.IsConfirmed)
             {
                 return;
             }
 
-            userRepository.ConfirmRegistration(userEntity.Id);
-                userRepository.CommitChanges();
-            }
+            userEntity.IsConfirmed = true;
+            userRepository.CommitChanges();
         }
     }
+}

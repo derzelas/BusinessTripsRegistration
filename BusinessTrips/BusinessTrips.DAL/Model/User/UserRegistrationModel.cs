@@ -1,11 +1,12 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using BusinessTrips.DAL.Attribute;
 using BusinessTrips.DAL.Entity;
 using BusinessTrips.DAL.Repository;
 
-namespace BusinessTrips.DAL.Model
+namespace BusinessTrips.DAL.Model.User
 {
-    public class UserRegistrationModel
+    public class UserRegistrationModel : IUserRegistrationModel
     {
         private const int MinimumPasswordLength = 6;
         private const int MinimumNameLength = 3;
@@ -73,5 +74,9 @@ namespace BusinessTrips.DAL.Model
                 Id = Id
             };
         }
+    }
+
+    public interface IUserRegistrationModel
+    {
     }
 }

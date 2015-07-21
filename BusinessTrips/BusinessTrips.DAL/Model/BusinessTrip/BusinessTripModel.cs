@@ -1,10 +1,12 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using BusinessTrips.DAL.Attribute;
 using BusinessTrips.DAL.Entity;
+using BusinessTrips.DAL.Model.User;
 using BusinessTrips.DAL.Exception;
 using BusinessTrips.DAL.Repository;
 
-namespace BusinessTrips.DAL.Model
+namespace BusinessTrips.DAL.Model.BusinessTrip
 {
     public class BusinessTripModel
     {
@@ -38,13 +40,13 @@ namespace BusinessTrips.DAL.Model
         [Required]
         [Display(Name = "Starting date:")]
         [DataType(DataType.Date)]
-        [DateRangeAttribute]
+        [DateRange]
         public DateTime StartingDate { get; set; }
 
         [Required]
         [Display(Name = "Ending date:")]
         [DataType(DataType.Date)]
-        [DateRangeAttribute]
+        [DateRange]
         public DateTime EndingDate { get; set; }
 
         [Required]
@@ -97,7 +99,7 @@ namespace BusinessTrips.DAL.Model
             {
                 throw new BusinessTripNotFoundException();
             }
-            
+
             Load(businessTripEntity);
         }
 
@@ -148,7 +150,7 @@ namespace BusinessTrips.DAL.Model
 
         public BusinessTripEntity ToEntity()
         {
-            return new BusinessTripEntity()
+            return new BusinessTripEntity
             {
                 Id = Id,
                 User = User.ToEntity(),

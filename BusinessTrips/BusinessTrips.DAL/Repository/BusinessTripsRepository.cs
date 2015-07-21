@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using BusinessTrips.DAL.Entity;
 using BusinessTrips.DAL.Model;
+using BusinessTrips.DAL.Model.BusinessTrip;
+using BusinessTrips.DAL.Model.User;
 using BusinessTrips.DAL.Storage;
 
 namespace BusinessTrips.DAL.Repository

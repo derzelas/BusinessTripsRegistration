@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using BusinessTrips.DAL.Model.User;
 
 namespace BusinessTrips.DAL.Model
 {

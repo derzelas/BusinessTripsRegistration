@@ -3,7 +3,8 @@
 }
 
 @using BusinessTrips.DAL
-@model BusinessTrips.DAL.Model.BusinessTripModel
+@using BusinessTrips.DAL.Model.BusinessTrip
+@model BusinessTrips.DAL.Model.BusinessTrip.BusinessTripModel
 
 <h2>Manage Request</h2>
 <table class="table">
@@ -48,7 +49,7 @@
                 @Html.ActionLink("Reject", "RejectRequest", "BusinessTrip", Model, null)
             }
 
-            @Html.ActionLink("Details", "GetDetails", "BusinessTrip", new { id = Model.Id }, null)
+            @Html.ActionLink("Details", "GetDetails", "BusinessTrip", new { businessTripId = Model.Id }, null)
         </td>
     </tr>
 </table>

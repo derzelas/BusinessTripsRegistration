@@ -53,21 +53,19 @@ namespace BusinessTrips.Services
         public void SendBusinessTripRegistrationEmail(Guid businessTripId)
         {
             const string subject = "New Business Trip request pending";
-            const string message = "A new business trip has been registered, to accept/reject the request click here: ";
+            string message = "A new business trip has been registered, to accept/reject the request click here: ";
+            message += GetLinkToBusinessTripBy(businessTripId);
 
-            string link = GetLinkToBusinessTripBy(businessTripId);
-
-            Send(subject, message + link, BusinessTripOperatorAddress);
+            Send(subject, message, BusinessTripOperatorAddress);
         }
 
         public void SendCancelBusinessTripEmail(Guid businessTripId)
         {
             const string subject = "Request canceled";
-            const string message = "The following business trip has been canceled: ";
+            string message = "The following business trip has been canceled: ";
+            message+= GetLinkToBusinessTripBy(businessTripId);
 
-            string link = GetLinkToBusinessTripBy(businessTripId);
-
-            Send(subject, message + link, BusinessTripOperatorAddress);
+            Send(subject, message, BusinessTripOperatorAddress);
         }
 
         private static string GetLinkToBusinessTripBy(Guid businessTripId)
