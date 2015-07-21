@@ -8,7 +8,22 @@ using BusinessTrips.Services;
 namespace BusinessTrips.Controllers
 {
     public class UserOperationsController : Controller
-    {
+    {       
+        [HttpPost]
+        public ActionResult ForgotPasswordActionResult(ForgotPasswordModel userForgotPasswordModelModel)
+        {
+            if (ModelState.IsValid)
+            {
+                
+
+                var email = new Email();
+                email.SendUserRegistrationEmail(userForgotPasswordModelModel.Id, userForgotPasswordModelModel.Email);
+
+                return View("SetNewPassword");
+            }
+            return View("ForgotPassword");
+        }
+
         public ActionResult Register()
         {
             return View("Register");
