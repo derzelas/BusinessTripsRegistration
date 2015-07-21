@@ -8,17 +8,18 @@ using BusinessTrips.Services;
 
 namespace BusinessTrips.Controllers
 {
-    [Authorize(Roles = "Regular,HR")]
     public class BusinessTripController : Controller
     {
         private const string CookieName = "Cookie";
 
+        [Authorize(Roles = "Regular,HR")]
         public ActionResult Register()
         {
             return View("Register");
         }
 
         [HttpPost]
+        [Authorize(Roles = "Regular,HR")]
         public ActionResult Register(BusinessTripModel businessTripModel)
         {
             if (ModelState.IsValid)
@@ -52,6 +53,7 @@ namespace BusinessTrips.Controllers
             return FormsAuthentication.Decrypt(cookieValue).Name;
         }
 
+        [Authorize(Roles = "Regular,HR")]
         public ActionResult GetUserBusinessTrips()
         {
             UserModel userModel = GetUserModelById(GetUserIdFromCookie());
@@ -63,6 +65,7 @@ namespace BusinessTrips.Controllers
             return View("UserBusinessTrips", userBusinessTripsCollection);
         }
 
+        [Authorize(Roles = "Regular,HR")]
         public ActionResult Cancel(Guid businessTripId)
         {
             BusinessTripModel businessTripModel = new BusinessTripModel(businessTripId);
@@ -78,11 +81,13 @@ namespace BusinessTrips.Controllers
             return GetUserBusinessTrips();
         }
 
+        [Authorize(Roles = "Regular,HR")]
         public ActionResult GetDetails(Guid businessTripId)
         {
             BusinessTripModel businessTripModel = new BusinessTripModel(businessTripId);
 
-            if (businessTripModel.Id != Guid.Empty && businessTripModel.User.Id.ToString() == HttpContext.User.Identity.Name)
+            if (businessTripModel.Id != Guid.Empty &&
+                businessTripModel.User.Id.ToString() == HttpContext.User.Identity.Name)
             {
                 return View("BusinessTripDetails", businessTripModel);
             }
@@ -90,17 +95,51 @@ namespace BusinessTrips.Controllers
             return RedirectToAction("GetUserBusinessTrips");
         }
 
+        [Authorize(Roles = "Regular,HR")]
         public ActionResult GetAllBusinessTrips()
         {
             return View("AllBusinessTrips", new AllBusinessTripsCollectionViewModel());
         }
 
         [HttpPost]
+        [Authorize(Roles = "Regular,HR")]
         public ActionResult GetAllBusinessTrips(AllBusinessTripsCollectionViewModel businessTripsCollectionViewModel)
         {
-            businessTripsCollectionViewModel.SearchBusinessTripModels = new BusinessTripCollectionModel().LoadOtherBusinessTrips(businessTripsCollectionViewModel.BusinessTripFilter);
+            businessTripsCollectionViewModel.SearchBusinessTripModels =
+                new BusinessTripCollectionModel().LoadOtherBusinessTrips(
+                    businessTripsCollectionViewModel.BusinessTripFilter);
 
             return View("AllBusinessTrips", businessTripsCollectionViewModel);
+        }
+
+        [Authorize(Roles = "HR")]
+        public ActionResult GetBy(string guid)
+        {
+            Guid parsedGuid;
+
+            if (Guid.TryParse(guid, out parsedGuid))
+            {
+                BusinessTripModel businessTripModel = new BusinessTripModel(Guid.Parse(guid));
+
+                return View("ManageRequest", businessTripModel);
+            }
+            return View("RequestNotFound");
+        }
+
+        [Authorize(Roles = "HR")]
+        public ActionResult AcceptRequest(BusinessTripModel businessTripModel)
+        {
+            businessTripModel.ChangeStatus(BusinessTripStatus.Accepted);
+
+            return View("StatusChangedSuccessfully");
+        }
+
+        [Authorize(Roles = "HR")]
+        public ActionResult RejectRequest(BusinessTripModel businessTripModel)
+        {
+            businessTripModel.ChangeStatus(BusinessTripStatus.Rejected);
+
+            return View("StatusChangedSuccessfully");
         }
     }
 }
