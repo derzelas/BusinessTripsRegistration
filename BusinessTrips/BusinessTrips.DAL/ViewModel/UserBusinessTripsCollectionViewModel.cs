@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace BusinessTrips.DAL.Model
+namespace BusinessTrips.DAL.ViewModel
 {
     public class UserBusinessTripsCollectionViewModel
     {

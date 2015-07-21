@@ -5,6 +5,8 @@ using System.Web.Mvc;
 using System.Web.Security;
 using BusinessTrips.DAL;
 using BusinessTrips.DAL.Model;
+using BusinessTrips.DAL.Model.BusinessTrip;
+using BusinessTrips.DAL.ViewModel;
 using BusinessTrips.Services;
 
 namespace BusinessTrips.Controllers
