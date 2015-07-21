@@ -100,12 +100,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\UserOperationsControllerTest.cs" />
-    <Compile Include="DataAccesssLayer\BusinessTripRepositoryTest.cs" />
+    <Compile Include="DataAccesssLayer\Repository\BusinessTripRepositoryTest.cs" />
     <Compile Include="DataAccesssLayer\UniqueEmailAttributeTest.cs" />
-    <Compile Include="DataAccesssLayer\UserRepositoryTest.cs" />
+    <Compile Include="DataAccesssLayer\Repository\UserRepositoryTest.cs" />
     <Compile Include="EfStorageDbInitializerTest.cs" />
-    <Compile Include="Models\UserModelTest.cs" />
-    <Compile Include="Models\UserRegistrationModelTest.cs" />
+    <Compile Include="DataAccesssLayer\Models\UserModelTest.cs" />
+    <Compile Include="DataAccesssLayer\Models\UserRegistrationModelTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -124,9 +124,7 @@
       <Name>BusinessTrips</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Entity\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>

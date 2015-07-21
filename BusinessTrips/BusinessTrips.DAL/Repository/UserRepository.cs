@@ -21,12 +21,12 @@ namespace BusinessTrips.DAL.Repository
 
         public UserEntity GetById(Guid userId)
         {
-            return storage.GetStorageFor<UserEntity>().FirstOrDefault(m => m.Id == userId);
+            return storage.GetStorageFor<UserEntity>().Single(m => m.Id == userId);
         }
 
         public UserEntity GetByEmail(string userEmail)
         {
-            return storage.GetStorageFor<UserEntity>().FirstOrDefault(m => m.Email == userEmail);
+            return storage.GetStorageFor<UserEntity>().Single(m => m.Email == userEmail);
         }
 
         public void ConfirmRegistration(Guid userId)

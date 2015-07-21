@@ -86,11 +86,13 @@
     <Compile Include="IRandomStringGenerator.cs" />
     <Compile Include="Model\RandomStringGenerator.cs" />
     <Compile Include="Repository\IUserRepository.cs" />
+    <Compile Include="Exception\ElementNotFoundExeption.cs" />
     <Compile Include="Model\BusinessTripCollectionModel.cs" />
     <Compile Include="Model\BusinessTripFilter.cs" />
     <Compile Include="Entity\RoleEntity.cs" />
     <Compile Include="Model\BusinessTripModel.cs" />
     <Compile Include="Model\DateRangeAttribute.cs" />
+    <Compile Include="Model\ForgotPasswordModel.cs" />
     <Compile Include="Model\UserBusinessTripsCollectionViewModel.cs" />
     <Compile Include="Model\UserBusinessTripViewModel.cs" />
     <Compile Include="Model\AllBusinessTripsCollectionViewModel.cs" />

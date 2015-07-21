@@ -33,11 +33,6 @@ namespace BusinessTrips.DAL.Storage
             return Set<T>();
         }
 
-        public void Remove<T>(T element) where T : class
-        {
-            Set<T>().Remove(element);
-        }
-
         public void Commit()
         {
             SaveChanges();
