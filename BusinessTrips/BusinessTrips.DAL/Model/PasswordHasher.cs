@@ -5,7 +5,7 @@ namespace BusinessTrips.DAL.Model
 {
     public class PasswordHasher
     {
-        public static string HashPassword(string password)
+        public static string GetHashed(string password)
         {
             SHA256Managed crypt = new SHA256Managed();
             StringBuilder hash = new StringBuilder();

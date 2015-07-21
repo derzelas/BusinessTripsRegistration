@@ -42,6 +42,7 @@ namespace BusinessTrips.Tests.Controllers
             var repository = new UserRepository();
             var userModel = new UserModel(repository.GetById(userRegistrationModel.Id));
 
+            Assert.IsNotNull(result);
             Assert.AreEqual(userModel.IsConfirmed, true);
             Assert.AreEqual("ConfirmRegistration", result.ViewName);
         }
@@ -52,7 +53,7 @@ namespace BusinessTrips.Tests.Controllers
             var result = controller.ConfirmRegistration(string.Empty) as ViewResult;
 
             Assert.IsNotNull(result);
-            Assert.AreEqual("Error", result.ViewName);
+            Assert.AreEqual("ErrorEncountered", result.ViewName);
         }
 
         [TestMethod]
@@ -63,7 +64,7 @@ namespace BusinessTrips.Tests.Controllers
             var result = controller.ConfirmRegistration(badFormatGuid) as ViewResult;
 
             Assert.IsNotNull(result);
-            Assert.AreEqual("Error", result.ViewName);
+            Assert.AreEqual("ErrorEncountered", result.ViewName);
         }
 
         [TestMethod]
@@ -74,31 +75,5 @@ namespace BusinessTrips.Tests.Controllers
             Assert.IsNotNull(result);
             Assert.AreEqual("UnknownUser", result.ViewName);
         }
-
-        //[TestMethod]
-        //public void LoginRedirectToRegisterBusinessTripActionWhenUserIsInDatabase()
-        //{
-        //    var userRegistrationModel = new UserRegistrationModel()
-        //    {
-        //        Id = Guid.NewGuid(),
-        //        Email = "example@gmail.com",
-        //        Name = "name",
-        //        Password = "password",
-        //        ConfirmedPassword = "password"
-        //    };
-        //    userRegistrationModel.Save();
-
-        //    var repository = new UserRepository();
-
-        //    repository.Confirm(userRegistrationModel.Id);
-        //    repository.CommitChanges();
-
-        //    var userModel = repository.GetById(userRegistrationModel.Id);
-        //    userModel.Password = "password";
-
-        //    var result = controller.Login(userModel) as RedirectResult;
-
-        //    Assert.AreEqual("RegisterBusinessTrip", result.Url);
-        //}
     }
 }

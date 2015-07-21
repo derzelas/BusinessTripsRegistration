@@ -3,7 +3,7 @@ using BusinessTrips.DAL.Model;
 using BusinessTrips.DAL.Storage;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace BusinessTrips.Tests.Models
+namespace BusinessTrips.Tests.DataAccesssLayer.Models
 {
     [TestClass]
     public class UserModelTest

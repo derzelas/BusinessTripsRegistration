@@ -25,7 +25,7 @@ namespace BusinessTrips.DAL.Model
 
         public bool IsConfirmed { get; set; }
 
-        public IEnumerable<BusinessTripModel> BusinessTrips { get; set; } 
+        public IEnumerable<BusinessTripModel> BusinessTrips { get; set; }
 
         public UserModel()
         {
@@ -40,7 +40,7 @@ namespace BusinessTrips.DAL.Model
         public UserModel(Guid id)
         {
             var repository = new UserRepository();
-            Load(repository.GetById(id));       
+            Load(repository.GetById(id));
         }
 
         private void Load(UserEntity userEntity)
@@ -61,14 +61,23 @@ namespace BusinessTrips.DAL.Model
         public bool Authenthicate()
         {
             var repository = new UserRepository();
-            UserEntity userEntity = repository.GetByEmail(Email);
+            UserEntity userEntity;
 
-            if (userEntity == null || userEntity.IsConfirmed == false)
+            try
+            {
+                userEntity = repository.GetByEmail(Email);
+            }
+            catch(InvalidOperationException)
             {
                 return false;
             }
 
-            string hashPassword = PasswordHasher.HashPassword(Password + userEntity.Salt);
+            if (userEntity.IsConfirmed == false)
+            {
+                return false;
+            }
+
+            string hashPassword = PasswordHasher.GetHashed(Password + userEntity.Salt);
             Load(userEntity);
 
             return hashPassword == userEntity.HashedPassword;

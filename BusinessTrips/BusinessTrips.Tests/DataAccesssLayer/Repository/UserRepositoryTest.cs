@@ -6,7 +6,7 @@ using BusinessTrips.DAL.Repository;
 using BusinessTrips.DAL.Storage;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace BusinessTrips.Tests.DataAccesssLayer
+namespace BusinessTrips.Tests.DataAccesssLayer.Repository
 {
     [TestClass]
     public class UserRepositoryTest
@@ -57,7 +57,7 @@ namespace BusinessTrips.Tests.DataAccesssLayer
             repository.CreateByUserEntity(userEntity);
             repository.CommitChanges();
 
-            repository.Confirm(userModel.Id);
+            repository.ConfirmRegistration(userModel.Id);
             repository.CommitChanges();
 
             UserModel retrievedModel = new UserModel(repository.GetById(userEntity.Id));
@@ -75,11 +75,12 @@ namespace BusinessTrips.Tests.DataAccesssLayer
         }
 
         [TestMethod]
+        [ExpectedException(typeof(InvalidOperationException))]
         public void GetByEmailReturnNullWhenEmailNotExists()
         {
             string email = "noemail@gmail.com";
 
-            Assert.IsNull(repository.GetByEmail(email));
+            repository.GetByEmail(email);
         }
     }
 }

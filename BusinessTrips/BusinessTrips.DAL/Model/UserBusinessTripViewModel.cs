@@ -2,7 +2,7 @@
 
 namespace BusinessTrips.DAL.Model
 {
-    public class UserBusinesTripsViewModel
+    public class UserBusinessTripViewModel
     {
         public Guid Id { get; set; }
         public string Department { get; set; }
@@ -11,9 +11,9 @@ namespace BusinessTrips.DAL.Model
         public string Accomodation { get; set; }
         public BusinessTripStatus Status { get; set; }
 
-        public UserBusinesTripsViewModel() { }
+        public UserBusinessTripViewModel() { }
 
-        public UserBusinesTripsViewModel(BusinessTripModel businessTripModel)
+        public UserBusinessTripViewModel(BusinessTripModel businessTripModel)
         {
             StartingDate = businessTripModel.StartingDate;
             EndingDate = businessTripModel.EndingDate;

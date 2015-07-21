@@ -1,12 +1,7 @@
 ﻿@{
     Layout = "~/Views/Shared/_Layout.cshtml";
-    ViewBag.Title = "Registration confirmed!";
 }
 
 <h3 class="col-md-12">Registration was successful!</h3>
 
 <p>@Html.ActionLink("Go to Login", "Login", "UserOperations")</p>
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}

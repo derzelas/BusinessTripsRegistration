@@ -4,16 +4,16 @@ namespace BusinessTrips.DAL.Model
 {
     public class UserBusinessTripsCollectionViewModel
     {
-        public IEnumerable<UserBusinesTripsViewModel> UserBusinesTripsViewModel { get; set; }
+        public IEnumerable<UserBusinessTripViewModel> UserBusinesTrips { get; set; }
 
         public UserBusinessTripsCollectionViewModel()
         {
-            UserBusinesTripsViewModel = new List<UserBusinesTripsViewModel>();
+            UserBusinesTrips = new List<UserBusinessTripViewModel>();
         }
 
-        public UserBusinessTripsCollectionViewModel(IEnumerable<UserBusinesTripsViewModel> enumerable)
+        public UserBusinessTripsCollectionViewModel(IEnumerable<UserBusinessTripViewModel> enumerable)
         {
-            UserBusinesTripsViewModel = enumerable;
+            UserBusinesTrips = enumerable;
         }
     }
 }

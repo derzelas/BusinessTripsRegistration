@@ -5,11 +5,11 @@ namespace BusinessTrips.DAL.Model
     public class AllBusinessTripsCollectionViewModel
     {
         public BusinessTripFilter BusinessTripFilter { get; set; }
-        public IEnumerable<SearchBusinessTripModel> SearchBusinessTripModels { get; set; }
+        public IEnumerable<BusinessTripViewModel> BusinessTrips { get; set; }
 
         public AllBusinessTripsCollectionViewModel()
         {
-            SearchBusinessTripModels = new List<SearchBusinessTripModel>();
+            BusinessTrips = new List<BusinessTripViewModel>();
         }
     }
 }

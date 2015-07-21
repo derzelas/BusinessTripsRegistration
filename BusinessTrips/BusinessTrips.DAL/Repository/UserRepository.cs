@@ -7,16 +7,11 @@ namespace BusinessTrips.DAL.Repository
 {
     public class UserRepository : IUserRepository
     {
-        private IStorage storage;
+        private readonly IStorage storage;
 
         public UserRepository()
         {
             storage = new StorageFactory().Create();
-        }
-
-        public UserRepository(IStorage storage)
-        {
-            this.storage = storage;
         }
 
         public void CreateByUserEntity(UserEntity userEntity)
@@ -24,36 +19,24 @@ namespace BusinessTrips.DAL.Repository
             storage.Add(userEntity);
         }
 
-        public UserEntity GetById(Guid id)
+        public UserEntity GetById(Guid userId)
         {
-            var userEntity = storage.GetSetFor<UserEntity>().FirstOrDefault(m => m.Id == id);
-
-            return userEntity;
+            return storage.GetStorageFor<UserEntity>().Single(m => m.Id == userId);
         }
 
-        public UserEntity GetByEmail(string email)
+        public UserEntity GetByEmail(string userEmail)
         {
-            return storage.GetSetFor<UserEntity>().SingleOrDefault(m => m.Email == email);
+            return storage.GetStorageFor<UserEntity>().Single(m => m.Email == userEmail);
         }
 
-        public void Confirm(Guid id)
+        public void ConfirmRegistration(Guid userId)
         {
-            var userEntity = storage.GetSetFor<UserEntity>().Single(u => u.Id == id);
-            userEntity.IsConfirmed = true;
+            storage.GetStorageFor<UserEntity>().Single(u => u.Id == userId).IsConfirmed = true;
         }
 
         public void CommitChanges()
         {
             storage.Commit();
         }
-    }
-
-    public interface IUserRepository
-    {
-        void CreateByUserEntity(UserEntity userEntity);
-        UserEntity GetById(Guid id);
-        void Confirm(Guid id);
-        UserEntity GetByEmail(string email);
-        void CommitChanges();
     }
 }
