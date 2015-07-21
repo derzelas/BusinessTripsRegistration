@@ -2,7 +2,7 @@
 using System.Linq;
 using BusinessTrips.DAL.Repository;
 
-namespace BusinessTrips.DAL.Model
+namespace BusinessTrips.DAL.Model.BusinessTrip
 {
     public class BusinessTripCollectionModel
     {
