@@ -115,6 +115,14 @@ namespace BusinessTrips.Controllers
                 filterContext.Result = View("ErrorEncountered");
             }
 
+            if (filterContext.Exception is InvalidOperationException)
+            {
+                filterContext.ExceptionHandled = true;
+
+                ViewBag.ExceptionMessage = "There are problem with DataBase; Please try again Later";
+                filterContext.Result = View("ErrorEncountered");
+            }
+
             base.OnException(filterContext);
         }
     }

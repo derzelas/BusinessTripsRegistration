@@ -13,7 +13,7 @@ namespace BusinessTrips.Tests.DataAccesssLayer.Models
         [TestInitialize]
         public void TestMethod1()
         {
-            EfStorage efStorage = new EfStorage(new DropCreateDatabaseAlways<EfStorage>());
+            EfStorage efStorage = new EfStorage(new EfStorageDbInitializerTest());
             efStorage.Database.Initialize(true);
 
             userRegistrationModel = new UserRegistrationModel()

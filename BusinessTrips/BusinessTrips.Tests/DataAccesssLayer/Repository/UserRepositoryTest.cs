@@ -19,7 +19,7 @@ namespace BusinessTrips.Tests.DataAccesssLayer.Repository
         [TestInitialize]
         public void Initialize()
         {
-            efStorage = new EfStorage(new DropCreateDatabaseAlways<EfStorage>());
+            efStorage = new EfStorage(new EfStorageDbInitializerTest());
             efStorage.Database.Initialize(true);
 
             repository = new UserRepository();

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using BusinessTrips.DAL.Entity;
+using BusinessTrips.DAL.Exception;
 using BusinessTrips.DAL.Repository;
 
 namespace BusinessTrips.DAL.Model
@@ -87,8 +88,16 @@ namespace BusinessTrips.DAL.Model
 
         public BusinessTripModel(Guid id)
         {
-            BusinessTripEntity businessTripEntity = businessTripRepository.GetById(id);
-
+            BusinessTripEntity businessTripEntity;
+            try
+            {
+                businessTripEntity = businessTripRepository.GetById(id);
+            }
+            catch (System.Exception)
+            {
+                throw new BusinessTripNotFoundException();
+            }
+            
             Load(businessTripEntity);
         }
 

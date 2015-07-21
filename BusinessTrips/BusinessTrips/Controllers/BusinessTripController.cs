@@ -142,5 +142,15 @@ namespace BusinessTrips.Controllers
 
             return View("StatusChangedSuccessfully");
         }
+
+        protected override void OnException(ExceptionContext filterContext)
+        {
+
+
+
+
+
+            base.OnException(filterContext);
+        }
     }
 }

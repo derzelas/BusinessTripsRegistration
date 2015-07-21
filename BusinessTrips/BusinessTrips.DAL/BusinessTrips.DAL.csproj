@@ -83,10 +83,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entity\BusinessTripEntity.cs" />
+    <Compile Include="Exception\BusinessTripNotFoundException.cs" />
+    <Compile Include="Exception\UserNotFoundInDataBaseException.cs" />
     <Compile Include="Model\User\IRandomStringGenerator.cs" />
     <Compile Include="Model\User\RandomStringGenerator.cs" />
     <Compile Include="Repository\IUserRepository.cs" />
-    <Compile Include="Exception\ElementNotFoundExeption.cs" />
     <Compile Include="Model\BusinessTrip\BusinessTripCollectionModel.cs" />
     <Compile Include="Model\User\BusinessTripFilter.cs" />
     <Compile Include="Entity\RoleEntity.cs" />
