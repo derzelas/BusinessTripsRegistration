@@ -75,11 +75,12 @@ namespace BusinessTrips.Tests.DataAccesssLayer.Repository
         }
 
         [TestMethod]
+        [ExpectedException(typeof(InvalidOperationException))]
         public void GetByEmailReturnNullWhenEmailNotExists()
         {
             string email = "noemail@gmail.com";
 
-            Assert.IsNull(repository.GetByEmail(email));
+            repository.GetByEmail(email);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using BusinessTrips.DAL.Repository;
 
 namespace BusinessTrips.DAL.Model
@@ -8,7 +9,15 @@ namespace BusinessTrips.DAL.Model
         public override bool IsValid(object value)
         {
             UserRepository userRepository = new UserRepository();
-            return userRepository.GetByEmail((string)value) == null;
+            try
+            {
+                userRepository.GetByEmail((string) value);
+                return false;
+            }
+            catch (InvalidOperationException)
+            {
+                return true;
+            }
         }
     }
 }
