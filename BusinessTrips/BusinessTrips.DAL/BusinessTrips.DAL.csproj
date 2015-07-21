@@ -84,7 +84,7 @@
   <ItemGroup>
     <Compile Include="Entity\BusinessTripEntity.cs" />
     <Compile Include="Exception\BusinessTripNotFoundException.cs" />
-    <Compile Include="Exception\UserNotFoundInDataBaseException.cs" />
+    <Compile Include="Exception\UserNotFoundException.cs" />
     <Compile Include="Model\User\IRandomStringGenerator.cs" />
     <Compile Include="Model\User\RandomStringGenerator.cs" />
     <Compile Include="Repository\IUserRepository.cs" />

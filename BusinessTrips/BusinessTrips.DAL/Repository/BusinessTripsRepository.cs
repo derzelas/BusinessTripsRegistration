@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using BusinessTrips.DAL.Entity;
+using BusinessTrips.DAL.Exception;
 using BusinessTrips.DAL.Model;
 using BusinessTrips.DAL.Model.BusinessTrip;
 using BusinessTrips.DAL.Model.User;
@@ -25,7 +26,14 @@ namespace BusinessTrips.DAL.Repository
 
         public BusinessTripEntity GetById(Guid businessTripId)
         {
-            return storage.GetStorageFor<BusinessTripEntity>().Single(m => m.Id == businessTripId);
+            var businessTrip = storage.GetStorageFor<BusinessTripEntity>().SingleOrDefault(m => m.Id == businessTripId);
+
+            if (businessTrip == null)
+            {
+                throw new BusinessTripNotFoundException();
+            }
+
+            return businessTrip;
         }
 
         public IEnumerable<BusinessTripEntity> GetByUser(Guid userId)

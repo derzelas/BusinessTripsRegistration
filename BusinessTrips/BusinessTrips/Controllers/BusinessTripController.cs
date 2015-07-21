@@ -3,6 +3,7 @@ using System.Configuration;
 using System.Linq;
 using System.Web.Mvc;
 using System.Web.Security;
+using BusinessTrips.DAL.Exception;
 using BusinessTrips.DAL.Model;
 using BusinessTrips.DAL.Model.BusinessTrip;
 using BusinessTrips.DAL.Model.User;
@@ -74,7 +75,7 @@ namespace BusinessTrips.Controllers
         {
             BusinessTripModel businessTripModel = new BusinessTripModel(businessTripId);
 
-            if (businessTripModel.Id != Guid.Empty && (businessTripModel.User.Id.ToString() == HttpContext.User.Identity.Name || User.IsInRole("HR")))
+            if (businessTripModel.User.Id.ToString() == HttpContext.User.Identity.Name || User.IsInRole("HR"))
             {
                 return View("Details", businessTripModel);
             }
@@ -108,6 +109,7 @@ namespace BusinessTrips.Controllers
 
                 return View("ManageRequest", businessTripModel);
             }
+
             return View("RequestNotFound");
         }
 
@@ -140,13 +142,13 @@ namespace BusinessTrips.Controllers
             return FormsAuthentication.Decrypt(cookieValue).Name;
         }
 
-
         protected override void OnException(ExceptionContext filterContext)
         {
-
-
-
-
+            if (filterContext.Exception is BusinessTripNotFoundException)
+            {
+                filterContext.ExceptionHandled = true;
+                filterContext.Result = View("ErrorEncountered");
+            }
 
             base.OnException(filterContext);
         }

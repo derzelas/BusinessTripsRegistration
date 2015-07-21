@@ -56,7 +56,7 @@ namespace BusinessTrips.DAL.Model.BusinessTrip
         [Required]
         [Display(Name = "Client location:")]
         public string ClientLocation { get; set; }
-        
+
         [Display(Name = "Means of transportation:")]
         public string MeansOfTransportation { get; set; }
 
@@ -90,15 +90,7 @@ namespace BusinessTrips.DAL.Model.BusinessTrip
 
         public BusinessTripModel(Guid id)
         {
-            BusinessTripEntity businessTripEntity;
-            try
-            {
-                businessTripEntity = businessTripRepository.GetById(id);
-            }
-            catch (System.Exception)
-            {
-                throw new BusinessTripNotFoundException();
-            }
+            var businessTripEntity = businessTripRepository.GetById(id);
 
             Load(businessTripEntity);
         }
@@ -107,7 +99,7 @@ namespace BusinessTrips.DAL.Model.BusinessTrip
         {
             if (businessTripEntity == null)
             {
-                return;    
+                return;
             }
 
             Id = businessTripEntity.Id;
@@ -142,7 +134,7 @@ namespace BusinessTrips.DAL.Model.BusinessTrip
             if (Status == BusinessTripStatus.Pending)
             {
                 Status = status;
-                
+
                 businessTripRepository.UpdateStatus(Id, status);
                 businessTripRepository.CommitChanges();
             }
