@@ -3,7 +3,7 @@ using BusinessTrips.DAL.Entity;
 using BusinessTrips.DAL.Exception;
 using BusinessTrips.DAL.Repository;
 
-namespace BusinessTrips.DAL.Model
+namespace BusinessTrips.DAL.Model.User
 {
     public class RegistrationConfirmationModel
     {
@@ -29,7 +29,7 @@ namespace BusinessTrips.DAL.Model
             }
 
             userRepository.ConfirmRegistration(userEntity.Id);
-                userRepository.CommitChanges();
-            }
+            userRepository.CommitChanges();
         }
     }
+}

@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using BusinessTrips.DAL.Repository;
 
-namespace BusinessTrips.DAL.Model
+namespace BusinessTrips.DAL.Attribute
 {
     public class UniqueEmailAttribute : ValidationAttribute
     {
@@ -11,7 +11,8 @@ namespace BusinessTrips.DAL.Model
             UserRepository userRepository = new UserRepository();
             try
             {
-                userRepository.GetByEmail((string) value);
+                userRepository.GetByEmail((string)value);
+
                 return false;
             }
             catch (InvalidOperationException)

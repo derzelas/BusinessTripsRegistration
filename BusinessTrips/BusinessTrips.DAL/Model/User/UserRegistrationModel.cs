@@ -1,9 +1,10 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using BusinessTrips.DAL.Attribute;
 using BusinessTrips.DAL.Entity;
 using BusinessTrips.DAL.Repository;
 
-namespace BusinessTrips.DAL.Model
+namespace BusinessTrips.DAL.Model.User
 {
     public class UserRegistrationModel
     {

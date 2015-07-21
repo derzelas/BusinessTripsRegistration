@@ -1,9 +1,11 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using BusinessTrips.DAL.Attribute;
 using BusinessTrips.DAL.Entity;
+using BusinessTrips.DAL.Model.User;
 using BusinessTrips.DAL.Repository;
 
-namespace BusinessTrips.DAL.Model
+namespace BusinessTrips.DAL.Model.BusinessTrip
 {
     public class BusinessTripModel
     {
@@ -37,13 +39,13 @@ namespace BusinessTrips.DAL.Model
         [Required]
         [Display(Name = "Starting date:")]
         [DataType(DataType.Date)]
-        [DateRangeAttribute]
+        [DateRange]
         public DateTime StartingDate { get; set; }
 
         [Required]
         [Display(Name = "Ending date:")]
         [DataType(DataType.Date)]
-        [DateRangeAttribute]
+        [DateRange]
         public DateTime EndingDate { get; set; }
 
         [Required]
@@ -53,7 +55,7 @@ namespace BusinessTrips.DAL.Model
         [Required]
         [Display(Name = "Client location:")]
         public string ClientLocation { get; set; }
-        
+
         [Display(Name = "Means of transportation:")]
         public string MeansOfTransportation { get; set; }
 
@@ -96,7 +98,7 @@ namespace BusinessTrips.DAL.Model
         {
             if (businessTripEntity == null)
             {
-                return;    
+                return;
             }
 
             Id = businessTripEntity.Id;
@@ -131,7 +133,7 @@ namespace BusinessTrips.DAL.Model
             if (Status == BusinessTripStatus.Pending)
             {
                 Status = status;
-                
+
                 businessTripRepository.UpdateStatus(Id, status);
                 businessTripRepository.CommitChanges();
             }

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using BusinessTrips.DAL.Model.User;
 using BusinessTrips.DAL.Repository;
 
 namespace BusinessTrips.DAL.Model.BusinessTrip

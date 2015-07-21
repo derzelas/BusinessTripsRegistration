@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using BusinessTrips.DAL.Entity;
+using BusinessTrips.DAL.Model.BusinessTrip;
 using BusinessTrips.DAL.Repository;
 
-namespace BusinessTrips.DAL.Model
+namespace BusinessTrips.DAL.Model.User
 {
     public class UserModel
     {
@@ -67,7 +68,7 @@ namespace BusinessTrips.DAL.Model
             {
                 userEntity = repository.GetByEmail(Email);
             }
-            catch(InvalidOperationException)
+            catch (InvalidOperationException)
             {
                 return false;
             }
