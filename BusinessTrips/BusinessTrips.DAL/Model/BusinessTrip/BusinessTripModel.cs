@@ -3,7 +3,6 @@ using System.ComponentModel.DataAnnotations;
 using BusinessTrips.DAL.Attribute;
 using BusinessTrips.DAL.Entity;
 using BusinessTrips.DAL.Model.User;
-using BusinessTrips.DAL.Exception;
 using BusinessTrips.DAL.Repository;
 
 namespace BusinessTrips.DAL.Model.BusinessTrip

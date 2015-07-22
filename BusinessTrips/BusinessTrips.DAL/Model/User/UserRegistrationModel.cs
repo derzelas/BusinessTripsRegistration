@@ -6,12 +6,13 @@ using BusinessTrips.DAL.Repository;
 
 namespace BusinessTrips.DAL.Model.User
 {
-    public class UserRegistrationModel : IUserRegistrationModel
+    public class UserRegistrationModel
     {
         private const int MinimumPasswordLength = 6;
         private const int MinimumNameLength = 3;
         private const string PasswordValidationMessage = "Minimum password length is 6";
-        private readonly IRandomStringGenerator randomStringGenerator;
+
+        private readonly IRandomSaltGenerator randomSaltGenerator;
         private readonly IUserRepository repository;
 
         public Guid Id { get; set; }
@@ -35,29 +36,30 @@ namespace BusinessTrips.DAL.Model.User
 
         [Required]
         [DataType(DataType.Password)]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [Compare("Password", ErrorMessage = "Password does not match confirmation password.")]
         [Display(Name = "Confirm password")]
         public string ConfirmedPassword { get; set; }
 
         public UserRegistrationModel()
         {
             repository = new UserRepository();
-            randomStringGenerator = new RandomStringGenerator();
+            randomSaltGenerator = new RandomSaltGenerator();
         }
 
-        public UserRegistrationModel(IRandomStringGenerator randomStringGenerator, IUserRepository userRepository)
+        public UserRegistrationModel(IRandomSaltGenerator randomSaltGenerator, IUserRepository userRepository)
         {
             repository = userRepository;
-            this.randomStringGenerator = randomStringGenerator;
+            this.randomSaltGenerator = randomSaltGenerator;
         }
 
+        // ---------- if i pass a role that is not in databate, than invalid operation exception is throw
         public void Save()
         {
             Id = Guid.NewGuid();
 
             UserEntity userEntity = ToUserEntity();
             userEntity.Roles.Add(new RoleRepository().GetRole("Regular"));
-            userEntity.Salt = randomStringGenerator.GetSalt();
+            userEntity.Salt = randomSaltGenerator.GetSalt();
             userEntity.HashedPassword = PasswordHasher.GetHashed(Password + userEntity.Salt);
 
             repository.CreateByUserEntity(userEntity);
@@ -74,9 +76,5 @@ namespace BusinessTrips.DAL.Model.User
                 Id = Id
             };
         }
-    }
-
-    public interface IUserRegistrationModel
-    {
     }
 }

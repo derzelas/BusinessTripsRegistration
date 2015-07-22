@@ -85,8 +85,8 @@
     <Compile Include="Entity\BusinessTripEntity.cs" />
     <Compile Include="Exception\BusinessTripNotFoundException.cs" />
     <Compile Include="Exception\UserNotFoundException.cs" />
-    <Compile Include="Model\User\IRandomStringGenerator.cs" />
-    <Compile Include="Model\User\RandomStringGenerator.cs" />
+    <Compile Include="Model\User\IRandomSaltGenerator.cs" />
+    <Compile Include="Model\User\RandomSaltGenerator.cs" />
     <Compile Include="Repository\IUserRepository.cs" />
     <Compile Include="Model\BusinessTrip\BusinessTripCollectionModel.cs" />
     <Compile Include="Model\User\BusinessTripFilter.cs" />

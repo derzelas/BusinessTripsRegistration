@@ -10,9 +10,7 @@ using BusinessTrips.Services;
 namespace BusinessTrips.Controllers
 {
     public class UserOperationsController : Controller
-    {
-        private readonly string cookieName = ConfigurationManager.AppSettings["Cookie"];
-
+    {        
         [HttpPost]
         public ActionResult ForgotPasswordActionResult(ForgotPasswordModel userForgotPasswordModelModel)
         {
@@ -50,17 +48,17 @@ namespace BusinessTrips.Controllers
         public ActionResult ConfirmRegistration(string guid)
         {
             Guid parsedGuid;
-            if (!Guid.TryParse(guid, out parsedGuid))
+            if (Guid.TryParse(guid, out parsedGuid))
             {
-                ViewBag.ExceptionMessage = "The link is invalid";
-                return View("ErrorEncountered");
+                var registrationConfirmationModel = new RegistrationConfirmationModel();
+
+                registrationConfirmationModel.Id = parsedGuid;
+                registrationConfirmationModel.Confirm();
+
+                return View("RegistrationConfirmationSuccessful");
             }
-            var registrationConfirmationModel = new RegistrationConfirmationModel();
 
-            registrationConfirmationModel.Id = parsedGuid;
-            registrationConfirmationModel.Confirm();
-
-            return View("RegistrationConfirmationSuccessful");
+            return View("ErrorEncountered");
         }
 
         public ActionResult Login()
@@ -88,6 +86,8 @@ namespace BusinessTrips.Controllers
         [Authorize(Roles = "HR,Regular")]
         public ActionResult Logout()
         {
+            string cookieName = ConfigurationManager.AppSettings["Cookie"];
+
             if (Request.Cookies[cookieName] == null)
             {
                 return RedirectToAction("Login");

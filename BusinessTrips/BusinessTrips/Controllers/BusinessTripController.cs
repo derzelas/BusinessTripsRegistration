@@ -14,8 +14,6 @@ namespace BusinessTrips.Controllers
 {
     public class BusinessTripController : Controller
     {
-        private readonly string cookieName = ConfigurationManager.AppSettings["Cookie"];
-
         [Authorize(Roles = "Regular,HR")]
         public ActionResult Register()
         {
@@ -137,6 +135,8 @@ namespace BusinessTrips.Controllers
         // There will always be a cookie because of Authorize, so no check for null is required
         private string GetUserIdFromCookie()
         {
+            string cookieName = ConfigurationManager.AppSettings["Cookie"];
+
             var cookieValue = Request.Cookies[cookieName].Value;
 
             return FormsAuthentication.Decrypt(cookieValue).Name;
