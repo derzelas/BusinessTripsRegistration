@@ -4,7 +4,7 @@ using BusinessTrips.DAL.Storage;
 
 namespace BusinessTrips.Tests
 {
-    class EfStorageDbInitializerTest : DropCreateDatabaseAlways<EfStorage>
+    public class EfStorageDbInitializerTest : DropCreateDatabaseAlways<EfStorage>
     {
         protected override void Seed(EfStorage context)
         {

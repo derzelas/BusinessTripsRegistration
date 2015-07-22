@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Web.Mvc;
 using BusinessTrips.Controllers;
-using BusinessTrips.DAL.Model;
-using BusinessTrips.DAL.Repository;
+using BusinessTrips.DAL.Model.User;
 using BusinessTrips.DAL.Storage;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -33,17 +32,15 @@ namespace BusinessTrips.Tests.Controllers
         }
 
         [TestMethod]
-        public void ConfirmRegistrationSetIsConfirmedPropertyToTrueIfUserGuidExistsAndIsValid()
+        public void ConfirmRegistration_SetIsConfirmedPropertyToTrue_IfUserGuidExistsAndIsValid()
         {
             var userRegistrationModel = new UserRegistrationModel();
             userRegistrationModel.Save();
 
             var result = controller.ConfirmRegistration(userRegistrationModel.Id.ToString()) as ViewResult;
-            var repository = new UserRepository();
-            var userModel = new UserModel(repository.GetById(userRegistrationModel.Id));
-
-            Assert.AreEqual(userModel.IsConfirmed, true);
-            Assert.AreEqual("ConfirmRegistration", result.ViewName);
+            
+            Assert.IsNotNull(result);
+            Assert.AreEqual("RegistrationConfirmationSuccessful", result.ViewName);
         }
 
         [TestMethod]
@@ -52,7 +49,7 @@ namespace BusinessTrips.Tests.Controllers
             var result = controller.ConfirmRegistration(string.Empty) as ViewResult;
 
             Assert.IsNotNull(result);
-            Assert.AreEqual("Error", result.ViewName);
+            Assert.AreEqual("ErrorEncountered", result.ViewName);
         }
 
         [TestMethod]
@@ -63,7 +60,7 @@ namespace BusinessTrips.Tests.Controllers
             var result = controller.ConfirmRegistration(badFormatGuid) as ViewResult;
 
             Assert.IsNotNull(result);
-            Assert.AreEqual("Error", result.ViewName);
+            Assert.AreEqual("ErrorEncountered", result.ViewName);
         }
 
         [TestMethod]
@@ -72,33 +69,7 @@ namespace BusinessTrips.Tests.Controllers
             var result = controller.Login(new UserModel() { Id = Guid.NewGuid(), Password = "" }) as ViewResult;
 
             Assert.IsNotNull(result);
-            Assert.AreEqual("UnknownUser", result.ViewName);
+            Assert.AreEqual("InvalidUser", result.ViewName);
         }
-
-        //[TestMethod]
-        //public void LoginRedirectToRegisterBusinessTripActionWhenUserIsInDatabase()
-        //{
-        //    var userRegistrationModel = new UserRegistrationModel()
-        //    {
-        //        Id = Guid.NewGuid(),
-        //        Email = "example@gmail.com",
-        //        Name = "name",
-        //        Password = "password",
-        //        ConfirmedPassword = "password"
-        //    };
-        //    userRegistrationModel.Save();
-
-        //    var repository = new UserRepository();
-
-        //    repository.Confirm(userRegistrationModel.Id);
-        //    repository.CommitChanges();
-
-        //    var userModel = repository.GetById(userRegistrationModel.Id);
-        //    userModel.Password = "password";
-
-        //    var result = controller.Login(userModel) as RedirectResult;
-
-        //    Assert.AreEqual("RegisterBusinessTrip", result.Url);
-        //}
     }
 }

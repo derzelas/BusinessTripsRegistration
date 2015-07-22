@@ -2,14 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using BusinessTrips.DAL.Entity;
+using BusinessTrips.DAL.Exception;
 using BusinessTrips.DAL.Model;
+using BusinessTrips.DAL.Model.BusinessTrip;
+using BusinessTrips.DAL.Model.User;
 using BusinessTrips.DAL.Storage;
 
 namespace BusinessTrips.DAL.Repository
 {
     public class BusinessTripsRepository
     {
-        private IStorage storage;
+        private readonly IStorage storage;
 
         public BusinessTripsRepository()
         {
@@ -23,17 +26,24 @@ namespace BusinessTrips.DAL.Repository
 
         public BusinessTripEntity GetById(Guid businessTripId)
         {
-            return storage.GetSetFor<BusinessTripEntity>().FirstOrDefault(m => m.Id == businessTripId);
+            var businessTrip = storage.GetStorageFor<BusinessTripEntity>().SingleOrDefault(m => m.Id == businessTripId);
+
+            if (businessTrip == null)
+            {
+                throw new BusinessTripNotFoundException();
+            }
+
+            return businessTrip;
         }
 
         public IEnumerable<BusinessTripEntity> GetByUser(Guid userId)
         {
-            return storage.GetSetFor<BusinessTripEntity>().Where(e => e.User.Id == userId);
+            return storage.GetStorageFor<BusinessTripEntity>().Where(e => e.User.Id == userId);
         }
 
-        public IEnumerable<BusinessTripEntity> GetBusinessTrips(BusinessTripFilter filter)
+        public IEnumerable<BusinessTripEntity> GetBusinessTripsBy(BusinessTripFilter filter)
         {
-            IQueryable<BusinessTripEntity> businessTrips = storage.GetSetFor<BusinessTripEntity>();
+            IQueryable<BusinessTripEntity> businessTrips = storage.GetStorageFor<BusinessTripEntity>();
 
             if (!string.IsNullOrEmpty(filter.Person))
             {
@@ -75,7 +85,7 @@ namespace BusinessTrips.DAL.Repository
 
         public void UpdateStatus(Guid id, BusinessTripStatus status)
         {
-            var businessTripEntity = storage.GetSetFor<BusinessTripEntity>().Single(u => u.Id == id);
+            BusinessTripEntity businessTripEntity = storage.GetStorageFor<BusinessTripEntity>().Single(u => u.Id == id);
             businessTripEntity.Status = status;
         }
 

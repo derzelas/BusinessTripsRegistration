@@ -1,6 +1,6 @@
 ﻿@if (Request.IsAuthenticated)
 {
-    using (Html.BeginForm("Logout", "UserOperations", FormMethod.Post, new { id = "logoutForm", @class = "navbar-static-top" }))
+    using (Html.BeginForm("Logout", "UserOperations", FormMethod.Post, new { id = "logoutForm", @class = "navbar-static-top", role = "form" }))
     {
         @Html.AntiForgeryToken()
 
@@ -11,6 +11,7 @@
             <li>
                 @Html.ActionLink("Register business trip", "Register", "BusinessTrip")
             </li>
+
             <li>
                 @Html.ActionLink("My business trips", "GetUserBusinessTrips", "BusinessTrip")
             </li>
@@ -23,7 +24,6 @@
 else
 {
     <ul class="nav navbar-nav navbar-right">
-        <li>ot log in</li>
         <li>@Html.ActionLink("Register", "Register", "UserOperations")</li>
         <li>@Html.ActionLink("Login", "Login", "UserOperations")</li>
     </ul>

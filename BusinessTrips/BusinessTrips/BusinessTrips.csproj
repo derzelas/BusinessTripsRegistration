@@ -167,7 +167,6 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\BusinessTripController.cs" />
-    <Compile Include="Controllers\BusinessTripsOperationsController.cs" />
     <Compile Include="Controllers\UserOperationsController.cs" />
     <Compile Include="Error401.aspx.cs">
       <DependentUpon>Error401.aspx</DependentUpon>
@@ -207,18 +206,14 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Views\BusinessTrip\Register.cshtml" />
-    <Content Include="Views\Shared\401Error.html" />
-    <Content Include="Views\UserOperations\Error.cshtml" />
-    <Content Include="Views\BusinessTripsOperations\ManageRequest.cshtml" />
+    <Content Include="Views\BusinessTrip\ManageRequest.cshtml" />
     <Content Include="Views\BusinessTrip\UserBusinessTrips.cshtml" />
-    <Content Include="Views\BusinessTripsOperations\RequestNotFound.cshtml" />
-    <Content Include="Views\Shared\Lockout.cshtml" />
+    <Content Include="Views\BusinessTrip\RequestNotFound.cshtml" />
     <Content Include="Views\Shared\UnauthenticatedLayout.cshtml" />
-    <Content Include="Views\UserOperations\ConfirmationEmailSent.cshtml" />
     <Content Include="Views\BusinessTrip\AllBusinessTrips.cshtml" />
-    <Content Include="Views\Shared\BusinessTripDetails.cshtml" />
+    <Content Include="Views\BusinessTrip\Details.cshtml" />
     <Content Include="Views\BusinessTrip\RegisteredSuccessfully.cshtml" />
-    <Content Include="Views\BusinessTripsOperations\StatusChangedSuccessfully.cshtml" />
+    <Content Include="Views\BusinessTrip\StatusChangedSuccessfully.cshtml" />
     <Content Include="Views\UserOperations\ForgotPassword.cshtml" />
     <Content Include="Views\UserOperations\SetNewPassword.cshtml" />
     <Content Include="Views\UserOperations\ForgotPasswordEmailSent.cshtml" />
@@ -260,16 +255,15 @@
     </Content>
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\ErrorEncountered.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\UserOperations\Register.cshtml" />
-    <Content Include="Views\UserOperations\RegisterMailSent.cshtml" />
+    <Content Include="Views\UserOperations\RegistrationSuccessful.cshtml" />
     <Content Include="Views\UserOperations\Login.cshtml" />
-    <Content Include="Views\UserOperations\UnknownUser.cshtml" />
-    <Content Include="Views\UserOperations\ConfirmRegistration.cshtml" />
-    <Content Include="Views\UserOperations\AuthenticatedUser.cshtml" />
+    <Content Include="Views\UserOperations\InvalidUser.cshtml" />
+    <Content Include="Views\UserOperations\RegistrationConfirmationSuccessful.cshtml" />
     <None Include="_bin_deployableAssemblies\amd64\Microsoft.VC90.CRT\Microsoft.VC90.CRT.manifest" />
     <None Include="_bin_deployableAssemblies\x86\Microsoft.VC90.CRT\Microsoft.VC90.CRT.manifest" />
   </ItemGroup>

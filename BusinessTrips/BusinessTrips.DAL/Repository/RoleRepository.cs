@@ -15,7 +15,7 @@ namespace BusinessTrips.DAL.Repository
 
         public RoleEntity GetRole(string roleName)
         {
-            return storage.GetSetFor<RoleEntity>().FirstOrDefault(r => r.Name == roleName);
+            return storage.GetStorageFor<RoleEntity>().Single(r => r.Name == roleName);
         }
     }
 }

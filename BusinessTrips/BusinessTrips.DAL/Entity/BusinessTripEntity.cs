@@ -1,4 +1,5 @@
 ﻿using System;
+using BusinessTrips.DAL.Model.BusinessTrip;
 
 namespace BusinessTrips.DAL.Entity
 {
@@ -20,7 +21,7 @@ namespace BusinessTrips.DAL.Entity
 
         public string ClientName { get; set; }
         public string ClientLocation { get; set; }
-        
+
         public string MeansOfTransportation { get; set; }
 
         public string Accomodation { get; set; }

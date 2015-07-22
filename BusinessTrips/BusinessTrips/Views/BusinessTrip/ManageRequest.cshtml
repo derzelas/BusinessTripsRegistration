@@ -1,0 +1,55 @@
+﻿@{
+    ViewBag.Title = "Manage request";
+}
+
+@using BusinessTrips.DAL
+@using BusinessTrips.DAL.Model.BusinessTrip
+@model BusinessTrips.DAL.Model.BusinessTrip.BusinessTripModel
+
+<h2>Manage Request</h2>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Department)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StartingDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EndingDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Accomodation)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
+        <th></th>
+    </tr>
+    <tr>
+        <td>
+            @Html.DisplayFor(model => model.Department)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.StartingDate)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.EndingDate)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.Accomodation)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.Status)
+        </td>
+        <td>
+            @if (Model.Status == BusinessTripStatus.Pending)
+            {
+                @Html.ActionLink("Accept", "AcceptRequest", "BusinessTrip", Model, null)  
+                @Html.ActionLink("Reject", "RejectRequest", "BusinessTrip", Model, null)
+            }
+
+            @Html.ActionLink("Details", "GetDetails", "BusinessTrip", new { businessTripId = Model.Id }, null)
+        </td>
+    </tr>
+</table>

@@ -5,7 +5,7 @@
 
 <h2>All business trips</h2>
 
-@using (Html.BeginForm("GetAllBusinessTrips", "BusinessTrip", FormMethod.Post, new { @class = "form-horizontal"}))
+@using (Html.BeginForm("GetAllBusinessTrips", "BusinessTrip", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
     <table>
         <tr>
@@ -96,7 +96,7 @@
         </th>
     </tr>
 
-    @foreach (var item in Model.SearchBusinessTripModels)
+    @foreach (var item in Model.BusinessTrips)
     {
         <tr>
             <td>

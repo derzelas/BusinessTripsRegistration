@@ -1,11 +1,11 @@
-﻿@model BusinessTrips.DAL.Model.UserBusinessTripsCollectionViewModel
+﻿@model BusinessTrips.DAL.ViewModel.UserBusinessTripsCollectionViewModel
 @{
-    ViewBag.Title = "My Business Trips";
+    ViewBag.Title = "My business trips";
 }
 
 <h2>My Business Trips</h2>
 
-@using (Html.BeginForm("GetUserBusinessTrips", "BusinessTrip", FormMethod.Get, new { @class = "form-horizontal" }))
+@using (Html.BeginForm("GetUserBusinessTrips", "BusinessTrip", FormMethod.Get, new { @class = "form-horizontal", role = "form" }))
 {
     <table class="table">
         <tr>
@@ -27,7 +27,7 @@
             <th></th>
         </tr>
 
-        @foreach (var item in Model.UserBusinesTripsViewModel)
+        @foreach (var item in Model.UserBusinesTrips)
         {
             <tr>
                 <td>

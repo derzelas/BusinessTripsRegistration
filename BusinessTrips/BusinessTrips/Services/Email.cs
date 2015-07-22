@@ -7,7 +7,8 @@ namespace BusinessTrips.Services
 {
     public class Email
     {
-        private SmtpClient Client;
+        private const int Port = 587;
+        private readonly SmtpClient client;
         private const string SenderAddress = "iQuestBusinessTrips@gmail.com";
         private const string BusinessTripOperatorAddress = "iQuestBusinessTrips@gmail.com";
         private const string Password = "Ana@re6mere";
@@ -15,8 +16,7 @@ namespace BusinessTrips.Services
 
         public Email()
         {
-            const int port = 587;
-            Client = new SmtpClient(SmtpClient, port)
+            client = new SmtpClient(SmtpClient, Port)
             {
                 UseDefaultCredentials = false,
                 EnableSsl = true,
@@ -34,7 +34,7 @@ namespace BusinessTrips.Services
                 To = { receiver }
             };
 
-            Client.Send(message);
+            client.Send(message);
         }
 
         public void SendForgotPasswordEmail(Guid id, string receiverEmail)
@@ -50,7 +50,7 @@ namespace BusinessTrips.Services
             Send(subject, welcomeMessage + link, receiverEmail);
         }
 
-        public void SendUserRegistrationEmail(Guid id, string receiverEmail)
+        public void SendUserRegistrationEmail(Guid userId, string receiverEmail)
         {
             const string subject = "Confirm your email for Business Trips";
             const string welcomeMessage = "Welcome to Business trips. Here is your confirmation link: ";
@@ -58,37 +58,36 @@ namespace BusinessTrips.Services
             var link = String.Format("http://{0}:{1}/UserOperations/ConfirmRegistration/?guid={2}",
                 HttpContext.Current.Request.Url.Host,
                 HttpContext.Current.Request.Url.Port,
-                id);
+                userId);
 
             Send(subject, welcomeMessage + link, receiverEmail);
         }
 
-        public void SendBusinessTripRegistrationEmail(Guid id)
+        public void SendBusinessTripRegistrationEmail(Guid businessTripId)
         {
             const string subject = "New Business Trip request pending";
-            const string message = "A new business trip has been registered, to accept/reject the request click here: ";
+            string message = "A new business trip has been registered, to accept/reject the request click here: ";
+            message += GetLinkToBusinessTripBy(businessTripId);
 
-            var link = GetLinkToBusinessTrip(id);
-
-            Send(subject, message + link, BusinessTripOperatorAddress);
+            Send(subject, message, BusinessTripOperatorAddress);
         }
 
-        public void SendCancelBusinessTripEmail(Guid id)
+        public void SendCancelBusinessTripEmail(Guid businessTripId)
         {
             const string subject = "Request canceled";
-            const string message = "The following business trip has been canceled: ";
+            string message = "The following business trip has been canceled: ";
+            message+= GetLinkToBusinessTripBy(businessTripId);
 
-            var link = GetLinkToBusinessTrip(id);
-
-            Send(subject, message + link, BusinessTripOperatorAddress);
+            Send(subject, message, BusinessTripOperatorAddress);
         }
 
-        private static string GetLinkToBusinessTrip(Guid id)
+        private static string GetLinkToBusinessTripBy(Guid businessTripId)
         {
-            var link = string.Format("http://{0}:{1}/BusinessTripsOperations/GetRequestBy/?guid={2}",
+            var link = string.Format("http://{0}:{1}/BusinessTrip/GetBy/?guid={2}",
                 HttpContext.Current.Request.Url.Host,
                 HttpContext.Current.Request.Url.Port,
-                id);
+                businessTripId);
+
             return link;
         }
     }

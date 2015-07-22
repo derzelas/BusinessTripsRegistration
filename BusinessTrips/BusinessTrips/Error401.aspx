@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Error401.aspx.cs" Inherits="BusinessTrips.Error401" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Error401.aspx.cs" Inherits="BusinessTrips.Views.Shared.Error401" %>
 
 <!DOCTYPE html>
 
