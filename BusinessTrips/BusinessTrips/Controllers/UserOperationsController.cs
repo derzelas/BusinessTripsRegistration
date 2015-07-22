@@ -8,22 +8,7 @@ using BusinessTrips.Services;
 namespace BusinessTrips.Controllers
 {
     public class UserOperationsController : Controller
-    {       
-        [HttpPost]
-        public ActionResult ForgotPasswordActionResult(ForgotPasswordModel userForgotPasswordModelModel)
-        {
-            if (ModelState.IsValid)
-            {
-                
-
-                var email = new Email();
-                email.SendUserRegistrationEmail(userForgotPasswordModelModel.Id, userForgotPasswordModelModel.Email);
-
-                return View("SetNewPassword");
-            }
-            return View("ForgotPassword");
-        }
-
+    {
         public ActionResult Register()
         {
             return View("Register");
@@ -90,6 +75,43 @@ namespace BusinessTrips.Controllers
                 Response.Cookies.Add(cookie);
             }
             return RedirectToAction("Login");
+        }
+
+        public ActionResult ForgotPassword()
+        {
+            return View("ForgotPassword");
+        }
+
+        [HttpPost]
+        public ActionResult ForgotPassword(ForgotPasswordModel userModel)
+        {
+            if (ModelState.IsValid)
+            {
+                userModel.ToForgotPasswordModelByEmail(userModel.Email);
+                var email = new Email();
+                email.SendForgotPasswordEmail(userModel.Id, userModel.Email);
+
+                return View("ForgotPasswordEmailSent");
+            }
+            return View("ForgotPassword");
+        }
+
+        public ActionResult SetNewPassword(string guid)
+        {
+            return View("SetNewPassword");
+        }
+
+        [HttpPost]
+        public ActionResult SetNewPassword(SetNewPasswordModel userModel)
+        {
+            if (ModelState.IsValid)
+            {
+                userModel.SetPassword(userModel.Id);
+
+                return View("PasswordSet");
+            }
+
+            return View("SetNewPassword");
         }
     }
 }
