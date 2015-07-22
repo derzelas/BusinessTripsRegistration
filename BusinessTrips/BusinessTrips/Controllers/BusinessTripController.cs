@@ -123,7 +123,7 @@ namespace BusinessTrips.Controllers
             return View("RequestNotFound");
         }
 
-        [RoleAuthorize(Roles.Hr)]
+        [RoleAuthorize(Role.Hr)]
         public ActionResult AcceptRequest(Guid businessTripId)
         {
             var businessTripModel=new BusinessTripModel(businessTripId);
@@ -132,7 +132,7 @@ namespace BusinessTrips.Controllers
             return View("StatusChangedSuccessfully");
         }
 
-        [RoleAuthorize(Roles.Hr)]
+        [RoleAuthorize(Role.Hr)]
         public ActionResult RejectRequest(Guid businessTripId)
         {
             var businessTripModel = new BusinessTripModel(businessTripId);

@@ -98,7 +98,7 @@
     <Compile Include="Model\BusinessTrip\BusinessTripModel.cs" />
     <Compile Include="Attribute\DateRangeAttribute.cs" />
     <Compile Include="Model\User\ForgotPasswordModel.cs" />
-    <Compile Include="Storage\Roles.cs" />
+    <Compile Include="Storage\Role.cs" />
     <Compile Include="ViewModel\PendingBusinessTripsCollectionViewModel.cs" />
     <Compile Include="ViewModel\PendingBusinessTripViewModel.cs" />
     <Compile Include="ViewModel\UserBusinessTripsCollectionViewModel.cs" />
