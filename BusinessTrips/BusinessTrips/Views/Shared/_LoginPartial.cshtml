@@ -11,13 +11,18 @@
             <li>
                 @Html.ActionLink("Register business trip", "Register", "BusinessTrip")
             </li>
-
             <li>
                 @Html.ActionLink("My business trips", "GetUserBusinessTrips", "BusinessTrip")
             </li>
             <li>
                 @Html.ActionLink("Search", "GetAllBusinessTrips", "BusinessTrip")
             </li>
+            @if (User.IsInRole("HR"))
+            {
+                <li>
+                    @Html.ActionLink("Pending requests", "GetAllBusinessTrips", "BusinessTrip")
+                </li>
+            }
         </ul>
     }
 }

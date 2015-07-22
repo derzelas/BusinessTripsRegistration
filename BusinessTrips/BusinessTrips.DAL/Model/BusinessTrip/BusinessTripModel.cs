@@ -96,11 +96,6 @@ namespace BusinessTrips.DAL.Model.BusinessTrip
 
         private void Load(BusinessTripEntity businessTripEntity)
         {
-            if (businessTripEntity == null)
-            {
-                return;
-            }
-
             Id = businessTripEntity.Id;
             User = new UserModel(businessTripEntity.User);
             PmName = businessTripEntity.PmName;
@@ -130,7 +125,7 @@ namespace BusinessTrips.DAL.Model.BusinessTrip
 
         public void ChangeStatus(BusinessTripStatus status)
         {
-            if (Status == BusinessTripStatus.Pending)
+            if (Status == BusinessTripStatus.Pending || Status == BusinessTripStatus.Accepted)
             {
                 Status = status;
 

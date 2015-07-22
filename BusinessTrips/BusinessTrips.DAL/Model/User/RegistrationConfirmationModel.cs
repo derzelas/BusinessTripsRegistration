@@ -1,6 +1,5 @@
 ﻿using System;
 using BusinessTrips.DAL.Entity;
-using BusinessTrips.DAL.Exception;
 using BusinessTrips.DAL.Repository;
 
 namespace BusinessTrips.DAL.Model.User
@@ -12,9 +11,8 @@ namespace BusinessTrips.DAL.Model.User
         public void Confirm()
         {
             var userRepository = new UserRepository();
-            UserEntity userEntity;
 
-            userEntity = userRepository.GetById(Id);
+            var userEntity = userRepository.GetById(Id);
 
             if (userEntity.IsConfirmed)
             {

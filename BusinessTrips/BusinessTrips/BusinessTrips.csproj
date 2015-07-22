@@ -216,6 +216,8 @@
     <Content Include="Views\BusinessTrip\StatusChangedSuccessfully.cshtml" />
     <Content Include="Views\UserOperations\ForgotPassword.cshtml" />
     <Content Include="Views\UserOperations\SetNewPassword.cshtml" />
+    <Content Include="Views\UserOperations\ForgotPasswordEmailSent.cshtml" />
+    <Content Include="Views\UserOperations\PasswordSet.cshtml" />
     <None Include="_bin_deployableAssemblies\x86\sqlcese40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceqp40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceme40.dll" />

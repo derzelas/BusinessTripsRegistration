@@ -3,19 +3,17 @@ using System.ComponentModel.DataAnnotations;
 using BusinessTrips.DAL.Attribute;
 using BusinessTrips.DAL.Entity;
 using BusinessTrips.DAL.Repository;
+using BusinessTrips.DAL.Storage;
 
 namespace BusinessTrips.DAL.Model.User
 {
-    public class UserRegistrationModel
+    public class UserRegistrationModel : PasswordRegistrationModel
     {
-        private const int MinimumPasswordLength = 6;
         private const int MinimumNameLength = 3;
         private const string PasswordValidationMessage = "Minimum password length is 6";
 
         private readonly IRandomSaltGenerator randomSaltGenerator;
         private readonly IUserRepository repository;
-
-        public Guid Id { get; set; }
 
         [Required]
         [Display(Name = "Name")]
@@ -27,18 +25,6 @@ namespace BusinessTrips.DAL.Model.User
         [Display(Name = "E-mail")]
         [UniqueEmail(ErrorMessage = "This e-mail is already registered")]
         public string Email { get; set; }
-
-        [Required]
-        [DataType(DataType.Password)]
-        [MinLength(MinimumPasswordLength, ErrorMessage = PasswordValidationMessage)]
-        [Display(Name = "Password")]
-        public string Password { get; set; }
-
-        [Required]
-        [DataType(DataType.Password)]
-        [Compare("Password", ErrorMessage = "Password does not match confirmation password.")]
-        [Display(Name = "Confirm password")]
-        public string ConfirmedPassword { get; set; }
 
         public UserRegistrationModel()
         {
@@ -52,14 +38,13 @@ namespace BusinessTrips.DAL.Model.User
             this.randomSaltGenerator = randomSaltGenerator;
         }
 
-        // ---------- if i pass a role that is not in databate, than invalid operation exception is throw
         public void Save()
         {
             Id = Guid.NewGuid();
 
             UserEntity userEntity = ToUserEntity();
-            userEntity.Roles.Add(new RoleRepository().GetRole("Regular"));
-            userEntity.Salt = randomSaltGenerator.GetSalt();
+            userEntity.Roles.Add(new RoleRepository().GetRole(Roles.Regular.ToString()));
+            userEntity.Salt = randomStringGenerator.GetSalt();
             userEntity.HashedPassword = PasswordHasher.GetHashed(Password + userEntity.Salt);
 
             repository.CreateByUserEntity(userEntity);

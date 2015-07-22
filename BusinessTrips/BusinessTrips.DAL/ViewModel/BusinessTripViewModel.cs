@@ -1,7 +1,7 @@
 ﻿using System;
 using BusinessTrips.DAL.Entity;
 
-namespace BusinessTrips.DAL.Model
+namespace BusinessTrips.DAL.ViewModel
 {
     public class BusinessTripViewModel
     {

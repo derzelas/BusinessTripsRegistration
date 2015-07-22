@@ -37,7 +37,20 @@ namespace BusinessTrips.Services
             client.Send(message);
         }
 
-        public void SendUserRegistrationEmail(Guid userId, string reveiverEmail)
+        public void SendForgotPasswordEmail(Guid id, string receiverEmail)
+        {
+            const string subject = "Link to change  password";
+            const string welcomeMessage = "Here is your link to change your password: ";
+
+            var link = String.Format("http://{0}:{1}/UserOperations/SetNewPassword/?guid={2}",
+                HttpContext.Current.Request.Url.Host,
+                HttpContext.Current.Request.Url.Port,
+                id);
+
+            Send(subject, welcomeMessage + link, receiverEmail);
+        }
+
+        public void SendUserRegistrationEmail(Guid userId, string receiverEmail)
         {
             const string subject = "Confirm your email for Business Trips";
             const string welcomeMessage = "Welcome to Business trips. Here is your confirmation link: ";
@@ -47,7 +60,7 @@ namespace BusinessTrips.Services
                 HttpContext.Current.Request.Url.Port,
                 userId);
 
-            Send(subject, welcomeMessage + link, reveiverEmail);
+            Send(subject, welcomeMessage + link, receiverEmail);
         }
 
         public void SendBusinessTripRegistrationEmail(Guid businessTripId)
@@ -63,7 +76,7 @@ namespace BusinessTrips.Services
         {
             const string subject = "Request canceled";
             string message = "The following business trip has been canceled: ";
-            message+= GetLinkToBusinessTripBy(businessTripId);
+            message += GetLinkToBusinessTripBy(businessTripId);
 
             Send(subject, message, BusinessTripOperatorAddress);
         }
