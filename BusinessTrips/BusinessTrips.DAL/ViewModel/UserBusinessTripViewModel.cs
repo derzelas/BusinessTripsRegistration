@@ -1,5 +1,4 @@
 ﻿using System;
-using BusinessTrips.DAL.Model;
 using BusinessTrips.DAL.Model.BusinessTrip;
 
 namespace BusinessTrips.DAL.ViewModel

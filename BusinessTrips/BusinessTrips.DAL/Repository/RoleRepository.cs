@@ -6,7 +6,7 @@ namespace BusinessTrips.DAL.Repository
 {
     public class RoleRepository
     {
-        private IStorage storage;
+        private readonly IStorage storage;
 
         public RoleRepository()
         {
