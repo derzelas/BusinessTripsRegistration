@@ -50,7 +50,7 @@ namespace BusinessTrips.Controllers
 
             var userBusinessTripsCollection =
                 new UserBusinessTripsCollectionViewModel(
-                    userModel.BusinessTrips.Select(e => new UserBusinessTripViewModel(e)));
+                    userModel.BusinessTrips.Select(e => new UserBusinessTripViewModel(e)).OrderByDescending(m=>m.StartingDate));
 
             return View("UserBusinessTrips", userBusinessTripsCollection);
         }
@@ -126,16 +126,18 @@ namespace BusinessTrips.Controllers
         }
 
         [RoleAuthorize(Roles.Hr)]
-        public ActionResult AcceptRequest(BusinessTripModel businessTripModel)
+        public ActionResult AcceptRequest(Guid businessTripId)
         {
+            var businessTripModel=new BusinessTripModel(businessTripId);
             businessTripModel.ChangeStatus(BusinessTripStatus.Accepted);
 
             return View("StatusChangedSuccessfully");
         }
 
         [RoleAuthorize(Roles.Hr)]
-        public ActionResult RejectRequest(BusinessTripModel businessTripModel)
+        public ActionResult RejectRequest(Guid businessTripId)
         {
+            var businessTripModel = new BusinessTripModel(businessTripId);
             businessTripModel.ChangeStatus(BusinessTripStatus.Rejected);
 
             return View("StatusChangedSuccessfully");
