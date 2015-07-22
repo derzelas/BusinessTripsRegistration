@@ -131,7 +131,7 @@ namespace BusinessTrips.DAL.Model.BusinessTrip
 
         public void ChangeStatus(BusinessTripStatus status)
         {
-            if (Status == BusinessTripStatus.Pending)
+            if (Status == BusinessTripStatus.Pending || Status == BusinessTripStatus.Accepted)
             {
                 Status = status;
 
