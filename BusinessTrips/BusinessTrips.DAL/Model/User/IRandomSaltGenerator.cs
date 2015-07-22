@@ -1,6 +1,6 @@
 namespace BusinessTrips.DAL.Model.User
 {
-    public interface IRandomStringGenerator
+    public interface IRandomSaltGenerator
     {
         string GetSalt();
     }

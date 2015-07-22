@@ -3,18 +3,16 @@ using System.ComponentModel.DataAnnotations;
 using BusinessTrips.DAL.Attribute;
 using BusinessTrips.DAL.Entity;
 using BusinessTrips.DAL.Repository;
+using BusinessTrips.DAL.Storage;
 
 namespace BusinessTrips.DAL.Model.User
 {
-    public class UserRegistrationModel : IUserRegistrationModel
+    public class UserRegistrationModel : PasswordRegistrationModel
     {
-        private const int MinimumPasswordLength = 6;
         private const int MinimumNameLength = 3;
-        private const string PasswordValidationMessage = "Minimum password length is 6";
-        private readonly IRandomStringGenerator randomStringGenerator;
-        private readonly IUserRepository repository;
 
-        public Guid Id { get; set; }
+        private readonly IRandomSaltGenerator randomSaltGenerator;
+        private readonly IUserRepository repository;
 
         [Required]
         [Display(Name = "Name")]
@@ -27,28 +25,16 @@ namespace BusinessTrips.DAL.Model.User
         [UniqueEmail(ErrorMessage = "This e-mail is already registered")]
         public string Email { get; set; }
 
-        [Required]
-        [DataType(DataType.Password)]
-        [MinLength(MinimumPasswordLength, ErrorMessage = PasswordValidationMessage)]
-        [Display(Name = "Password")]
-        public string Password { get; set; }
-
-        [Required]
-        [DataType(DataType.Password)]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
-        [Display(Name = "Confirm password")]
-        public string ConfirmedPassword { get; set; }
-
         public UserRegistrationModel()
         {
             repository = new UserRepository();
-            randomStringGenerator = new RandomStringGenerator();
+            randomSaltGenerator = new RandomSaltGenerator();
         }
 
-        public UserRegistrationModel(IRandomStringGenerator randomStringGenerator, IUserRepository userRepository)
+        public UserRegistrationModel(IRandomSaltGenerator randomSaltGenerator, IUserRepository userRepository)
         {
             repository = userRepository;
-            this.randomStringGenerator = randomStringGenerator;
+            this.randomSaltGenerator = randomSaltGenerator;
         }
 
         public void Save()
@@ -56,8 +42,8 @@ namespace BusinessTrips.DAL.Model.User
             Id = Guid.NewGuid();
 
             UserEntity userEntity = ToUserEntity();
-            userEntity.Roles.Add(new RoleRepository().GetRole("Regular"));
-            userEntity.Salt = randomStringGenerator.GetSalt();
+            userEntity.Roles.Add(new RoleRepository().GetRole(Roles.Regular.ToString()));
+            userEntity.Salt = randomSaltGenerator.GetSalt();
             userEntity.HashedPassword = PasswordHasher.GetHashed(Password + userEntity.Salt);
 
             repository.CreateByUserEntity(userEntity);
@@ -74,9 +60,5 @@ namespace BusinessTrips.DAL.Model.User
                 Id = Id
             };
         }
-    }
-
-    public interface IUserRegistrationModel
-    {
     }
 }

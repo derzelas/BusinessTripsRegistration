@@ -7,8 +7,8 @@ namespace BusinessTrips.DAL.Storage
     {
         protected override void Seed(EfStorage context)
         {
-            context.Roles.Add(new RoleEntity {Name = "Regular"});
-            context.Roles.Add(new RoleEntity {Name = "HR"});
+            context.Roles.Add(new RoleEntity { Id = (int)Roles.Regular, Name = Roles.Regular.ToString() });
+            context.Roles.Add(new RoleEntity { Id = (int)Roles.Hr, Name = Roles.Hr.ToString() });
 
             base.Seed(context);
         }

@@ -3,16 +3,17 @@ using System.Configuration;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using BusinessTrips.DAL.Attribute;
 using BusinessTrips.DAL.Exception;
+using BusinessTrips.DAL.Model;
 using BusinessTrips.DAL.Model.User;
 using BusinessTrips.Services;
+using Roles = BusinessTrips.DAL.Storage.Roles;
 
 namespace BusinessTrips.Controllers
 {
     public class UserOperationsController : Controller
     {
-        private readonly string cookieName = ConfigurationManager.AppSettings["Cookie"];
-
         [HttpPost]
         public ActionResult ForgotPasswordActionResult(ForgotPasswordModel userForgotPasswordModelModel)
         {
@@ -50,17 +51,16 @@ namespace BusinessTrips.Controllers
         public ActionResult ConfirmRegistration(string guid)
         {
             Guid parsedGuid;
-            if (!Guid.TryParse(guid, out parsedGuid))
+            if (Guid.TryParse(guid, out parsedGuid))
             {
-                ViewBag.ExceptionMessage = "The link is invalid";
-                return View("ErrorEncountered");
+                var registrationConfirmationModel = new RegistrationConfirmationModel();
+
+                registrationConfirmationModel.Id = parsedGuid;
+                registrationConfirmationModel.Confirm();
+
+                return View("RegistrationConfirmationSuccessful");
             }
-            var registrationConfirmationModel = new RegistrationConfirmationModel();
-
-            registrationConfirmationModel.Id = parsedGuid;
-            registrationConfirmationModel.Confirm();
-
-            return View("RegistrationConfirmationSuccessful");
+            return View("ErrorEncountered");
         }
 
         public ActionResult Login()
@@ -85,9 +85,11 @@ namespace BusinessTrips.Controllers
             return RedirectToAction("GetUserBusinessTrips", "BusinessTrip");
         }
 
-        [Authorize(Roles = "HR,Regular")]
+        [RoleAuthorize(Roles.Regular, Roles.Hr)]
         public ActionResult Logout()
         {
+            string cookieName = ConfigurationManager.AppSettings["Cookie"];
+
             if (Request.Cookies[cookieName] == null)
             {
                 return RedirectToAction("Login");
@@ -112,6 +114,43 @@ namespace BusinessTrips.Controllers
             }
 
             base.OnException(filterContext);
+        }
+
+        public ActionResult ForgotPassword()
+        {
+            return View("ForgotPassword");
+        }
+
+        [HttpPost]
+        public ActionResult ForgotPassword(ForgotPasswordModel userModel)
+        {
+            if (ModelState.IsValid)
+            {
+                userModel.ToForgotPasswordModelByEmail(userModel.Email);
+                var email = new Email();
+                email.SendForgotPasswordEmail(userModel.Id, userModel.Email);
+
+                return View("ForgotPasswordEmailSent");
+            }
+            return View("ForgotPassword");
+        }
+
+        public ActionResult SetNewPassword(string guid)
+        {
+            var model = new SetNewPasswordModel() { Id = Guid.Parse(guid) };
+            return View("SetNewPassword", model);
+        }
+
+        [HttpPost]
+        public ActionResult SetNewPassword(SetNewPasswordModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                model.SetPassword();
+
+                return View("PasswordSet");
+            }
+            return View("SetNewPassword");
         }
     }
 }

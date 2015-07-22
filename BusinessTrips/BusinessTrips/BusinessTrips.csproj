@@ -205,8 +205,6 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
-    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Views\BusinessTrip\Register.cshtml" />
     <Content Include="Views\BusinessTrip\ManageRequest.cshtml" />
     <Content Include="Views\BusinessTrip\UserBusinessTrips.cshtml" />
@@ -219,6 +217,8 @@
     <Content Include="Views\UserOperations\ForgotPassword.cshtml" />
     <Content Include="Views\UserOperations\SetNewPassword.cshtml" />
     <Content Include="Views\BusinessTrip\GetPendingBusinessTrips.cshtml" />
+    <Content Include="Views\UserOperations\ForgotPasswordEmailSent.cshtml" />
+    <Content Include="Views\UserOperations\PasswordSet.cshtml" />
     <None Include="_bin_deployableAssemblies\x86\sqlcese40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceqp40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceme40.dll" />

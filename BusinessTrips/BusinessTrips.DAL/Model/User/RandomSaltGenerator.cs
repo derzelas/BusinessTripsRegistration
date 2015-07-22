@@ -2,7 +2,7 @@
 
 namespace BusinessTrips.DAL.Model.User
 {
-    public class RandomStringGenerator : IRandomStringGenerator
+    public class RandomSaltGenerator : IRandomSaltGenerator
     {
         public string GetSalt()
         {
