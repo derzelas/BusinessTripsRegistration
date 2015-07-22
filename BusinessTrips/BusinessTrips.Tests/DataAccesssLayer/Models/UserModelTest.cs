@@ -1,6 +1,4 @@
-﻿using System.Data.Entity;
-using BusinessTrips.DAL.Model;
-using BusinessTrips.DAL.Model.User;
+﻿using BusinessTrips.DAL.Model.User;
 using BusinessTrips.DAL.Storage;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 

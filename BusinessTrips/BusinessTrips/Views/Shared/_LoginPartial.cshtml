@@ -20,7 +20,7 @@
             @if (User.IsInRole("HR"))
             {
                 <li>
-                    @Html.ActionLink("Pending requests", "GetAllBusinessTrips", "BusinessTrip")
+                    @Html.ActionLink("Pending requests", "GetPendingBusinessTrips", "BusinessTrip")
                 </li>
             }
         </ul>

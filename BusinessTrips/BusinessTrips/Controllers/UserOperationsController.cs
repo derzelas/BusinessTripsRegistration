@@ -14,7 +14,18 @@ namespace BusinessTrips.Controllers
 {
     public class UserOperationsController : Controller
     {
-        private readonly string cookieName = ConfigurationManager.AppSettings["Cookie"];
+        [HttpPost]
+        public ActionResult ForgotPasswordActionResult(ForgotPasswordModel userForgotPasswordModelModel)
+        {
+            if (ModelState.IsValid)
+            {
+                var email = new Email();
+                email.SendUserRegistrationEmail(userForgotPasswordModelModel.Id, userForgotPasswordModelModel.Email);
+
+                return View("SetNewPassword");
+            }
+            return View("ForgotPassword");
+        }
 
         public ActionResult Register()
         {
@@ -40,17 +51,16 @@ namespace BusinessTrips.Controllers
         public ActionResult ConfirmRegistration(string guid)
         {
             Guid parsedGuid;
-            if (!Guid.TryParse(guid, out parsedGuid))
+            if (Guid.TryParse(guid, out parsedGuid))
             {
-                ViewBag.ExceptionMessage = "The link is invalid";
-                return View("ErrorEncountered");
+                var registrationConfirmationModel = new RegistrationConfirmationModel();
+
+                registrationConfirmationModel.Id = parsedGuid;
+                registrationConfirmationModel.Confirm();
+
+                return View("RegistrationConfirmationSuccessful");
             }
-            var registrationConfirmationModel = new RegistrationConfirmationModel();
-
-            registrationConfirmationModel.Id = parsedGuid;
-            registrationConfirmationModel.Confirm();
-
-            return View("RegistrationConfirmationSuccessful");
+            return View("ErrorEncountered");
         }
 
         public ActionResult Login()
@@ -75,9 +85,11 @@ namespace BusinessTrips.Controllers
             return RedirectToAction("GetUserBusinessTrips", "BusinessTrip");
         }
 
-        [RoleAuthorize(Roles.Regular,Roles.Hr)]
+        [RoleAuthorize(Roles.Regular, Roles.Hr)]
         public ActionResult Logout()
         {
+            string cookieName = ConfigurationManager.AppSettings["Cookie"];
+
             if (Request.Cookies[cookieName] == null)
             {
                 return RedirectToAction("Login");
@@ -138,7 +150,6 @@ namespace BusinessTrips.Controllers
 
                 return View("PasswordSet");
             }
-
             return View("SetNewPassword");
         }
     }

@@ -50,7 +50,7 @@ namespace BusinessTrips.Controllers
 
             var userBusinessTripsCollection =
                 new UserBusinessTripsCollectionViewModel(
-                    userModel.BusinessTrips.Select(e => new UserBusinessTripViewModel(e)));
+                    userModel.BusinessTrips.Select(e => new UserBusinessTripViewModel(e)).OrderByDescending(m=>m.StartingDate));
 
             return View("UserBusinessTrips", userBusinessTripsCollection);
         }
@@ -58,7 +58,12 @@ namespace BusinessTrips.Controllers
         [RoleAuthorize(Roles.Hr)]
         public ActionResult GetPendingBusinessTrips()
         {
-            return null;
+            var businessTripsCollectionViewModel = new PendingBusinessTripsCollectionViewModel
+            {
+                BusinessTrips = new PendingBusinessTripCollectionModel().GetPendingBusinessTrips()
+            };
+
+            return View("GetPendingBusinessTrips", businessTripsCollectionViewModel);
         }
 
         [RoleAuthorize(Roles.Regular, Roles.Hr)]
@@ -121,16 +126,18 @@ namespace BusinessTrips.Controllers
         }
 
         [RoleAuthorize(Roles.Hr)]
-        public ActionResult AcceptRequest(BusinessTripModel businessTripModel)
+        public ActionResult AcceptRequest(Guid businessTripId)
         {
+            var businessTripModel=new BusinessTripModel(businessTripId);
             businessTripModel.ChangeStatus(BusinessTripStatus.Accepted);
 
             return View("StatusChangedSuccessfully");
         }
 
         [RoleAuthorize(Roles.Hr)]
-        public ActionResult RejectRequest(BusinessTripModel businessTripModel)
+        public ActionResult RejectRequest(Guid businessTripId)
         {
+            var businessTripModel = new BusinessTripModel(businessTripId);
             businessTripModel.ChangeStatus(BusinessTripStatus.Rejected);
 
             return View("StatusChangedSuccessfully");
@@ -144,6 +151,8 @@ namespace BusinessTrips.Controllers
         // There will always be a cookie because of Authorize, so no check for null is required
         private string GetUserIdFromCookie()
         {
+            string cookieName = ConfigurationManager.AppSettings["Cookie"];
+
             var cookieValue = Request.Cookies[cookieName].Value;
 
             return FormsAuthentication.Decrypt(cookieValue).Name;
