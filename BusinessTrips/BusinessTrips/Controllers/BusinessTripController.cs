@@ -48,7 +48,7 @@ namespace BusinessTrips.Controllers
 
             var userBusinessTripsCollection =
                 new UserBusinessTripsCollectionViewModel(
-                    userModel.BusinessTrips.Select(e => new UserBusinessTripViewModel(e)));
+                    userModel.BusinessTrips.Select(e => new UserBusinessTripViewModel(e)).OrderByDescending(m=>m.StartingDate));
 
             return View("UserBusinessTrips", userBusinessTripsCollection);
         }
@@ -56,7 +56,12 @@ namespace BusinessTrips.Controllers
         [RoleAuthorize(Role.Hr)]
         public ActionResult GetPendingBusinessTrips()
         {
-            return null;
+            var businessTripsCollectionViewModel = new PendingBusinessTripsCollectionViewModel
+            {
+                BusinessTrips = new PendingBusinessTripCollectionModel().GetPendingBusinessTrips()
+            };
+
+            return View("GetPendingBusinessTrips", businessTripsCollectionViewModel);
         }
 
         [RoleAuthorize(Role.Regular, Role.Hr)]
@@ -118,17 +123,19 @@ namespace BusinessTrips.Controllers
             return View("RequestNotFound");
         }
 
-        [RoleAuthorize(Role.Hr)]
-        public ActionResult AcceptRequest(BusinessTripModel businessTripModel)
+        [RoleAuthorize(Roles.Hr)]
+        public ActionResult AcceptRequest(Guid businessTripId)
         {
+            var businessTripModel=new BusinessTripModel(businessTripId);
             businessTripModel.ChangeStatus(BusinessTripStatus.Accepted);
 
             return View("StatusChangedSuccessfully");
         }
 
-        [RoleAuthorize(Role.Hr)]
-        public ActionResult RejectRequest(BusinessTripModel businessTripModel)
+        [RoleAuthorize(Roles.Hr)]
+        public ActionResult RejectRequest(Guid businessTripId)
         {
+            var businessTripModel = new BusinessTripModel(businessTripId);
             businessTripModel.ChangeStatus(BusinessTripStatus.Rejected);
 
             return View("StatusChangedSuccessfully");

@@ -121,13 +121,13 @@ namespace BusinessTrips.Controllers
         }
 
         [HttpPost]
-        public ActionResult ForgotPassword(ForgotPasswordModel userModel)
+        public ActionResult ForgotPassword(ForgotPasswordModel userForgotPasswordModel)
         {
             if (ModelState.IsValid)
             {
-                userModel.ToForgotPasswordModelByEmail(userModel.Email);
+                userForgotPasswordModel.ToForgotPasswordModelByEmail(userForgotPasswordModel.Email);
                 var email = new Email();
-                email.SendForgotPasswordEmail(userModel.Id, userModel.Email);
+                email.SendForgotPasswordEmail(userForgotPasswordModel.Id, userForgotPasswordModel.Email);
 
                 return View("ForgotPasswordEmailSent");
             }
@@ -136,16 +136,16 @@ namespace BusinessTrips.Controllers
 
         public ActionResult SetNewPassword(string guid)
         {
-            var model = new SetNewPasswordModel() { Id = Guid.Parse(guid) };
-            return View("SetNewPassword", model);
+            var userSetNewPasswordModel = new SetNewPasswordModel() { Id = Guid.Parse(guid) };
+            return View("SetNewPassword", userSetNewPasswordModel);
         }
 
         [HttpPost]
-        public ActionResult SetNewPassword(SetNewPasswordModel model)
+        public ActionResult SetNewPassword(SetNewPasswordModel userSetNewPasswordModel)
         {
             if (ModelState.IsValid)
             {
-                model.SetPassword();
+                userSetNewPasswordModel.SetPassword();
 
                 return View("PasswordSet");
             }

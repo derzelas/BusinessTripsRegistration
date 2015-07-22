@@ -43,8 +43,8 @@
         <td>
             @if (Model.Status == BusinessTripStatus.Pending)
             {
-                @Html.ActionLink("Accept", "AcceptRequest", "BusinessTrip", Model, null)
-                @Html.ActionLink("Reject", "RejectRequest", "BusinessTrip", Model, null)
+                @Html.ActionLink("Accept", "AcceptRequest", "BusinessTrip", new { businessTripId = Model.Id }, null)
+                @Html.ActionLink("Reject", "RejectRequest", "BusinessTrip", new { businessTripId = Model.Id }, null)
             }
             @Html.ActionLink("Details", "GetDetails", "BusinessTrip", new { businessTripId = Model.Id }, null)
         </td>
