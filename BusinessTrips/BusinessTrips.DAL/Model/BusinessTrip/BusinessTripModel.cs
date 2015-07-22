@@ -3,7 +3,6 @@ using System.ComponentModel.DataAnnotations;
 using BusinessTrips.DAL.Attribute;
 using BusinessTrips.DAL.Entity;
 using BusinessTrips.DAL.Model.User;
-using BusinessTrips.DAL.Exception;
 using BusinessTrips.DAL.Repository;
 
 namespace BusinessTrips.DAL.Model.BusinessTrip
@@ -97,11 +96,6 @@ namespace BusinessTrips.DAL.Model.BusinessTrip
 
         private void Load(BusinessTripEntity businessTripEntity)
         {
-            if (businessTripEntity == null)
-            {
-                return;
-            }
-
             Id = businessTripEntity.Id;
             User = new UserModel(businessTripEntity.User);
             PmName = businessTripEntity.PmName;
