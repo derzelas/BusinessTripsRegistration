@@ -57,7 +57,12 @@ namespace BusinessTrips.Controllers
         [Authorize(Roles = "HR")]
         public ActionResult GetPendingBusinessTrips()
         {
-            return null;
+            var businessTripsCollectionViewModel = new PendingBusinessTripsCollectionViewModel
+            {
+                BusinessTrips = new PendingBusinessTripCollectionModel().GetPendingBusinessTrips()
+            };
+
+            return View("GetPendingBusinessTrips", businessTripsCollectionViewModel);
         }
 
         [Authorize(Roles = "Regular,HR")]

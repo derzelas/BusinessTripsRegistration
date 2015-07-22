@@ -1,0 +1,53 @@
+﻿@using BusinessTrips.DAL.Model.BusinessTrip
+@model BusinessTrips.DAL.ViewModel.PendingBusinessTripsCollectionViewModel
+
+@{
+    ViewBag.Title = "Pending Business Trips";
+}
+
+<h2>GetPendingBusinessTrips</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayName("Accomodation")
+        </th>
+        <th>
+            @Html.DisplayName("EndingDate")
+        </th>
+        <th>
+            @Html.DisplayName("StartingDate")
+        </th>
+        <th>
+            @Html.DisplayName("Status")
+        </th>
+    </tr>
+
+    @foreach (var item in Model.BusinessTrips)
+    {
+        <tr id='@item.Id'>
+            <td>
+                @Html.DisplayFor(modelItem => item.Accomodation)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EndingDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartingDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @if (item.Status == BusinessTripStatus.Pending)
+                {
+                    @Html.ActionLink("Accept", "AcceptRequest", "BusinessTrip", Model, null)
+                    @Html.ActionLink("Reject", "RejectRequest", "BusinessTrip", Model, null)
+                }
+                @Html.ActionLink("Details", "GetDetails", "BusinessTrip", new { businessTripId = item.Id }, null)               
+            </td>
+        </tr>
+    }
+</table>
+
+

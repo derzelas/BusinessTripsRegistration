@@ -81,6 +81,13 @@ namespace BusinessTrips.DAL.Repository
 
             return businessTrips;
         }
+        public IEnumerable<BusinessTripEntity> GetPendingBusinessTrips()
+        {
+            IQueryable<BusinessTripEntity> businessTrips = storage.GetStorageFor<BusinessTripEntity>();
+            businessTrips = businessTrips.Where(m => m.Status == BusinessTripStatus.Pending);
+
+            return businessTrips;
+        }
 
         public void UpdateStatus(Guid id, BusinessTripStatus status)
         {
