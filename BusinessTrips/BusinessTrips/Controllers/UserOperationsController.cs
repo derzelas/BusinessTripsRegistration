@@ -27,13 +27,13 @@ namespace BusinessTrips.Controllers
                 return View("Register");
             }
 
-                userRegistrationModel.Save();
+            userRegistrationModel.Save();
 
-                var email = new Email();
-                email.SendUserRegistrationEmail(userRegistrationModel.Id, userRegistrationModel.Email);
+            var email = new Email();
+            email.SendUserRegistrationEmail(userRegistrationModel.Id, userRegistrationModel.Email);
 
             return View("RegistrationSuccessful");
-            }
+        }
 
         public ActionResult ConfirmRegistration(string guid)
         {
@@ -45,11 +45,11 @@ namespace BusinessTrips.Controllers
             }
             var registrationConfirmationModel = new RegistrationConfirmationModel();
 
-                registrationConfirmationModel.Id = parsedGuid;
-                registrationConfirmationModel.Confirm();
+            registrationConfirmationModel.Id = parsedGuid;
+            registrationConfirmationModel.Confirm();
 
             return View("RegistrationConfirmationSuccessful");
-            }
+        }
 
         public ActionResult Login()
         {
@@ -69,7 +69,7 @@ namespace BusinessTrips.Controllers
                 return View("InvalidUser");
             }
 
-                FormsAuthentication.SetAuthCookie(userModel.Id.ToString(), false);
+            FormsAuthentication.SetAuthCookie(userModel.Id.ToString(), false);
             return RedirectToAction("GetUserBusinessTrips", "BusinessTrip");
         }
 
@@ -86,7 +86,7 @@ namespace BusinessTrips.Controllers
                 Expires = DateTime.Now.AddDays(-1d)
             };
 
-                Response.Cookies.Add(cookie);
+            Response.Cookies.Add(cookie);
 
             return RedirectToAction("Login");
         }
@@ -123,15 +123,16 @@ namespace BusinessTrips.Controllers
 
         public ActionResult SetNewPassword(string guid)
         {
-            return View("SetNewPassword");
+            var model = new SetNewPasswordModel() { Id = Guid.Parse(guid) };
+            return View("SetNewPassword", model);
         }
 
         [HttpPost]
-        public ActionResult SetNewPassword(SetNewPasswordModel userModel)
+        public ActionResult SetNewPassword(SetNewPasswordModel model)
         {
             if (ModelState.IsValid)
             {
-                userModel.SetPassword(userModel.Id);
+                model.SetPassword();
 
                 return View("PasswordSet");
             }

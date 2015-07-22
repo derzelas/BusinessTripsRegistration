@@ -6,15 +6,11 @@ using BusinessTrips.DAL.Repository;
 
 namespace BusinessTrips.DAL.Model.User
 {
-    public class UserRegistrationModel : IUserRegistrationModel
+    public class UserRegistrationModel : PasswordRegistrationModel, IUserRegistrationModel
     {
-        private const int MinimumPasswordLength = 6;
         private const int MinimumNameLength = 3;
-        private const string PasswordValidationMessage = "Minimum password length is 6";
         private readonly IRandomStringGenerator randomStringGenerator;
         private readonly IUserRepository repository;
-
-        public Guid Id { get; set; }
 
         [Required]
         [Display(Name = "Name")]
@@ -26,18 +22,6 @@ namespace BusinessTrips.DAL.Model.User
         [Display(Name = "E-mail")]
         [UniqueEmail(ErrorMessage = "This e-mail is already registered")]
         public string Email { get; set; }
-
-        [Required]
-        [DataType(DataType.Password)]
-        [MinLength(MinimumPasswordLength, ErrorMessage = PasswordValidationMessage)]
-        [Display(Name = "Password")]
-        public string Password { get; set; }
-
-        [Required]
-        [DataType(DataType.Password)]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
-        [Display(Name = "Confirm password")]
-        public string ConfirmedPassword { get; set; }
 
         public UserRegistrationModel()
         {

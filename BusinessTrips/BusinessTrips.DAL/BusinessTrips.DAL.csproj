@@ -86,7 +86,9 @@
     <Compile Include="Exception\BusinessTripNotFoundException.cs" />
     <Compile Include="Exception\UserNotFoundException.cs" />
     <Compile Include="Model\User\IRandomStringGenerator.cs" />
+    <Compile Include="Model\User\PasswordRegistrationModel.cs" />
     <Compile Include="Model\User\RandomStringGenerator.cs" />
+    <Compile Include="Model\User\SetNewPasswordModel.cs" />
     <Compile Include="Repository\IUserRepository.cs" />
     <Compile Include="Model\BusinessTrip\BusinessTripCollectionModel.cs" />
     <Compile Include="Model\User\BusinessTripFilter.cs" />
@@ -98,7 +100,6 @@
     <Compile Include="ViewModel\UserBusinessTripViewModel.cs" />
     <Compile Include="ViewModel\AllBusinessTripsCollectionViewModel.cs" />
     <Compile Include="ViewModel\BusinessTripViewModel.cs" />
-    <Compile Include="Model\SetNewPasswordModel.cs" />
     <Compile Include="Repository\BusinessTripsRepository.cs" />
     <Compile Include="Model\User\PasswordHasher.cs" />
     <Compile Include="Repository\RoleRepository.cs" />
