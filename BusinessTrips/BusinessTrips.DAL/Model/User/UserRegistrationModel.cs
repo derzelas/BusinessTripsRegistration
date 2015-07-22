@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using BusinessTrips.DAL.Attribute;
 using BusinessTrips.DAL.Entity;
 using BusinessTrips.DAL.Repository;
+using BusinessTrips.DAL.Storage;
 
 namespace BusinessTrips.DAL.Model.User
 {
@@ -56,7 +57,7 @@ namespace BusinessTrips.DAL.Model.User
             Id = Guid.NewGuid();
 
             UserEntity userEntity = ToUserEntity();
-            userEntity.Roles.Add(new RoleRepository().GetRole("Regular"));
+            userEntity.Roles.Add(new RoleRepository().GetRole(Roles.Regular.ToString()));
             userEntity.Salt = randomStringGenerator.GetSalt();
             userEntity.HashedPassword = PasswordHasher.GetHashed(Password + userEntity.Salt);
 

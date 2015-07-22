@@ -3,9 +3,11 @@ using System.Configuration;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using BusinessTrips.DAL.Attribute;
 using BusinessTrips.DAL.Exception;
 using BusinessTrips.DAL.Model.User;
 using BusinessTrips.Services;
+using Roles = BusinessTrips.DAL.Storage.Roles;
 
 namespace BusinessTrips.Controllers
 {
@@ -85,7 +87,7 @@ namespace BusinessTrips.Controllers
             return RedirectToAction("GetUserBusinessTrips", "BusinessTrip");
         }
 
-        [Authorize(Roles = "HR,Regular")]
+        [RoleAuthorize(Roles.Regular,Roles.Hr)]
         public ActionResult Logout()
         {
             if (Request.Cookies[cookieName] == null)

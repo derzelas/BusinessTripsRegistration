@@ -82,6 +82,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Attribute\RoleAuthorizeAttribute.cs" />
     <Compile Include="Entity\BusinessTripEntity.cs" />
     <Compile Include="Exception\BusinessTripNotFoundException.cs" />
     <Compile Include="Exception\UserNotFoundException.cs" />
@@ -94,6 +95,7 @@
     <Compile Include="Model\BusinessTrip\BusinessTripModel.cs" />
     <Compile Include="Attribute\DateRangeAttribute.cs" />
     <Compile Include="Model\User\ForgotPasswordModel.cs" />
+    <Compile Include="Storage\Roles.cs" />
     <Compile Include="ViewModel\UserBusinessTripsCollectionViewModel.cs" />
     <Compile Include="ViewModel\UserBusinessTripViewModel.cs" />
     <Compile Include="ViewModel\AllBusinessTripsCollectionViewModel.cs" />
