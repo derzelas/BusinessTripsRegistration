@@ -5,9 +5,9 @@ namespace BusinessTrips.DAL.Attribute
 {
     public class RoleAuthorizeAttribute : AuthorizeAttribute
     {
-        public RoleAuthorizeAttribute(params Roles[] roles)
+        public RoleAuthorizeAttribute(params Role[] role)
         {
-            Roles = string.Join(",", roles);
+            Roles = string.Join(",", role);
         }
     }
 }

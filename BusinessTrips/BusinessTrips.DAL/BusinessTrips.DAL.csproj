@@ -92,12 +92,12 @@
     <Compile Include="Model\User\SetNewPasswordModel.cs" />
     <Compile Include="Repository\IUserRepository.cs" />
     <Compile Include="Model\BusinessTrip\BusinessTripCollectionModel.cs" />
-    <Compile Include="Model\User\BusinessTripFilter.cs" />
+    <Compile Include="Model\BusinessTrip\BusinessTripFilter.cs" />
     <Compile Include="Entity\RoleEntity.cs" />
     <Compile Include="Model\BusinessTrip\BusinessTripModel.cs" />
     <Compile Include="Attribute\DateRangeAttribute.cs" />
     <Compile Include="Model\User\ForgotPasswordModel.cs" />
-    <Compile Include="Storage\Roles.cs" />
+    <Compile Include="Storage\Role.cs" />
     <Compile Include="ViewModel\UserBusinessTripsCollectionViewModel.cs" />
     <Compile Include="ViewModel\UserBusinessTripViewModel.cs" />
     <Compile Include="ViewModel\AllBusinessTripsCollectionViewModel.cs" />

@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Data.Entity;
 using System.Linq;
-using BusinessTrips.DAL.Model;
 using BusinessTrips.DAL.Model.BusinessTrip;
 using BusinessTrips.DAL.Model.User;
 using BusinessTrips.DAL.Repository;
@@ -32,7 +30,7 @@ namespace BusinessTrips.Tests.DataAccesssLayer.Repository
 
             userRegistrationModel.Save();
 
-            userModel=new UserModel(userRegistrationModel.Id);
+            userModel = new UserModel(userRegistrationModel.Id);
 
             repository = new BusinessTripsRepository();
             businessTripModel = new BusinessTripModel

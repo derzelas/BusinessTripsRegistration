@@ -5,10 +5,9 @@ using System.Web.Mvc;
 using System.Web.Security;
 using BusinessTrips.DAL.Attribute;
 using BusinessTrips.DAL.Exception;
-using BusinessTrips.DAL.Model;
 using BusinessTrips.DAL.Model.User;
+using BusinessTrips.DAL.Storage;
 using BusinessTrips.Services;
-using Roles = BusinessTrips.DAL.Storage.Roles;
 
 namespace BusinessTrips.Controllers
 {
@@ -85,7 +84,7 @@ namespace BusinessTrips.Controllers
             return RedirectToAction("GetUserBusinessTrips", "BusinessTrip");
         }
 
-        [RoleAuthorize(Roles.Regular, Roles.Hr)]
+        [RoleAuthorize(Role.Regular, Role.Hr)]
         public ActionResult Logout()
         {
             string cookieName = ConfigurationManager.AppSettings["Cookie"];

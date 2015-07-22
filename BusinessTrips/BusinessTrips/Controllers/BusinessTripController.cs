@@ -7,24 +7,22 @@ using BusinessTrips.DAL.Attribute;
 using BusinessTrips.DAL.Exception;
 using BusinessTrips.DAL.Model.BusinessTrip;
 using BusinessTrips.DAL.Model.User;
+using BusinessTrips.DAL.Storage;
 using BusinessTrips.DAL.ViewModel;
 using BusinessTrips.Services;
-using Roles = BusinessTrips.DAL.Storage.Roles;
 
 namespace BusinessTrips.Controllers
 {
     public class BusinessTripController : Controller
     {
-        private readonly string cookieName = ConfigurationManager.AppSettings["Cookie"];
-
-        [RoleAuthorize(Roles.Regular, Roles.Hr)]
+        [RoleAuthorize(Role.Regular, Role.Hr)]
         public ActionResult Register()
         {
             return View("Register");
         }
 
         [HttpPost]
-        [RoleAuthorize(Roles.Regular, Roles.Hr)]
+        [RoleAuthorize(Role.Regular, Role.Hr)]
         public ActionResult Register(BusinessTripModel businessTripModel)
         {
             if (!ModelState.IsValid)
@@ -43,7 +41,7 @@ namespace BusinessTrips.Controllers
             return View("RegisteredSuccessfully");
         }
 
-        [RoleAuthorize(Roles.Regular, Roles.Hr)]
+        [RoleAuthorize(Role.Regular, Role.Hr)]
         public ActionResult GetUserBusinessTrips()
         {
             UserModel userModel = GetUserModelBy(GetUserIdFromCookie());
@@ -55,13 +53,13 @@ namespace BusinessTrips.Controllers
             return View("UserBusinessTrips", userBusinessTripsCollection);
         }
 
-        [RoleAuthorize(Roles.Hr)]
+        [RoleAuthorize(Role.Hr)]
         public ActionResult GetPendingBusinessTrips()
         {
             return null;
         }
 
-        [RoleAuthorize(Roles.Regular, Roles.Hr)]
+        [RoleAuthorize(Role.Regular, Role.Hr)]
         public ActionResult Cancel(Guid businessTripId)
         {
             BusinessTripModel businessTripModel = new BusinessTripModel(businessTripId);
@@ -77,7 +75,7 @@ namespace BusinessTrips.Controllers
             return GetUserBusinessTrips();
         }
 
-        [RoleAuthorize(Roles.Regular, Roles.Hr)]
+        [RoleAuthorize(Role.Regular, Role.Hr)]
         public ActionResult GetDetails(Guid businessTripId)
         {
             BusinessTripModel businessTripModel = new BusinessTripModel(businessTripId);
@@ -90,14 +88,14 @@ namespace BusinessTrips.Controllers
             return RedirectToAction("GetUserBusinessTrips");
         }
 
-        [RoleAuthorize(Roles.Regular, Roles.Hr)]
+        [RoleAuthorize(Role.Regular, Role.Hr)]
         public ActionResult GetAllBusinessTrips()
         {
             return View("AllBusinessTrips", new AllBusinessTripsCollectionViewModel());
         }
 
         [HttpPost]
-        [RoleAuthorize(Roles.Regular, Roles.Hr)]
+        [RoleAuthorize(Role.Regular, Role.Hr)]
         public ActionResult GetAllBusinessTrips(AllBusinessTripsCollectionViewModel businessTripsCollectionViewModel)
         {
             businessTripsCollectionViewModel.BusinessTrips = new BusinessTripCollectionModel().GetBusinessTripsBy(businessTripsCollectionViewModel.BusinessTripFilter);
@@ -105,7 +103,7 @@ namespace BusinessTrips.Controllers
             return View("AllBusinessTrips", businessTripsCollectionViewModel);
         }
 
-        [RoleAuthorize(Roles.Hr)]
+        [RoleAuthorize(Role.Hr)]
         public ActionResult GetBy(string guid)
         {
             Guid parsedGuid;
@@ -120,7 +118,7 @@ namespace BusinessTrips.Controllers
             return View("RequestNotFound");
         }
 
-        [RoleAuthorize(Roles.Hr)]
+        [RoleAuthorize(Role.Hr)]
         public ActionResult AcceptRequest(BusinessTripModel businessTripModel)
         {
             businessTripModel.ChangeStatus(BusinessTripStatus.Accepted);
@@ -128,7 +126,7 @@ namespace BusinessTrips.Controllers
             return View("StatusChangedSuccessfully");
         }
 
-        [RoleAuthorize(Roles.Hr)]
+        [RoleAuthorize(Role.Hr)]
         public ActionResult RejectRequest(BusinessTripModel businessTripModel)
         {
             businessTripModel.ChangeStatus(BusinessTripStatus.Rejected);

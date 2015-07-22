@@ -1,8 +1,8 @@
 ﻿namespace BusinessTrips.DAL.Storage
 {
-    public enum Roles
+    public enum Role
     {
         Regular = 1,
-        Hr
+        Hr = 2
     }
 }

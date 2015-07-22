@@ -12,7 +12,7 @@ namespace BusinessTrips.DAL.Model.User
         private const int MinimumNameLength = 3;
 
         private readonly IRandomSaltGenerator randomSaltGenerator;
-        private readonly IUserRepository repository;
+        private readonly IUserRepository userRepository;
 
         [Required]
         [Display(Name = "Name")]
@@ -27,13 +27,13 @@ namespace BusinessTrips.DAL.Model.User
 
         public UserRegistrationModel()
         {
-            repository = new UserRepository();
+            userRepository = new UserRepository();
             randomSaltGenerator = new RandomSaltGenerator();
         }
 
         public UserRegistrationModel(IRandomSaltGenerator randomSaltGenerator, IUserRepository userRepository)
         {
-            repository = userRepository;
+            this.userRepository = userRepository;
             this.randomSaltGenerator = randomSaltGenerator;
         }
 
@@ -42,15 +42,16 @@ namespace BusinessTrips.DAL.Model.User
             Id = Guid.NewGuid();
 
             UserEntity userEntity = ToUserEntity();
-            userEntity.Roles.Add(new RoleRepository().GetRole(Roles.Regular.ToString()));
+
+            userEntity.Roles.Add(new RoleRepository().GetRole(Role.Regular));
             userEntity.Salt = randomSaltGenerator.GetSalt();
             userEntity.HashedPassword = PasswordHasher.GetHashed(Password + userEntity.Salt);
 
-            repository.CreateByUserEntity(userEntity);
-            repository.CommitChanges();
+            userRepository.CreateByUserEntity(userEntity);
+            userRepository.CommitChanges();
         }
 
-        public UserEntity ToUserEntity()
+        private UserEntity ToUserEntity()
         {
             return new UserEntity()
             {

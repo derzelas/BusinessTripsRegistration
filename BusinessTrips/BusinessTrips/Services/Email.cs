@@ -8,11 +8,12 @@ namespace BusinessTrips.Services
     public class Email
     {
         private const int Port = 587;
-        private readonly SmtpClient client;
         private const string SenderAddress = "iQuestBusinessTrips@gmail.com";
         private const string BusinessTripOperatorAddress = "iQuestBusinessTrips@gmail.com";
         private const string Password = "Ana@re6mere";
         private const string SmtpClient = "smtp.gmail.com";
+
+        private readonly SmtpClient client;
 
         public Email()
         {
@@ -24,43 +25,30 @@ namespace BusinessTrips.Services
             };
         }
 
-        private void Send(string subject, string body, string receiver)
-        {
-            var message = new MailMessage
-            {
-                From = new MailAddress(SenderAddress),
-                Subject = subject,
-                Body = body,
-                To = { receiver }
-            };
-
-            client.Send(message);
-        }
-
-        public void SendForgotPasswordEmail(Guid id, string receiverEmail)
+        public void SendForgotPasswordEmail(Guid userId, string userEmail)
         {
             const string subject = "Link to change  password";
-            const string welcomeMessage = "Here is your link to change your password: ";
+            string message = "Here is your link to change your password: ";
 
-            var link = String.Format("http://{0}:{1}/UserOperations/SetNewPassword/?guid={2}",
-                HttpContext.Current.Request.Url.Host,
-                HttpContext.Current.Request.Url.Port,
-                id);
-
-            Send(subject, welcomeMessage + link, receiverEmail);
-        }
-
-        public void SendUserRegistrationEmail(Guid userId, string receiverEmail)
-        {
-            const string subject = "Confirm your email for Business Trips";
-            const string welcomeMessage = "Welcome to Business trips. Here is your confirmation link: ";
-
-            var link = String.Format("http://{0}:{1}/UserOperations/ConfirmRegistration/?guid={2}",
+            message += string.Format("http://{0}:{1}/UserOperations/SetNewPassword/?guid={2}",
                 HttpContext.Current.Request.Url.Host,
                 HttpContext.Current.Request.Url.Port,
                 userId);
 
-            Send(subject, welcomeMessage + link, receiverEmail);
+            Send(subject, message, userEmail);
+        }
+
+        public void SendUserRegistrationEmail(Guid userId, string userEmail)
+        {
+            const string subject = "Confirm your email for Business Trips";
+            string message = "Welcome to Business trips. Here is your confirmation link: ";
+
+            message += string.Format("http://{0}:{1}/UserOperations/ConfirmRegistration/?guid={2}",
+                HttpContext.Current.Request.Url.Host,
+                HttpContext.Current.Request.Url.Port,
+                userId);
+
+            Send(subject, message, userEmail);
         }
 
         public void SendBusinessTripRegistrationEmail(Guid businessTripId)
@@ -89,6 +77,19 @@ namespace BusinessTrips.Services
                 businessTripId);
 
             return link;
+        }
+
+        private void Send(string subject, string body, string receiver)
+        {
+            var message = new MailMessage
+            {
+                From = new MailAddress(SenderAddress),
+                Subject = subject,
+                Body = body,
+                To = { receiver }
+            };
+
+            client.Send(message);
         }
     }
 }

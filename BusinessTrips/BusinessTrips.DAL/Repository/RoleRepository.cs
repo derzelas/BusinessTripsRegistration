@@ -13,9 +13,9 @@ namespace BusinessTrips.DAL.Repository
             storage = new StorageFactory().Create();
         }
 
-        public RoleEntity GetRole(string roleName)
+        public RoleEntity GetRole(Role roleName)
         {
-            return storage.GetStorageFor<RoleEntity>().Single(r => r.Name == roleName);
+            return storage.GetStorageFor<RoleEntity>().Single(r => r.Name == roleName.ToString());
         }
     }
 }
