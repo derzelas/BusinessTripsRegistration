@@ -108,16 +108,6 @@ namespace BusinessTrips.Controllers
             if (filterContext.Exception is UserNotFoundException)
             {
                 filterContext.ExceptionHandled = true;
-
-                ViewBag.ExceptionMessage = filterContext.Exception.Message;
-                filterContext.Result = View("ErrorEncountered");
-            }
-
-            if (filterContext.Exception is InvalidOperationException)
-            {
-                filterContext.ExceptionHandled = true;
-
-                ViewBag.ExceptionMessage = "There are problem with DataBase; Please try again Later";
                 filterContext.Result = View("ErrorEncountered");
             }
 
