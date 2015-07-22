@@ -57,20 +57,7 @@ namespace BusinessTrips.Controllers
         [Authorize(Roles = "HR")]
         public ActionResult GetPendingBusinessTrips()
         {
-
-
-            UserModel userModel = new UserModel();
-
-            var userBusinessTripsCollection =
-                new UserBusinessTripsCollectionViewModel(
-                    userModel.BusinessTrips.Select(e => new UserBusinessTripViewModel(e)));
-
-            return View("AllBusinessTrips", userBusinessTripsCollection);
-
-            BusinessTripModel businessTripModel = new BusinessTripModel();
-            businessTripModel.Status = BusinessTripStatus.Pending;
-
-           // return View("AllBusinessTrips", new AllBusinessTripsCollectionViewModel());
+            return null;
         }
 
         [Authorize(Roles = "Regular,HR")]
