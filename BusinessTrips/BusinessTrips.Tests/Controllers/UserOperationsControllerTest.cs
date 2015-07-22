@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Web.Mvc;
 using BusinessTrips.Controllers;
-using BusinessTrips.DAL.Model;
 using BusinessTrips.DAL.Model.User;
-using BusinessTrips.DAL.Repository;
 using BusinessTrips.DAL.Storage;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
