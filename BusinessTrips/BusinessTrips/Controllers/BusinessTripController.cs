@@ -54,6 +54,25 @@ namespace BusinessTrips.Controllers
             return View("UserBusinessTrips", userBusinessTripsCollection);
         }
 
+        [Authorize(Roles = "HR")]
+        public ActionResult GetPendingBusinessTrips()
+        {
+
+
+            UserModel userModel = new UserModel();
+
+            var userBusinessTripsCollection =
+                new UserBusinessTripsCollectionViewModel(
+                    userModel.BusinessTrips.Select(e => new UserBusinessTripViewModel(e)));
+
+            return View("AllBusinessTrips", userBusinessTripsCollection);
+
+            BusinessTripModel businessTripModel = new BusinessTripModel();
+            businessTripModel.Status = BusinessTripStatus.Pending;
+
+           // return View("AllBusinessTrips", new AllBusinessTripsCollectionViewModel());
+        }
+
         [Authorize(Roles = "Regular,HR")]
         public ActionResult Cancel(Guid businessTripId)
         {
