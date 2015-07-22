@@ -76,7 +76,7 @@ namespace BusinessTrips.Services
         {
             const string subject = "Request canceled";
             string message = "The following business trip has been canceled: ";
-            message+= GetLinkToBusinessTripBy(businessTripId);
+            message += GetLinkToBusinessTripBy(businessTripId);
 
             Send(subject, message, BusinessTripOperatorAddress);
         }

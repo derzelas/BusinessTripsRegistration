@@ -3,12 +3,13 @@ using System.Configuration;
 using System.Linq;
 using System.Web.Mvc;
 using System.Web.Security;
+using BusinessTrips.DAL.Attribute;
 using BusinessTrips.DAL.Exception;
-using BusinessTrips.DAL.Model;
 using BusinessTrips.DAL.Model.BusinessTrip;
 using BusinessTrips.DAL.Model.User;
 using BusinessTrips.DAL.ViewModel;
 using BusinessTrips.Services;
+using Roles = BusinessTrips.DAL.Storage.Roles;
 
 namespace BusinessTrips.Controllers
 {
@@ -16,14 +17,14 @@ namespace BusinessTrips.Controllers
     {
         private readonly string cookieName = ConfigurationManager.AppSettings["Cookie"];
 
-        [Authorize(Roles = "Regular,HR")]
+        [RoleAuthorize(Roles.Regular, Roles.Hr)]
         public ActionResult Register()
         {
             return View("Register");
         }
 
         [HttpPost]
-        [Authorize(Roles = "Regular,HR")]
+        [RoleAuthorize(Roles.Regular, Roles.Hr)]
         public ActionResult Register(BusinessTripModel businessTripModel)
         {
             if (!ModelState.IsValid)
@@ -42,7 +43,7 @@ namespace BusinessTrips.Controllers
             return View("RegisteredSuccessfully");
         }
 
-        [Authorize(Roles = "Regular,HR")]
+        [RoleAuthorize(Roles.Regular, Roles.Hr)]
         public ActionResult GetUserBusinessTrips()
         {
             UserModel userModel = GetUserModelBy(GetUserIdFromCookie());
@@ -54,7 +55,13 @@ namespace BusinessTrips.Controllers
             return View("UserBusinessTrips", userBusinessTripsCollection);
         }
 
-        [Authorize(Roles = "Regular,HR")]
+        [RoleAuthorize(Roles.Hr)]
+        public ActionResult GetPendingBusinessTrips()
+        {
+            return null;
+        }
+
+        [RoleAuthorize(Roles.Regular, Roles.Hr)]
         public ActionResult Cancel(Guid businessTripId)
         {
             BusinessTripModel businessTripModel = new BusinessTripModel(businessTripId);
@@ -70,7 +77,7 @@ namespace BusinessTrips.Controllers
             return GetUserBusinessTrips();
         }
 
-        [Authorize(Roles = "Regular,HR")]
+        [RoleAuthorize(Roles.Regular, Roles.Hr)]
         public ActionResult GetDetails(Guid businessTripId)
         {
             BusinessTripModel businessTripModel = new BusinessTripModel(businessTripId);
@@ -83,14 +90,14 @@ namespace BusinessTrips.Controllers
             return RedirectToAction("GetUserBusinessTrips");
         }
 
-        [Authorize(Roles = "Regular,HR")]
+        [RoleAuthorize(Roles.Regular, Roles.Hr)]
         public ActionResult GetAllBusinessTrips()
         {
             return View("AllBusinessTrips", new AllBusinessTripsCollectionViewModel());
         }
 
         [HttpPost]
-        [Authorize(Roles = "Regular,HR")]
+        [RoleAuthorize(Roles.Regular, Roles.Hr)]
         public ActionResult GetAllBusinessTrips(AllBusinessTripsCollectionViewModel businessTripsCollectionViewModel)
         {
             businessTripsCollectionViewModel.BusinessTrips = new BusinessTripCollectionModel().GetBusinessTripsBy(businessTripsCollectionViewModel.BusinessTripFilter);
@@ -98,7 +105,7 @@ namespace BusinessTrips.Controllers
             return View("AllBusinessTrips", businessTripsCollectionViewModel);
         }
 
-        [Authorize(Roles = "HR")]
+        [RoleAuthorize(Roles.Hr)]
         public ActionResult GetBy(string guid)
         {
             Guid parsedGuid;
@@ -113,7 +120,7 @@ namespace BusinessTrips.Controllers
             return View("RequestNotFound");
         }
 
-        [Authorize(Roles = "HR")]
+        [RoleAuthorize(Roles.Hr)]
         public ActionResult AcceptRequest(BusinessTripModel businessTripModel)
         {
             businessTripModel.ChangeStatus(BusinessTripStatus.Accepted);
@@ -121,7 +128,7 @@ namespace BusinessTrips.Controllers
             return View("StatusChangedSuccessfully");
         }
 
-        [Authorize(Roles = "HR")]
+        [RoleAuthorize(Roles.Hr)]
         public ActionResult RejectRequest(BusinessTripModel businessTripModel)
         {
             businessTripModel.ChangeStatus(BusinessTripStatus.Rejected);
