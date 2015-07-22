@@ -55,6 +55,12 @@ namespace BusinessTrips.Controllers
             return View("UserBusinessTrips", userBusinessTripsCollection);
         }
 
+        [RoleAuthorize(Roles.Hr)]
+        public ActionResult GetPendingBusinessTrips()
+        {
+            return null;
+        }
+
         [RoleAuthorize(Roles.Regular, Roles.Hr)]
         public ActionResult Cancel(Guid businessTripId)
         {
