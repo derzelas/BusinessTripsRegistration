@@ -16,11 +16,11 @@ namespace BusinessTrips.DAL.ViewModel
 
         public BusinessTripViewModel(BusinessTripEntity businessTripEntity)
         {
-            Name = businessTripEntity.User.Name;
             StartingDate = businessTripEntity.StartingDate;
             Location = businessTripEntity.ClientLocation;
-            Accomodation = businessTripEntity.Accomodation;
+            Name = businessTripEntity.User.Name;
             MeansOfTransportaion = businessTripEntity.MeansOfTransportation;
+            Accomodation = businessTripEntity.Accomodation;
             Status = businessTripEntity.Status;
             Id = businessTripEntity.Id;
         }

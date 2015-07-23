@@ -99,7 +99,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\BusinessTripControllerTest.cs" />
     <Compile Include="Controllers\UserOperationsControllerTest.cs" />
+    <Compile Include="DataAccesssLayer\Models\BusinessTripCollectionModelTest.cs" />
     <Compile Include="DataAccesssLayer\PasswordTests.cs" />
     <Compile Include="DataAccesssLayer\Repository\BusinessTripRepositoryTest.cs" />
     <Compile Include="DataAccesssLayer\UniqueEmailAttributeTest.cs" />

@@ -3,7 +3,7 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using BusinessTrips.DAL.Model.BusinessTrip;
 
-namespace BusinessTrips.DAL.Model.User
+namespace BusinessTrips.DAL.Model.BusinessTrip
 {
     public class BusinessTripFilter
     {

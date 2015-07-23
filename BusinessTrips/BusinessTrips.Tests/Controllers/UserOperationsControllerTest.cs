@@ -14,7 +14,7 @@ namespace BusinessTrips.Tests.Controllers
         private UserOperationsController controller;
 
         [TestInitialize]
-        public void Initialize()
+        public void TestInitialize()
         {
             controller = new UserOperationsController();
             EfStorage storage = new EfStorage(new EfStorageDbInitializerTest());
