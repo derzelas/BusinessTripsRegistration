@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using BusinessTrips.DAL.Model.User;
+using BusinessTrips.DAL.Model.BusinessTrip;
 
 namespace BusinessTrips.DAL.ViewModel
 {

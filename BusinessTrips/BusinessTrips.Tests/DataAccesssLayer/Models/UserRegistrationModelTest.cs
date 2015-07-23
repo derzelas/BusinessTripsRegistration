@@ -1,5 +1,4 @@
-﻿using System;
-using BusinessTrips.DAL.Entity;
+﻿using BusinessTrips.DAL.Entity;
 using BusinessTrips.DAL.Model.User;
 using BusinessTrips.DAL.Repository;
 using BusinessTrips.DAL.Storage;
@@ -33,17 +32,6 @@ namespace BusinessTrips.Tests.DataAccesssLayer.Models
         {
             userRegistrationModel.Save();
             Assert.IsNotNull(userRegistrationModel.Id);
-        }
-
-        [TestMethod]
-        public void ToUserEntityCreatesAValidUserEntity()
-        {
-            //UserEntity userEntity = userRegistrationModel.ToUserEntity();
-
-            //Assert.AreEqual(userEntity.Name, "nume");
-            //Assert.AreEqual(userEntity.Email, "email@email.com");
-            //Assert.AreEqual(userEntity.IsConfirmed, false);
-            //Assert.AreEqual(userEntity.Id, Guid.Empty);
         }
 
         [TestMethod]
