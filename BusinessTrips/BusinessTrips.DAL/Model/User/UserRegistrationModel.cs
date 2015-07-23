@@ -12,10 +12,9 @@ namespace BusinessTrips.DAL.Model.User
         private const int MinimumNameLength = 3;
         private const int MinimumPasswordLength = 6;
 
-        private readonly IRandomSaltGenerator randomSaltGenerator;
         private readonly IUserRepository userRepository;
 
-        public Guid Id { get; set; }
+        public Guid Id { get; private set; }
 
         [Required]
         [Display(Name = "Name")]
@@ -43,24 +42,18 @@ namespace BusinessTrips.DAL.Model.User
         public UserRegistrationModel()
         {
             userRepository = new UserRepository();
-            randomSaltGenerator = new RandomSaltGenerator();
+            Id = Guid.NewGuid();
         }
 
-        public UserRegistrationModel(IRandomSaltGenerator randomSaltGenerator, IUserRepository userRepository)
+        public UserRegistrationModel(IUserRepository userRepository)
         {
             this.userRepository = userRepository;
-            this.randomSaltGenerator = randomSaltGenerator;
+            Id = Guid.NewGuid();
         }
 
         public void Save()
         {
-            Id = Guid.NewGuid();
-
             UserEntity userEntity = ToUserEntity();
-
-            userEntity.Roles.Add(new RoleRepository().GetRole(Role.Regular));
-            userEntity.Salt = randomSaltGenerator.GetSalt();
-            userEntity.HashedPassword = PasswordHasher.GetHashed(Password + userEntity.Salt);
 
             userRepository.Add(userEntity);
             userRepository.SaveChanges();
@@ -68,13 +61,21 @@ namespace BusinessTrips.DAL.Model.User
 
         private UserEntity ToUserEntity()
         {
-            return new UserEntity()
+            var password = new Password(Password);
+
+            var userEntity = new UserEntity
             {
                 Name = Name,
                 Email = Email,
                 IsConfirmed = false,
-                Id = Id
+                Id = Id,
+                Salt = password.GetSalt(),
+                HashedPassword = password.GetHashed(),
             };
+
+            userEntity.Roles.Add(new RoleRepository().GetRole(Role.Regular));
+
+            return userEntity;
         }
     }
 }

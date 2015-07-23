@@ -26,7 +26,9 @@ namespace BusinessTrips.DAL.Model.User
             var userRepository = new UserRepository();
             var userEntity = userRepository.GetBy(Id);
 
-            ConfirmedPassword = PasswordHasher.GetHashed(ConfirmedPassword + userEntity.Salt);
+            var password = new Password(ConfirmedPassword, userEntity.Salt);
+
+            ConfirmedPassword = password.GetHashed();
             userEntity.HashedPassword = ConfirmedPassword;
 
             userRepository.SaveChanges();
