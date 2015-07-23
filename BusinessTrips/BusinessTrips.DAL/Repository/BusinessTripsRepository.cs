@@ -59,14 +59,14 @@ namespace BusinessTrips.DAL.Repository
                         m => m.Status == BusinessTripStatus.Accepted || m.Status == BusinessTripStatus.Pending);
             }
 
-            if (!string.IsNullOrEmpty(filter.Person))
+            if (filter.StartingDate.HasValue)
             {
-                businessTrips = businessTrips.Where(m => m.User.Name.Contains(filter.Person));
+                businessTrips = businessTrips.Where(m => m.StartingDate == filter.StartingDate);
             }
 
-            if (!string.IsNullOrEmpty(filter.ClientName))
+            if (filter.StartingDate.HasValue)
             {
-                businessTrips = businessTrips.Where(m => m.ClientName.Contains(filter.ClientName));
+                businessTrips = businessTrips.Where(m => m.EndingDate == filter.EndingDate);
             }
 
             if (!string.IsNullOrEmpty(filter.Location))
@@ -74,9 +74,9 @@ namespace BusinessTrips.DAL.Repository
                 businessTrips = businessTrips.Where(m => m.ClientLocation.Contains(filter.Location));
             }
 
-            if (!string.IsNullOrEmpty(filter.Accommodation))
+            if (!string.IsNullOrEmpty(filter.Person))
             {
-                businessTrips = businessTrips.Where(m => m.Accomodation.Contains(filter.Accommodation));
+                businessTrips = businessTrips.Where(m => m.User.Name.Contains(filter.Person));
             }
 
             if (!string.IsNullOrEmpty(filter.MeanOfTransportation))
@@ -84,14 +84,9 @@ namespace BusinessTrips.DAL.Repository
                 businessTrips = businessTrips.Where(m => m.MeansOfTransportation.Contains(filter.MeanOfTransportation));
             }
 
-            if (filter.StartingDate.HasValue)
+            if (!string.IsNullOrEmpty(filter.Accommodation))
             {
-                businessTrips = businessTrips.Where(m => m.StartingDate == filter.StartingDate);
-            }
-
-            if (filter.EndingDate.HasValue)
-            {
-                businessTrips = businessTrips.Where(m => m.EndingDate == filter.EndingDate);
+                businessTrips = businessTrips.Where(m => m.Accomodation.Contains(filter.Accommodation));
             }
 
             return businessTrips;

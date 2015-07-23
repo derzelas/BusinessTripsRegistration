@@ -13,27 +13,24 @@ namespace BusinessTrips.DAL.Model.BusinessTrip
 
         public Guid? Guid { get; set; }
 
-        [DisplayName("Name")]
-        public string Person { get; set; }
-
-        [DisplayName("Client Name")]
-        public string ClientName { get; set; }
-
-        [DisplayName("Location")]
-        public string Location { get; set; }
-
-        [DisplayName("Mean Of Transporation")]
-        public string MeanOfTransportation { get; set; }
-
-        [DisplayName("Accomodation")]
-        public string Accommodation { get; set; }
-
-        [DisplayName("Staring Date")]
+        [DisplayName("Starting Date")]
         [DataType(DataType.Date)]
         public DateTime? StartingDate { get; set; }
 
         [DisplayName("Ending Date")]
         [DataType(DataType.Date)]
         public DateTime? EndingDate { get; set; }
+
+        [DisplayName("Location")]
+        public string Location { get; set; }
+
+        [DisplayName("Person")]
+        public string Person { get; set; }
+
+        [DisplayName("Mean Of Transporation")]
+        public string MeanOfTransportation { get; set; }
+
+        [DisplayName("Accomodation")]
+        public string Accommodation { get; set; }    
     }
 }

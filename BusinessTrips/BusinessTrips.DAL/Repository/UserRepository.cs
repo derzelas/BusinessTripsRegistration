@@ -6,7 +6,7 @@ using BusinessTrips.DAL.Storage;
 
 namespace BusinessTrips.DAL.Repository
 {
-    public class UserRepository : IUserRepository
+    public class UserRepository
     {
         private readonly IStorage storage;
 

@@ -12,8 +12,6 @@ namespace BusinessTrips.DAL.ViewModel
         public string Accomodation { get; set; }
         public BusinessTripStatus Status { get; set; }
 
-        public UserBusinessTripViewModel() { }
-
         public UserBusinessTripViewModel(BusinessTripModel businessTripModel)
         {
             StartingDate = businessTripModel.StartingDate;

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Data.Entity;
 using BusinessTrips.DAL.Entity;
 using BusinessTrips.DAL.Exception;
 using BusinessTrips.DAL.Repository;
@@ -33,7 +32,7 @@ namespace BusinessTrips.Tests.DataAccesssLayer.Repository
         }
 
         [TestMethod]
-        public void GetByIdFindsCreatedUser()
+        public void GetById_IdInRepository_ReturnsEntity()
         {
             repository.Add(userEntity);
             repository.SaveChanges();
@@ -48,7 +47,14 @@ namespace BusinessTrips.Tests.DataAccesssLayer.Repository
         }
 
         [TestMethod]
-        public void GetByEmailIsNotNullWhenEmailExists()
+        [ExpectedException(typeof(UserNotFoundException))]
+        public void GetById_IdNotInRepository_ThrowsException()
+        {
+            repository.GetBy(userEntity.Id);
+        }
+
+        [TestMethod]
+        public void GetByEmail_ExistentEmail_NoNull()
         {
             repository.Add(userEntity);
             repository.SaveChanges();
@@ -57,8 +63,7 @@ namespace BusinessTrips.Tests.DataAccesssLayer.Repository
         }
 
         [TestMethod]
-        //[ExpectedException(typeof(UserNotFoundException))]
-        public void GetByEmailReturnNullWhenEmailNotExists()
+        public void GetByEmail_InexistentEmail_ReturnsNull()
         {
             string email = "noemail@gmail.com";
 

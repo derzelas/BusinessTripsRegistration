@@ -38,10 +38,10 @@ namespace BusinessTrips.Controllers
         {
             var registrationConfirmationModel = new RegistrationConfirmationModel { Id = Guid.Parse(guid) };
 
-                registrationConfirmationModel.Confirm();
+            registrationConfirmationModel.Confirm();
 
-                return View("RegistrationConfirmationSuccessful");
-            }
+            return View("RegistrationConfirmationSuccessful");
+        }
 
         public ActionResult Login()
         {
