@@ -90,7 +90,6 @@
     <Compile Include="Model\User\IRandomSaltGenerator.cs" />
     <Compile Include="Model\User\Password.cs" />
     <Compile Include="Model\User\RandomSaltGenerator.cs" />
-    <Compile Include="Model\User\PasswordRegistrationModel.cs" />
     <Compile Include="Model\User\SetNewPasswordModel.cs" />
     <Compile Include="Repository\IUserRepository.cs" />
     <Compile Include="Model\BusinessTrip\BusinessTripCollectionModel.cs" />
