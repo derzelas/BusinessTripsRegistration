@@ -107,6 +107,7 @@
     <Compile Include="DataAccesssLayer\Repository\BusinessTripRepositoryTest.cs" />
     <Compile Include="DataAccesssLayer\Attribute\UniqueEmailAttributeTest.cs" />
     <Compile Include="DataAccesssLayer\Repository\UserRepositoryTest.cs" />
+    <Compile Include="DataAccesssLayer\ViewModel\BusinessTripViewModelTest.cs" />
     <Compile Include="EfStorageDbInitializerTest.cs" />
     <Compile Include="DataAccesssLayer\Models\UserModelTest.cs" />
     <Compile Include="DataAccesssLayer\Models\UserRegistrationModelTest.cs" />
