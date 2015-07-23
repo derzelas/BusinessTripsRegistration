@@ -12,7 +12,7 @@ namespace BusinessTrips.DAL.Model.User
         private const int MinimumNameLength = 3;
         private const int MinimumPasswordLength = 6;
 
-        private readonly IUserRepository userRepository;
+        private readonly UserRepository userRepository;
 
         public Guid Id { get; private set; }
 
@@ -42,12 +42,6 @@ namespace BusinessTrips.DAL.Model.User
         public UserRegistrationModel()
         {
             userRepository = new UserRepository();
-            Id = Guid.NewGuid();
-        }
-
-        public UserRegistrationModel(IUserRepository userRepository)
-        {
-            this.userRepository = userRepository;
             Id = Guid.NewGuid();
         }
 
