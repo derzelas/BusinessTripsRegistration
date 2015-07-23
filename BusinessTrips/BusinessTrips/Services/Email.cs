@@ -18,7 +18,6 @@ namespace BusinessTrips.Services
             string smtpClient = ConfigurationManager.AppSettings["SmtpClient"];
             int Port = 587;
 
-
             client = new SmtpClient(smtpClient, Port)
             {
                 UseDefaultCredentials = false,

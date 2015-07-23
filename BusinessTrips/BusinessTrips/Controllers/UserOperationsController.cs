@@ -13,19 +13,6 @@ namespace BusinessTrips.Controllers
 {
     public class UserOperationsController : Controller
     {
-        [HttpPost]
-        public ActionResult ForgotPasswordActionResult(ForgotPasswordModel userForgotPasswordModelModel)
-        {
-            if (ModelState.IsValid)
-            {
-                var email = new Email();
-                email.SendUserRegistrationEmail(userForgotPasswordModelModel.Id, userForgotPasswordModelModel.Email);
-
-                return View("SetNewPassword");
-            }
-            return View("ForgotPassword");
-        }
-
         public ActionResult Register()
         {
             return View("Register");
@@ -51,10 +38,10 @@ namespace BusinessTrips.Controllers
         {
             var registrationConfirmationModel = new RegistrationConfirmationModel { Id = Guid.Parse(guid) };
 
-            registrationConfirmationModel.Confirm();
+                registrationConfirmationModel.Confirm();
 
-            return View("RegistrationConfirmationSuccessful");
-        }
+                return View("RegistrationConfirmationSuccessful");
+            }
 
         public ActionResult Login()
         {
@@ -98,30 +85,23 @@ namespace BusinessTrips.Controllers
             return RedirectToAction("Login");
         }
 
-        protected override void OnException(ExceptionContext filterContext)
-        {
-            if (filterContext.Exception is UserNotFoundException || filterContext.Exception is FormatException || filterContext.Exception is ArgumentNullException)
-            {
-                filterContext.ExceptionHandled = true;
-                filterContext.Result = View("ErrorEncountered");
-            }
-
-            base.OnException(filterContext);
-        }
-
         public ActionResult ForgotPassword()
         {
             return View("ForgotPassword");
         }
 
         [HttpPost]
-        public ActionResult ForgotPassword(ForgotPasswordModel userForgotPasswordModel)
+        public ActionResult ForgotPassword(ForgotPasswordModel forgotPasswordModel)
         {
             if (ModelState.IsValid)
             {
-                userForgotPasswordModel.ToForgotPasswordModelByEmail(userForgotPasswordModel.Email);
                 var email = new Email();
-                email.SendForgotPasswordEmail(userForgotPasswordModel.Id, userForgotPasswordModel.Email);
+                forgotPasswordModel = forgotPasswordModel.ToForgotPasswordModelBy(forgotPasswordModel.Email);
+
+                if (forgotPasswordModel != null)
+                {
+                    email.SendForgotPasswordEmail(forgotPasswordModel.Id, forgotPasswordModel.Email);
+                }
 
                 return View("ForgotPasswordEmailSent");
             }
@@ -144,6 +124,17 @@ namespace BusinessTrips.Controllers
                 return View("PasswordSet");
             }
             return View("SetNewPassword");
+        }
+
+        protected override void OnException(ExceptionContext filterContext)
+        {
+            if (filterContext.Exception is UserNotFoundException || filterContext.Exception is FormatException || filterContext.Exception is ArgumentNullException)
+            {
+                filterContext.ExceptionHandled = true;
+                filterContext.Result = View("ErrorEncountered");
+            }
+
+            base.OnException(filterContext);
         }
     }
 }
