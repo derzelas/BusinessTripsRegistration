@@ -21,45 +21,12 @@
                 </td>
             </tr>
         }
-
-        <tr>
-            <td>
-                @Html.LabelFor(m => m.BusinessTripFilter.Person)
-            </td>
-            <td>
-                @Html.TextBoxFor(m => m.BusinessTripFilter.Person, new { @class = "form-control" })
-            </td>
-        <tr>
-        <tr>
-            <td>
-                @Html.LabelFor(m => m.BusinessTripFilter.ClientName)
-            </td>
-            <td>
-                @Html.TextBoxFor(m => m.BusinessTripFilter.ClientName, new { @class = "form-control" })
-            </td>
-        <tr>
-        <tr>
-            <td>
-                @Html.LabelFor(m => m.BusinessTripFilter.Accommodation)
-            </td>
-            <td>
-                @Html.TextBoxFor(m => m.BusinessTripFilter.Accommodation, new { @class = "form-control" })
-            </td>
-        <tr>
         <tr>
             <td>
                 @Html.LabelFor(m => m.BusinessTripFilter.StartingDate)
             </td>
             <td>
                 @Html.EditorFor(m => m.BusinessTripFilter.StartingDate)
-            </td>
-        <tr>
-        <tr>
-            <td>
-                @Html.LabelFor(m => m.BusinessTripFilter.EndingDate)
-            </td>
-            <td>
-                @Html.EditorFor(m => m.BusinessTripFilter.EndingDate)
             </td>
         <tr>
         <tr>
@@ -72,10 +39,26 @@
         <tr>
         <tr>
             <td>
+                @Html.LabelFor(m => m.BusinessTripFilter.Person)
+            </td>
+            <td>
+                @Html.TextBoxFor(m => m.BusinessTripFilter.Person, new { @class = "form-control" })
+            </td>
+        <tr>
+        <tr>
+            <td>
                 @Html.LabelFor(m => m.BusinessTripFilter.MeanOfTransportation)
             </td>
             <td>
                 @Html.TextBoxFor(m => m.BusinessTripFilter.MeanOfTransportation, new { @class = "form-control" })
+            </td>
+        <tr>
+        <tr>
+            <td>
+                @Html.LabelFor(m => m.BusinessTripFilter.Accommodation)
+            </td>
+            <td>
+                @Html.TextBoxFor(m => m.BusinessTripFilter.Accommodation, new { @class = "form-control" })
             </td>
         <tr>
         <tr>
@@ -94,19 +77,19 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayName("Name")
-        </th>
-        <th>
-            @Html.DisplayName("Accomodation")
+            @Html.DisplayName("Starting date")
         </th>
         <th>
             @Html.DisplayName("Location")
         </th>
         <th>
+            @Html.DisplayName("Person")
+        </th>
+        <th>
             @Html.DisplayName("Means of transportaion")
         </th>
         <th>
-            @Html.DisplayName("Starting date")
+            @Html.DisplayName("Accomodation")
         </th>
         @if (User.IsInRole("HR"))
         {
@@ -123,20 +106,21 @@
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Accomodation)
+                @Html.DisplayFor(modelItem => item.StartingDate)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Location)
             </td>
             <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.MeansOfTransportaion)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.StartingDate)
+                @Html.DisplayFor(modelItem => item.Accomodation)
             </td>
+
             @if (User.IsInRole("HR"))
             {
                 <td>
