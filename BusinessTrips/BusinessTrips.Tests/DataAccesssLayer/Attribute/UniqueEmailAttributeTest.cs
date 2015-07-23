@@ -3,7 +3,7 @@ using BusinessTrips.DAL.Model.User;
 using BusinessTrips.DAL.Storage;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace BusinessTrips.Tests.DataAccesssLayer
+namespace BusinessTrips.Tests.DataAccesssLayer.Attribute
 {
     [TestClass]
     public class UniqueEmailAttributeTest
