@@ -37,9 +37,9 @@ namespace BusinessTrips.DAL.Model.User
             FromEntity(userEntity);
         }
 
-        public UserModel(Guid id)
+        public UserModel(Guid userId)
         {
-            FromEntity(repository.GetBy(id));
+            FromEntity(repository.GetBy(userId));
         }
 
         public bool Authenthicate()

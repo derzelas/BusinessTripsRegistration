@@ -54,22 +54,6 @@ namespace BusinessTrips.Controllers
         }
 
         [RoleAuthorize(Role.Regular, Role.Hr)]
-        public ActionResult Cancel(Guid businessTripId)
-        {
-            BusinessTripModel businessTripModel = new BusinessTripModel(businessTripId);
-
-            if (businessTripModel.Status == BusinessTripStatus.Accepted)
-            {
-                Email userEmail = new Email();
-                userEmail.SendCancelBusinessTripEmail(businessTripModel.Id);
-            }
-
-            businessTripModel.ChangeStatus(BusinessTripStatus.Canceled);
-
-            return GetUserBusinessTrips();
-        }
-
-        [RoleAuthorize(Role.Regular, Role.Hr)]
         public ActionResult GetDetails(Guid businessTripId)
         {
             BusinessTripModel businessTripModel = new BusinessTripModel(businessTripId);
@@ -112,14 +96,14 @@ namespace BusinessTrips.Controllers
                     }
                 };
 
-                return GetAllBusinessTrips(businessTripsCollectionViewModel);
+                return RedirectToAction("GetAllBusinessTrips", new { businessTripsCollectionViewModel});
             }
 
-            return View("RequestNotFound");
+            return View("BusinessTripNotFound");
         }
 
         [RoleAuthorize(Role.Hr)]
-        public ActionResult AcceptRequest(Guid businessTripId)
+        public ActionResult Accept(Guid businessTripId)
         {
             var businessTripModel = new BusinessTripModel(businessTripId);
             businessTripModel.ChangeStatus(BusinessTripStatus.Accepted);
@@ -128,7 +112,7 @@ namespace BusinessTrips.Controllers
         }
 
         [RoleAuthorize(Role.Hr)]
-        public ActionResult RejectRequest(Guid businessTripId)
+        public ActionResult Reject(Guid businessTripId)
         {
             var businessTripModel = new BusinessTripModel(businessTripId);
             businessTripModel.ChangeStatus(BusinessTripStatus.Rejected);
@@ -136,7 +120,23 @@ namespace BusinessTrips.Controllers
             return View("StatusChangedSuccessfully");
         }
 
-        private static UserModel GetUserModelBy(string userId)
+        [RoleAuthorize(Role.Regular, Role.Hr)]
+        public ActionResult Cancel(Guid businessTripId)
+        {
+            BusinessTripModel businessTripModel = new BusinessTripModel(businessTripId);
+
+            if (businessTripModel.Status == BusinessTripStatus.Accepted)
+            {
+                Email userEmail = new Email();
+                userEmail.SendCancelBusinessTripEmail(businessTripModel.Id);
+            }
+
+            businessTripModel.ChangeStatus(BusinessTripStatus.Canceled);
+
+            return GetUserBusinessTrips();
+        }
+
+        private UserModel GetUserModelBy(string userId)
         {
             return new UserModel(Guid.Parse(userId));
         }

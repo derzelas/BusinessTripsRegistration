@@ -133,8 +133,6 @@ namespace BusinessTrips.Controllers
                 filterContext.ExceptionHandled = true;
                 filterContext.Result = View("ErrorEncountered");
             }
-
-            base.OnException(filterContext);
         }
     }
 }

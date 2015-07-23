@@ -4,7 +4,6 @@ using System.Linq;
 using BusinessTrips.DAL.Entity;
 using BusinessTrips.DAL.Exception;
 using BusinessTrips.DAL.Model.BusinessTrip;
-using BusinessTrips.DAL.Model.User;
 using BusinessTrips.DAL.Storage;
 
 namespace BusinessTrips.DAL.Repository
@@ -104,7 +103,7 @@ namespace BusinessTrips.DAL.Repository
             businessTripEntity.Status = status;
         }
 
-        public void CommitChanges()
+        public void SaveChanges()
         {
             storage.SaveChanges();
         }

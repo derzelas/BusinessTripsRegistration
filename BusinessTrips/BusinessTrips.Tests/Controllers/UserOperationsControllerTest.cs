@@ -60,26 +60,6 @@ namespace BusinessTrips.Tests.Controllers
         }
 
         [TestMethod]
-        public void ConfirmRegistration_GuidIsEmpty_ReturnsErrorView()
-        {
-            var result = controller.ConfirmRegistration(string.Empty) as ViewResult;
-
-            Assert.IsNotNull(result);
-            Assert.AreEqual("ErrorEncountered", result.ViewName);
-        }
-
-        [TestMethod]
-        public void ConfirmRegistration_GuidHasBadFormat_ReturnsErrorView()
-        {
-            string badFormatGuid = "5746876876876";
-
-            var result = controller.ConfirmRegistration(badFormatGuid) as ViewResult;
-
-            Assert.IsNotNull(result);
-            Assert.AreEqual("ErrorEncountered", result.ViewName);
-        }
-
-        [TestMethod]
         public void Login_UserIsNotInStorage_ReturnsUnknownUserView()
         {
             var result = controller.Login(new UserModel() { Id = Guid.NewGuid(), Password = "" }) as ViewResult;

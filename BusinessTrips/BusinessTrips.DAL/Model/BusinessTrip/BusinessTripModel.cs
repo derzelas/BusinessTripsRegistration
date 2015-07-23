@@ -120,7 +120,7 @@ namespace BusinessTrips.DAL.Model.BusinessTrip
         public void Save()
         {
             businessTripRepository.Add(this);
-            businessTripRepository.CommitChanges();
+            businessTripRepository.SaveChanges();
         }
 
         public void ChangeStatus(BusinessTripStatus status)
@@ -130,7 +130,7 @@ namespace BusinessTrips.DAL.Model.BusinessTrip
                 Status = status;
 
                 businessTripRepository.UpdateStatus(Id, status);
-                businessTripRepository.CommitChanges();
+                businessTripRepository.SaveChanges();
             }
         }
 

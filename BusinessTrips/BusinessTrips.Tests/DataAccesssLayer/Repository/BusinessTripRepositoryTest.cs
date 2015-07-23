@@ -41,14 +41,14 @@ namespace BusinessTrips.Tests.DataAccesssLayer.Repository
                 User = userModel
             };
 
-            repository.CommitChanges();
+            repository.SaveChanges();
         }
 
         [TestMethod]
         public void AddedElementIsFoundInStorageByHisId()
         {
             repository.Add(businessTripModel);
-            repository.CommitChanges();
+            repository.SaveChanges();
 
             var actual = new BusinessTripModel(repository.GetById(businessTripModel.Id));
 
@@ -71,7 +71,7 @@ namespace BusinessTrips.Tests.DataAccesssLayer.Repository
                 repository.Add(businessTripModel);
             }
 
-            repository.CommitChanges();
+            repository.SaveChanges();
 
             var actual = repository.GetByUser(userRegistrationModel.Id).Select(e => new BusinessTripModel(e));
 
