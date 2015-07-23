@@ -1,5 +1,4 @@
 ﻿using System;
-using BusinessTrips.DAL.Entity;
 using BusinessTrips.DAL.Repository;
 
 namespace BusinessTrips.DAL.Model.User

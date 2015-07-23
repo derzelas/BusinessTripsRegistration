@@ -33,7 +33,7 @@ namespace BusinessTrips.DAL.Storage
             return Set<T>();
         }
 
-        public void SaveChanges()
+        void IStorage.SaveChanges()
         {
             SaveChanges();
         }
