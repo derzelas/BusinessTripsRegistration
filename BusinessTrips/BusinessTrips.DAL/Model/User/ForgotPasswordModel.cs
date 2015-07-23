@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using BusinessTrips.DAL.Entity;
 using BusinessTrips.DAL.Repository;
 
 namespace BusinessTrips.DAL.Model.User
@@ -13,12 +14,19 @@ namespace BusinessTrips.DAL.Model.User
         [EmailAddress]
         public string Email { get; set; }
 
-        public void ToForgotPasswordModelByEmail(string email)
+        public ForgotPasswordModel ToForgotPasswordModelBy(string email)
         {
-           var userRepository=new UserRepository();
-           var userEntity = userRepository.GetBy(email);
-            Id = userEntity.Id;
-        }
+            var userRepository = new UserRepository();
 
+            UserEntity userEntity = userRepository.GetBy(email);
+
+            if (userEntity != null)
+            {
+                Id = userEntity.Id;
+                return this;
+            }
+
+            return null;
+        }
     }
 }

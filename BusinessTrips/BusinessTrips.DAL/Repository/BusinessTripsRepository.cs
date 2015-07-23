@@ -42,7 +42,7 @@ namespace BusinessTrips.DAL.Repository
 
         public IEnumerable<BusinessTripEntity> GetBusinessTripsBy(BusinessTripFilter filter)
         {
-            IQueryable<BusinessTripEntity> businessTrips = storage.GetStorageFor<BusinessTripEntity>();
+            IQueryable<BusinessTripEntity> businessTrips = storage.GetStorageFor<BusinessTripEntity>().Where(m=>m.Status==BusinessTripStatus.Accepted ||m.Status==BusinessTripStatus.Pending);
 
             if (!string.IsNullOrEmpty(filter.Person))
             {
