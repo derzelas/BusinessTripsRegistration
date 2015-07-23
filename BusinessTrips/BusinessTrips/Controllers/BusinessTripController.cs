@@ -115,9 +115,12 @@ namespace BusinessTrips.Controllers
 
             if (Guid.TryParse(guid, out parsedGuid))
             {
-                BusinessTripModel businessTripModel = new BusinessTripModel(Guid.Parse(guid));
+                var businessTripsCollectionViewModel = new PendingBusinessTripsCollectionViewModel
+                {
+                    BusinessTrips = new PendingBusinessTripCollectionModel().GetPendingBusinessTripsById(parsedGuid)
+                };
 
-                return View("ManageRequest", businessTripModel);
+                return View("GetPendingBusinessTrips", businessTripsCollectionViewModel);
             }
 
             return View("RequestNotFound");

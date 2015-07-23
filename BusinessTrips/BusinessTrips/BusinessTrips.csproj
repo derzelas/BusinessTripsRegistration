@@ -206,7 +206,6 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Views\BusinessTrip\Register.cshtml" />
-    <Content Include="Views\BusinessTrip\ManageRequest.cshtml" />
     <Content Include="Views\BusinessTrip\UserBusinessTrips.cshtml" />
     <Content Include="Views\BusinessTrip\RequestNotFound.cshtml" />
     <Content Include="Views\Shared\UnauthenticatedLayout.cshtml" />
