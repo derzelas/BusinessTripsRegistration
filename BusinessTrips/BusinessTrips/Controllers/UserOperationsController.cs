@@ -36,18 +36,12 @@ namespace BusinessTrips.Controllers
 
         public ActionResult ConfirmRegistration(string guid)
         {
-            Guid parsedGuid;
-            if (Guid.TryParse(guid, out parsedGuid))
-            {
-                var registrationConfirmationModel = new RegistrationConfirmationModel();
+            var registrationConfirmationModel = new RegistrationConfirmationModel { Id = Guid.Parse(guid) };
 
-                registrationConfirmationModel.Id = parsedGuid;
                 registrationConfirmationModel.Confirm();
 
                 return View("RegistrationConfirmationSuccessful");
             }
-            return View("ErrorEncountered");
-        }
 
         public ActionResult Login()
         {
@@ -134,7 +128,7 @@ namespace BusinessTrips.Controllers
 
         protected override void OnException(ExceptionContext filterContext)
         {
-            if (filterContext.Exception is UserNotFoundException)
+            if (filterContext.Exception is UserNotFoundException || filterContext.Exception is FormatException || filterContext.Exception is ArgumentNullException)
             {
                 filterContext.ExceptionHandled = true;
                 filterContext.Result = View("ErrorEncountered");
