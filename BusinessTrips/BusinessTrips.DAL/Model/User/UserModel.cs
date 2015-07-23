@@ -52,9 +52,9 @@ namespace BusinessTrips.DAL.Model.User
 
             FromEntity(userEntity);
 
-            var password=new Password(Password,userEntity.Salt);
+            var password = new Password(Password, userEntity.Salt);
 
-            return password.GetHashed() == userEntity.HashedPassword;
+            return userEntity.HashedPassword == password.GetHashed();
         }
 
         public UserEntity GetEntity()

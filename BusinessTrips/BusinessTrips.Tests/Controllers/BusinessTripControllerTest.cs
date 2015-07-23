@@ -86,8 +86,12 @@ namespace BusinessTrips.Tests.Controllers
             var userRegistrationModel = new UserRegistrationModel();
             userRegistrationModel.Save();
 
-            var businessTripModel = new BusinessTripModel();
-            businessTripModel.User = new UserModel(userRegistrationModel.Id);
+            var businessTripModel = new BusinessTripModel
+            {
+                User = new UserModel(userRegistrationModel.Id),
+                StartingDate = DateTime.Now,
+                EndingDate = DateTime.Now
+            };
 
             businessTripRepository.Add(businessTripModel);
             businessTripRepository.SaveChanges();

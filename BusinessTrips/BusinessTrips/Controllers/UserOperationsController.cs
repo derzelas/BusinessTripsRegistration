@@ -36,9 +36,8 @@ namespace BusinessTrips.Controllers
 
         public ActionResult ConfirmRegistration(string guid)
         {
-            var registrationConfirmationModel = new RegistrationConfirmationModel { Id = Guid.Parse(guid) };
-
-            registrationConfirmationModel.Confirm();
+            var registrationConfirmationModel = new RegistrationConfirmationModel();
+            registrationConfirmationModel.Confirm(guid);
 
             return View("RegistrationConfirmationSuccessful");
         }
@@ -49,6 +48,7 @@ namespace BusinessTrips.Controllers
             {
                 return RedirectToAction("GetUserBusinessTrips", "BusinessTrip");
             }
+
             return View("Login");
         }
 
@@ -91,21 +91,17 @@ namespace BusinessTrips.Controllers
         }
 
         [HttpPost]
-        public ActionResult ForgotPassword(ForgotPasswordModel forgotPasswordModel)
+        public ActionResult ForgotPassword(RecoverPasswordModel recoverPasswordModel)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                var email = new Email();
-                forgotPasswordModel = forgotPasswordModel.ToForgotPasswordModelBy(forgotPasswordModel.Email);
-
-                if (forgotPasswordModel != null)
-                {
-                    email.SendForgotPasswordEmail(forgotPasswordModel.Id, forgotPasswordModel.Email);
-                }
-
-                return View("ForgotPasswordEmailSent");
+                return View("ForgotPassword");               
             }
-            return View("ForgotPassword");
+
+            var email = new Email();
+            email.SendForgotPasswordEmail(recoverPasswordModel.GetId(), recoverPasswordModel.Email);
+
+            return View("ForgotPasswordEmailSent");            
         }
 
         public ActionResult SetNewPassword(string guid)
@@ -128,7 +124,7 @@ namespace BusinessTrips.Controllers
 
         protected override void OnException(ExceptionContext filterContext)
         {
-            if (filterContext.Exception is UserNotFoundException || filterContext.Exception is FormatException || filterContext.Exception is ArgumentNullException)
+            if (filterContext.Exception is UserNotFoundException || filterContext.Exception is InvalidIdException)
             {
                 filterContext.ExceptionHandled = true;
                 filterContext.Result = View("ErrorEncountered");

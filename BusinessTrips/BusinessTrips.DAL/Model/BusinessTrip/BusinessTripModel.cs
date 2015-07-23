@@ -84,17 +84,17 @@ namespace BusinessTrips.DAL.Model.BusinessTrip
 
         public BusinessTripModel(BusinessTripEntity businessTripEntity)
         {
-            Load(businessTripEntity);
+            FromEntity(businessTripEntity);
         }
 
         public BusinessTripModel(Guid id)
         {
             var businessTripEntity = businessTripRepository.GetById(id);
 
-            Load(businessTripEntity);
+            FromEntity(businessTripEntity);
         }
 
-        private void Load(BusinessTripEntity businessTripEntity)
+        private void FromEntity(BusinessTripEntity businessTripEntity)
         {
             Id = businessTripEntity.Id;
             User = new UserModel(businessTripEntity.User);

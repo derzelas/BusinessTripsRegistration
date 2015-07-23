@@ -102,8 +102,7 @@
     <Compile Include="Controllers\BusinessTripControllerTest.cs" />
     <Compile Include="Controllers\UserOperationsControllerTest.cs" />
     <Compile Include="DataAccesssLayer\Attribute\RoleAuthorizeAttributeTest.cs" />
-    <Compile Include="DataAccesssLayer\Models\BusinessTripCollectionModelTest.cs" />
-    <Compile Include="DataAccesssLayer\Models\ForgotPasswordModelTest.cs" />
+    <Compile Include="DataAccesssLayer\Models\RecoverPasswordModelTests.cs" />
     <Compile Include="DataAccesssLayer\PasswordTests.cs" />
     <Compile Include="DataAccesssLayer\Repository\BusinessTripRepositoryTest.cs" />
     <Compile Include="DataAccesssLayer\Attribute\UniqueEmailAttributeTest.cs" />

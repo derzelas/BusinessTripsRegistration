@@ -1,32 +1,29 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using BusinessTrips.DAL.Entity;
+using BusinessTrips.DAL.Exception;
 using BusinessTrips.DAL.Repository;
 
 namespace BusinessTrips.DAL.Model.User
 {
-    public class ForgotPasswordModel
+    public class RecoverPasswordModel
     {
-        public Guid Id { get; set; }
-
         [Required]
         [Display(Name = "E-mail")]
         [EmailAddress]
         public string Email { get; set; }
 
-        public ForgotPasswordModel ToForgotPasswordModelBy(string email)
+        public Guid GetId()
         {
             var userRepository = new UserRepository();
+            UserEntity userEntity = userRepository.GetBy(Email);
 
-            UserEntity userEntity = userRepository.GetBy(email);
-
-            if (userEntity != null)
+            if (userEntity == null)
             {
-                Id = userEntity.Id;
-                return this;
+                throw new UserNotFoundException();                
             }
 
-            return null;
+            return userEntity.Id;
         }
     }
 }

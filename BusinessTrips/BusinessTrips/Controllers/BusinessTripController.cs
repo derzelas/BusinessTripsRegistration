@@ -30,9 +30,7 @@ namespace BusinessTrips.Controllers
                 return View("Register");
             }
 
-            UserModel userModel = GetUserModelBy(GetUserIdFromCookie());
-
-            businessTripModel.User = userModel;
+            businessTripModel.User = new UserModel(GetUserIdFromCookie()); 
             businessTripModel.Save();
 
             var email = new Email();
@@ -44,7 +42,7 @@ namespace BusinessTrips.Controllers
         [RoleAuthorize(Role.Regular, Role.Hr)]
         public ActionResult GetUserBusinessTrips()
         {
-            UserModel userModel = GetUserModelBy(GetUserIdFromCookie());
+            UserModel userModel = new UserModel(GetUserIdFromCookie());
 
             var userBusinessTripsCollection =
                 new UserBusinessTripsCollectionViewModel(
@@ -58,7 +56,7 @@ namespace BusinessTrips.Controllers
         {
             BusinessTripModel businessTripModel = new BusinessTripModel(businessTripId);
 
-            if (businessTripModel.User.Id.ToString() == HttpContext.User.Identity.Name || User.IsInRole("HR"))
+            if (IsOwnBusinessTrip(businessTripModel.User.Id) || User.IsInRole("HR"))
             {
                 return View("Details", businessTripModel);
             }
@@ -76,7 +74,8 @@ namespace BusinessTrips.Controllers
         [RoleAuthorize(Role.Regular, Role.Hr)]
         public ActionResult GetAllBusinessTrips(AllBusinessTripsCollectionViewModel businessTripsCollectionViewModel)
         {
-            businessTripsCollectionViewModel.BusinessTrips = new BusinessTripCollectionModel().GetBusinessTripsBy(businessTripsCollectionViewModel.BusinessTripFilter);
+            businessTripsCollectionViewModel.BusinessTrips = 
+                new BusinessTripCollectionModel().GetBusinessTripsBy(businessTripsCollectionViewModel.BusinessTripFilter);
 
             return View("AllBusinessTrips", businessTripsCollectionViewModel);
         }
@@ -136,19 +135,19 @@ namespace BusinessTrips.Controllers
             return GetUserBusinessTrips();
         }
 
-        private UserModel GetUserModelBy(string userId)
-        {
-            return new UserModel(Guid.Parse(userId));
-        }
-
         // There will always be a cookie because of Authorize, so no check for null is required
-        private string GetUserIdFromCookie()
+        private Guid GetUserIdFromCookie()
         {
             string cookieName = ConfigurationManager.AppSettings["Cookie"];
 
             var cookieValue = Request.Cookies[cookieName].Value;
 
-            return FormsAuthentication.Decrypt(cookieValue).Name;
+            return Guid.Parse(FormsAuthentication.Decrypt(cookieValue).Name);
+        }
+
+        private bool IsOwnBusinessTrip(Guid ownerId)
+        {
+            return ownerId == GetUserIdFromCookie();
         }
 
         protected override void OnException(ExceptionContext filterContext)

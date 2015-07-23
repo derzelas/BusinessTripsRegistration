@@ -64,7 +64,7 @@ namespace BusinessTrips.DAL.Repository
                 businessTrips = businessTrips.Where(m => m.StartingDate == filter.StartingDate);
             }
 
-            if (filter.StartingDate.HasValue)
+            if (filter.EndingDate.HasValue)
             {
                 businessTrips = businessTrips.Where(m => m.EndingDate == filter.EndingDate);
             }

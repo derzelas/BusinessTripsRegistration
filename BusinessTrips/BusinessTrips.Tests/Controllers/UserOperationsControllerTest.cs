@@ -33,22 +33,6 @@ namespace BusinessTrips.Tests.Controllers
         }
 
         [TestMethod]
-        public void Register_UserRegistrationModelIsValid_ReturnsRegistrationSuccessfulView()
-        {
-            var validUserRegistrationModel = new UserRegistrationModel
-            {
-                Email = "example@gmail.com",
-                Password = "123456",
-                ConfirmedPassword = "123456"
-            };
-
-            var result = controller.Register(validUserRegistrationModel) as ViewResult;
-
-            Assert.IsNotNull(result);
-            Assert.AreEqual("RegistrationSuccessful", result.ViewName);
-        }
-
-        [TestMethod]
         public void ConfirmRegistration_GuidIsValidForExistentUser_ReturnRegistrationConfirmationSuccessfulView()
         {
             var userRegistrationModel = new UserRegistrationModel();
@@ -77,13 +61,13 @@ namespace BusinessTrips.Tests.Controllers
         }
 
         [TestMethod]
+        [ExpectedException(typeof(UserNotFoundException))]
         public void ForgotPassword_UserIsInvalid_ReturnsEmailSentView()
         {
-            var result = controller.ForgotPassword(new ForgotPasswordModel() { Email = "", Id = Guid.Empty }) as ViewResult;
-
-            Assert.IsNotNull(result);
-            Assert.AreEqual("ForgotPasswordEmailSent", result.ViewName);
-            
+            controller.ForgotPassword(new RecoverPasswordModel
+            {
+                Email = string.Empty
+            });            
         }
     }
 }

@@ -85,6 +85,7 @@
     <Compile Include="Attribute\RoleAuthorizeAttribute.cs" />
     <Compile Include="Entity\BusinessTripEntity.cs" />
     <Compile Include="Exception\BusinessTripNotFoundException.cs" />
+    <Compile Include="Exception\InvalidIdException.cs" />
     <Compile Include="Exception\UserNotFoundException.cs" />
     <Compile Include="Model\User\Password.cs" />
     <Compile Include="Model\User\SetNewPasswordModel.cs" />
@@ -93,7 +94,7 @@
     <Compile Include="Entity\RoleEntity.cs" />
     <Compile Include="Model\BusinessTrip\BusinessTripModel.cs" />
     <Compile Include="Attribute\DateRangeAttribute.cs" />
-    <Compile Include="Model\User\ForgotPasswordModel.cs" />
+    <Compile Include="Model\User\RecoverPasswordModel.cs" />
     <Compile Include="Storage\Role.cs" />
     <Compile Include="ViewModel\ConfirmUserViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />

@@ -1,13 +1,11 @@
 ﻿using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using BusinessTrips.DAL.Model.BusinessTrip;
 
 namespace BusinessTrips.DAL.Model.BusinessTrip
 {
     public class BusinessTripFilter
     {
-
         [DisplayName("Status")]
         public BusinessTripStatus? Status { get; set; }
 

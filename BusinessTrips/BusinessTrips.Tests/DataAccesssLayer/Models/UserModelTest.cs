@@ -54,12 +54,9 @@ namespace BusinessTrips.Tests.DataAccesssLayer.Models
         [TestMethod]
         public void Authenthicate_ValidAndConfirmedUser_ReturnsTrue()
         {
-            RegistrationConfirmationModel registrationConfirmationModel = new RegistrationConfirmationModel()
-            {
-                Id = userRegistrationModel.Id
-            };
+            RegistrationConfirmationModel registrationConfirmationModel = new RegistrationConfirmationModel();
 
-            registrationConfirmationModel.Confirm();
+            registrationConfirmationModel.Confirm(userRegistrationModel.Id.ToString());
 
             UserModel userModel = new UserModel()
             {
@@ -103,12 +100,8 @@ namespace BusinessTrips.Tests.DataAccesssLayer.Models
         [TestMethod]
         public void Authenthicate_ExistentConfirmedEmailWrongPassword_ReturnsFalse()
         {
-            RegistrationConfirmationModel registrationConfirmationModel = new RegistrationConfirmationModel()
-            {
-                Id = userRegistrationModel.Id
-            };
-
-            registrationConfirmationModel.Confirm();
+            RegistrationConfirmationModel registrationConfirmationModel = new RegistrationConfirmationModel();
+            registrationConfirmationModel.Confirm(userRegistrationModel.Id.ToString());
 
             UserModel userModel = new UserModel()
             {

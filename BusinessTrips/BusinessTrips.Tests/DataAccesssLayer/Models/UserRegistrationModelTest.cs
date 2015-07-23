@@ -15,7 +15,6 @@ namespace BusinessTrips.Tests.DataAccesssLayer.Models
         [TestInitialize]
         public void Initialize()
         {
-
             storage = new EfStorage(new EfStorageDbInitializerTest());
             storage.Database.Initialize(true);
 
@@ -32,6 +31,7 @@ namespace BusinessTrips.Tests.DataAccesssLayer.Models
         public void Save_AddsNewUserEntityInStorage()
         {
             userRegistrationModel.Save();
+
             Assert.IsNotNull(storage.Users.SingleOrDefault(entity => entity.Id == userRegistrationModel.Id));
         }
 
@@ -40,6 +40,7 @@ namespace BusinessTrips.Tests.DataAccesssLayer.Models
         {
             userRegistrationModel.Save();
             var userEntity = storage.Users.Single(entity => entity.Id == userRegistrationModel.Id);
+            
             Assert.IsFalse(userEntity.IsConfirmed);
         }
 
