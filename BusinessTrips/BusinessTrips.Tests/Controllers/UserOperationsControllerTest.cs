@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Web.Mvc;
 using BusinessTrips.Controllers;
+using BusinessTrips.DAL.Exception;
 using BusinessTrips.DAL.Model.User;
 using BusinessTrips.DAL.Storage;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -48,35 +49,22 @@ namespace BusinessTrips.Tests.Controllers
         }
 
         [TestMethod]
-        public void ConfirmRegistration_UserGuidIsValid_ReturnRegistrationConfirmationSuccessfulView()
+        public void ConfirmRegistration_GuidIsValidForExistentUser_ReturnRegistrationConfirmationSuccessfulView()
         {
             var userRegistrationModel = new UserRegistrationModel();
             userRegistrationModel.Save();
 
             var result = controller.ConfirmRegistration(userRegistrationModel.Id.ToString()) as ViewResult;
-            
+
             Assert.IsNotNull(result);
             Assert.AreEqual("RegistrationConfirmationSuccessful", result.ViewName);
         }
 
         [TestMethod]
-        public void ConfirmRegistration_GuidIsEmpty_ReturnsErrorView()
+        [ExpectedException(typeof(UserNotFoundException))]
+        public void ConfirmRegistration_GuidIsValidAndNoUser_ThrowsUserNotFoundException()
         {
-            var result = controller.ConfirmRegistration(string.Empty) as ViewResult;
-
-            Assert.IsNotNull(result);
-            Assert.AreEqual("ErrorEncountered", result.ViewName);
-        }
-
-        [TestMethod]
-        public void ConfirmRegistration_GuidHasBadFormat_ReturnsErrorView()
-        {
-            string badFormatGuid = "5746876876876";
-
-            var result = controller.ConfirmRegistration(badFormatGuid) as ViewResult;
-
-            Assert.IsNotNull(result);
-            Assert.AreEqual("ErrorEncountered", result.ViewName);
+            controller.ConfirmRegistration(Guid.NewGuid().ToString());
         }
 
         [TestMethod]
@@ -91,11 +79,11 @@ namespace BusinessTrips.Tests.Controllers
         [TestMethod]
         public void ForgotPassword_UserIsInvalid_ReturnsEmailSentView()
         {
-            var result = controller.ForgotPassword(new ForgotPasswordModel() {Email = "",Id = Guid.Empty})as ViewResult;
+            var result = controller.ForgotPassword(new ForgotPasswordModel() { Email = "", Id = Guid.Empty }) as ViewResult;
 
             Assert.IsNotNull(result);
             Assert.AreEqual("ForgotPasswordEmailSent", result.ViewName);
-            
+
         }
     }
 }
