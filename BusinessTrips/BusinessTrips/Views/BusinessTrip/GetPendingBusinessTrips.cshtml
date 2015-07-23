@@ -7,6 +7,16 @@
 
 <h2>GetPendingBusinessTrips</h2>
 
+
+@using (Html.BeginForm("GetAllBusinessTrips", "BusinessTrip", FormMethod.Post, new {@class = "form-horizontal", role = "form"}))
+{
+    @Html.DisplayName("Status")
+    @Html.DropDownListFor("MyType", EnumHelper.GetSelectList(typeof(BusinessTripStatus)) , "Select Status", new { @class = "form-control" })
+    
+    
+}
+
+
 <table class="table">
     <tr>
         <th>

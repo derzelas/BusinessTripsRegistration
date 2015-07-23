@@ -1,5 +1,6 @@
 ﻿using System;
 using BusinessTrips.DAL.Entity;
+using BusinessTrips.DAL.Model.BusinessTrip;
 
 namespace BusinessTrips.DAL.ViewModel
 {
@@ -10,6 +11,8 @@ namespace BusinessTrips.DAL.ViewModel
         public string Name { get; set; }
         public string MeansOfTransportaion { get; set; }
         public string Accomodation { get; set; }
+        public BusinessTripStatus Status { get; set; }
+        public Guid Id { get; set; }
 
         public BusinessTripViewModel(BusinessTripEntity businessTripEntity)
         {
@@ -18,6 +21,8 @@ namespace BusinessTrips.DAL.ViewModel
             Name = businessTripEntity.User.Name;
             MeansOfTransportaion = businessTripEntity.MeansOfTransportation;
             Accomodation = businessTripEntity.Accomodation;
+            Status = businessTripEntity.Status;
+            Id = businessTripEntity.Id;
         }
     }
 }

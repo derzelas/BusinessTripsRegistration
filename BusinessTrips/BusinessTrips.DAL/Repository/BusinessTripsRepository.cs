@@ -42,7 +42,23 @@ namespace BusinessTrips.DAL.Repository
 
         public IEnumerable<BusinessTripEntity> GetBusinessTripsBy(BusinessTripFilter filter)
         {
-            IQueryable<BusinessTripEntity> businessTrips = storage.GetStorageFor<BusinessTripEntity>().Where(m=>m.Status==BusinessTripStatus.Accepted ||m.Status==BusinessTripStatus.Pending);
+            IQueryable<BusinessTripEntity> businessTrips = storage.GetStorageFor<BusinessTripEntity>();
+
+            if (filter.Guid.HasValue)
+            {
+                return businessTrips.Where(m => m.Id == filter.Guid);
+            }
+
+            if (filter.Status.HasValue)
+            {
+                businessTrips = businessTrips.Where(m => m.Status == filter.Status);
+            }
+            else
+            {
+                businessTrips =
+                    businessTrips.Where(
+                        m => m.Status == BusinessTripStatus.Accepted || m.Status == BusinessTripStatus.Pending);
+            }
 
             if (!string.IsNullOrEmpty(filter.Person))
             {
@@ -78,14 +94,6 @@ namespace BusinessTrips.DAL.Repository
             {
                 businessTrips = businessTrips.Where(m => m.EndingDate == filter.EndingDate);
             }
-
-            return businessTrips;
-        }
-
-        public IEnumerable<BusinessTripEntity> GetPendingBusinessTrips()
-        {
-            IQueryable<BusinessTripEntity> businessTrips = storage.GetStorageFor<BusinessTripEntity>();
-            businessTrips = businessTrips.Where(m => m.Status == BusinessTripStatus.Pending);
 
             return businessTrips;
         }

@@ -53,17 +53,6 @@ namespace BusinessTrips.Controllers
             return View("UserBusinessTrips", userBusinessTripsCollection);
         }
 
-        [RoleAuthorize(Role.Hr)]
-        public ActionResult GetPendingBusinessTrips()
-        {
-            var businessTripsCollectionViewModel = new PendingBusinessTripsCollectionViewModel
-            {
-                BusinessTrips = new PendingBusinessTripCollectionModel().GetPendingBusinessTrips()
-            };
-
-            return View("GetPendingBusinessTrips", businessTripsCollectionViewModel);
-        }
-
         [RoleAuthorize(Role.Regular, Role.Hr)]
         public ActionResult Cancel(Guid businessTripId)
         {
@@ -115,12 +104,15 @@ namespace BusinessTrips.Controllers
 
             if (Guid.TryParse(guid, out parsedGuid))
             {
-                var businessTripsCollectionViewModel = new PendingBusinessTripsCollectionViewModel
+                var businessTripsCollectionViewModel = new AllBusinessTripsCollectionViewModel
                 {
-                    BusinessTrips = new PendingBusinessTripCollectionModel().GetPendingBusinessTripsById(parsedGuid)
+                    BusinessTripFilter = new BusinessTripFilter
+                    {
+                        Guid = parsedGuid
+                    }
                 };
 
-                return View("GetPendingBusinessTrips", businessTripsCollectionViewModel);
+                return GetAllBusinessTrips(businessTripsCollectionViewModel);
             }
 
             return View("RequestNotFound");

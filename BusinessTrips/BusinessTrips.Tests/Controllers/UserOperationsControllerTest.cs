@@ -21,7 +21,7 @@ namespace BusinessTrips.Tests.Controllers
         }
 
         [TestMethod]
-        public void Register_ReturnRegisterView_IfUserRegistrationModelIsInvalid()
+        public void Register_UserRegistrationModelIsInvalid_ReturnsRegisterView()
         {
             controller.ModelState.AddModelError("key", "error");
 
@@ -32,7 +32,23 @@ namespace BusinessTrips.Tests.Controllers
         }
 
         [TestMethod]
-        public void ConfirmRegistration_SetIsConfirmedPropertyToTrue_IfUserGuidExistsAndIsValid()
+        public void Register_UserRegistrationModelIsValid_ReturnsRegistrationSuccessfulView()
+        {
+            var validUserRegistrationModel = new UserRegistrationModel
+            {
+                Email = "example@gmail.com",
+                Password = "123456",
+                ConfirmedPassword = "123456"
+            };
+
+            var result = controller.Register(validUserRegistrationModel) as ViewResult;
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual("RegistrationSuccessful", result.ViewName);
+        }
+
+        [TestMethod]
+        public void ConfirmRegistration_UserGuidIsValid_ReturnRegistrationConfirmationSuccessfulView()
         {
             var userRegistrationModel = new UserRegistrationModel();
             userRegistrationModel.Save();
@@ -44,7 +60,7 @@ namespace BusinessTrips.Tests.Controllers
         }
 
         [TestMethod]
-        public void ConfirmRegistrationReturnsErrorViewWhenGuidIsEmpty()
+        public void ConfirmRegistration_GuidIsEmpty_ReturnsErrorView()
         {
             var result = controller.ConfirmRegistration(string.Empty) as ViewResult;
 
@@ -53,7 +69,7 @@ namespace BusinessTrips.Tests.Controllers
         }
 
         [TestMethod]
-        public void ConfirmRegistrationReturnsErrorViewWhenGuidHasBadFormat()
+        public void ConfirmRegistration_GuidHasBadFormat_ReturnsErrorView()
         {
             string badFormatGuid = "5746876876876";
 
@@ -64,12 +80,22 @@ namespace BusinessTrips.Tests.Controllers
         }
 
         [TestMethod]
-        public void LoginReturnsUnknownUserViewWhenUserIsNotInDatabase()
+        public void Login_UserIsNotInStorage_ReturnsUnknownUserView()
         {
             var result = controller.Login(new UserModel() { Id = Guid.NewGuid(), Password = "" }) as ViewResult;
 
             Assert.IsNotNull(result);
             Assert.AreEqual("InvalidUser", result.ViewName);
+        }
+
+        [TestMethod]
+        public void ForgotPassword_UserIsInvalid_ReturnsEmailSentView()
+        {
+            var result = controller.ForgotPassword(new ForgotPasswordModel() {Email = "",Id = Guid.Empty})as ViewResult;
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual("ForgotPasswordEmailSent", result.ViewName);
+            
         }
     }
 }
