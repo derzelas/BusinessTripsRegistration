@@ -101,10 +101,11 @@
   <ItemGroup>
     <Compile Include="Controllers\BusinessTripControllerTest.cs" />
     <Compile Include="Controllers\UserOperationsControllerTest.cs" />
+    <Compile Include="DataAccesssLayer\Attribute\RoleAuthorizeAttributeTest.cs" />
     <Compile Include="DataAccesssLayer\Models\BusinessTripCollectionModelTest.cs" />
     <Compile Include="DataAccesssLayer\PasswordTests.cs" />
     <Compile Include="DataAccesssLayer\Repository\BusinessTripRepositoryTest.cs" />
-    <Compile Include="DataAccesssLayer\UniqueEmailAttributeTest.cs" />
+    <Compile Include="DataAccesssLayer\Attribute\UniqueEmailAttributeTest.cs" />
     <Compile Include="DataAccesssLayer\Repository\UserRepositoryTest.cs" />
     <Compile Include="EfStorageDbInitializerTest.cs" />
     <Compile Include="DataAccesssLayer\Models\UserModelTest.cs" />
