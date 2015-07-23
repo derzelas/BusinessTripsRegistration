@@ -32,22 +32,6 @@ namespace BusinessTrips.Tests.Controllers
         }
 
         [TestMethod]
-        public void Register_ReturnRegistrationSuccessfulView_IfUserRegistrationModelIsValid()
-        {
-            var validUserRegistrationModel = new UserRegistrationModel
-            {
-                Email = "example@gmail.com",
-                Password = "123456",
-                ConfirmedPassword = "123456"
-            };
-
-            var result = controller.Register(validUserRegistrationModel) as ViewResult;
-
-            Assert.IsNotNull(result);
-            Assert.AreEqual("RegistrationSuccessful", result.ViewName);
-        }
-
-        [TestMethod]
         public void ConfirmRegistration_SetIsConfirmedPropertyToTrue_IfUserGuidExistsAndIsValid()
         {
             var userRegistrationModel = new UserRegistrationModel();
