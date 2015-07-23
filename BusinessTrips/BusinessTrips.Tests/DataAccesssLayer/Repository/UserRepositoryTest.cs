@@ -35,10 +35,10 @@ namespace BusinessTrips.Tests.DataAccesssLayer.Repository
         [TestMethod]
         public void GetByIdFindsCreatedUser()
         {
-            repository.CreateByUserEntity(userEntity);
-            repository.CommitChanges();
+            repository.Add(userEntity);
+            repository.SaveChanges();
 
-            UserEntity retrievedUser = repository.GetById(userEntity.Id);
+            UserEntity retrievedUser = repository.GetBy(userEntity.Id);
 
             Assert.AreEqual(userEntity.Id, retrievedUser.Id);
             Assert.AreEqual(userEntity.Name, retrievedUser.Name);
@@ -50,10 +50,10 @@ namespace BusinessTrips.Tests.DataAccesssLayer.Repository
         [TestMethod]
         public void GetByEmailIsNotNullWhenEmailExists()
         {
-            repository.CreateByUserEntity(userEntity);
-            repository.CommitChanges();
+            repository.Add(userEntity);
+            repository.SaveChanges();
 
-            Assert.IsNotNull(repository.GetByEmail(userEntity.Email));
+            Assert.IsNotNull(repository.GetBy(userEntity.Email));
         }
 
         [TestMethod]
@@ -62,7 +62,7 @@ namespace BusinessTrips.Tests.DataAccesssLayer.Repository
         {
             string email = "noemail@gmail.com";
 
-            Assert.IsNull(repository.GetByEmail(email));
+            Assert.IsNull(repository.GetBy(email));
         }
     }
 }

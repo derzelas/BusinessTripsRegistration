@@ -9,7 +9,7 @@ namespace BusinessTrips.DAL.Attribute
         {
             var userRepository = new UserRepository();
 
-            return userRepository.GetByEmail((string)value) == null;
+            return userRepository.GetBy((string)value) == null;
         }
     }
 }

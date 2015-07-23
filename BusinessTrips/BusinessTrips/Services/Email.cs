@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.Net;
 using System.Net.Mail;
 using System.Web;
@@ -7,21 +8,22 @@ namespace BusinessTrips.Services
 {
     public class Email
     {
-        private const int Port = 587;
-        private const string SenderAddress = "iQuestBusinessTrips@gmail.com";
-        private const string BusinessTripOperatorAddress = "iQuestBusinessTrips@gmail.com";
-        private const string Password = "Ana@re6mere";
-        private const string SmtpClient = "smtp.gmail.com";
+        private static readonly string SenderAddress = ConfigurationManager.AppSettings["SenderAddress"];
+        private static readonly string SenderPassword = ConfigurationManager.AppSettings["SenderPassword"];
 
         private readonly SmtpClient client;
 
         public Email()
         {
-            client = new SmtpClient(SmtpClient, Port)
+            string smtpClient = ConfigurationManager.AppSettings["SmtpClient"];
+            int Port = 587;
+
+
+            client = new SmtpClient(smtpClient, Port)
             {
                 UseDefaultCredentials = false,
                 EnableSsl = true,
-                Credentials = new NetworkCredential(SenderAddress, Password)
+                Credentials = new NetworkCredential(SenderAddress, SenderPassword)
             };
         }
 
@@ -50,6 +52,9 @@ namespace BusinessTrips.Services
 
             Send(subject, message, userEmail);
         }
+
+        private static readonly string BusinessTripOperatorAddress = ConfigurationManager.AppSettings["BusinessTripOperatorAddress"];
+
 
         public void SendBusinessTripRegistrationEmail(Guid businessTripId)
         {

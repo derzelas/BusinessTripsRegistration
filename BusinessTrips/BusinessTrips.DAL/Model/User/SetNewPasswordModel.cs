@@ -7,12 +7,12 @@ namespace BusinessTrips.DAL.Model.User
         public void SetPassword()
         {
             var userRepository = new UserRepository();
-            var userEntity = userRepository.GetById(Id);
+            var userEntity = userRepository.GetBy(Id);
 
             ConfirmedPassword = PasswordHasher.GetHashed(ConfirmedPassword + userEntity.Salt);
             userEntity.HashedPassword = ConfirmedPassword;
 
-            userRepository.CommitChanges();
+            userRepository.SaveChanges();
         }
     }
 }

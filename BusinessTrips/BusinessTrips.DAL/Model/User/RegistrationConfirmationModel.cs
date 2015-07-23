@@ -12,7 +12,7 @@ namespace BusinessTrips.DAL.Model.User
         {
             var userRepository = new UserRepository();
 
-            var userEntity = userRepository.GetById(Id);
+            var userEntity = userRepository.GetBy(Id);
 
             if (userEntity.IsConfirmed)
             {
@@ -20,7 +20,7 @@ namespace BusinessTrips.DAL.Model.User
             }
 
             userEntity.IsConfirmed = true;
-            userRepository.CommitChanges();
+            userRepository.SaveChanges();
         }
     }
 }

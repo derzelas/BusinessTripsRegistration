@@ -16,7 +16,7 @@ namespace BusinessTrips.DAL.Model.User
         public void ToForgotPasswordModelByEmail(string email)
         {
            var userRepository=new UserRepository();
-           var userEntity = userRepository.GetByEmail(email);
+           var userEntity = userRepository.GetBy(email);
             Id = userEntity.Id;
         }
 

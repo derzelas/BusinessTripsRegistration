@@ -47,8 +47,8 @@ namespace BusinessTrips.DAL.Model.User
             userEntity.Salt = randomSaltGenerator.GetSalt();
             userEntity.HashedPassword = PasswordHasher.GetHashed(Password + userEntity.Salt);
 
-            userRepository.CreateByUserEntity(userEntity);
-            userRepository.CommitChanges();
+            userRepository.Add(userEntity);
+            userRepository.SaveChanges();
         }
 
         private UserEntity ToUserEntity()

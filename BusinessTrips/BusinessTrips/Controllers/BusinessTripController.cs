@@ -48,7 +48,7 @@ namespace BusinessTrips.Controllers
 
             var userBusinessTripsCollection =
                 new UserBusinessTripsCollectionViewModel(
-                    userModel.BusinessTrips.Select(e => new UserBusinessTripViewModel(e)).OrderByDescending(m=>m.StartingDate));
+                    userModel.BusinessTrips.Select(e => new UserBusinessTripViewModel(e)).OrderByDescending(m => m.StartingDate));
 
             return View("UserBusinessTrips", userBusinessTripsCollection);
         }
@@ -126,7 +126,7 @@ namespace BusinessTrips.Controllers
         [RoleAuthorize(Role.Hr)]
         public ActionResult AcceptRequest(Guid businessTripId)
         {
-            var businessTripModel=new BusinessTripModel(businessTripId);
+            var businessTripModel = new BusinessTripModel(businessTripId);
             businessTripModel.ChangeStatus(BusinessTripStatus.Accepted);
 
             return View("StatusChangedSuccessfully");
@@ -163,8 +163,6 @@ namespace BusinessTrips.Controllers
                 filterContext.ExceptionHandled = true;
                 filterContext.Result = View("ErrorEncountered");
             }
-
-            base.OnException(filterContext);
         }
     }
 }

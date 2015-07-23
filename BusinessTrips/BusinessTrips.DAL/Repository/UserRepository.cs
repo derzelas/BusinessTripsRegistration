@@ -15,12 +15,12 @@ namespace BusinessTrips.DAL.Repository
             storage = new StorageFactory().Create();
         }
 
-        public void CreateByUserEntity(UserEntity userEntity)
+        public void Add(UserEntity userEntity)
         {
             storage.Add(userEntity);
         }
 
-        public UserEntity GetById(Guid userId)
+        public UserEntity GetBy(Guid userId)
         {
             UserEntity userEntity = storage.GetStorageFor<UserEntity>().Single(m => m.Id == userId);
 
@@ -32,14 +32,14 @@ namespace BusinessTrips.DAL.Repository
             return userEntity;
         }
 
-        public UserEntity GetByEmail(string userEmail)
+        public UserEntity GetBy(string userEmail)
         {
             return storage.GetStorageFor<UserEntity>().SingleOrDefault(m => m.Email == userEmail);
         }
 
-        public void CommitChanges()
+        public void SaveChanges()
         {
-            storage.Commit();
+            storage.SaveChanges();
         }
     }
 }

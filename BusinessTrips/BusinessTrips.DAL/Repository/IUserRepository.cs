@@ -5,9 +5,9 @@ namespace BusinessTrips.DAL.Repository
 {
     public interface IUserRepository
     {
-        void CreateByUserEntity(UserEntity userEntity);
-        UserEntity GetById(Guid userId);
-        UserEntity GetByEmail(string userEmail);
-        void CommitChanges();
+        void Add(UserEntity userEntity);
+        UserEntity GetBy(Guid userId);
+        UserEntity GetBy(string userEmail);
+        void SaveChanges();
     }
 }

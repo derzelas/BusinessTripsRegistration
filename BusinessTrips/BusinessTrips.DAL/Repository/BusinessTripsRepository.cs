@@ -81,6 +81,7 @@ namespace BusinessTrips.DAL.Repository
 
             return businessTrips;
         }
+
         public IEnumerable<BusinessTripEntity> GetPendingBusinessTrips()
         {
             IQueryable<BusinessTripEntity> businessTrips = storage.GetStorageFor<BusinessTripEntity>();
@@ -97,7 +98,7 @@ namespace BusinessTrips.DAL.Repository
 
         public void CommitChanges()
         {
-            storage.Commit();
+            storage.SaveChanges();
         }
     }
 }

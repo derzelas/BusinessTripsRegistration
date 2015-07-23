@@ -8,6 +8,6 @@ namespace BusinessTrips.DAL.Storage
 
         IQueryable<T> GetStorageFor<T>() where T : class;
 
-        void Commit();
+        void SaveChanges();
     }
 }

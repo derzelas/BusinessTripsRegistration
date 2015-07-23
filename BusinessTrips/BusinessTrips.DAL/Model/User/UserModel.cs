@@ -39,7 +39,7 @@ namespace BusinessTrips.DAL.Model.User
 
         public UserModel(Guid id)
         {
-            FromEntity(repository.GetById(id));
+            FromEntity(repository.GetBy(id));
         }
 
         private void FromEntity(UserEntity userEntity)
@@ -57,7 +57,7 @@ namespace BusinessTrips.DAL.Model.User
 
         public bool Authenthicate()
         {
-            var userEntity = repository.GetByEmail(Email);
+            var userEntity = repository.GetBy(Email);
             if (userEntity == null || !userEntity.IsConfirmed)
             {
                 return false;
@@ -70,7 +70,7 @@ namespace BusinessTrips.DAL.Model.User
 
         public UserEntity ToEntity()
         {
-            return repository.GetById(Id);
+            return repository.GetBy(Id);
         }
     }
 }

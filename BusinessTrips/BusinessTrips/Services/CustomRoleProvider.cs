@@ -56,7 +56,7 @@ namespace BusinessTrips.Services
             if (Guid.TryParse(id, out parsedGuid))
             {
                 var userRepository = new UserRepository();
-                var userEntity = userRepository.GetById(parsedGuid);
+                var userEntity = userRepository.GetBy(parsedGuid);
 
                 return userEntity.Roles.Select(x => x.Name).ToArray();
             }
