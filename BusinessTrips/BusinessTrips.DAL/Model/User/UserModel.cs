@@ -42,19 +42,6 @@ namespace BusinessTrips.DAL.Model.User
             FromEntity(repository.GetBy(id));
         }
 
-        private void FromEntity(UserEntity userEntity)
-        {
-            if (userEntity == null)
-            {
-                return;
-            }
-
-            Id = userEntity.Id;
-            Name = userEntity.Name;
-            Email = userEntity.Email;
-            BusinessTrips = userEntity.BusinessTrips.ToList().Select(e => new BusinessTripModel(e));
-        }
-
         public bool Authenthicate()
         {
             var userEntity = repository.GetBy(Email);
@@ -68,9 +55,17 @@ namespace BusinessTrips.DAL.Model.User
             return PasswordHasher.GetHashed(Password + userEntity.Salt) == userEntity.HashedPassword;
         }
 
-        public UserEntity ToEntity()
+        public UserEntity GetEntity()
         {
             return repository.GetBy(Id);
+        }
+
+        private void FromEntity(UserEntity userEntity)
+        {
+            Id = userEntity.Id;
+            Name = userEntity.Name;
+            Email = userEntity.Email;
+            BusinessTrips = userEntity.BusinessTrips.ToList().Select(e => new BusinessTripModel(e));
         }
     }
 }

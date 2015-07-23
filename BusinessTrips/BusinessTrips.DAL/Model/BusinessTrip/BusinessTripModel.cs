@@ -139,7 +139,7 @@ namespace BusinessTrips.DAL.Model.BusinessTrip
             return new BusinessTripEntity
             {
                 Id = Id,
-                User = User.ToEntity(),
+                User = User.GetEntity(),
                 PmName = PmName,
                 ProjectNumber = ProjectNumber,
                 ProjectName = ProjectName,

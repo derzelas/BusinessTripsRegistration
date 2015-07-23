@@ -88,6 +88,7 @@
     <Compile Include="Exception\UserNotFoundException.cs" />
     <Compile Include="Model\BusinessTrip\PendingBusinessTripCollectionModel.cs" />
     <Compile Include="Model\User\IRandomSaltGenerator.cs" />
+    <Compile Include="Model\User\Password.cs" />
     <Compile Include="Model\User\RandomSaltGenerator.cs" />
     <Compile Include="Model\User\PasswordRegistrationModel.cs" />
     <Compile Include="Model\User\SetNewPasswordModel.cs" />

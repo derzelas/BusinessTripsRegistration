@@ -22,7 +22,7 @@ namespace BusinessTrips.DAL.Repository
 
         public UserEntity GetBy(Guid userId)
         {
-            UserEntity userEntity = storage.GetStorageFor<UserEntity>().Single(m => m.Id == userId);
+            UserEntity userEntity = storage.GetStorageFor<UserEntity>().SingleOrDefault(m => m.Id == userId);
 
             if (userEntity == null)
             {
