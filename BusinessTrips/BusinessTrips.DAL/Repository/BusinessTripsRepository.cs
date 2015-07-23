@@ -65,6 +65,11 @@ namespace BusinessTrips.DAL.Repository
                 businessTrips = businessTrips.Where(m => m.StartingDate == filter.StartingDate);
             }
 
+            if (filter.StartingDate.HasValue)
+            {
+                businessTrips = businessTrips.Where(m => m.EndingDate == filter.EndingDate);
+            }
+
             if (!string.IsNullOrEmpty(filter.Location))
             {
                 businessTrips = businessTrips.Where(m => m.ClientLocation.Contains(filter.Location));
