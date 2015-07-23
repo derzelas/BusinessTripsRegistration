@@ -17,12 +17,6 @@
             <li>
                 @Html.ActionLink("Search", "GetAllBusinessTrips", "BusinessTrip")
             </li>
-            @if (User.IsInRole("HR"))
-            {
-                <li>
-                    @Html.ActionLink("Pending requests", "GetPendingBusinessTrips", "BusinessTrip")
-                </li>
-            }
         </ul>
     }
 }

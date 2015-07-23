@@ -1,11 +1,18 @@
 ﻿using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using BusinessTrips.DAL.Model.BusinessTrip;
 
 namespace BusinessTrips.DAL.Model.User
 {
     public class BusinessTripFilter
     {
+
+        [DisplayName("Status")]
+        public BusinessTripStatus? Status { get; set; }
+
+        public Guid? Guid { get; set; }
+
         [DisplayName("Name")]
         public string Person { get; set; }
 
