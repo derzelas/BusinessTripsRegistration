@@ -31,7 +31,7 @@ namespace BusinessTrips.Services
             const string subject = "Link to change  password";
             string message = "Here is your link to change your password: ";
 
-            message += string.Format("http://{0}:{1}/UserOperations/SetNewPassword/?guid={2}",
+            message += string.Format("http://{0}:{1}/UserOperations/ResetPassword/?guid={2}",
                 HttpContext.Current.Request.Url.Host,
                 HttpContext.Current.Request.Url.Port,
                 userId);

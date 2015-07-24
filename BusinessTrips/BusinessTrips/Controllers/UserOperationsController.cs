@@ -85,17 +85,17 @@ namespace BusinessTrips.Controllers
             return RedirectToAction("Login");
         }
 
-        public ActionResult ForgotPassword()
+        public ActionResult RecoverPassword()
         {
-            return View("ForgotPassword");
+            return View("RecoverPassword");
         }
 
         [HttpPost]
-        public ActionResult ForgotPassword(RecoverPasswordModel recoverPasswordModel)
+        public ActionResult RecoverPassword(RecoverPasswordModel recoverPasswordModel)
         {
             if (!ModelState.IsValid)
             {
-                return View("ForgotPassword");               
+                return View("RecoverPassword");               
             }
 
             var email = new Email();
@@ -104,14 +104,14 @@ namespace BusinessTrips.Controllers
             return View("ForgotPasswordEmailSent");            
         }
 
-        public ActionResult SetNewPassword(string guid)
+        public ActionResult ResetPassword(string guid)
         {
             var userSetNewPasswordModel = new SetNewPasswordModel() { Id = Guid.Parse(guid) };
-            return View("SetNewPassword", userSetNewPasswordModel);
+            return View("ResetPassword", userSetNewPasswordModel);
         }
 
         [HttpPost]
-        public ActionResult SetNewPassword(SetNewPasswordModel userSetNewPasswordModel)
+        public ActionResult ResetPassword(SetNewPasswordModel userSetNewPasswordModel)
         {
             if (ModelState.IsValid)
             {
@@ -119,7 +119,7 @@ namespace BusinessTrips.Controllers
 
                 return View("PasswordSet");
             }
-            return View("SetNewPassword");
+            return View("ResetPassword");
         }
 
         protected override void OnException(ExceptionContext filterContext)
