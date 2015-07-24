@@ -130,7 +130,7 @@ namespace BusinessTrips.Tests.DataAccesssLayer.Repositories
         [TestMethod]
         public void GetBusinessTripBy_MultipleBusinessTrips()
         {
-
+            
         }
 
         private void AddGeneratedBusinessTrips(int numberOfBusinessTrips, BusinessTripFilter filter)
@@ -149,7 +149,7 @@ namespace BusinessTrips.Tests.DataAccesssLayer.Repositories
 
                 var businessTrip = new BusinessTripModel();
 
-                    businessTrip.StartingDate = DateTime.Now.AddYears(random.Next(-1, 1));
+                businessTrip.StartingDate = DateTime.Now.AddYears(random.Next(-1, 1));
                 businessTrip.EndingDate = DateTime.Now.AddYears(random.Next(-1, 1));
                 businessTrip.ClientLocation = "Locations" + random.Next(0, numberOfBusinessTrips);
                 businessTrip.MeansOfTransportation = "MeansOfTransportations" + random.Next(0, numberOfBusinessTrips);
