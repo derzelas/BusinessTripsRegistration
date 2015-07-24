@@ -152,7 +152,7 @@ namespace BusinessTrips.Controllers
 
         protected override void OnException(ExceptionContext filterContext)
         {
-            if (filterContext.Exception is BusinessTripNotFoundException)
+            if (filterContext.Exception is BusinessTripNotFoundException || filterContext.Exception is UserNotFoundException)
             {
                 filterContext.ExceptionHandled = true;
                 filterContext.Result = View("ErrorEncountered");

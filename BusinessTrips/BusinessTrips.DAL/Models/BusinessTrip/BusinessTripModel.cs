@@ -36,16 +36,18 @@ namespace BusinessTrips.DAL.Models.BusinessTrip
         [Display(Name = "Leaving from:")]
         public string LeavingFrom { get; set; }
 
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]
         [Required]
         [Display(Name = "Starting date:")]
         [DataType(DataType.Date)]
-        [DateRange]
+        [DateRange]       
         public DateTime StartingDate { get; set; }
 
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]
         [Required]
         [Display(Name = "Ending date:")]
         [DataType(DataType.Date)]
-        [DateRange]
+        [DateRange]              
         public DateTime EndingDate { get; set; }
 
         [Required]
