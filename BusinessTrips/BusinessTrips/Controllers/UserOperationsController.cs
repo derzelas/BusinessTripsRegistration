@@ -95,13 +95,13 @@ namespace BusinessTrips.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View("RecoverPassword");
+                return View("RecoverPassword");               
             }
 
             var email = new Email();
             email.SendForgotPasswordEmail(recoverPasswordModel.GetId(), recoverPasswordModel.Email);
 
-            return View("ForgotPasswordEmailSent");
+            return View("ForgotPasswordEmailSent");            
         }
 
         public ActionResult ResetPassword(string guid)
