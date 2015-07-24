@@ -9,7 +9,7 @@
     <table>
         <tr>
             <th>
-                @Html.LabelFor(m => m.Department)
+                @Html.LabelFor(m => m.Area)
             </th>
             <th>
                 @Html.LabelFor(m => m.PmName)
@@ -29,8 +29,8 @@
         </tr>
         <tr>
             <td>
-                @Html.TextBoxFor(m => m.Department, new { @class = "form-control" })
-                @Html.ValidationMessageFor(m => m.Department, "", new { @class = "text-danger" })
+                @Html.TextBoxFor(m => m.Area, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Area, "", new { @class = "text-danger" })
             </td>
             <td>
                 @Html.TextBoxFor(m => m.PmName, new { @class = "form-control" })

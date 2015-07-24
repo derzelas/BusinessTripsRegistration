@@ -13,8 +13,8 @@ namespace BusinessTrips.DAL.Models.BusinessTrip
         public UserModel User { get; set; }
 
         [Required]
-        [Display(Name = "Department:")]
-        public string Department { get; set; }
+        [Display(Name = "Area:")]
+        public string Area { get; set; }
 
         [Required]
         [Display(Name = "PM name:")]
@@ -107,7 +107,7 @@ namespace BusinessTrips.DAL.Models.BusinessTrip
             BankCardIsNeeded = businessTripEntity.BankCardIsNeeded;
             ClientLocation = businessTripEntity.ClientLocation;
             ClientName = businessTripEntity.ClientName;
-            Department = businessTripEntity.Department;
+            Area = businessTripEntity.Area;
             EndingDate = businessTripEntity.EndingDate;
             LeavingFrom = businessTripEntity.LeavingFrom;
             MeansOfTransportation = businessTripEntity.MeansOfTransportation;
@@ -149,7 +149,7 @@ namespace BusinessTrips.DAL.Models.BusinessTrip
                 BankCardIsNeeded = BankCardIsNeeded,
                 ClientLocation = ClientLocation,
                 ClientName = ClientName,
-                Department = Department,
+                Area = Area,
                 EndingDate = EndingDate,
                 LeavingFrom = LeavingFrom,
                 MeansOfTransportation = MeansOfTransportation,
