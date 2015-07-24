@@ -24,14 +24,14 @@ namespace BusinessTrips.Tests.Controllers
         }
 
         [TestMethod]
-        public void Register_ModelStateIsInvalid_ReturnsRegisterView()
+        public void Submit_ModelStateIsInvalid_ReturnsRegisterView()
         {
             controller.ModelState.AddModelError("key", "error");
 
             var result = controller.Submit(new BusinessTripModel()) as ViewResult;
 
             Assert.IsNotNull(result);
-            Assert.AreEqual("Register", result.ViewName);
+            Assert.AreEqual("Submit", result.ViewName);
         }
 
         [TestMethod]
@@ -48,6 +48,7 @@ namespace BusinessTrips.Tests.Controllers
         {
             var allBusinessTripCollection = new AllBusinessTripsCollectionViewModel();
             allBusinessTripCollection.BusinessTripFilter = new BusinessTripFilter();
+            allBusinessTripCollection.BusinessTripFilter.Guid = Guid.NewGuid();
 
             var result = controller.GetAllBusinessTrips(allBusinessTripCollection) as ViewResult;
 

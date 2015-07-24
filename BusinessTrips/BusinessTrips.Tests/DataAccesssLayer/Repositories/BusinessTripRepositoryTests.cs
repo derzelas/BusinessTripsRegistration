@@ -84,9 +84,9 @@ namespace BusinessTrips.Tests.DataAccesssLayer.Repositories
 
         [TestMethod]
         [ExpectedException(typeof(BusinessTripNotFoundException))]
-        public void GetBy_InvalidGuid_ThrowsBusinessTripNotFoundException()
+        public void GetBy_NotExistingBusinessTripGui_ThrowsBusinessTripNotFoundException()
         {
-            
+            repository.GetById(Guid.NewGuid());
         }
     }
 }
