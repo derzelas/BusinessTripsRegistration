@@ -13,22 +13,24 @@ namespace BusinessTrips.DAL.Models.BusinessTrip
         public UserModel User { get; set; }
 
         [Required]
-        [Display(Name = "Department:")]
-        public string Department { get; set; }
+        [Display(Name = "Area:")]
+        public string Area { get; set; }
 
         [Required]
         [Display(Name = "PM name:")]
         public string PmName { get; set; }
 
-        [Display(Name = "Project number:")]
-        public string ProjectNumber { get; set; }
-
         [Display(Name = "Project name:")]
         public string ProjectName { get; set; }
+
+        [Required]
+        [Display(Name = "Project number:")]
+        public string ProjectNumber { get; set; }
 
         [Display(Name = "Task name:")]
         public string TaskName { get; set; }
 
+        [Required]
         [Display(Name = "Task number:")]
         public string TaskNumber { get; set; }
 
@@ -58,6 +60,7 @@ namespace BusinessTrips.DAL.Models.BusinessTrip
         [Display(Name = "Client location:")]
         public string ClientLocation { get; set; }
 
+        [Required]
         [Display(Name = "Means of transportation:")]
         public string MeansOfTransportation { get; set; }
 
@@ -107,7 +110,7 @@ namespace BusinessTrips.DAL.Models.BusinessTrip
             BankCardIsNeeded = businessTripEntity.BankCardIsNeeded;
             ClientLocation = businessTripEntity.ClientLocation;
             ClientName = businessTripEntity.ClientName;
-            Department = businessTripEntity.Department;
+            Area = businessTripEntity.Area;
             EndingDate = businessTripEntity.EndingDate;
             LeavingFrom = businessTripEntity.LeavingFrom;
             MeansOfTransportation = businessTripEntity.MeansOfTransportation;
@@ -149,7 +152,7 @@ namespace BusinessTrips.DAL.Models.BusinessTrip
                 BankCardIsNeeded = BankCardIsNeeded,
                 ClientLocation = ClientLocation,
                 ClientName = ClientName,
-                Department = Department,
+                Area = Area,
                 EndingDate = EndingDate,
                 LeavingFrom = LeavingFrom,
                 MeansOfTransportation = MeansOfTransportation,

@@ -11,7 +11,7 @@
     <table class="table">
         <tr>
             <th>
-                @Html.DisplayName("Department")
+                @Html.DisplayName("Location")
             </th>
             <th>
                 @Html.DisplayName("Starting date")
@@ -25,13 +25,15 @@
             <th>
                 @Html.DisplayName("Status")
             </th>
-            <th></th>
+            <th>
+                @Html.DisplayName("Action")
+            </th>
         </tr>
         @foreach (var item in Model.UserBusinesTrips)
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Department)
+                    @Html.DisplayFor(modelItem => item.Location)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.StartingDate)

@@ -13,7 +13,7 @@ namespace BusinessTrips.DAL.Entities
         public string ProjectName { get; set; }
         public string TaskName { get; set; }
         public string TaskNumber { get; set; }
-        public string Department { get; set; }
+        public string Area { get; set; }
 
         public string LeavingFrom { get; set; }
         public DateTime StartingDate { get; set; }

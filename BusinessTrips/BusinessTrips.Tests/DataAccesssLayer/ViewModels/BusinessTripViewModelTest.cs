@@ -26,7 +26,7 @@ namespace BusinessTrips.Tests.DataAccesssLayer.ViewModels
 
             var businessTripViewModel = new BusinessTripViewModel(businessTripEntity);
 
-            Assert.AreEqual(businessTripViewModel.EndingDate, businessTripEntity.StartingDate);
+            Assert.AreEqual(businessTripViewModel.StartingDate, businessTripEntity.StartingDate);
             Assert.AreEqual(businessTripViewModel.Location, businessTripEntity.ClientLocation);
             Assert.AreEqual(businessTripViewModel.Name, businessTripEntity.User.Name);
             Assert.AreEqual(businessTripViewModel.MeansOfTransportaion, businessTripEntity.MeansOfTransportation);
