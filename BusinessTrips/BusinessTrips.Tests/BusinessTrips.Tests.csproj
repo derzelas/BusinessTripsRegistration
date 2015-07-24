@@ -106,6 +106,7 @@
     <Compile Include="DataAccesssLayer\Models\RecoverPasswordModelTests.cs" />
     <Compile Include="DataAccesssLayer\Models\RegistrationConfirmationModelTests.cs" />
     <Compile Include="DataAccesssLayer\PasswordTests.cs" />
+    <Compile Include="DataAccesssLayer\Repositories\BusinessTripFilterTests.cs" />
     <Compile Include="DataAccesssLayer\Repositories\BusinessTripRepositoryTests.cs" />
     <Compile Include="DataAccesssLayer\Attributes\UniqueEmailAttributeTests.cs" />
     <Compile Include="DataAccesssLayer\Repositories\UserRepositoryTests.cs" />
