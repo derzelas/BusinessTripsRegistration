@@ -48,7 +48,7 @@ namespace BusinessTrips.Tests.Controllers
         {
             var allBusinessTripCollection = new AllBusinessTripsCollectionViewModel();
             allBusinessTripCollection.BusinessTripFilter = new BusinessTripFilter();
-            allBusinessTripCollection.BusinessTripFilter.Guid = Guid.NewGuid();
+            allBusinessTripCollection.BusinessTripFilter.Id = Guid.NewGuid().ToString();
 
             var result = controller.GetAllBusinessTrips(allBusinessTripCollection) as ViewResult;
 

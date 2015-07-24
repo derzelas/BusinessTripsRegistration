@@ -43,10 +43,11 @@ namespace BusinessTrips.DAL.Repositories
         {           
             IQueryable<BusinessTripEntity> businessTrips = storage.GetStorageFor<BusinessTripEntity>();
 
-            if (filter.Guid.HasValue)
+            if (!string.IsNullOrEmpty(filter.Id))
             {
-                Validate(filter.Guid.ToString());
-                return businessTrips.Where(m => m.Id == filter.Guid);
+                Guid filterGuid = GetGuidBy(filter.Id);
+
+                return businessTrips.Where(m => m.Id == filterGuid);
             }
 
             if (filter.Status.HasValue)
@@ -104,13 +105,15 @@ namespace BusinessTrips.DAL.Repositories
             storage.SaveChanges();
         }
 
-        private static void Validate(string businessTripId)
+        private static Guid GetGuidBy(string businessTripId)
         {
             Guid parsedId;
             if (!Guid.TryParse(businessTripId, out parsedId))
             {
                 throw new InvalidIdException();
             }
+
+            return parsedId;
         }
     }
 }

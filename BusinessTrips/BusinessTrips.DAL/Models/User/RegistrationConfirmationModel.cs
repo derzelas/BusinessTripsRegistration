@@ -10,7 +10,7 @@ namespace BusinessTrips.DAL.Models.User
         {
             var userRepository = new UserRepository();
 
-            var userEntity = userRepository.GetBy(GetId(userId));
+            var userEntity = userRepository.GetBy(GetGuidBy(userId));
 
             if (userEntity.IsConfirmed)
             {
@@ -21,7 +21,7 @@ namespace BusinessTrips.DAL.Models.User
             userRepository.SaveChanges();
         }
 
-        private static Guid GetId(string userId)
+        private static Guid GetGuidBy(string userId)
         {
             Guid parsedId;
 
