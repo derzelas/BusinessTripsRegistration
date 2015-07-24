@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.Web.Mvc.Html;
 
 namespace BusinessTrips.DAL.Models.BusinessTrip
 {

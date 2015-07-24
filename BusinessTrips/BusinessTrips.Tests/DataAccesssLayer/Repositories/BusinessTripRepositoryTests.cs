@@ -116,13 +116,13 @@ namespace BusinessTrips.Tests.DataAccesssLayer.Repositories
         }
 
         [TestMethod]
-        public void GetBusinessTripsBy_MultipleBusinessTripsNoFilterValue_ReturnsAllBusinessTrips()
+        public void GetBusinessTripsBy_MultipleBusinessTripsNoFilterValueHrRole_ReturnsAllBusinessTrips()
         {
             const int numberOfBusinessTrips = 15;
 
             AddGeneratedBusinessTrips(numberOfBusinessTrips, new BusinessTripFilter());
 
-            var actualBusinessTripCollection = businessTripsRepository.GetBusinessTripsBy(new BusinessTripFilter());
+            var actualBusinessTripCollection = businessTripsRepository.GetBusinessTripsBy(new BusinessTripFilter(), new[] { Role.Hr.ToString() });
 
             Assert.AreEqual(numberOfBusinessTrips, actualBusinessTripCollection.Count());
         }
@@ -130,7 +130,7 @@ namespace BusinessTrips.Tests.DataAccesssLayer.Repositories
         [TestMethod]
         public void GetBusinessTripBy_MultipleBusinessTrips()
         {
-            
+
         }
 
         private void AddGeneratedBusinessTrips(int numberOfBusinessTrips, BusinessTripFilter filter)
@@ -149,8 +149,7 @@ namespace BusinessTrips.Tests.DataAccesssLayer.Repositories
 
                 var businessTrip = new BusinessTripModel();
 
-                if (!string.IsNullOrEmpty(filter.UserId))
-                businessTrip.StartingDate = DateTime.Now.AddYears(random.Next(-1, 1));
+                    businessTrip.StartingDate = DateTime.Now.AddYears(random.Next(-1, 1));
                 businessTrip.EndingDate = DateTime.Now.AddYears(random.Next(-1, 1));
                 businessTrip.ClientLocation = "Locations" + random.Next(0, numberOfBusinessTrips);
                 businessTrip.MeansOfTransportation = "MeansOfTransportations" + random.Next(0, numberOfBusinessTrips);

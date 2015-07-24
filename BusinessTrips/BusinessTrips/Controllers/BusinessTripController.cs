@@ -75,7 +75,7 @@ namespace BusinessTrips.Controllers
         public ActionResult GetAllBusinessTrips(AllBusinessTripsCollectionViewModel businessTripsCollectionViewModel)
         {
             businessTripsCollectionViewModel.BusinessTrips = 
-                new BusinessTripCollectionModel().GetBusinessTripsBy(businessTripsCollectionViewModel.BusinessTripFilter);
+                new BusinessTripCollectionModel().GetBusinessTripsBy(businessTripsCollectionViewModel.BusinessTripFilter, new CustomRoleProvider().GetRolesForUser(GetUserIdFromCookie().ToString()));
 
             return View("AllBusinessTrips", businessTripsCollectionViewModel);
         }
