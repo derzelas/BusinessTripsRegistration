@@ -45,7 +45,7 @@ namespace BusinessTrips.Tests.DataAccesssLayer.Repositories
         }
 
         [TestMethod]
-        public void AddedElementIsFoundInStorageByHisId()
+        public void Add_ElementIsFoundInStorageByHisId()
         {
             repository.Add(businessTripModel);
             repository.SaveChanges();
@@ -56,7 +56,7 @@ namespace BusinessTrips.Tests.DataAccesssLayer.Repositories
         }
 
         [TestMethod]
-        public void ElementsAreFoundInStorageByUser()
+        public void Add_ElementsAreFoundInStorageByUser()
         {
             for (int i = 0; i < 10; i++)
             {

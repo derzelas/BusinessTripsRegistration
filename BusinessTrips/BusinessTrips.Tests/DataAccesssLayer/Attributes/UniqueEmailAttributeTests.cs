@@ -30,13 +30,13 @@ namespace BusinessTrips.Tests.DataAccesssLayer.Attributes
         }
 
         [TestMethod]
-        public void IsValidReturnsFalseForExistingEmail()
+        public void IsValid_ForExistingEmail_ReturnsFalse()
         {
             Assert.AreEqual(false, uniqueEmailAttribute.IsValid("email@email.com"));
         }
 
         [TestMethod]
-        public void IsValidReturnsTrueForNonExistingEmail()
+        public void IsValid_ForNonExistingEmail_ReturnsTrue()
         {
             Assert.AreEqual(true, uniqueEmailAttribute.IsValid("emaifgdfgdfgdfgdfl@email.com"));
         }

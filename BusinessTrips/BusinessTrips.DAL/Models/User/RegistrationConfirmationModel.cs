@@ -6,13 +6,13 @@ namespace BusinessTrips.DAL.Models.User
 {
     public class RegistrationConfirmationModel
     {
-        public void Confirm(string id)
+        public void Confirm(string userId)
         {
-            Validate(id);
+            Validate(userId);
 
             var userRepository = new UserRepository();
 
-            var userEntity = userRepository.GetBy(Guid.Parse(id));
+            var userEntity = userRepository.GetBy(Guid.Parse(userId));
 
             if (userEntity.IsConfirmed)
             {
@@ -23,10 +23,10 @@ namespace BusinessTrips.DAL.Models.User
             userRepository.SaveChanges();
         }
 
-        private static void Validate(string id)
+        private static void Validate(string userId)
         {
-            Guid parsed;
-            if (!Guid.TryParse(id, out parsed))
+            Guid parsedId;
+            if (!Guid.TryParse(userId, out parsedId))
             {
                 throw new InvalidIdException();
             }
