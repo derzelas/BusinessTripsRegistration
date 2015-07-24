@@ -40,13 +40,12 @@ namespace BusinessTrips.DAL.Repositories
         }
 
         public IEnumerable<BusinessTripEntity> GetBusinessTripsBy(BusinessTripFilter filter)
-        {
-            Validate(filter.Guid.ToString());
-
+        {           
             IQueryable<BusinessTripEntity> businessTrips = storage.GetStorageFor<BusinessTripEntity>();
 
             if (filter.Guid.HasValue)
             {
+                Validate(filter.Guid.ToString());
                 return businessTrips.Where(m => m.Id == filter.Guid);
             }
 

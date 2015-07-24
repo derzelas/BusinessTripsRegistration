@@ -8,11 +8,9 @@ namespace BusinessTrips.DAL.Models.User
     {
         public void Confirm(string userId)
         {
-            Validate(userId);
-
             var userRepository = new UserRepository();
 
-            var userEntity = userRepository.GetBy(Guid.Parse(userId));
+            var userEntity = userRepository.GetBy(GetId(userId));
 
             if (userEntity.IsConfirmed)
             {
@@ -23,13 +21,16 @@ namespace BusinessTrips.DAL.Models.User
             userRepository.SaveChanges();
         }
 
-        private static void Validate(string userId)
+        private static Guid GetId(string userId)
         {
             Guid parsedId;
+
             if (!Guid.TryParse(userId, out parsedId))
             {
                 throw new InvalidIdException();
             }
+
+            return parsedId;
         }
     }
 }

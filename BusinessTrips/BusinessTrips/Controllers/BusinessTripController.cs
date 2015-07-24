@@ -91,7 +91,7 @@ namespace BusinessTrips.Controllers
                 {
                     BusinessTripFilter = new BusinessTripFilter
                     {
-                        Guid = parsedGuid,
+                        Guid = parsedGuid
                     }
                 };
                 
