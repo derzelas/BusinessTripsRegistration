@@ -30,7 +30,7 @@ namespace BusinessTrips.Controllers
                 return View("Submit");
             }
 
-            businessTripModel.User = new UserModel(GetUserIdFromCookie()); 
+            businessTripModel.User = new UserModel(GetUserIdFromCookie());
             businessTripModel.Save();
 
             var email = new Email();
@@ -74,7 +74,7 @@ namespace BusinessTrips.Controllers
         [RoleAuthorize(Role.Regular, Role.Hr)]
         public ActionResult GetAllBusinessTrips(AllBusinessTripsCollectionViewModel businessTripsCollectionViewModel)
         {
-            businessTripsCollectionViewModel.BusinessTrips = 
+            businessTripsCollectionViewModel.BusinessTrips =
                 new BusinessTripCollectionModel().GetBusinessTripsBy(businessTripsCollectionViewModel.BusinessTripFilter);
 
             return View("AllBusinessTrips", businessTripsCollectionViewModel);
@@ -94,7 +94,7 @@ namespace BusinessTrips.Controllers
                         UserId = guid
                     }
                 };
-                
+
                 return GetAllBusinessTrips(businessTripsCollectionViewModel);
             }
 
