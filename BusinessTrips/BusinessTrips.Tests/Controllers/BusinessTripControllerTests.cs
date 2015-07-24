@@ -28,7 +28,7 @@ namespace BusinessTrips.Tests.Controllers
         {
             controller.ModelState.AddModelError("key", "error");
 
-            var result = controller.Register(new BusinessTripModel()) as ViewResult;
+            var result = controller.Submit(new BusinessTripModel()) as ViewResult;
 
             Assert.IsNotNull(result);
             Assert.AreEqual("Register", result.ViewName);
