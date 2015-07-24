@@ -63,12 +63,12 @@ namespace BusinessTrips.DAL.Repositories
 
             if (filter.StartingDate.HasValue)
             {
-                businessTrips = businessTrips.Where(m => m.StartingDate == filter.StartingDate);
+                businessTrips = businessTrips.Where(m => m.StartingDate >= filter.StartingDate);
             }
 
             if (filter.EndingDate.HasValue)
             {
-                businessTrips = businessTrips.Where(m => m.EndingDate == filter.EndingDate);
+                businessTrips = businessTrips.Where(m => m.EndingDate <= filter.EndingDate);
             }
 
             if (!string.IsNullOrEmpty(filter.Location))
