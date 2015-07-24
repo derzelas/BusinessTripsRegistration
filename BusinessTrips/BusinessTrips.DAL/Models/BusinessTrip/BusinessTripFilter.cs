@@ -9,7 +9,7 @@ namespace BusinessTrips.DAL.Models.BusinessTrip
         [DisplayName("Status")]
         public BusinessTripStatus? Status { get; set; }
 
-        public Guid? Guid { get; set; }
+        public string Id { get; set; }
 
         [DisplayName("Starting Date")]
         [DataType(DataType.Date)]
