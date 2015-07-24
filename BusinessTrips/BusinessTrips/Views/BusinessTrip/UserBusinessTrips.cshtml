@@ -1,4 +1,4 @@
-﻿@using BusinessTrips.DAL.Model.BusinessTrip
+﻿@using BusinessTrips.DAL.Models.BusinessTrip
 @model BusinessTrips.DAL.ViewModel.UserBusinessTripsCollectionViewModel
 @{
     ViewBag.Title = "My business trips";
@@ -51,7 +51,7 @@
                     @Html.ActionLink("Details", "GetDetails", new { businessTripId = item.Id })
                     @if (item.Status == BusinessTripStatus.Pending ||item.Status == BusinessTripStatus.Accepted)
                     { 
-                        @Html.ActionLink("Cancel", "Cancel", new { businessTripId = item.Id })
+                    @Html.ActionLink("Cancel", "Cancel", new { businessTripId = item.Id })
                     }
                 </td>
             </tr>

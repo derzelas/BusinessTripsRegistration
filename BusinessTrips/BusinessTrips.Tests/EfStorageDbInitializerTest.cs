@@ -1,5 +1,5 @@
 ﻿using System.Data.Entity;
-using BusinessTrips.DAL.Entity;
+using BusinessTrips.DAL.Entities;
 using BusinessTrips.DAL.Storage;
 
 namespace BusinessTrips.Tests

@@ -1,5 +1,5 @@
 ﻿using System.Data.Entity;
-using BusinessTrips.DAL.Entity;
+using BusinessTrips.DAL.Entities;
 
 namespace BusinessTrips.DAL.Storage
 {

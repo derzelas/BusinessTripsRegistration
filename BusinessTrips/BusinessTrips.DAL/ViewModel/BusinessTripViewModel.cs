@@ -1,6 +1,6 @@
 ﻿using System;
-using BusinessTrips.DAL.Entity;
-using BusinessTrips.DAL.Model.BusinessTrip;
+using BusinessTrips.DAL.Entities;
+using BusinessTrips.DAL.Models.BusinessTrip;
 
 namespace BusinessTrips.DAL.ViewModel
 {

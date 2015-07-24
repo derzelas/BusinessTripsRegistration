@@ -2,7 +2,7 @@
 using System.Configuration.Provider;
 using System.Linq;
 using System.Web.Security;
-using BusinessTrips.DAL.Repository;
+using BusinessTrips.DAL.Repositories;
 
 namespace BusinessTrips.Services
 {
