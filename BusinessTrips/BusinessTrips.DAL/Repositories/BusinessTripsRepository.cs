@@ -43,9 +43,9 @@ namespace BusinessTrips.DAL.Repositories
         {           
             IQueryable<BusinessTripEntity> businessTrips = storage.GetStorageFor<BusinessTripEntity>();
 
-            if (!string.IsNullOrEmpty(filter.Id))
+            if (!string.IsNullOrEmpty(filter.UserId))
             {
-                Guid filterGuid = GetGuidBy(filter.Id);
+                Guid filterGuid = GetGuidBy(filter.UserId);
 
                 return businessTrips.Where(m => m.Id == filterGuid);
             }
@@ -81,9 +81,9 @@ namespace BusinessTrips.DAL.Repositories
                 businessTrips = businessTrips.Where(m => m.User.Name.Contains(filter.Person));
             }
 
-            if (!string.IsNullOrEmpty(filter.MeanOfTransportation))
+            if (!string.IsNullOrEmpty(filter.MeansOfTransportation))
             {
-                businessTrips = businessTrips.Where(m => m.MeansOfTransportation.Contains(filter.MeanOfTransportation));
+                businessTrips = businessTrips.Where(m => m.MeansOfTransportation.Contains(filter.MeansOfTransportation));
             }
 
             if (!string.IsNullOrEmpty(filter.Accommodation))

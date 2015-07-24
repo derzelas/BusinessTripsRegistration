@@ -9,7 +9,7 @@ namespace BusinessTrips.DAL.Models.BusinessTrip
         [DisplayName("Status")]
         public BusinessTripStatus? Status { get; set; }
 
-        public string Id { get; set; }
+        public string UserId { get; set; }
 
         [DisplayName("Starting Date")]
         [DataType(DataType.Date)]
@@ -25,8 +25,8 @@ namespace BusinessTrips.DAL.Models.BusinessTrip
         [DisplayName("Person")]
         public string Person { get; set; }
 
-        [DisplayName("Mean Of Transporation")]
-        public string MeanOfTransportation { get; set; }
+        [DisplayName("Means Of Transporation")]
+        public string MeansOfTransportation { get; set; }
 
         [DisplayName("Accomodation")]
         public string Accommodation { get; set; }    

@@ -91,7 +91,7 @@ namespace BusinessTrips.Controllers
                 {
                     BusinessTripFilter = new BusinessTripFilter
                     {
-                        Id = guid
+                        UserId = guid
                     }
                 };
                 
@@ -152,7 +152,7 @@ namespace BusinessTrips.Controllers
 
         protected override void OnException(ExceptionContext filterContext)
         {
-            if (filterContext.Exception is BusinessTripNotFoundException || filterContext.Exception is UserNotFoundException)
+            if (filterContext.Exception is BusinessTripNotFoundException || filterContext.Exception is InvalidIdException)
             {
                 filterContext.ExceptionHandled = true;
                 filterContext.Result = View("ErrorEncountered");
