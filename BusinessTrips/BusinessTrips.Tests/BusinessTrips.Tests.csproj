@@ -99,18 +99,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controllers\BusinessTripControllerTest.cs" />
-    <Compile Include="Controllers\UserOperationsControllerTest.cs" />
-    <Compile Include="DataAccesssLayer\Attribute\RoleAuthorizeAttributeTest.cs" />
+    <Compile Include="Controllers\BusinessTripControllerTests.cs" />
+    <Compile Include="Controllers\UserOperationsControllerTests.cs" />
+    <Compile Include="DataAccesssLayer\Attributes\RoleAuthorizeAttributeTest.cs" />
     <Compile Include="DataAccesssLayer\Models\RecoverPasswordModelTests.cs" />
     <Compile Include="DataAccesssLayer\PasswordTests.cs" />
-    <Compile Include="DataAccesssLayer\Repository\BusinessTripRepositoryTest.cs" />
-    <Compile Include="DataAccesssLayer\Attribute\UniqueEmailAttributeTest.cs" />
-    <Compile Include="DataAccesssLayer\Repository\UserRepositoryTest.cs" />
-    <Compile Include="DataAccesssLayer\ViewModel\BusinessTripViewModelTest.cs" />
+    <Compile Include="DataAccesssLayer\Repositories\BusinessTripRepositoryTests.cs" />
+    <Compile Include="DataAccesssLayer\Attributes\UniqueEmailAttributeTests.cs" />
+    <Compile Include="DataAccesssLayer\Repositories\UserRepositoryTests.cs" />
+    <Compile Include="DataAccesssLayer\ViewModels\BusinessTripViewModelTest.cs" />
     <Compile Include="EfStorageDbInitializerTest.cs" />
-    <Compile Include="DataAccesssLayer\Models\UserModelTest.cs" />
-    <Compile Include="DataAccesssLayer\Models\UserRegistrationModelTest.cs" />
+    <Compile Include="DataAccesssLayer\Models\UserModelTests.cs" />
+    <Compile Include="DataAccesssLayer\Models\UserRegistrationModelTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

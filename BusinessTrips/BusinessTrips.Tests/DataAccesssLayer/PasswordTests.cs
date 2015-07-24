@@ -1,4 +1,4 @@
-﻿using BusinessTrips.DAL.Model.User;
+﻿using BusinessTrips.DAL.Models.User;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace BusinessTrips.Tests.DataAccesssLayer

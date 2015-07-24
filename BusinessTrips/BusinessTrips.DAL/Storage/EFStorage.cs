@@ -1,6 +1,6 @@
 ﻿using System.Data.Entity;
 using System.Linq;
-using BusinessTrips.DAL.Entity;
+using BusinessTrips.DAL.Entities;
 
 namespace BusinessTrips.DAL.Storage
 {

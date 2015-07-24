@@ -3,9 +3,9 @@ using System.Configuration;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
-using BusinessTrips.DAL.Attribute;
-using BusinessTrips.DAL.Exception;
-using BusinessTrips.DAL.Model.User;
+using BusinessTrips.DAL.Attributes;
+using BusinessTrips.DAL.Exceptions;
+using BusinessTrips.DAL.Models.User;
 using BusinessTrips.DAL.Storage;
 using BusinessTrips.Services;
 
