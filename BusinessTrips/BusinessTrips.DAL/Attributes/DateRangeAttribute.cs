@@ -6,10 +6,11 @@ namespace BusinessTrips.DAL.Attributes
 {
     public class DateRangeAttribute : RangeAttribute
     {
+        private const int NumberOfYears = 10;
         public DateRangeAttribute()
-            : base(typeof(DateTime), 
-            DateTime.Now.AddYears(-1).ToString(CultureInfo.InvariantCulture), 
-            DateTime.Now.AddYears(20).ToString(CultureInfo.InvariantCulture))
+            : base(typeof(DateTime),
+            DateTime.Now.AddYears(-NumberOfYears).ToString(CultureInfo.InvariantCulture),
+            DateTime.Now.AddYears(NumberOfYears).ToString(CultureInfo.InvariantCulture))
         {
         }
     }

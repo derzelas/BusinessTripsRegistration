@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using BusinessTrips.DAL.Attributes;
 
 namespace BusinessTrips.DAL.Models.BusinessTrip
 {
@@ -13,10 +14,12 @@ namespace BusinessTrips.DAL.Models.BusinessTrip
 
         [DisplayName("Starting Date")]
         [DataType(DataType.Date)]
+        [DateRange]  
         public DateTime? StartingDate { get; set; }
 
         [DisplayName("Ending Date")]
         [DataType(DataType.Date)]
+        [DateRange]    
         public DateTime? EndingDate { get; set; }
 
         [DisplayName("Location")]
