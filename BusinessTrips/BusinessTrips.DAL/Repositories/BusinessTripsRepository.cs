@@ -81,9 +81,9 @@ namespace BusinessTrips.DAL.Repositories
                 businessTrips = businessTrips.Where(m => m.User.Name.Contains(filter.Person));
             }
 
-            if (!string.IsNullOrEmpty(filter.MeanOfTransportation))
+            if (!string.IsNullOrEmpty(filter.MeansOfTransportation))
             {
-                businessTrips = businessTrips.Where(m => m.MeansOfTransportation.Contains(filter.MeanOfTransportation));
+                businessTrips = businessTrips.Where(m => m.MeansOfTransportation.Contains(filter.MeansOfTransportation));
             }
 
             if (!string.IsNullOrEmpty(filter.Accommodation))

@@ -25,8 +25,8 @@ namespace BusinessTrips.DAL.Models.BusinessTrip
         [DisplayName("Person")]
         public string Person { get; set; }
 
-        [DisplayName("Mean Of Transporation")]
-        public string MeanOfTransportation { get; set; }
+        [DisplayName("Means Of Transporation")]
+        public string MeansOfTransportation { get; set; }
 
         [DisplayName("Accomodation")]
         public string Accommodation { get; set; }    

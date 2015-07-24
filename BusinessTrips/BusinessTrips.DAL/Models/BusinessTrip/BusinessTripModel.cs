@@ -20,15 +20,17 @@ namespace BusinessTrips.DAL.Models.BusinessTrip
         [Display(Name = "PM name:")]
         public string PmName { get; set; }
 
-        [Display(Name = "Project number:")]
-        public string ProjectNumber { get; set; }
-
         [Display(Name = "Project name:")]
         public string ProjectName { get; set; }
+
+        [Required]
+        [Display(Name = "Project number:")]
+        public string ProjectNumber { get; set; }
 
         [Display(Name = "Task name:")]
         public string TaskName { get; set; }
 
+        [Required]
         [Display(Name = "Task number:")]
         public string TaskNumber { get; set; }
 
@@ -58,6 +60,7 @@ namespace BusinessTrips.DAL.Models.BusinessTrip
         [Display(Name = "Client location:")]
         public string ClientLocation { get; set; }
 
+        [Required]
         [Display(Name = "Means of transportation:")]
         public string MeansOfTransportation { get; set; }
 
