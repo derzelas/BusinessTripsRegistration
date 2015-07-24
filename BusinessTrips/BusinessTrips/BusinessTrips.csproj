@@ -205,7 +205,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Views\BusinessTrip\Register.cshtml" />
+    <Content Include="Views\BusinessTrip\Submit.cshtml" />
     <Content Include="Views\BusinessTrip\UserBusinessTrips.cshtml" />
     <Content Include="Views\BusinessTrip\BusinessTripNotFound.cshtml" />
     <Content Include="Views\Shared\UnauthenticatedLayout.cshtml" />
@@ -213,8 +213,8 @@
     <Content Include="Views\BusinessTrip\Details.cshtml" />
     <Content Include="Views\BusinessTrip\RegisteredSuccessfully.cshtml" />
     <Content Include="Views\BusinessTrip\StatusChangedSuccessfully.cshtml" />
-    <Content Include="Views\UserOperations\ForgotPassword.cshtml" />
-    <Content Include="Views\UserOperations\SetNewPassword.cshtml" />
+    <Content Include="Views\UserOperations\RecoverPassword.cshtml" />
+    <Content Include="Views\UserOperations\ResetPassword.cshtml" />
     <Content Include="Views\UserOperations\ForgotPasswordEmailSent.cshtml" />
     <Content Include="Views\UserOperations\PasswordSet.cshtml" />
     <None Include="_bin_deployableAssemblies\x86\sqlcese40.dll" />

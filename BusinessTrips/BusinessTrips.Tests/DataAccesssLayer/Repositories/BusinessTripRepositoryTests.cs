@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using BusinessTrips.DAL.Exceptions;
 using BusinessTrips.DAL.Models.BusinessTrip;
 using BusinessTrips.DAL.Models.User;
 using BusinessTrips.DAL.Repositories;
@@ -79,6 +80,13 @@ namespace BusinessTrips.Tests.DataAccesssLayer.Repositories
             {
                 Assert.AreEqual(userRegistrationModel.Id, tripModel.User.Id);
             }
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(BusinessTripNotFoundException))]
+        public void GetBy_NotExistingBusinessTripGui_ThrowsBusinessTripNotFoundException()
+        {
+            repository.GetById(Guid.NewGuid());
         }
     }
 }

@@ -41,6 +41,8 @@ namespace BusinessTrips.DAL.Repositories
 
         public IEnumerable<BusinessTripEntity> GetBusinessTripsBy(BusinessTripFilter filter)
         {
+            Validate(filter.Guid.ToString());
+
             IQueryable<BusinessTripEntity> businessTrips = storage.GetStorageFor<BusinessTripEntity>();
 
             if (filter.Guid.HasValue)
@@ -101,6 +103,15 @@ namespace BusinessTrips.DAL.Repositories
         public void SaveChanges()
         {
             storage.SaveChanges();
+        }
+
+        private static void Validate(string businessTripId)
+        {
+            Guid parsedId;
+            if (!Guid.TryParse(businessTripId, out parsedId))
+            {
+                throw new InvalidIdException();
+            }
         }
     }
 }

@@ -16,18 +16,18 @@ namespace BusinessTrips.Controllers
     public class BusinessTripController : Controller
     {
         [RoleAuthorize(Role.Regular, Role.Hr)]
-        public ActionResult Register()
+        public ActionResult Submit()
         {
-            return View("Register");
+            return View("Submit");
         }
 
         [HttpPost]
         [RoleAuthorize(Role.Regular, Role.Hr)]
-        public ActionResult Register(BusinessTripModel businessTripModel)
+        public ActionResult Submit(BusinessTripModel businessTripModel)
         {
             if (!ModelState.IsValid)
             {
-                return View("Register");
+                return View("Submit");
             }
 
             businessTripModel.User = new UserModel(GetUserIdFromCookie()); 
@@ -91,11 +91,11 @@ namespace BusinessTrips.Controllers
                 {
                     BusinessTripFilter = new BusinessTripFilter
                     {
-                        Guid = parsedGuid
+                        Guid = parsedGuid,
                     }
                 };
-
-                return RedirectToAction("GetAllBusinessTrips", new { businessTripsCollectionViewModel});
+                
+                return GetAllBusinessTrips(businessTripsCollectionViewModel);
             }
 
             return View("BusinessTripNotFound");
