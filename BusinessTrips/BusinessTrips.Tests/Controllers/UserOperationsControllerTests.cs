@@ -64,7 +64,7 @@ namespace BusinessTrips.Tests.Controllers
         [ExpectedException(typeof(UserNotFoundException))]
         public void ForgotPassword_UserIsInvalid_ReturnsEmailSentView()
         {
-            controller.ForgotPassword(new RecoverPasswordModel
+            controller.RecoverPassword(new RecoverPasswordModel
             {
                 Email = string.Empty
             });            
