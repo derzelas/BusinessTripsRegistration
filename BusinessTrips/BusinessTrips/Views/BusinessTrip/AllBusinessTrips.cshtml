@@ -87,7 +87,10 @@
     <tr>
         <th>
             @Html.DisplayName("Starting date")
-        </th>    
+        </th>
+        <th>
+            @Html.DisplayName("Ending date")
+        </th>  
         <th>
             @Html.DisplayName("Location")
         </th>
@@ -116,7 +119,10 @@
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.StartingDate)
-            </td>         
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EndingDate)
+            </td> 
             <td>
                 @Html.DisplayFor(modelItem => item.Location)
             </td>

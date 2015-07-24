@@ -7,6 +7,7 @@ namespace BusinessTrips.DAL.ViewModel
     public class BusinessTripViewModel
     {
         public DateTime StartingDate { get; set; }
+        public DateTime EndingDate { get; set; }
         public string Location { get; set; }
         public string Name { get; set; }
         public string MeansOfTransportaion { get; set; }
@@ -17,6 +18,7 @@ namespace BusinessTrips.DAL.ViewModel
         public BusinessTripViewModel(BusinessTripEntity businessTripEntity)
         {
             StartingDate = businessTripEntity.StartingDate;
+            EndingDate = businessTripEntity.EndingDate;
             Location = businessTripEntity.ClientLocation;
             Name = businessTripEntity.User.Name;
             MeansOfTransportaion = businessTripEntity.MeansOfTransportation;
