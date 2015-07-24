@@ -44,41 +44,6 @@ namespace BusinessTrips.Tests.Controllers
         }
 
         [TestMethod]
-        public void GetAllBusinessTrips_NewAllBusinessTripsCollectionViewModel_ReturnsAllBusinessTripsView()
-        {
-            var allBusinessTripCollection = new AllBusinessTripsCollectionViewModel();
-            allBusinessTripCollection.BusinessTripFilter = new BusinessTripFilter();
-            allBusinessTripCollection.BusinessTripFilter.UserId = Guid.NewGuid().ToString();
-
-            var result = controller.GetAllBusinessTrips(allBusinessTripCollection) as ViewResult;
-
-            Assert.IsNotNull(result);
-            Assert.AreEqual("AllBusinessTrips", result.ViewName);
-        }
-
-        [TestMethod]
-        public void GetBy_GuidValid_ReturnsAllBusinessTripsView()
-        {
-            string guid = Guid.NewGuid().ToString();
-
-            var result = controller.GetBy(guid) as ViewResult;
-
-            Assert.IsNotNull(result);
-            Assert.AreEqual("AllBusinessTrips", result.ViewName);
-        }
-
-        [TestMethod]
-        public void GetBy_GuidInvalid_ReturnsBusinessTripNotFoundView()
-        {
-            string guid = "bad guid";
-
-            var result = controller.GetBy(guid) as ViewResult;
-
-            Assert.IsNotNull(result);
-            Assert.AreEqual("BusinessTripNotFound", result.ViewName);
-        }
-
-        [TestMethod]
         public void Accept_BusinessTripIdInStorage_ReturnsStatusChangedSuccessfullyView()
         {
             var businessTripRepository = new BusinessTripsRepository();

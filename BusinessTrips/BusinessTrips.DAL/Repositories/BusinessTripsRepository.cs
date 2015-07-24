@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using BusinessTrips.DAL.Entities;
 using BusinessTrips.DAL.Exceptions;
 using BusinessTrips.DAL.Models.BusinessTrip;
@@ -39,8 +40,8 @@ namespace BusinessTrips.DAL.Repositories
             return storage.GetStorageFor<BusinessTripEntity>().Where(e => e.User.Id == userId);
         }
 
-        public IEnumerable<BusinessTripEntity> GetBusinessTripsBy(BusinessTripFilter filter)
-        {           
+        public IEnumerable<BusinessTripEntity> GetBusinessTripsBy(BusinessTripFilter filter, string[] userRole)
+        {
             IQueryable<BusinessTripEntity> businessTrips = storage.GetStorageFor<BusinessTripEntity>();
 
             if (!string.IsNullOrEmpty(filter.UserId))
@@ -50,15 +51,20 @@ namespace BusinessTrips.DAL.Repositories
                 return businessTrips.Where(m => m.Id == filterGuid);
             }
 
-            if (filter.Status.HasValue)
+            if (userRole.Contains(Role.Hr.ToString()))
             {
-                businessTrips = businessTrips.Where(m => m.Status == filter.Status);
+                if (filter.Status.HasValue)
+                {
+                    businessTrips = businessTrips.Where(m => m.Status == filter.Status);
+                }
+                else
+                {
+                    businessTrips = businessTrips.Where(AllStatusFilter());
+                }
             }
             else
             {
-                businessTrips =
-                    businessTrips.Where(
-                        m => m.Status == BusinessTripStatus.Accepted || m.Status == BusinessTripStatus.Pending);
+                businessTrips = businessTrips.Where(RegularUserStatusFilter());
             }
 
             if (filter.StartingDate.HasValue)
@@ -103,6 +109,16 @@ namespace BusinessTrips.DAL.Repositories
         public void SaveChanges()
         {
             storage.SaveChanges();
+        }
+
+        private Expression<Func<BusinessTripEntity, bool>> AllStatusFilter()
+        {
+            return m => m.Status == BusinessTripStatus.Accepted || m.Status == BusinessTripStatus.Pending || m.Status == BusinessTripStatus.Canceled || m.Status == BusinessTripStatus.Rejected;
+        }
+
+        private Expression<Func<BusinessTripEntity, bool>> RegularUserStatusFilter()
+        {
+            return m => m.Status == BusinessTripStatus.Accepted || m.Status == BusinessTripStatus.Pending;
         }
 
         private static Guid GetGuidBy(string businessTripId)

@@ -27,6 +27,7 @@
         </td>
             <td>
                 @Html.EditorFor(m => m.BusinessTripFilter.StartingDate)
+                @Html.ValidationMessageFor(m => m.BusinessTripFilter.StartingDate, "", new { @class = "text-danger" })
             </td>
         <tr>
         <tr>
@@ -35,6 +36,7 @@
             </td>
             <td>
                 @Html.EditorFor(m => m.BusinessTripFilter.EndingDate)
+                @Html.ValidationMessageFor(m => m.BusinessTripFilter.EndingDate, "", new { @class = "text-danger" })
             </td>
         <tr>
         <tr>

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using BusinessTrips.DAL.Entities;
 using BusinessTrips.DAL.Models.BusinessTrip;
 
@@ -6,7 +7,10 @@ namespace BusinessTrips.DAL.ViewModel
 {
     public class BusinessTripViewModel
     {
+        [DisplayFormat(DataFormatString = "{0:d}")]
         public DateTime StartingDate { get; set; }
+
+        [DisplayFormat(DataFormatString = "{0:d}")]
         public DateTime EndingDate { get; set; }
         public string Location { get; set; }
         public string Name { get; set; }
