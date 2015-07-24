@@ -56,14 +56,14 @@ namespace BusinessTrips.Tests.Controllers
         }
 
         [TestMethod]
-        public void GetBy_GuidValid_ReturnsRedirectToGetAllBusinessTripsActionResult()
+        public void GetBy_GuidValid_ReturnsAllBusinessTripsView()
         {
             string guid = Guid.NewGuid().ToString();
 
-            var result = controller.GetBy(guid) as RedirectToRouteResult;
+            var result = controller.GetBy(guid) as ViewResult;
 
             Assert.IsNotNull(result);
-            Assert.AreEqual("GetAllBusinessTrips", result.RouteValues["action"]);
+            Assert.AreEqual("AllBusinessTrips", result.ViewName);
         }
 
         [TestMethod]

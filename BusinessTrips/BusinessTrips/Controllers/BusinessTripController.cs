@@ -91,11 +91,11 @@ namespace BusinessTrips.Controllers
                 {
                     BusinessTripFilter = new BusinessTripFilter
                     {
-                        Guid = parsedGuid
+                        Guid = parsedGuid,
                     }
                 };
-
-                return RedirectToAction("GetAllBusinessTrips", new { businessTripsCollectionViewModel});
+                
+                return GetAllBusinessTrips(businessTripsCollectionViewModel);
             }
 
             return View("BusinessTripNotFound");
