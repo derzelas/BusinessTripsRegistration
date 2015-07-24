@@ -8,7 +8,7 @@ namespace BusinessTrips.Tests.DataAccesssLayer.Attributes
     public class DateRangeAttributeTest
     {
         [TestMethod]
-        public void Constructor_ValidateYearsBetweenLastYearAndNextTwentyYears()
+        public void Constructor_ValidateYearsBetweenLastTenYearsAndNextTenYears()
         {
             var dataRange = new DateRangeAttribute();
 
@@ -18,8 +18,8 @@ namespace BusinessTrips.Tests.DataAccesssLayer.Attributes
             DateTime endingDate;
             DateTime.TryParse(dataRange.Maximum.ToString(), out endingDate);
             
-            Assert.AreEqual(startingDate.Year, DateTime.Now.AddYears(-1).Year);
-            Assert.AreEqual(endingDate.Year, DateTime.Now.AddYears(20).Year);
+            Assert.AreEqual(startingDate.Year, DateTime.Now.AddYears(-10).Year);
+            Assert.AreEqual(endingDate.Year, DateTime.Now.AddYears(10).Year);
         }
     }
 }

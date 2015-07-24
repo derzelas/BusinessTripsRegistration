@@ -149,7 +149,6 @@ namespace BusinessTrips.Tests.DataAccesssLayer.Repositories
 
                 var businessTrip = new BusinessTripModel();
 
-                if (!string.IsNullOrEmpty(filter.UserId))
                 businessTrip.StartingDate = DateTime.Now.AddYears(random.Next(-1, 1));
                 businessTrip.EndingDate = DateTime.Now.AddYears(random.Next(-1, 1));
                 businessTrip.ClientLocation = "Locations" + random.Next(0, numberOfBusinessTrips);
